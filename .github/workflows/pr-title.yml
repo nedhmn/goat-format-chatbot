@@ -13,7 +13,6 @@ permissions: {}
 jobs:
   pr-title:
     name: conventional title
-    if: github.event.action != 'edited' || github.event.changes.title != null
     runs-on: ubuntu-24.04
     timeout-minutes: 2
     steps:
