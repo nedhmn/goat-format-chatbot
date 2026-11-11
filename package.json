@@ -11,6 +11,7 @@
     "lint": "oxlint",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
+    "fix": "oxlint --fix && oxfmt",
     "knip": "knip",
     "gate": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm knip && pnpm test && pnpm build",
     "prepare": "git config core.hooksPath .githooks"
