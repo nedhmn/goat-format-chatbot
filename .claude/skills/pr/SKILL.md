@@ -25,7 +25,7 @@ PRs squash into `main`, so the title is the commit subject on `main` and CI's `c
    - **What**: what changed, as a reader of the diff would want it summarized.
    - **Blast radius**: other apps and packages, CI, the Pages demo, releases. "None" is fine.
    - **Evidence**: local screenshots in `.evidence/` or command output, each with what it proves.
-   - **Checked**: the gate result, the `/code-review` result, and what could not be verified.
+   - **Checked**: the gate result and what could not be verified.
 
 4. Create or update:
    ```sh
