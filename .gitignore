@@ -6,6 +6,8 @@ dist
 !.env.example
 .DS_Store
 *.log
+.dev
+.evidence
 
 # maintainer tooling, installed by the oss-repo skill
 .claude/skills/*
@@ -16,4 +18,5 @@ dist
 !.claude/skills/commit
 !.claude/skills/pr
 !.claude/skills/babysit-pr
+!.claude/skills/verify-web
 skills-lock.json
