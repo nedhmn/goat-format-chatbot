@@ -43,10 +43,10 @@ Every comment is a hypothesis. Prune stale ones, dedupe, verify each survivor ag
 GitHub treats the stack as one unit; `gh pr merge` on a layer fails. Merge is the user's unless they say so in chat. Then, announced first since it redeploys the Pages demo:
 
 ```sh
-gh stack merge <top> --squash --yes
+gh stack merge <top PR number> --squash --yes
 ```
 
-Every layer up to `<top>` lands atomically, one squash commit each, and the new `main` head runs one `CI` workflow.
+`gh stack merge` takes a PR or stack number, not a branch name. Every layer up to that PR lands atomically, one squash commit each, and the new `main` head runs one `CI` workflow.
 
 ## After a merge
 
