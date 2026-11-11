@@ -2,6 +2,8 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
 import { defineConfig, type Plugin, type PreviewServer, type ViteDevServer } from "vite";
 
 const host = "127.0.0.1";
@@ -55,7 +57,7 @@ function devPorts(): Plugin {
 
 export default defineConfig({
   base: "/yugioh-rulings-chatbot/",
-  plugins: [devPorts()],
+  plugins: [react(), tailwindcss(), devPorts()],
   server: { host },
   preview: { host },
 });

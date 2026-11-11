@@ -10,9 +10,17 @@
     <link rel="manifest" href="site.webmanifest" />
     <meta name="theme-color" content="#9ea5a6" />
     <title>Yu-Gi-Oh! Rulings Chatbot</title>
+    <script>
+      {
+        const dark = matchMedia("(prefers-color-scheme: dark)");
+        const apply = () => document.documentElement.classList.toggle("dark", dark.matches);
+        apply();
+        dark.addEventListener("change", apply);
+      }
+    </script>
   </head>
   <body>
-    <h1 id="title"></h1>
-    <script type="module" src="/src/main.ts"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
