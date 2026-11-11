@@ -1,0 +1,44 @@
+/* Type scale. Sizes are exact, not a round scale. */
+:root {
+  --text-xs: 13px;
+  --lh-xs: 18.5714px;
+  --text-sm: 14px;
+  --lh-sm: 21px;
+  --ls-sm: 0.14px;
+  --text-base: 16px;
+  --lh-base: 24px;
+  --ls-base: 0.08px;
+  --text-prose: 17.28px;
+  --lh-prose: 23.328px;
+  --text-lg: 22px;
+  --lh-lg: 28.6px;
+  --ls-lg: -0.11px;
+  --text-xl: 26px;
+  --lh-xl: 32.5px;
+  --ls-xl: -0.325px;
+  --text-2xl: 36px;
+  --lh-2xl: 43.2px;
+  --ls-2xl: -0.72px;
+  --text-3xl: 56px;
+  --lh-3xl: 60px;
+  --ls-3xl: -1.4px;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+
+  /* Semantic roles */
+  --type-hero: var(--weight-regular) var(--text-3xl)/var(--lh-3xl) var(--font-heading);
+  --type-page-title: var(--weight-regular) var(--text-2xl)/var(--lh-2xl) var(--font-heading);
+  --type-section-title: var(--weight-bold) var(--text-lg)/var(--lh-lg) var(--font-heading);
+  --type-card-title: var(--weight-regular) var(--text-xl)/var(--lh-xl) var(--font-heading);
+  --type-body: var(--weight-regular) var(--text-base)/var(--lh-base) var(--font-body);
+  --type-ui: var(--weight-regular) var(--text-sm)/var(--lh-sm) var(--font-ui);
+  --type-meta: var(--weight-regular) var(--text-sm)/var(--lh-sm) var(--font-ui);
+  --type-prose: var(--weight-regular) var(--text-prose)/var(--lh-prose) var(--font-prose);
+  --type-code: var(--weight-regular) var(--text-sm)/var(--lh-sm) var(--font-code);
+
+  --measure-prose: 77ch;
+  --measure-article: 680px;
+  --layout-max: 1240px;
+}

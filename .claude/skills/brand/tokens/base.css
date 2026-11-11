@@ -1,0 +1,33 @@
+/* Minimal element defaults so specimen cards and kits share a baseline. */
+html {
+  color-scheme: light;
+}
+[data-theme="dark"],
+.dark {
+  color-scheme: dark;
+}
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font: var(--type-body);
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: var(--color-text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  transition: var(--motion-hover);
+}
+a:hover {
+  color: var(--color-text-primary);
+}
+code,
+pre {
+  font: var(--type-code);
+  color: var(--color-code-text);
+}
+::selection {
+  background: var(--color-accent-bg-strong);
+}

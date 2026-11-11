@@ -1,0 +1,118 @@
+<!-- @dsCard group="Spacing" viewport="700x140" name="Radii" subtitle="0 for nav and media bands, 4–6 for chips, ~10 for cards, pill for buttons." -->
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: var(--color-bg);
+      }
+      body {
+        padding: 18px 20px;
+        box-sizing: border-box;
+        font: var(--type-ui);
+        color: var(--color-text-primary);
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+      .sw {
+        width: 104px;
+      }
+      .chip {
+        height: 56px;
+        border-radius: 6px;
+        border: 1px solid var(--color-border);
+      }
+      .nm {
+        font: var(--type-code);
+        font-size: 11px;
+        margin-top: 6px;
+        display: block;
+        color: var(--color-text-primary);
+      }
+      .hx {
+        font: var(--type-code);
+        font-size: 11px;
+        color: var(--color-text-muted);
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <div class="sw">
+        <div
+          style="
+            height: 56px;
+            background: var(--color-bg-elevated);
+            border: 1px solid var(--color-border-bright);
+            border-radius: 0px;
+          "
+        ></div>
+        <span class="nm">--radius-none</span><span class="hx">0px</span>
+      </div>
+      <div class="sw">
+        <div
+          style="
+            height: 56px;
+            background: var(--color-bg-elevated);
+            border: 1px solid var(--color-border-bright);
+            border-radius: 4px;
+          "
+        ></div>
+        <span class="nm">--radius-sm</span><span class="hx">4px</span>
+      </div>
+      <div class="sw">
+        <div
+          style="
+            height: 56px;
+            background: var(--color-bg-elevated);
+            border: 1px solid var(--color-border-bright);
+            border-radius: 6px;
+          "
+        ></div>
+        <span class="nm">--radius-md</span><span class="hx">6px</span>
+      </div>
+      <div class="sw">
+        <div
+          style="
+            height: 56px;
+            background: var(--color-bg-elevated);
+            border: 1px solid var(--color-border-bright);
+            border-radius: 10px;
+          "
+        ></div>
+        <span class="nm">--radius-lg</span><span class="hx">10px</span>
+      </div>
+      <div class="sw">
+        <div
+          style="
+            height: 56px;
+            background: var(--color-bg-elevated);
+            border: 1px solid var(--color-border-bright);
+            border-radius: 14px;
+          "
+        ></div>
+        <span class="nm">--radius-xl</span><span class="hx">14px</span>
+      </div>
+      <div class="sw">
+        <div
+          style="
+            height: 56px;
+            background: var(--color-bg-elevated);
+            border: 1px solid var(--color-border-bright);
+            border-radius: 9999px;
+          "
+        ></div>
+        <span class="nm">--radius-pill</span><span class="hx">9999px</span>
+      </div>
+    </div>
+  </body>
+</html>

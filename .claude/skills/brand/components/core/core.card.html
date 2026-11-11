@@ -1,0 +1,100 @@
+<!-- @dsCard group="Components" viewport="700x330" name="Core" subtitle="Button, Badge, Avatar, Card, Input, Code" -->
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <script
+      src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"
+      integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y"
+      crossorigin="anonymous"
+    ></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@19.2.8",
+          "react-dom/client": "https://esm.sh/react-dom@19.2.8/client"
+        }
+      }
+    </script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: var(--color-bg);
+      }
+      body {
+        padding: 18px 20px;
+        box-sizing: border-box;
+        font: var(--type-ui);
+        color: var(--color-text-primary);
+      }
+      .lbl {
+        font: var(--type-code);
+        font-size: 10px;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+        color: var(--color-text-faint);
+        margin-bottom: 7px;
+      }
+      .grp {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/plain" id="demo">
+      function Demo(){return <div style={{display:'grid',gap:16}}>
+      <div><div className="lbl">Button: variants</div><div className="grp">
+      <Button variant="primary" size="lg" >Ask a ruling</Button>
+      <Button variant="secondary" size="lg" trailing="→">Request a demo</Button>
+      <Button variant="outline">Browse cards</Button>
+      <Button variant="ghost">Models</Button>
+      <Button variant="primary" disabled>Disabled</Button>
+      </div></div>
+      <div><div className="lbl">Button: sizes</div><div className="grp">
+      <Button size="sm">Download</Button><Button size="md">Download</Button><Button size="lg">Download</Button>
+      </div></div>
+      <div><div className="lbl">Badge · Avatar · Code</div><div className="grp">
+      <Badge>Research</Badge><Badge tone="accent" mono>+52</Badge><Badge tone="success">Passing</Badge>
+      <Badge tone="error">Failed</Badge><Badge tone="outline">Beta</Badge>
+      <Avatar initials="MR" size="sm"/><Avatar initials="NT" size="md"/><Avatar initials="AB" size="lg"/>
+      <Code>app/globals.css</Code>
+      </div></div>
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1.2fr',gap:12,alignItems:'start'}}>
+      <Card variant="elevated"><div style={{fontSize:14}}>Elevated</div><div style={{fontSize:13,color:'var(--color-text-muted)'}}>fill + hairline</div></Card>
+      <Card variant="outlined"><div style={{fontSize:14}}>Outlined</div><div style={{fontSize:13,color:'var(--color-text-muted)'}}>bright border</div></Card>
+      <div style={{display:'grid',gap:8}}><Input placeholder="Describe the change…"/><Code block>pnpm dev</Code></div>
+      </div>
+      </div>}
+      ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+    </script>
+    <script type="module">
+      import React from "react";
+      import * as ReactDOM from "react-dom/client";
+      const names = ["Button", "Badge", "Avatar", "Card", "Input", "Code"];
+      const compile = (src) =>
+        Babel.transform(src, { presets: ["react"], plugins: ["transform-modules-commonjs"] }).code;
+      const req = () => ({ __esModule: true, default: React });
+      const C = {};
+      for (const n of names) {
+        const exports = {};
+        new Function("require", "exports", compile(await (await fetch(`./${n}.jsx`)).text()))(
+          req,
+          exports,
+        );
+        Object.assign(C, exports);
+      }
+      new Function(
+        "React",
+        "ReactDOM",
+        ...names,
+        compile(document.getElementById("demo").textContent),
+      )(React, ReactDOM, ...names.map((n) => C[n]));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+<!-- @dsCard group="Type" viewport="700x160" name="Gothic: body & UI" subtitle="16/24 at +0.08px for body; 14/21 at +0.14px for UI and list items." -->
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: var(--color-bg);
+      }
+      body {
+        padding: 18px 20px;
+        box-sizing: border-box;
+        font: var(--type-ui);
+        color: var(--color-text-primary);
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+      .sw {
+        width: 104px;
+      }
+      .chip {
+        height: 56px;
+        border-radius: 6px;
+        border: 1px solid var(--color-border);
+      }
+      .nm {
+        font: var(--type-code);
+        font-size: 11px;
+        margin-top: 6px;
+        display: block;
+        color: var(--color-text-primary);
+      }
+      .hx {
+        font: var(--type-code);
+        font-size: 11px;
+        color: var(--color-text-muted);
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="font-family: var(--font-gothic); display: grid; gap: 10px; max-width: 600px">
+      <div style="font-size: 16px; line-height: 24px; letter-spacing: 0.08px">
+        Body 16/24: The assistant reads the card text, checks the rulings, and cites every source it
+        used.
+      </div>
+      <div
+        style="
+          font-size: 14px;
+          line-height: 21px;
+          letter-spacing: 0.14px;
+          color: var(--color-text-muted);
+        "
+      >
+        UI 14/21: Rulings · Cards · Chains · Pricing · Resources
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+/* Spacing: built on a 10px unit, not an 8px grid. */
+:root {
+  --space-unit: calc(10rem / 16); /* 10px at a 16px root */
+  --spacing-xs: calc(var(--space-unit) * 0.25); /* 2.5px */
+  --spacing-sm: calc(var(--space-unit) * 0.5); /* 5px   */
+  --spacing-md: calc(var(--space-unit) * 1); /* 10px  */
+  --spacing-lg: calc(var(--space-unit) * 1.5); /* 15px  */
+  --spacing-xl: calc(var(--space-unit) * 2); /* 20px  */
+  --spacing-2xl: calc(var(--space-unit) * 3); /* 30px  */
+
+  /* Page rhythm */
+  --section-pad-y: 67.2px;
+  --section-pad-y-lg: 112px;
+  --section-pad-y-sm: 33.6px;
+  --gutter: 20px;
+}
