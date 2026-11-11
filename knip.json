@@ -4,10 +4,10 @@
   "ignore": ["tools/oxlint/anti-slop/**"],
   "workspaces": {
     "packages/*": {
-      "project": ["src/**/*.ts"]
+      "project": ["src/**/*.{ts,tsx}"]
     },
     "apps/web": {
-      "project": ["src/**/*.ts"]
+      "project": ["src/**/*.{ts,tsx}"]
     }
   }
 }

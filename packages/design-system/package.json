@@ -1,0 +1,33 @@
+{
+  "name": "@yugioh-rulings-chatbot/design-system",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./styles.css": "./src/styles.css",
+    "./lib/*": "./src/lib/*.ts",
+    "./components/*": "./src/components/*.tsx"
+  },
+  "scripts": {
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@base-ui/react": "1.9.0",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "tailwind-merge": "3.6.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "0.5.20",
+    "@types/react": "19.2.18",
+    "@yugioh-rulings-chatbot/typescript": "workspace:*",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "tailwindcss": "4.3.3",
+    "typescript": "7.0.2"
+  },
+  "peerDependencies": {
+    "react": "^19",
+    "react-dom": "^19"
+  }
+}
