@@ -16,7 +16,7 @@ gh run view <id> --log-failed
 
 Waits longer than a few minutes go to a background agent on opus that watches and reports once. It never edits, checks out, or rebases: it shares this checkout with the main loop.
 
-Two checks run on PRs, both in the `CI` workflow: `gate` (the same steps as `pnpm gate`) and `conventional title`. `pages` and `release` only run on pushes to `main`. A failing check is yours, fixed in the main loop between layers:
+Two checks run on PRs: `gate` in the `CI` workflow (the same steps as `pnpm gate`) and `conventional title` in the `PR title` workflow, which also re-runs when the title is edited. `pages` and `release` only run on pushes to `main`. A failing check is yours, fixed in the main loop between layers:
 
 ```sh
 gh stack checkout <broken branch>
