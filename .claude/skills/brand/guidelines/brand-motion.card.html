@@ -1,0 +1,79 @@
+<!-- @dsCard group="Brand" viewport="700x150" name="Interaction states" subtitle="Hover changes ground, not colour. 0.14s, colour properties only. No scale, no bounce." -->
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: var(--color-bg);
+      }
+      body {
+        padding: 18px 20px;
+        box-sizing: border-box;
+        font: var(--type-ui);
+        color: var(--color-text-primary);
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+      .sw {
+        width: 104px;
+      }
+      .chip {
+        height: 56px;
+        border-radius: 6px;
+        border: 1px solid var(--color-border);
+      }
+      .nm {
+        font: var(--type-code);
+        font-size: 11px;
+        margin-top: 6px;
+        display: block;
+        color: var(--color-text-primary);
+      }
+      .hx {
+        font: var(--type-code);
+        font-size: 11px;
+        color: var(--color-text-muted);
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <style>
+      .st {
+        padding: 8px 14px;
+        border-radius: 9999px;
+        font-size: 14px;
+        transition:
+          background-color 0.14s cubic-bezier(0.2, 0, 0, 1),
+          color 0.14s;
+      }
+    </style>
+    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap">
+      <div class="st" style="background: var(--ink); color: var(--paper)">Rest</div>
+      <div class="st" style="background: #3a382f; color: var(--paper)">Hover +8%</div>
+      <div class="st" style="background: #171610; color: var(--paper)">Press −1 step</div>
+      <div
+        class="st"
+        style="
+          background: var(--ink);
+          color: var(--paper);
+          outline: 1px solid var(--color-border-bright);
+          box-shadow: 0 0 0 3px var(--color-accent-bg-strong);
+        "
+      >
+        Focus
+      </div>
+      <div class="st" style="background: var(--ink); color: var(--paper); opacity: 0.4">
+        Disabled
+      </div>
+    </div>
+  </body>
+</html>

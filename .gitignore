@@ -19,4 +19,5 @@ dist
 !.claude/skills/pr
 !.claude/skills/babysit-pr
 !.claude/skills/verify-web
+!.claude/skills/brand
 skills-lock.json

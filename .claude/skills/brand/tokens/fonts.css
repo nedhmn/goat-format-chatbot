@@ -1,0 +1,22 @@
+/* Webfonts. Stacks mirror packages/design-system/src/styles.css exactly.
+   The serif is a reserved system stack; nothing loads a serif webfont. */
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:ital,wght@0,400..700;1,400..700&display=swap");
+
+:root {
+  /* Base families */
+  --font-gothic: "Inter Tight", system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-serif:
+    "Iowan Old Style", "Palatino Linotype", P052, ui-serif, Georgia, Cambria, "Times New Roman",
+    Times, serif;
+  --font-mono:
+    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  --font-display: var(--font-gothic);
+
+  /* Semantic aliases */
+  --font-ui: var(--font-gothic);
+  --font-heading: var(--font-gothic);
+  --font-body: var(--font-gothic);
+  --font-prose: var(--font-gothic);
+  --font-code: var(--font-mono);
+}

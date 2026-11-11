@@ -1,0 +1,68 @@
+<!-- @dsCard group="Type" viewport="700x150" name="Mono: code & CLI" subtitle="JetBrains Mono 13–14px. Commands, paths, counts." -->
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: var(--color-bg);
+      }
+      body {
+        padding: 18px 20px;
+        box-sizing: border-box;
+        font: var(--type-ui);
+        color: var(--color-text-primary);
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+      .sw {
+        width: 104px;
+      }
+      .chip {
+        height: 56px;
+        border-radius: 6px;
+        border: 1px solid var(--color-border);
+      }
+      .nm {
+        font: var(--type-code);
+        font-size: 11px;
+        margin-top: 6px;
+        display: block;
+        color: var(--color-text-primary);
+      }
+      .hx {
+        font: var(--type-code);
+        font-size: 11px;
+        color: var(--color-text-muted);
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="display: grid; gap: 10px; max-width: 600px">
+      <div
+        style="
+          font: var(--type-code);
+          background: var(--color-code-bg);
+          border: 1px solid var(--color-border);
+          border-radius: 6px;
+          padding: 10px 12px;
+        "
+      >
+        pnpm dev
+      </div>
+      <div style="font: var(--type-code); display: flex; gap: 14px; align-items: center">
+        <span>app/page.tsx</span><span style="color: var(--color-accent)">+52</span
+        ><span style="color: var(--color-text-muted)">-0</span
+        ><span style="color: var(--color-text-muted)">·</span><span>13px / 18.57</span>
+      </div>
+    </div>
+  </body>
+</html>

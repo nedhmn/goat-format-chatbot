@@ -1,0 +1,18 @@
+/* Motion. Short, linear-ish, no bounce. */
+:root {
+  --transition-fast: 0.14s; /* @kind other */
+  --transition-med: 0.24s; /* @kind other */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1); /* @kind other */
+  --ease-out: cubic-bezier(0, 0, 0.2, 1); /* @kind other */
+  --motion-hover:
+    background-color var(--transition-fast) var(--ease-standard),
+    color var(--transition-fast) var(--ease-standard),
+    border-color var(--transition-fast) var(--ease-standard),
+    opacity var(--transition-fast) var(--ease-standard);
+}
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0s; /* @kind other */
+    --transition-med: 0s; /* @kind other */
+  }
+}
