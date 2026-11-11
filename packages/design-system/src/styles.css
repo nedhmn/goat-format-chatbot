@@ -237,3 +237,10 @@
   border: 1px solid var(--border-hairline);
   border-radius: var(--radius-md);
 }
+.prose :where(code):not(:where([class~="not-prose"] *)) {
+  font-weight: 400;
+}
+.prose :where(code):not(:where([class~="not-prose"] *))::before,
+.prose :where(code):not(:where([class~="not-prose"] *))::after {
+  content: none;
+}
