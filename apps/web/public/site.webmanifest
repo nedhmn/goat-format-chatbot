@@ -1,0 +1,13 @@
+{
+  "name": "Yu-Gi-Oh! Rulings Chatbot",
+  "short_name": "Yu-Gi-Oh! Rulings Chatbot",
+  "description": "An AI chatbot that answers Yu-Gi-Oh! rulings questions",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#9ea5a6",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

@@ -1,0 +1,4 @@
+{
+  "extends": "@yugioh-rulings-chatbot/typescript/base.json",
+  "include": ["src"]
+}
