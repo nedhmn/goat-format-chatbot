@@ -1,11 +1,11 @@
 ---
 name: kickoff
-description: Take an ask from chat to a reviewed stack of PRs, one parent issue per thread. Use when the user opens a thread with an ask or an issue number, or says kick off, continue, or where were we.
+description: Take an ask from chat to a green stack of PRs, one parent issue per thread. Use when the user opens a thread with an ask or an issue number, or says kick off, continue, or where were we.
 ---
 
 # kickoff
 
-Outcome: a parent issue whose sub-issues each have a green, self-reviewed PR in one `gh stack`, and one message to the user that the stack is ready. The user approves the brief, reviews the stack, and merges. Runs `plan-issue`, then `work-issue` per sub-issue, then `babysit-pr`, without being asked again.
+Outcome: a parent issue whose sub-issues each have a green PR in one `gh stack`, and one message to the user that the stack is ready. The user approves the brief, reviews the stack, and merges. Runs `plan-issue`, then `work-issue` per sub-issue, then `babysit-pr`, without being asked again.
 
 ## Where things stand
 
@@ -44,9 +44,8 @@ Branch names are task-based (`fix/...`, `feat/...`, `chore/...`, `docs/...`), ne
 
 When every layer is green:
 
-1. Run `/code-review` over the whole stack (`main...<top branch>`). Fix each finding on the layer it belongs to, commit, `gh stack rebase --upstack --no-trunk` from that layer, then `gh stack push`.
-2. Mark every PR ready: `gh pr ready <n>`.
-3. One message: the stack (PR links bottom to top, merging the top PR lands all of it), what to look at, the local URLs to check from `.dev/ports.env` with the dev servers left running on the top branch (per `verify-web`), and anything that needs a decision.
+1. Mark every PR ready: `gh pr ready <n>`.
+2. One message: the stack (full PR links bottom to top, merging the top PR lands all of it), what to look at, the local URLs to check from `.dev/ports.env` with the dev servers left running on the top branch (per `verify-web`), and anything that needs a decision.
 
 Then `babysit-pr` until the stack is merged. When it is, say so in one line, close the parent issue if GitHub did not, and switch back to `main`.
 
