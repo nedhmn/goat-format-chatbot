@@ -31,8 +31,9 @@ PRs squash into `main`, so the title is the commit subject on `main` and CI's `c
    ```sh
    gh stack submit --auto                       # pushes the stack, opens missing PRs as drafts
    gh pr edit <n> --title "<title>" --body-file <file>
+   gh pr view <n> --json title -q .title        # must print <title>
    ```
-   Then register the PR with the thread.
+   `gh stack submit` titles a multi-commit layer after its branch, so always pass `--title`. If the check prints anything else, fix the title before moving on. Then register the PR with the thread.
 
 ## Rules
 
