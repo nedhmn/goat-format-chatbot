@@ -1,4 +1,3 @@
-import { Button } from "@goat-format-chatbot/design-system/components/ui/button";
 import {
   Sidebar,
   SidebarContent,
@@ -11,8 +10,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSkeleton,
+  SidebarSwap,
   useSidebar,
-} from "@goat-format-chatbot/design-system/components/ui/sidebar";
+} from "@goat-format-chatbot/design-system/components/sidebar";
+import { Button } from "@goat-format-chatbot/design-system/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
@@ -25,10 +26,6 @@ import { useRef, useState, type KeyboardEvent } from "react";
 import { usePastThreads, type PastThread } from "@/features/chat/api/chat";
 
 const LOADING_ROWS = 4;
-
-const SHOWN_WHEN_COLLAPSED = "hidden group-data-[collapsible=icon]:flex";
-
-const HIDDEN_WHEN_COLLAPSED = "group-data-[collapsible=icon]:hidden";
 
 function matching(threads: PastThread[], search: string): PastThread[] {
   const needle = search.trim().toLowerCase();
@@ -79,46 +76,52 @@ export function ThreadSidebar() {
   };
 
   return (
-    <Sidebar variant="inset" collapsible="icon">
+    <Sidebar>
       <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem className={`flex items-center gap-2 ${HIDDEN_WHEN_COLLAPSED}`}>
-            <Link
-              to="/"
-              onClick={closeOnMobile}
-              className="truncate px-2 font-heading text-base text-sidebar-foreground no-underline"
-            >
-              Goat Format Chatbot
-            </Link>
-            <CollapseButton />
-          </SidebarMenuItem>
-          <SidebarMenuItem className={SHOWN_WHEN_COLLAPSED}>
+        <SidebarSwap
+          expanded={
+            <>
+              <Link
+                to="/"
+                onClick={closeOnMobile}
+                className="truncate px-3 font-heading text-sm text-sidebar-foreground no-underline"
+              >
+                Goat Format Chatbot
+              </Link>
+              <CollapseButton />
+            </>
+          }
+          collapsed={
             <SidebarMenuButton tooltip="Expand sidebar" onClick={toggleSidebar}>
               <RiExpandRightLine />
               <span>Expand sidebar</span>
             </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-        <div className={`relative ${HIDDEN_WHEN_COLLAPSED}`}>
-          <RiSearchLine className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
-          <SidebarInput
-            ref={searchInput}
-            type="search"
-            aria-label="Search past questions"
-            placeholder="Search"
-            className="pl-8 [&::-webkit-search-cancel-button]:appearance-none"
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-            onKeyDown={clearOnEscape}
-          />
-        </div>
-        <SidebarMenu>
-          <SidebarMenuItem className={SHOWN_WHEN_COLLAPSED}>
+          }
+        />
+        <SidebarSwap
+          expanded={
+            <div className="relative w-full">
+              <RiSearchLine className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+              <SidebarInput
+                ref={searchInput}
+                type="search"
+                aria-label="Search past questions"
+                placeholder="Search"
+                className="pl-9.5 [&::-webkit-search-cancel-button]:appearance-none"
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                onKeyDown={clearOnEscape}
+              />
+            </div>
+          }
+          collapsed={
             <SidebarMenuButton tooltip="Search" onClick={openSearch}>
               <RiSearchLine />
               <span>Search</span>
             </SidebarMenuButton>
-          </SidebarMenuItem>
+          }
+        />
+        <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               tooltip="New chat"
@@ -132,7 +135,7 @@ export function ThreadSidebar() {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup className={HIDDEN_WHEN_COLLAPSED}>
+        <SidebarGroup>
           <SidebarGroupLabel>Past questions</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -154,13 +157,13 @@ export function ThreadSidebar() {
                           />
                         }
                       >
-                        <span className="truncate">{thread.title}</span>
+                        <span>{thread.title}</span>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   ))}
             </SidebarMenu>
             {!loading && shown.length === 0 ? (
-              <p className="px-2 py-1.5 text-sm text-muted-foreground">
+              <p className="px-3 py-1.5 text-sm text-muted-foreground">
                 {threads.length === 0 ? "No questions yet." : "No questions match."}
               </p>
             ) : null}
