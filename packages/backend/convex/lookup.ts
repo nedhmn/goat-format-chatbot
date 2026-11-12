@@ -2,6 +2,18 @@ import { v } from "convex/values";
 
 import type { Doc } from "./_generated/dataModel";
 import { internalQuery, type QueryCtx } from "./_generated/server";
+import { matchCards } from "./agent/cardNames";
+
+export const findCards = internalQuery({
+  args: { name: v.string() },
+  handler: async (ctx, { name }) => {
+    const cards = await ctx.db.query("cards").collect();
+    return matchCards(
+      cards.map((card) => ({ name: card.name, kind: card.kind })),
+      name,
+    );
+  },
+});
 
 export const passagesForCard = internalQuery({
   args: { cardId: v.id("cards") },

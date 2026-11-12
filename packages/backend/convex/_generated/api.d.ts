@@ -9,7 +9,9 @@
  */
 
 import type * as agent_agent from "../agent/agent.js";
+import type * as agent_cardNames from "../agent/cardNames.js";
 import type * as agent_instructions from "../agent/instructions.js";
+import type * as agent_tools from "../agent/tools.js";
 import type * as chat from "../chat.js";
 import type * as ingest_goatformat from "../ingest/goatformat.js";
 import type * as ingest_mentions from "../ingest/mentions.js";
@@ -27,7 +29,9 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   "agent/agent": typeof agent_agent;
+  "agent/cardNames": typeof agent_cardNames;
   "agent/instructions": typeof agent_instructions;
+  "agent/tools": typeof agent_tools;
   chat: typeof chat;
   "ingest/goatformat": typeof ingest_goatformat;
   "ingest/mentions": typeof ingest_mentions;

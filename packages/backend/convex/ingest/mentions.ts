@@ -2,7 +2,7 @@ export type PoolCard = { passcode: number; name: string };
 
 export type Mentions = { passcodes: number[]; unmatched: string[] };
 
-const FUZZY_MIN_LENGTH = 8;
+export const FUZZY_MIN_LENGTH = 8;
 
 export function cardKey(name: string): string {
   return name
