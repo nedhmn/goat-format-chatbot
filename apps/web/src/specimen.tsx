@@ -3,30 +3,59 @@ import { Badge } from "@goat-format-chatbot/design-system/components/badge";
 import { Button } from "@goat-format-chatbot/design-system/components/button";
 import { Card } from "@goat-format-chatbot/design-system/components/card";
 import { Code, CodeBlock } from "@goat-format-chatbot/design-system/components/code";
-import {
-  Conversation,
-  ConversationContent,
-  ConversationScrollButton,
-} from "@goat-format-chatbot/design-system/components/conversation";
 import { Input, Textarea } from "@goat-format-chatbot/design-system/components/input";
-import {
-  Message,
-  MessageContent,
-  MessageMarkdown,
-} from "@goat-format-chatbot/design-system/components/message";
-import {
-  PromptInput,
-  PromptInputSubmit,
-  PromptInputTextarea,
-} from "@goat-format-chatbot/design-system/components/prompt-input";
-import { ToolCall } from "@goat-format-chatbot/design-system/components/tool-call";
+import { Markdown } from "@goat-format-chatbot/design-system/components/markdown";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@goat-format-chatbot/design-system/components/tooltip";
-import { RiFileCopyLine, RiSendPlane2Line, RiStopCircleLine } from "@remixicon/react";
+import { Bubble, BubbleContent } from "@goat-format-chatbot/design-system/components/ui/bubble";
+import { Button as UiButton } from "@goat-format-chatbot/design-system/components/ui/button";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@goat-format-chatbot/design-system/components/ui/hover-card";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupTextarea,
+} from "@goat-format-chatbot/design-system/components/ui/input-group";
+import {
+  Message,
+  MessageContent,
+  MessageFooter,
+} from "@goat-format-chatbot/design-system/components/ui/message";
+import {
+  MessageScroller,
+  MessageScrollerButton,
+  MessageScrollerContent,
+  MessageScrollerItem,
+  MessageScrollerProvider,
+  MessageScrollerViewport,
+} from "@goat-format-chatbot/design-system/components/ui/message-scroller";
+import {
+  Trace,
+  TraceCollapsible,
+  TraceCollapsibleContent,
+  TraceCollapsibleTrigger,
+  TraceIcon,
+  TraceLine,
+  TraceTitle,
+} from "@goat-format-chatbot/design-system/components/ui/trace";
+import {
+  RiArrowRightUpLine,
+  RiArrowUpLine,
+  RiBookOpenLine,
+  RiFileCopyLine,
+  RiGlobalLine,
+  RiSearchLine,
+  RiSendPlane2Line,
+  RiStopCircleLine,
+} from "@remixicon/react";
 import { StrictMode, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 
@@ -39,9 +68,27 @@ const answer = `**No.** Book of Moon cannot be activated during the Damage Step.
 
 Only monster effects and Counter Traps can negate there, and Book of Moon changes neither ATK nor DEF.
 
-Sources:
-- [Book of Moon](https://beta.goatformat.com/cards/book-of-moon)
-- [Damage Step](https://beta.goatformat.com/learn/rulings#damage-step)`;
+\`\`\`text
+CL1: Mystical Space Typhoon
+CL2: Book of Moon
+\`\`\``;
+
+const lookups = [
+  { title: "Looked up Book of Moon", icon: <RiSearchLine />, status: undefined },
+  { title: "Read rulings for Book of Moon", icon: <RiBookOpenLine />, status: undefined },
+  { title: 'Searched rulings for "damage step"', icon: <RiSearchLine />, status: "error" },
+] as const;
+
+const sources = [
+  { title: "Book of Moon", url: "https://beta.goatformat.com/cards/book-of-moon" },
+  { title: "Damage Step", url: "https://beta.goatformat.com/learn/rulings#damage-step" },
+];
+
+const suggestions = [
+  "Can Sinister Serpent return during the End Phase?",
+  "Does Sangan trigger if it is banished?",
+  "Can Breaker use a counter the turn it is summoned?",
+];
 
 function Section({ name, children }: { name: string; children: ReactNode }) {
   return (
@@ -165,35 +212,139 @@ function Specimen() {
         </Section>
 
         <Section name="Chat">
-          <Conversation className="h-96 rounded-lg border">
-            <ConversationContent className="px-4">
-              <Message from="user">
-                <MessageContent>
-                  Can Book of Moon be activated during the damage step?
-                </MessageContent>
-              </Message>
-              <Message from="assistant">
-                <MessageContent>
-                  <ToolCall label="Looked up Book of Moon" state="done" />
-                  <ToolCall label="Searched mechanics: damage step" state="failed" />
-                  <MessageMarkdown>{answer}</MessageMarkdown>
-                </MessageContent>
-              </Message>
-              <Message from="assistant">
-                <MessageContent>
-                  <ToolCall label="Reading Ring of Destruction" state="running" />
-                  <MessageMarkdown streaming>
-                    {"**Yes,** Ring of Destruction can be **chain"}
-                  </MessageMarkdown>
-                </MessageContent>
-              </Message>
-            </ConversationContent>
-            <ConversationScrollButton />
-          </Conversation>
-          <PromptInput onSubmit={(event) => event.preventDefault()}>
-            <PromptInputTextarea placeholder="Ask about a ruling" />
-            <PromptInputSubmit />
-          </PromptInput>
+          <MessageScrollerProvider autoScroll>
+            <MessageScroller className="h-[28rem] rounded-lg border">
+              <MessageScrollerViewport>
+                <MessageScrollerContent className="gap-6 p-4 text-sm">
+                  <MessageScrollerItem messageId="question" scrollAnchor>
+                    <Message align="end">
+                      <MessageContent>
+                        <Bubble align="end" variant="muted">
+                          <BubbleContent>
+                            Can Book of Moon be activated during the damage step?
+                          </BubbleContent>
+                        </Bubble>
+                      </MessageContent>
+                    </Message>
+                  </MessageScrollerItem>
+                  <MessageScrollerItem messageId="answer">
+                    <Message>
+                      <MessageContent className="gap-4">
+                        <Trace>
+                          {lookups.map((lookup) => (
+                            <TraceLine key={lookup.title} status={lookup.status}>
+                              <TraceIcon>{lookup.icon}</TraceIcon>
+                              <TraceTitle>{lookup.title}</TraceTitle>
+                            </TraceLine>
+                          ))}
+                        </Trace>
+                        <Markdown>{answer}</Markdown>
+                        <Trace>
+                          <TraceCollapsible>
+                            <TraceCollapsibleTrigger>
+                              <TraceLine>
+                                <TraceIcon>
+                                  <RiGlobalLine />
+                                </TraceIcon>
+                                <TraceTitle>Used {sources.length} sources</TraceTitle>
+                              </TraceLine>
+                            </TraceCollapsibleTrigger>
+                            <TraceCollapsibleContent>
+                              <Trace>
+                                {sources.map((source) => (
+                                  <a
+                                    key={source.url}
+                                    href={source.url}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                  >
+                                    <TraceLine>
+                                      <TraceTitle>
+                                        {source.title}{" "}
+                                        <span className="sr-only">(opens in a new tab)</span>
+                                      </TraceTitle>
+                                      <TraceIcon>
+                                        <RiArrowRightUpLine />
+                                      </TraceIcon>
+                                    </TraceLine>
+                                  </a>
+                                ))}
+                              </Trace>
+                            </TraceCollapsibleContent>
+                          </TraceCollapsible>
+                        </Trace>
+                        <MessageFooter>
+                          <UiButton variant="ghost" size="icon-sm" aria-label="Copy answer">
+                            <RiFileCopyLine />
+                          </UiButton>
+                        </MessageFooter>
+                      </MessageContent>
+                    </Message>
+                  </MessageScrollerItem>
+                  <MessageScrollerItem messageId="streaming">
+                    <Message>
+                      <MessageContent className="gap-4">
+                        <Trace>
+                          <TraceLine status="running">
+                            <TraceIcon>
+                              <RiBookOpenLine />
+                            </TraceIcon>
+                            <TraceTitle>Reading rulings for Ring of Destruction</TraceTitle>
+                          </TraceLine>
+                        </Trace>
+                        <Markdown streaming>
+                          {"**Yes,** Ring of Destruction can be **chain"}
+                        </Markdown>
+                      </MessageContent>
+                    </Message>
+                  </MessageScrollerItem>
+                </MessageScrollerContent>
+              </MessageScrollerViewport>
+              <MessageScrollerButton />
+            </MessageScroller>
+          </MessageScrollerProvider>
+          <p className="text-sm">
+            Damage Step rulings come from the{" "}
+            <HoverCard>
+              <HoverCardTrigger
+                delay={10}
+                closeDelay={100}
+                render={<UiButton variant="secondary" size="xs" />}
+              >
+                goatformat.com
+              </HoverCardTrigger>
+              <HoverCardContent className="flex w-64 flex-col gap-1">
+                <span className="font-medium">Damage Step</span>
+                <span className="text-muted-foreground">
+                  Only Counter Traps and effects that change ATK or DEF can be activated.
+                </span>
+              </HoverCardContent>
+            </HoverCard>{" "}
+            rulings page.
+          </p>
+          <div className="scrollbar-none flex scroll-fade-x gap-2 overflow-x-auto">
+            {suggestions.map((suggestion) => (
+              <UiButton key={suggestion} variant="outline" size="sm" className="shrink-0">
+                {suggestion}
+              </UiButton>
+            ))}
+          </div>
+          <form onSubmit={(event) => event.preventDefault()}>
+            <InputGroup>
+              <InputGroupTextarea placeholder="Ask about a ruling" className="p-3" />
+              <InputGroupAddon align="block-end">
+                <InputGroupButton
+                  type="submit"
+                  size="icon-sm"
+                  variant="default"
+                  className="ml-auto rounded-full"
+                  aria-label="Send"
+                >
+                  <RiArrowUpLine />
+                </InputGroupButton>
+              </InputGroupAddon>
+            </InputGroup>
+          </form>
         </Section>
       </main>
     </TooltipProvider>
