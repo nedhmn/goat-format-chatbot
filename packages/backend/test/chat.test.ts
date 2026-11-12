@@ -6,7 +6,15 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { api, components } from "../convex/_generated/api";
 import { openRouterModel, rulingsAgent } from "../convex/agent/agent";
-import { answer, NOT_YOUR_THREAD, streamReply } from "../convex/chat";
+import {
+  answer,
+  NOT_YOUR_THREAD,
+  OWNER,
+  streamReply,
+  threadTitle,
+  TITLE_LENGTH,
+  UNTITLED,
+} from "../convex/chat";
 import { QUESTIONS_PER_MINUTE, tooManyQuestions } from "../convex/limits";
 import schema from "../convex/schema";
 
@@ -104,7 +112,7 @@ describe("messages", () => {
   it("lists the streamed reply after the question", async () => {
     const t = backend();
     const prompt = await t.mutation(async (ctx) => {
-      const threadId = await createThread(ctx, components.agent);
+      const threadId = await createThread(ctx, components.agent, { userId: OWNER });
       const { messageId } = await saveMessage(ctx, components.agent, {
         threadId,
         prompt: "Book of Moon in the damage step?",
@@ -130,6 +138,40 @@ describe("messages", () => {
     await expect(
       t.query(api.chat.messages, { threadId, paginationOpts: firstPage }),
     ).rejects.toThrow(NOT_YOUR_THREAD);
+  });
+});
+
+describe("threads", () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.stubEnv("OPENROUTER_API_KEY", "test-key");
+  });
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.unstubAllEnvs();
+  });
+
+  it("lists the owner's threads newest first, titled from their first question", async () => {
+    const t = backend();
+    const first = await t.mutation(api.chat.send, { question: "Book of Moon?" });
+    await t.mutation(api.chat.send, { question: "And Ring?", threadId: first.threadId });
+    const second = await t.mutation(api.chat.send, { question: "  Sangan\n banished? " });
+    await t.mutation((ctx) => createThread(ctx, components.agent, { userId: "someone-else" }));
+    await t.mutation((ctx) => createThread(ctx, components.agent, { userId: OWNER }));
+    const threads = await t.query(api.chat.threads, {});
+    expect(threads.map((thread) => [thread.threadId, thread.title])).toEqual([
+      [expect.any(String), UNTITLED],
+      [second.threadId, "Sangan banished?"],
+      [first.threadId, "Book of Moon?"],
+    ]);
+  });
+});
+
+describe("threadTitle", () => {
+  it("shortens a long question", () => {
+    const title = threadTitle("Can ".repeat(40));
+    expect(title).toHaveLength(TITLE_LENGTH);
+    expect(title.endsWith("Can…")).toBe(true);
   });
 });
 
