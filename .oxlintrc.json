@@ -32,6 +32,7 @@
     "**/.turbo/**",
     "**/drizzle/**",
     "**/convex/_generated/**",
+    "**/*.gen.ts",
     ".agents/**",
     ".claude/**",
     "docs/**",
@@ -80,9 +81,15 @@
     },
     {
       // TanStack Router derives URLs from route file names such as __root.tsx and
-      // threads.$threadId.tsx, so they cannot be kebab-case.
+      // threads/$threadId.tsx, so they cannot be kebab-case.
       "files": ["apps/web/src/app/routes/**"],
       "rules": { "unicorn/filename-case": "off" }
+    },
+    {
+      // TanStack Router reads its types from a merged Register interface. A type alias
+      // cannot merge into the library's declaration.
+      "files": ["apps/web/src/app/router.tsx"],
+      "rules": { "typescript/consistent-type-definitions": "off" }
     },
     {
       "files": [

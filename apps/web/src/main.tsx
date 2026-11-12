@@ -1,14 +1,15 @@
 import "@goat-format-chatbot/design-system/styles.css";
+import { RouterProvider } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+
+import { router } from "@/app/router";
 
 const root = document.querySelector("#root");
 
 if (root)
   createRoot(root).render(
     <StrictMode>
-      <main className="mx-auto max-w-layout px-4 py-16">
-        <h1 className="font-heading text-3xl text-text-primary">Goat Format Chatbot</h1>
-      </main>
+      <RouterProvider router={router} />
     </StrictMode>,
   );

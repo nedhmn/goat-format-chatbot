@@ -9,6 +9,8 @@ pnpm dev                                  # WEB_DEV_URL in .dev/ports.env
 pnpm build && pnpm --filter web preview   # WEB_PREVIEW_URL in .dev/ports.env
 ```
 
+`pnpm build` is the demo build that GitHub Pages serves (`vite build --mode demo`). It copies `index.html` to `404.html`, so Pages serves the app for deep links such as `/threads/<id>`.
+
 Each server takes the next free port when its default is busy and records its real URL in `.dev/ports.env`. Read the URL from there, never assume a port.
 
 ## Pages
