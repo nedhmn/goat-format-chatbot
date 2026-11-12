@@ -21,3 +21,12 @@ import { Button } from "@goat-format-chatbot/design-system/components/button";
 ## Components
 
 `badge`, `button`, `card`, `code`, `input`, `tooltip`, and `cn` in `lib/utils`.
+
+Chat, for the rulings chat:
+
+- `conversation`: a scrolling log that sticks to the bottom while a reply streams, with a "Jump to latest" button once you scroll up.
+- `message`: a user or assistant message. `MessageMarkdown` renders Markdown with GFM into `.prose` and opens links in a new tab. Pass `streaming` while the text is still arriving, so an unclosed `**` or backtick does not flash as raw text.
+- `prompt-input`: a form with an auto-growing textarea. Enter submits, Shift+Enter adds a line, and nothing submits while the submit button is disabled.
+- `tool-call`: one line per agent tool call, with a running, done, or failed badge.
+
+`conversation`, `message`, and `prompt-input` are adapted from [AI Elements](https://github.com/vercel/ai-elements) (Apache-2.0); see the root `LICENSE`.

@@ -3,7 +3,23 @@ import { Badge } from "@goat-format-chatbot/design-system/components/badge";
 import { Button } from "@goat-format-chatbot/design-system/components/button";
 import { Card } from "@goat-format-chatbot/design-system/components/card";
 import { Code, CodeBlock } from "@goat-format-chatbot/design-system/components/code";
+import {
+  Conversation,
+  ConversationContent,
+  ConversationScrollButton,
+} from "@goat-format-chatbot/design-system/components/conversation";
 import { Input, Textarea } from "@goat-format-chatbot/design-system/components/input";
+import {
+  Message,
+  MessageContent,
+  MessageMarkdown,
+} from "@goat-format-chatbot/design-system/components/message";
+import {
+  PromptInput,
+  PromptInputSubmit,
+  PromptInputTextarea,
+} from "@goat-format-chatbot/design-system/components/prompt-input";
+import { ToolCall } from "@goat-format-chatbot/design-system/components/tool-call";
 import {
   Tooltip,
   TooltipContent,
@@ -18,6 +34,14 @@ const variants = ["primary", "secondary", "outline", "ghost"] as const;
 const sizes = ["sm", "md", "lg"] as const;
 const badges = ["neutral", "accent", "success", "error", "outline"] as const;
 const cards = ["elevated", "outlined", "plain"] as const;
+
+const answer = `**No.** Book of Moon cannot be activated during the Damage Step.
+
+Only monster effects and Counter Traps can negate there, and Book of Moon changes neither ATK nor DEF.
+
+Sources:
+- [Book of Moon](https://beta.goatformat.com/cards/book-of-moon)
+- [Damage Step](https://beta.goatformat.com/learn/rulings#damage-step)`;
 
 function Section({ name, children }: { name: string; children: ReactNode }) {
   return (
@@ -138,6 +162,38 @@ function Specimen() {
             </ul>
           </div>
           <CodeBlock>{"CL1: Pot of Prosperity\nCL2: Ash Blossom & Joyous Spring"}</CodeBlock>
+        </Section>
+
+        <Section name="Chat">
+          <Conversation className="h-96 rounded-lg border">
+            <ConversationContent className="px-4">
+              <Message from="user">
+                <MessageContent>
+                  Can Book of Moon be activated during the damage step?
+                </MessageContent>
+              </Message>
+              <Message from="assistant">
+                <MessageContent>
+                  <ToolCall label="Looked up Book of Moon" state="done" />
+                  <ToolCall label="Searched mechanics: damage step" state="failed" />
+                  <MessageMarkdown>{answer}</MessageMarkdown>
+                </MessageContent>
+              </Message>
+              <Message from="assistant">
+                <MessageContent>
+                  <ToolCall label="Reading Ring of Destruction" state="running" />
+                  <MessageMarkdown streaming>
+                    {"**Yes,** Ring of Destruction can be **chain"}
+                  </MessageMarkdown>
+                </MessageContent>
+              </Message>
+            </ConversationContent>
+            <ConversationScrollButton />
+          </Conversation>
+          <PromptInput onSubmit={(event) => event.preventDefault()}>
+            <PromptInputTextarea placeholder="Ask about a ruling" />
+            <PromptInputSubmit />
+          </PromptInput>
         </Section>
       </main>
     </TooltipProvider>
