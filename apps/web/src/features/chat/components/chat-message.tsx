@@ -23,12 +23,25 @@ import { useState } from "react";
 import type { ChatMessage as ChatMessageData } from "@/features/chat/api/chat-message";
 import { LookupTrace } from "@/features/chat/components/lookup-trace";
 import { SourcesTrace } from "@/features/chat/components/sources-trace";
+import { answerTime, fullTime } from "@/features/chat/utils/answer-time";
 import { groupParts } from "@/features/chat/utils/group-parts";
 
 export const NO_ANSWER = "The answer stopped before it finished. Ask again.";
 
 const THINKING = "Reading the question";
 const COPIED_FOR_MS = 2000;
+
+function AnswerTime({ sentAt }: { sentAt: number }) {
+  const sent = new Date(sentAt);
+  return (
+    <Tooltip>
+      <TooltipTrigger render={<time dateTime={sent.toISOString()} className="px-1" />}>
+        {answerTime(sent, new Date())}
+      </TooltipTrigger>
+      <TooltipContent>{fullTime(sent)}</TooltipContent>
+    </Tooltip>
+  );
+}
 
 function CopyAnswer({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
@@ -104,8 +117,9 @@ export function ChatMessage({ message }: { message: ChatMessageData }) {
         ) : null}
         {message.sources.length > 0 ? <SourcesTrace sources={message.sources} /> : null}
         {message.status === "done" && message.text ? (
-          <MessageFooter className="px-0">
+          <MessageFooter className="gap-1 px-0">
             <CopyAnswer text={message.text} />
+            <AnswerTime sentAt={message.sentAt} />
           </MessageFooter>
         ) : null}
       </MessageContent>

@@ -19,6 +19,7 @@ export type ChatMessage = {
   key: string;
   role: "user" | "assistant";
   status: "pending" | "streaming" | "done" | "failed";
+  sentAt: number;
   text: string;
   parts: ChatPart[];
   sources: Source[];
@@ -108,6 +109,7 @@ export function toChatMessage(message: UIMessage): ChatMessage[] {
       key: message.key,
       role: message.role,
       status: statuses[message.status],
+      sentAt: message._creationTime,
       text: message.text,
       ...(message.role === "assistant" ? splitSources(parts) : { parts, sources: [] }),
     },
