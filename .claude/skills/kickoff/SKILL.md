@@ -51,4 +51,4 @@ Then `babysit-pr` until the stack is merged. When it is, say so in one line, clo
 
 ## Deploys
 
-The only thing this repo deploys is the static demo: every push to `main` runs the CI `pages` job, which publishes `apps/web` to GitHub Pages. The AI chat app (`apps/web` against `apps/api`) runs locally and has no hosted deploy. The same push updates the release-please PR; that PR is never part of a stack and is merged only through the `release` skill.
+The only thing this repo deploys is the static demo: every push to `main` runs the CI `pages` job, which publishes `apps/web` to GitHub Pages. The AI chat app (`apps/web` against Convex in `packages/backend`) runs locally and has no hosted deploy. The same push updates the release-please PR; that PR is never part of a stack and is merged only through the `release` skill.
