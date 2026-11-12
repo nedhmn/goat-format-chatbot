@@ -1,6 +1,6 @@
 import { v } from "convex/values";
 
-import { internalMutation } from "../_generated/server";
+import { internalMutation, type MutationCtx } from "../_generated/server";
 import { card, rulingType, type Card, type Passage } from "../schema";
 
 export type Counts = { inserted: number; updated: number; unchanged: number };
@@ -44,20 +44,21 @@ export const upsertRulings = internalMutation({
         .withIndex("by_passcode", (q) => q.eq("passcode", passcode))
         .unique();
       if (!owner) throw new Error(`no card with passcode ${passcode} for ${ruling.sourceUrl}`);
-      const next = { kind: "ruling" as const, cardId: owner._id, ...ruling };
-      const existing = await ctx.db
-        .query("passages")
-        .withIndex("by_source_url", (q) => q.eq("sourceUrl", next.sourceUrl))
-        .unique();
-      if (!existing) {
-        await ctx.db.insert("passages", next);
-        counts.inserted++;
-      } else if (isUnchanged<Passage>(existing, next)) {
-        counts.unchanged++;
-      } else {
-        await ctx.db.replace(existing._id, next);
-        counts.updated++;
-      }
+      counts[await upsertPassage(ctx, { kind: "ruling", cardId: owner._id, ...ruling })]++;
+    }
+    return counts;
+  },
+});
+
+export const upsertSections = internalMutation({
+  args: {
+    kind: v.union(v.literal("notice"), v.literal("mechanic")),
+    sections: v.array(v.object({ title: v.string(), text: v.string(), sourceUrl: v.string() })),
+  },
+  handler: async (ctx, { kind, sections }) => {
+    const counts = emptyCounts();
+    for (const section of sections) {
+      counts[await upsertPassage(ctx, { kind, ...section })]++;
     }
     return counts;
   },
@@ -95,6 +96,20 @@ export const deleteStalePassages = internalMutation({
     return deleted;
   },
 });
+
+async function upsertPassage(ctx: MutationCtx, next: Passage): Promise<keyof Counts> {
+  const existing = await ctx.db
+    .query("passages")
+    .withIndex("by_source_url", (q) => q.eq("sourceUrl", next.sourceUrl))
+    .unique();
+  if (!existing) {
+    await ctx.db.insert("passages", next);
+    return "inserted";
+  }
+  if (isUnchanged<Passage>(existing, next)) return "unchanged";
+  await ctx.db.replace(existing._id, next);
+  return "updated";
+}
 
 function emptyCounts(): Counts {
   return { inserted: 0, updated: 0, unchanged: 0 };

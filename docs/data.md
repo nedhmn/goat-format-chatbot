@@ -32,11 +32,11 @@ Card images are not stored. Build an image URL from a base URL and the passcode,
 
 Every piece of text the agent searches, in one table so one search index ranks them together. `kind` decides the other fields.
 
-| `kind`     | Fields                                      | One row per                        |
-| ---------- | ------------------------------------------- | ---------------------------------- |
-| `ruling`   | `cardId`, `rulingType`, `text`, `sourceUrl` | ruling on a card                   |
-| `notice`   | `title`, `text`, `sourceUrl`                | section of a ruling notice article |
-| `mechanic` | `title`, `text`, `sourceUrl`                | section of a `/learn` guide        |
+| `kind`     | Fields                                      | One row per                          |
+| ---------- | ------------------------------------------- | ------------------------------------ |
+| `ruling`   | `cardId`, `rulingType`, `text`, `sourceUrl` | ruling on a card                     |
+| `notice`   | `title`, `text`, `sourceUrl`                | section of a ruling notice article   |
+| `mechanic` | `title`, `text`, `sourceUrl`                | section of a gameplay `/learn` guide |
 
 `rulingType` is `faq`, `netrep-ruling`, or `netrep-qa`. `sourceUrl` links to the passage on the site and is the key for upserts.
 
@@ -44,7 +44,7 @@ The `search_text` index searches `text` and filters by `kind` and `cardId`. Conv
 
 ## Ingest
 
-With the backend running (`pnpm dev`), load or refresh everything:
+Load or refresh everything while the backend runs (`pnpm dev`):
 
 ```sh
 pnpm --filter @goat-format-chatbot/backend ingest
@@ -52,9 +52,10 @@ pnpm --filter @goat-format-chatbot/backend ingest
 
 It runs `ingest/sync:run`, an internal action in `packages/backend/convex/ingest/`:
 
-- Fetches every page of cards and rulings from the site's API, one request a second, and parses each response at the fetch.
-- Upserts cards by `passcode` and rulings by `sourceUrl`, in batches of 100, rewriting only rows that changed.
-- Deletes cards and rulings the site no longer lists. Deleting a card deletes its rulings.
+- Fetches every page of cards and rulings from the site's API, then every ruling notice (`/articles/ruling-notice-*`) and the two gameplay guides (`/learn/rulings`, `/learn/goat-format-history`) listed in the site's sitemap, one request a second. The other `/learn` pages cover accounts, deckbuilding, and tournaments, so they are left out. Each response is parsed where it is fetched.
+- Splits each article at its `h2` headings that carry an id. Each section links to that heading, and text before the first heading links to the page. Card widgets inside the article are skipped. The text is written as Markdown: lists, quotes, sub-headings, bold, and italics keep their markup, links keep only their text, and curly quotes are straightened.
+- Upserts cards by `passcode` and passages by `sourceUrl`, in batches of 100, rewriting only rows that changed.
+- Deletes cards and passages the site no longer lists. Deleting a card deletes its rulings.
 - Prints how many rows it inserted, updated, left unchanged, and deleted. A second run with no site changes reports every row unchanged.
 
 The site sorts rulings by card name, which ties within a card, so paging can repeat or skip a ruling where a card's rulings cross a page boundary. The ingest refetches those cards by name and dedupes by ruling id, then fails if the card or ruling count differs from the total the site reports.
