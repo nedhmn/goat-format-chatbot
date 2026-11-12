@@ -4,13 +4,20 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "CONVEX_AGENT_MODE=anonymous convex dev",
+    "dev": "pnpm run env:sync && CONVEX_AGENT_MODE=anonymous convex dev",
+    "env:sync": "test ! -f .env || CONVEX_AGENT_MODE=anonymous convex env set --force --from-file .env",
     "ingest": "CONVEX_AGENT_MODE=anonymous convex run ingest/sync:run",
     "typecheck": "tsc",
     "test": "vitest run"
   },
   "dependencies": {
+    "@ai-sdk/provider": "4.0.34",
+    "@ai-sdk/provider-utils": "5.0.71",
+    "@convex-dev/agent": "0.7.9",
+    "@openrouter/ai-sdk-provider": "3.1.0",
+    "ai": "7.0.157",
     "convex": "1.49.0",
+    "convex-helpers": "0.1.131",
     "node-html-parser": "9.0.5",
     "zod": "4.6.7"
   },
