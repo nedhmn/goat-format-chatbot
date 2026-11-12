@@ -5,6 +5,7 @@
     "**/.turbo/**",
     "**/drizzle/**",
     "**/convex/_generated/**",
+    ".agents/skills/**",
     "CHANGELOG.md",
     "pnpm-lock.yaml"
   ],
