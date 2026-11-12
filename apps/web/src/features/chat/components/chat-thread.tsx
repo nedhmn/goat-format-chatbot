@@ -21,7 +21,7 @@ export function ChatThread({ threadId }: { threadId: string }) {
       <MessageScrollerProvider autoScroll>
         <MessageScroller className="min-h-0 flex-1" aria-busy={loading}>
           <MessageScrollerViewport>
-            <MessageScrollerContent className="gap-8 py-6 text-sm">
+            <MessageScrollerContent className="mx-auto w-full max-w-3xl gap-8 py-6 text-sm">
               {messages.map((message) => (
                 <MessageScrollerItem
                   key={message.key}
@@ -36,12 +36,14 @@ export function ChatThread({ threadId }: { threadId: string }) {
           <MessageScrollerButton />
         </MessageScroller>
       </MessageScrollerProvider>
-      <QuestionForm
-        ask={ask}
-        placeholder="Ask a follow-up"
-        question={question}
-        onQuestionChange={setQuestion}
-      />
+      <div className="mx-auto w-full max-w-3xl">
+        <QuestionForm
+          ask={ask}
+          placeholder="Ask a follow-up"
+          question={question}
+          onQuestionChange={setQuestion}
+        />
+      </div>
     </div>
   );
 }

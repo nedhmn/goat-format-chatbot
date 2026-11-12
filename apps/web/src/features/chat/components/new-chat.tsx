@@ -16,7 +16,7 @@ export function NewChat() {
   const navigate = useNavigate();
   const [question, setQuestion] = useState("");
   return (
-    <div className="flex flex-col gap-6 py-16">
+    <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 py-16">
       <div className="flex flex-col gap-2">
         <h1 className="font-heading text-3xl text-foreground">Ask about a ruling</h1>
         <p className="text-muted-foreground">
