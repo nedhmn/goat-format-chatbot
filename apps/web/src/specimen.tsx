@@ -14,6 +14,17 @@ import {
 import { Bubble, BubbleContent } from "@goat-format-chatbot/design-system/components/ui/bubble";
 import { Button as UiButton } from "@goat-format-chatbot/design-system/components/ui/button";
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@goat-format-chatbot/design-system/components/ui/dropdown-menu";
+import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
@@ -165,6 +176,29 @@ function Specimen() {
               />
               <TooltipContent side="bottom">Stop generating</TooltipContent>
             </Tooltip>
+          </div>
+        </Section>
+
+        <Section name="Dropdown menu">
+          <div>
+            <DropdownMenu>
+              <DropdownMenuTrigger render={<Button variant="outline">You</Button>} />
+              <DropdownMenuContent align="start" className="w-48">
+                <DropdownMenuGroup>
+                  <DropdownMenuLabel>Theme</DropdownMenuLabel>
+                  <DropdownMenuRadioGroup defaultValue="system">
+                    <DropdownMenuRadioItem value="system">System</DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="light">Light</DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="dark">Dark</DropdownMenuRadioItem>
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <RiFileCopyLine />
+                  Copy link
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </Section>
 
