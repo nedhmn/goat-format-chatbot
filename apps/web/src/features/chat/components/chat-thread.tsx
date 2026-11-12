@@ -21,7 +21,7 @@ export function ChatThread({ threadId }: { threadId: string }) {
       <MessageScrollerProvider autoScroll>
         <MessageScroller className="min-h-0 flex-1" aria-busy={loading}>
           <MessageScrollerViewport>
-            <MessageScrollerContent className="mx-auto w-full max-w-3xl gap-8 py-6 text-sm">
+            <MessageScrollerContent className="mx-auto w-full max-w-3xl gap-8 pt-10 pb-6 text-sm md:pt-16">
               {messages.map((message) => (
                 <MessageScrollerItem
                   key={message.key}
