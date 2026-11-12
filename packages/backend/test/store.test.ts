@@ -157,3 +157,24 @@ describe("deleting what the site no longer lists", () => {
     );
   });
 });
+
+describe("upsertSections", () => {
+  it("upserts page sections by source url and leaves them alone on a second run", async () => {
+    const t = convexTest(schema, modules);
+    const sections = [
+      {
+        title: "Rulings: Priority",
+        text: "After a chain or summon resolves, the turn player acts first.",
+        sourceUrl: "https://beta.goatformat.com/learn/rulings#priority",
+      },
+    ];
+    expect(
+      await t.mutation(internal.ingest.store.upsertSections, { kind: "mechanic", sections }),
+    ).toEqual({ inserted: 1, updated: 0, unchanged: 0 });
+    expect(
+      await t.mutation(internal.ingest.store.upsertSections, { kind: "mechanic", sections }),
+    ).toEqual({ inserted: 0, updated: 0, unchanged: 1 });
+    const [stored] = await t.run((ctx) => ctx.db.query("passages").collect());
+    expect(stored).toMatchObject({ kind: "mechanic", ...sections[0] });
+  });
+});

@@ -44,7 +44,7 @@ The `search_text` index searches `text` and filters by `kind` and `cardId`. Conv
 
 ## Ingest
 
-With the backend running (`pnpm dev`), load or refresh everything:
+Load or refresh everything while the backend runs (`pnpm dev`):
 
 ```sh
 pnpm --filter @goat-format-chatbot/backend ingest
@@ -52,9 +52,10 @@ pnpm --filter @goat-format-chatbot/backend ingest
 
 It runs `ingest/sync:run`, an internal action in `packages/backend/convex/ingest/`:
 
-- Fetches every page of cards and rulings from the site's API, one request a second, and parses each response at the fetch.
-- Upserts cards by `passcode` and rulings by `sourceUrl`, in batches of 100, rewriting only rows that changed.
-- Deletes cards and rulings the site no longer lists. Deleting a card deletes its rulings.
+- Fetches every page of cards and rulings from the site's API, then every ruling notice (`/articles/ruling-notice-*`) and `/learn` page listed in the site's sitemap, one request a second. Each response is parsed where it is fetched.
+- Splits each article at its `h2` headings that carry an id. Each section links to that heading, and text before the first heading links to the page. Card widgets inside the article are skipped.
+- Upserts cards by `passcode` and passages by `sourceUrl`, in batches of 100, rewriting only rows that changed.
+- Deletes cards and passages the site no longer lists. Deleting a card deletes its rulings.
 - Prints how many rows it inserted, updated, left unchanged, and deleted. A second run with no site changes reports every row unchanged.
 
 The site sorts rulings by card name, which ties within a card, so paging can repeat or skip a ruling where a card's rulings cross a page boundary. The ingest refetches those cards by name and dedupes by ruling id, then fails if the card or ruling count differs from the total the site reports.

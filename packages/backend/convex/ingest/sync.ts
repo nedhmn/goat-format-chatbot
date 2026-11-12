@@ -1,7 +1,8 @@
 import { internal } from "../_generated/api";
-import { internalAction } from "../_generated/server";
+import { internalAction, type ActionCtx } from "../_generated/server";
 import type { Card } from "../schema";
-import { fetchCardsPage, fetchRulingsPage, type SiteRuling } from "./goatformat";
+import { fetchCardsPage, fetchRulingsPage, fetchSitePage, type SiteRuling } from "./goatformat";
+import { pageUrls, parseSections, type PageSection } from "./pages";
 import { assertComplete, chunk, fetchAllPages, pacer, straddlingSlugs, uniqueById } from "./paging";
 import type { Counts } from "./store";
 
@@ -11,6 +12,8 @@ const BATCH_SIZE = 100;
 type Summary = {
   cards: Counts & { deleted: number };
   rulings: Counts & { deleted: number; withoutCard: number };
+  notices: Counts & { deleted: number };
+  mechanics: Counts & { deleted: number };
 };
 
 export const run = internalAction({
@@ -40,6 +43,14 @@ export const run = internalAction({
         keep: owned.map((ruling) => ruling.sourceUrl),
       },
     );
+    const urls = pageUrls(await paced(pace, () => fetchSitePage("/sitemap.xml")));
+    const notices = await syncSections(ctx, "notice", await fetchSections(urls.notices, pace));
+    const mechanics = await syncSections(
+      ctx,
+      "mechanic",
+      await fetchSections(urls.mechanics, pace),
+    );
+
     const deletedCards: number = await ctx.runMutation(internal.ingest.store.deleteStaleCards, {
       keep: cards.map((card) => card.passcode),
     });
@@ -51,6 +62,8 @@ export const run = internalAction({
         deleted: deletedRulings,
         withoutCard: rulings.length - owned.length,
       },
+      notices,
+      mechanics,
     };
   },
 });
@@ -76,6 +89,35 @@ async function fetchRulings(cards: Card[], pace: () => Promise<void>): Promise<S
   const unique = uniqueById(rulings);
   assertComplete("rulings", unique.length, totalCount);
   return unique;
+}
+
+async function fetchSections(urls: string[], pace: () => Promise<void>): Promise<PageSection[]> {
+  const sections: PageSection[] = [];
+  for (const url of urls) {
+    const html = await paced(pace, () => fetchSitePage(new URL(url).pathname));
+    sections.push(...parseSections(html, url));
+  }
+  return sections;
+}
+
+async function syncSections(
+  ctx: ActionCtx,
+  kind: "notice" | "mechanic",
+  sections: PageSection[],
+): Promise<Counts & { deleted: number }> {
+  const counts = await upsertInBatches(sections, (batch) =>
+    ctx.runMutation(internal.ingest.store.upsertSections, { kind, sections: batch }),
+  );
+  const deleted: number = await ctx.runMutation(internal.ingest.store.deleteStalePassages, {
+    kind,
+    keep: sections.map((section) => section.sourceUrl),
+  });
+  return { ...counts, deleted };
+}
+
+async function paced<T>(pace: () => Promise<void>, request: () => Promise<T>): Promise<T> {
+  await pace();
+  return request();
 }
 
 async function upsertInBatches<T>(

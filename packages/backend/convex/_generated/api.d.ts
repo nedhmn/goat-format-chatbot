@@ -9,6 +9,7 @@
  */
 
 import type * as ingest_goatformat from "../ingest/goatformat.js";
+import type * as ingest_pages from "../ingest/pages.js";
 import type * as ingest_paging from "../ingest/paging.js";
 import type * as ingest_store from "../ingest/store.js";
 import type * as ingest_sync from "../ingest/sync.js";
@@ -21,6 +22,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   "ingest/goatformat": typeof ingest_goatformat;
+  "ingest/pages": typeof ingest_pages;
   "ingest/paging": typeof ingest_paging;
   "ingest/store": typeof ingest_store;
   "ingest/sync": typeof ingest_sync;

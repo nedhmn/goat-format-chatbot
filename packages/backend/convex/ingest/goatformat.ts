@@ -161,15 +161,24 @@ export async function fetchRulingsPage(page: number, cardName?: string): Promise
   return rulingsPage.parse(await response.json());
 }
 
+export async function fetchSitePage(path: string): Promise<string> {
+  const response = await get(new URL(path, SITE_URL));
+  return response.text();
+}
+
 async function getProcedure<P extends keyof Procedures>(
   procedure: P,
   input: Procedures[P],
 ): Promise<Response> {
   const url = new URL(`/api/trpc/${procedure}`, SITE_URL);
   url.searchParams.set("input", JSON.stringify({ json: input }));
+  return get(url);
+}
+
+async function get(url: URL): Promise<Response> {
   const response = await fetch(url, { headers: { "user-agent": USER_AGENT } });
   if (!response.ok) {
-    throw new Error(`${procedure} returned ${response.status} for ${url.search}`);
+    throw new Error(`${url.pathname} returned ${response.status} for ${url.search}`);
   }
   return response;
 }
