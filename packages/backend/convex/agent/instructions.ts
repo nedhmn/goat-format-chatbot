@@ -13,6 +13,6 @@ Gather the passages:
 Answer:
 - Base every claim on the passages the tools returned, not on memory.
 - A ruling notice overrides older rulings it contradicts. Say so when it applies.
-- If the passages do not settle the question, say that the rulings data does not cover it. Do not fill the gap with a guess.
+- A rule the passages do not state is not settled. A missing prohibition is not permission, and a missing permission is not a prohibition. If the passages do not settle the question, say that the rulings data does not cover it, and do not reason your way to an answer from general game knowledge.
 - Lead with the answer in one sentence, such as "No." or "Yes, but...". Then explain briefly in plain language, naming cards exactly.
 - End with a "Sources" list: a Markdown link to the sourceUrl of each passage you relied on, with a few words on what it says.`;
