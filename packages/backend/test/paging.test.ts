@@ -1,7 +1,13 @@
 import { describe, expect, it, vi } from "vitest";
 
 import { PAGE_SIZE, type SiteRuling } from "../convex/ingest/goatformat";
-import { chunk, fetchAllPages, straddlingSlugs, uniqueById } from "../convex/ingest/paging";
+import {
+  assertComplete,
+  chunk,
+  fetchAllPages,
+  straddlingSlugs,
+  uniqueById,
+} from "../convex/ingest/paging";
 
 function ruling(id: string, cardSlug: string): SiteRuling {
   return {
@@ -20,13 +26,31 @@ describe("fetchAllPages", () => {
       totalCount: PAGE_SIZE * 2 + 1,
     }));
     const beforeRequest = vi.fn(async () => {});
-    expect(await fetchAllPages(fetchPage, beforeRequest)).toEqual([[1], [2], [3]]);
+    expect(await fetchAllPages(fetchPage, beforeRequest)).toEqual({
+      pages: [[1], [2], [3]],
+      totalCount: PAGE_SIZE * 2 + 1,
+    });
     expect(beforeRequest).toHaveBeenCalledTimes(3);
   });
 
   it("stops at an empty page", async () => {
     const fetchPage = vi.fn(async () => ({ items: [], totalCount: PAGE_SIZE * 5 }));
-    expect(await fetchAllPages(fetchPage, async () => {})).toEqual([[]]);
+    expect(await fetchAllPages(fetchPage, async () => {})).toEqual({
+      pages: [[]],
+      totalCount: PAGE_SIZE * 5,
+    });
+  });
+});
+
+describe("assertComplete", () => {
+  it("passes when the ingest found everything the site lists", () => {
+    expect(() => assertComplete("rulings", 4186, 4186)).not.toThrow();
+  });
+
+  it("fails loudly when rows went missing", () => {
+    expect(() => assertComplete("rulings", 4180, 4186)).toThrow(
+      "the site lists 4186 rulings but the ingest found 4180",
+    );
   });
 });
 

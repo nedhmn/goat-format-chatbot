@@ -8,7 +8,7 @@ Everything comes from [beta.goatformat.com](https://beta.goatformat.com), throug
 
 - Card text is Goat format text: the wording and errata in effect for the April 2005 TCG. The site sources it from Yugipedia's errata history.
 - The banlist is the April 2005 TCG list, stored as a status on each card.
-- Rulings come from the site's rulings database, one row per card. A ruling that involves several cards appears once on each.
+- Rulings come from the site's rulings database, each filed under one card. A ruling's text often names other cards that it is not filed under.
 
 ## Tables
 
@@ -57,4 +57,4 @@ It runs `ingest/sync:run`, an internal action in `packages/backend/convex/ingest
 - Deletes cards and rulings the site no longer lists. Deleting a card deletes its rulings.
 - Prints how many rows it inserted, updated, left unchanged, and deleted. A second run with no site changes reports every row unchanged.
 
-The site sorts rulings by card name, which ties within a card, so paging can repeat or skip a ruling where a card's rulings cross a page boundary. The ingest refetches those cards by name and dedupes by ruling id.
+The site sorts rulings by card name, which ties within a card, so paging can repeat or skip a ruling where a card's rulings cross a page boundary. The ingest refetches those cards by name and dedupes by ruling id, then fails if the card or ruling count differs from the total the site reports.

@@ -3,13 +3,19 @@ import { PAGE_SIZE, type Page, type SiteRuling } from "./goatformat";
 export async function fetchAllPages<T>(
   fetchPage: (page: number) => Promise<Page<T>>,
   beforeRequest: () => Promise<void>,
-): Promise<T[][]> {
+): Promise<{ pages: T[][]; totalCount: number }> {
   const pages: T[][] = [];
   for (let page = 1; ; page++) {
     await beforeRequest();
     const { items, totalCount } = await fetchPage(page);
     pages.push(items);
-    if (items.length === 0 || page * PAGE_SIZE >= totalCount) return pages;
+    if (items.length === 0 || page * PAGE_SIZE >= totalCount) return { pages, totalCount };
+  }
+}
+
+export function assertComplete(what: string, found: number, totalCount: number): void {
+  if (found !== totalCount) {
+    throw new Error(`the site lists ${totalCount} ${what} but the ingest found ${found}`);
   }
 }
 

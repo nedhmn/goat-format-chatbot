@@ -2,7 +2,7 @@ import { internal } from "../_generated/api";
 import { internalAction } from "../_generated/server";
 import type { Card } from "../schema";
 import { fetchCardsPage, fetchRulingsPage, type SiteRuling } from "./goatformat";
-import { chunk, fetchAllPages, pacer, straddlingSlugs, uniqueById } from "./paging";
+import { assertComplete, chunk, fetchAllPages, pacer, straddlingSlugs, uniqueById } from "./paging";
 import type { Counts } from "./store";
 
 const REQUEST_GAP_MS = 1000;
@@ -17,7 +17,7 @@ export const run = internalAction({
   args: {},
   handler: async (ctx): Promise<Summary> => {
     const pace = pacer(REQUEST_GAP_MS);
-    const cards = (await fetchAllPages(fetchCardsPage, pace)).flat();
+    const cards = await fetchCards(pace);
     const rulings = await fetchRulings(cards, pace);
     const passcodeBySlug = new Map(cards.map((card) => [card.slug, card.passcode]));
 
@@ -55,8 +55,15 @@ export const run = internalAction({
   },
 });
 
+async function fetchCards(pace: () => Promise<void>): Promise<Card[]> {
+  const { pages, totalCount } = await fetchAllPages(fetchCardsPage, pace);
+  const cards = [...new Map(pages.flat().map((card) => [card.passcode, card])).values()];
+  assertComplete("cards", cards.length, totalCount);
+  return cards;
+}
+
 async function fetchRulings(cards: Card[], pace: () => Promise<void>): Promise<SiteRuling[]> {
-  const pages = await fetchAllPages((page) => fetchRulingsPage(page), pace);
+  const { pages, totalCount } = await fetchAllPages((page) => fetchRulingsPage(page), pace);
   const straddling = straddlingSlugs(pages);
   const rulings = pages.flat().filter((ruling) => !straddling.has(ruling.cardSlug));
   const nameBySlug = new Map(cards.map((card) => [card.slug, card.name]));
@@ -64,9 +71,11 @@ async function fetchRulings(cards: Card[], pace: () => Promise<void>): Promise<S
     const name = nameBySlug.get(slug);
     if (name === undefined) throw new Error(`no card for ruling slug ${slug}`);
     const refetched = await fetchAllPages((page) => fetchRulingsPage(page, name), pace);
-    rulings.push(...refetched.flat().filter((ruling) => ruling.cardSlug === slug));
+    rulings.push(...refetched.pages.flat().filter((ruling) => ruling.cardSlug === slug));
   }
-  return uniqueById(rulings);
+  const unique = uniqueById(rulings);
+  assertComplete("rulings", unique.length, totalCount);
+  return unique;
 }
 
 async function upsertInBatches<T>(
