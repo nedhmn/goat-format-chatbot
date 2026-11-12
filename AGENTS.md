@@ -19,4 +19,7 @@
 - No `Co-Authored-By` trailer, ever. The person who pushes is the author.
 - Ported or vendored code keeps its attribution in `LICENSE` and its own header.
 - Third-party skills and vendored rules are never edited in place. Edit upstream or fork it.
-- No docstrings, no narrative comments, no em dashes.
+- No comments or docstrings in code files. Names and types carry the what; the why goes in the
+  commit, the PR, or the docs. Exceptions: lint override reasons in lint configs, license and
+  attribution headers, and directives a tool reads.
+- No em dashes.

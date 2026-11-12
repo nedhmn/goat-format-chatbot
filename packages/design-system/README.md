@@ -13,7 +13,8 @@ import { Button } from "@goat-format-chatbot/design-system/components/button";
 ```
 
 - `styles.css` imports Tailwind, the typography plugin and the fonts, and scans `apps/**` for classes. It replaces Tailwind's default palette and type scale with the brand's, so classes like `bg-white` or `text-4xl` do not exist; use the tokens (`bg-bg`, `text-text-primary`, ...).
-- Dark mode is the `.dark` class on an ancestor, usually `html`.
+- Dark mode is the `.dark` class on an ancestor, usually `html`. It is a separate warm palette, not an inversion of light.
+- `.prose` styles rendered markdown with a sans body. Its colors come from the semantic tokens, so dark mode needs no `prose-invert`. It is unlayered on purpose: the typography plugin emits its defaults in the utilities layer, which outranks `@layer components`, so only unlayered rules reliably win.
 - Components take a Base UI `render` prop where they can be another element, for example `<Button render={<a href="/" />}>`.
 - Icons come from `@remixicon/react` in the app; `Button` sizes any `svg` child.
 
