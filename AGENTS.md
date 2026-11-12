@@ -6,7 +6,7 @@
 | Running it                               | `docs/getting-started.md` |
 | Workflows, versions, changelog, releases | `CONTRIBUTING.md`         |
 
-`.claude/skills/release` before merging a release PR.
+`.agents/skills/release` before merging a release PR.
 
 ## Rules
 

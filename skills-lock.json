@@ -1,0 +1,65 @@
+{
+  "version": 2,
+  "skills": {
+    "ai-sdk": {
+      "source": "vercel/ai",
+      "sourceType": "github",
+      "skillPath": "skills/use-ai-sdk/SKILL.md",
+      "computedHash": "59cd2dc82c5458f2819992fc3d27204ed16edfc9170870c6f8f04c44bac17772"
+    },
+    "convex": {
+      "source": "convex/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/convex/SKILL.md",
+      "computedHash": "22939725331c04868bc7bb56e49623cf9ee5b2c59b805ee3a5633be8ee9a369a"
+    },
+    "convex-agent": {
+      "source": "convex/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/convex-agent/SKILL.md",
+      "computedHash": "9feb0bb490256422125c6a50b820e51c7515e278af886c52884999e36a0c6d21"
+    },
+    "convex-design": {
+      "source": "convex/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/convex-design/SKILL.md",
+      "computedHash": "a66704a84f440c21c0eb5893d4c79da60d27f24ae0464d7dd809e141e20f22a5"
+    },
+    "convex-docs": {
+      "source": "convex/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/convex-docs/SKILL.md",
+      "computedHash": "34e22f7f46deed8d80e68a95d98c45db710360267b4a0fa7187995894db431e6"
+    },
+    "convex-seed": {
+      "source": "convex/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/convex-seed/SKILL.md",
+      "computedHash": "d247f3d19f4c7e6dc844c4be42a012f36d3c030753aec14a264ad666077bc501"
+    },
+    "convex-test": {
+      "source": "convex/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/convex-test/SKILL.md",
+      "computedHash": "5b627fefb022a06c8c5765c11556eff85fa00428d1b5b286fab77a512bc03136"
+    },
+    "no-use-effect": {
+      "source": "Factory-AI/factory-plugins",
+      "sourceType": "github",
+      "skillPath": "plugins/typescript/skills/no-use-effect/SKILL.md",
+      "computedHash": "db3c79b2d66ed7b3289d9c76cb4885825b08c37974557880a4073d05b949f0a2"
+    },
+    "turborepo": {
+      "source": "vercel/turborepo",
+      "sourceType": "github",
+      "skillPath": "skills/turborepo/SKILL.md",
+      "computedHash": "49bb6427015253ce5d93f15dfa6c9ade3f8528f0fbe54769b6da1e1458f058d4"
+    },
+    "typescript-advanced-types": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "skillPath": "plugins/javascript-typescript/skills/typescript-advanced-types/SKILL.md",
+      "computedHash": "34c5b3863fde1fc85981ac583ecaf0140471b374d0b7002ac5bc0bea2cf38b24"
+    }
+  }
+}

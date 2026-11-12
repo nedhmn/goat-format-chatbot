@@ -32,6 +32,7 @@
     "**/.turbo/**",
     "**/drizzle/**",
     "**/convex/_generated/**",
+    ".agents/**",
     ".claude/**",
     "docs/**",
     "tools/oxlint/anti-slop/**"

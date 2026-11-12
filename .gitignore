@@ -8,16 +8,3 @@ dist
 *.log
 .dev
 .evidence
-
-# maintainer tooling, installed by the oss-repo skill
-.claude/skills/*
-!.claude/skills/release
-!.claude/skills/kickoff
-!.claude/skills/plan-issue
-!.claude/skills/work-issue
-!.claude/skills/commit
-!.claude/skills/pr
-!.claude/skills/babysit-pr
-!.claude/skills/verify-web
-!.claude/skills/brand
-skills-lock.json
