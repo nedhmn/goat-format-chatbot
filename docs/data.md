@@ -42,6 +42,20 @@ Every piece of text the agent searches, in one table so one search index ranks t
 
 The `search_text` index searches `text` and filters by `kind` and `cardId`. Convex full-text search matches exact tokens with no typo tolerance, so card names are matched against the card pool in code before searching.
 
+### `passageCards`
+
+Links each passage to the cards it involves, so a lookup by card finds the rulings filed under it and the rulings, notices, and guide sections that only mention it. A ruling filed under 3-Hump Lacooda that names Ring of Destruction is found from either card.
+
+| Field       | Meaning                                                      |
+| ----------- | ------------------------------------------------------------ |
+| `passageId` | The passage                                                  |
+| `cardId`    | A card it involves                                           |
+| `role`      | `owner` for the card a ruling is filed under, else `mention` |
+
+`by_card` looks up a card's links by role and `by_passage` a passage's links. `lookup.passagesForCard` returns a card's owned and mentioned passages.
+
+Mentions come from quoted strings in the text, since the rulings quote card names. Each is matched against the card pool on a key that ignores case, spacing, punctuation, and a trailing `(s)` or possessive. A key of 8 or more characters with no exact match takes the one card within a single edit, which catches plurals and typos such as "Gradius's Option" and "Magicial Scientist". Names outside quotes are not matched, because short card names such as "Reload" and "Forest" are also ordinary words. Nicknames such as "Peten" and quoted terms such as "destroyed" stay unmatched, and the ingest lists the most frequent ones.
+
 ## Ingest
 
 Load or refresh everything while the backend runs (`pnpm dev`):
@@ -55,7 +69,8 @@ It runs `ingest/sync:run`, an internal action in `packages/backend/convex/ingest
 - Fetches every page of cards and rulings from the site's API, then every ruling notice (`/articles/ruling-notice-*`) and the two gameplay guides (`/learn/rulings`, `/learn/goat-format-history`) listed in the site's sitemap, one request a second. The other `/learn` pages cover accounts, deckbuilding, and tournaments, so they are left out. Each response is parsed where it is fetched.
 - Splits each article at its `h2` headings that carry an id. Each section links to that heading, and text before the first heading links to the page. Card widgets inside the article are skipped. The text is written as Markdown: lists, quotes, sub-headings, bold, and italics keep their markup, links keep only their text, and curly quotes are straightened.
 - Upserts cards by `passcode` and passages by `sourceUrl`, in batches of 100, rewriting only rows that changed.
-- Deletes cards and passages the site no longer lists. Deleting a card deletes its rulings.
-- Prints how many rows it inserted, updated, left unchanged, and deleted. A second run with no site changes reports every row unchanged.
+- Links every passage to the cards it involves, adding and removing only the links that changed.
+- Deletes cards and passages the site no longer lists. Deleting a card deletes its rulings, and deleting either deletes its links.
+- Prints how many rows it inserted, updated, left unchanged, and deleted, and the quoted strings it could not match to a card. A second run with no site changes reports every row unchanged.
 
 The site sorts rulings by card name, which ties within a card, so paging can repeat or skip a ruling where a card's rulings cross a page boundary. The ingest refetches those cards by name and dedupes by ruling id, then fails if the card or ruling count differs from the total the site reports.

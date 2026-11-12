@@ -90,6 +90,14 @@ export const passage = v.union(
   }),
 );
 
+export const cardRole = v.union(v.literal("owner"), v.literal("mention"));
+
+export const passageCard = v.object({
+  passageId: v.id("passages"),
+  cardId: v.id("cards"),
+  role: cardRole,
+});
+
 export type Card = Infer<typeof card>;
 export type Passage = Infer<typeof passage>;
 
@@ -99,4 +107,7 @@ export default defineSchema({
     .index("by_source_url", ["sourceUrl"])
     .index("by_card", ["cardId"])
     .searchIndex("search_text", { searchField: "text", filterFields: ["kind", "cardId"] }),
+  passageCards: defineTable(passageCard)
+    .index("by_card", ["cardId", "role"])
+    .index("by_passage", ["passageId"]),
 });

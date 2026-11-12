@@ -178,3 +178,76 @@ describe("upsertSections", () => {
     expect(stored).toMatchObject({ kind: "mechanic", ...sections[0] });
   });
 });
+
+async function linked() {
+  const t = await seeded();
+  const ruling = moonRuling("a", 'Chain "Book of Moon" to "Sinister Serpent".');
+  await t.mutation(internal.ingest.store.upsertRulings, { rulings: [ruling] });
+  const links = [
+    { sourceUrl: ruling.sourceUrl, owner: moon.passcode, mentions: [serpent.passcode] },
+  ];
+  const ids = await t.run(async (ctx) => {
+    const cards = await ctx.db.query("cards").collect();
+    const byName = new Map(cards.map((card) => [card.name, card._id]));
+    return { moon: byName.get(moon.name), serpent: byName.get(serpent.name) };
+  });
+  return { t, ruling, links, ids };
+}
+
+describe("card links", () => {
+  it("links a ruling to its owner and the cards it mentions, once", async () => {
+    const { t, links } = await linked();
+    expect(await t.mutation(internal.ingest.store.syncCardLinks, { passages: links })).toEqual({
+      inserted: 2,
+      deleted: 0,
+      unchanged: 0,
+    });
+    expect(await t.mutation(internal.ingest.store.syncCardLinks, { passages: links })).toEqual({
+      inserted: 0,
+      deleted: 0,
+      unchanged: 2,
+    });
+  });
+
+  it("drops a mention the text no longer makes", async () => {
+    const { t, links, ruling } = await linked();
+    await t.mutation(internal.ingest.store.syncCardLinks, { passages: links });
+    expect(
+      await t.mutation(internal.ingest.store.syncCardLinks, {
+        passages: [{ sourceUrl: ruling.sourceUrl, owner: moon.passcode, mentions: [] }],
+      }),
+    ).toEqual({ inserted: 0, deleted: 1, unchanged: 1 });
+  });
+
+  it("finds a ruling from the card it mentions, apart from the ones the card owns", async () => {
+    const { t, links, ids } = await linked();
+    await t.mutation(internal.ingest.store.syncCardLinks, { passages: links });
+    if (!ids.serpent || !ids.moon) throw new Error("cards not seeded");
+    const forSerpent = await t.query(internal.lookup.passagesForCard, { cardId: ids.serpent });
+    expect(forSerpent.owned).toEqual([]);
+    expect(forSerpent.mentioned.map((passage) => passage.text)).toEqual([
+      'Chain "Book of Moon" to "Sinister Serpent".',
+    ]);
+    const forMoon = await t.query(internal.lookup.passagesForCard, { cardId: ids.moon });
+    expect(forMoon.owned).toHaveLength(1);
+    expect(forMoon.mentioned).toEqual([]);
+  });
+
+  it("deletes links along with a stale passage or card", async () => {
+    const { t, links } = await linked();
+    await t.mutation(internal.ingest.store.syncCardLinks, { passages: links });
+    await t.mutation(internal.ingest.store.deleteStaleCards, { keep: [moon.passcode] });
+    expect(await t.run((ctx) => ctx.db.query("passageCards").collect())).toHaveLength(1);
+    await t.mutation(internal.ingest.store.deleteStalePassages, { kind: "ruling", keep: [] });
+    expect(await t.run((ctx) => ctx.db.query("passageCards").collect())).toEqual([]);
+  });
+
+  it("refuses a link to a passage that is not stored", async () => {
+    const t = await seeded();
+    await expect(
+      t.mutation(internal.ingest.store.syncCardLinks, {
+        passages: [{ sourceUrl: "https://beta.goatformat.com/missing", mentions: [] }],
+      }),
+    ).rejects.toThrow(/no passage at/);
+  });
+});
