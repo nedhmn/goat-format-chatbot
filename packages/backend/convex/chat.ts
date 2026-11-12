@@ -25,6 +25,7 @@ import {
   rulingsAgent,
   type RulingsAgent,
 } from "./agent/agent";
+import { questionAllowed, tooManyQuestions } from "./limits";
 
 export type Answer = { threadId: string; text: string };
 
@@ -39,6 +40,8 @@ export const send = mutation({
   handler: async (ctx, { question, threadId }): Promise<Sent> => {
     if (!env.OPENROUTER_API_KEY) throw new ConvexError(MISSING_KEY);
     const userId = await viewer(ctx);
+    const allowed = await questionAllowed(ctx, userId);
+    if (!allowed.ok) throw new ConvexError(tooManyQuestions(allowed.retryAfter));
     const thread =
       threadId === undefined
         ? await createThread(ctx, components.agent, { userId })

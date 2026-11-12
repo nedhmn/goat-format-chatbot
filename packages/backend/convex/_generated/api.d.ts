@@ -19,6 +19,7 @@ import type * as ingest_pages from "../ingest/pages.js";
 import type * as ingest_paging from "../ingest/paging.js";
 import type * as ingest_store from "../ingest/store.js";
 import type * as ingest_sync from "../ingest/sync.js";
+import type * as limits from "../limits.js";
 import type * as lookup from "../lookup.js";
 import type * as smoke from "../smoke.js";
 
@@ -40,6 +41,7 @@ declare const fullApi: ApiFromModules<{
   "ingest/paging": typeof ingest_paging;
   "ingest/store": typeof ingest_store;
   "ingest/sync": typeof ingest_sync;
+  limits: typeof limits;
   lookup: typeof lookup;
   smoke: typeof smoke;
 }>;
@@ -72,4 +74,5 @@ export declare const internal: FilterApi<
 
 export declare const components: {
   agent: import("@convex-dev/agent/_generated/component.js").ComponentApi<"agent">;
+  rateLimiter: import("@convex-dev/rate-limiter/_generated/component.js").ComponentApi<"rateLimiter">;
 };
