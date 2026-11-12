@@ -7,14 +7,20 @@ import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
 
 import { ThreadSidebar } from "@/features/chat/components/thread-sidebar";
 
+const SIDEBAR_CLOSED_COOKIE = "sidebar_state=false";
+
+function sidebarOpenAtLoad(): boolean {
+  return !document.cookie.split("; ").includes(SIDEBAR_CLOSED_COOKIE);
+}
+
 function RootLayout() {
   return (
-    <SidebarProvider className="h-dvh">
+    <SidebarProvider defaultOpen={sidebarOpenAtLoad()} className="h-dvh">
       <ThreadSidebar />
-      <SidebarInset className="min-h-0">
-        <header className="flex h-14 shrink-0 items-center gap-2 border-b border-border px-4">
-          <SidebarTrigger />
-          <Link to="/" className="font-heading text-lg text-text-primary no-underline">
+      <SidebarInset className="min-h-0 overflow-hidden">
+        <header className="flex h-12 shrink-0 items-center gap-2 border-b border-border px-2 md:hidden">
+          <SidebarTrigger aria-label="Open sidebar" />
+          <Link to="/" className="font-heading text-base text-text-primary no-underline">
             Goat Format Chatbot
           </Link>
         </header>
