@@ -8,6 +8,12 @@ import { tools } from "./tools";
 
 export const MODEL = "deepseek/deepseek-v4.1-flash-1017";
 
+export const MAX_STEPS = 8;
+
+export function lastStepAnswers({ stepNumber }: { stepNumber: number }) {
+  return stepNumber >= MAX_STEPS - 1 ? { toolChoice: "none" as const } : {};
+}
+
 export type RulingsAgent = ReturnType<typeof rulingsAgent>;
 
 export function rulingsAgent(languageModel: LanguageModelV4) {
@@ -16,7 +22,7 @@ export function rulingsAgent(languageModel: LanguageModelV4) {
     languageModel,
     instructions,
     tools,
-    stopWhen: isStepCount(8),
+    stopWhen: isStepCount(MAX_STEPS),
   });
 }
 
