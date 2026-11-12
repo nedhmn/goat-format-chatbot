@@ -29,6 +29,7 @@ tools/oxlint/anti-slop
   https://github.com/dmmulroy/anti-slop
 
 packages/design-system/src/components/ui/**
+packages/design-system/src/components/sidebar.tsx
 packages/design-system/src/hooks/use-highlighted-code.ts
 packages/design-system/src/lib/highlighter.tsx
   Copyright (c) 2023 shadcn. MIT.
