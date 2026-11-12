@@ -4,7 +4,7 @@ import { convexTest } from "convex-test";
 import { describe, expect, it } from "vitest";
 
 import { components, internal } from "../convex/_generated/api";
-import { rulingsAgent } from "../convex/agent/agent";
+import { MAX_STEPS, rulingsAgent } from "../convex/agent/agent";
 import { answer } from "../convex/chat";
 import schema, { type Card } from "../convex/schema";
 
@@ -74,5 +74,40 @@ describe("findCard", () => {
         value: { match: "typo", cards: [{ name: "Sinister Serpent", kind: "monster" }], more: 0 },
       },
     ]);
+  });
+});
+
+describe("the step limit", () => {
+  it("takes the tools away on the last step so the agent always answers", async () => {
+    const t = await seeded();
+    const lookup = {
+      type: "tool-call" as const,
+      toolCallId: "call",
+      toolName: "findCard",
+      input: JSON.stringify({ name: "serpent" }),
+    };
+    const model = mockModel({
+      contentSteps: [
+        ...Array.from({ length: MAX_STEPS - 1 }, (_, i) => [
+          { ...lookup, toolCallId: `call-${i}` },
+        ]),
+        [{ type: "text", text: "Sinister Serpent returns to the hand." }],
+      ],
+    });
+    const toolChoices: unknown[] = [];
+    const recording: typeof model = {
+      ...model,
+      doGenerate: (options) => {
+        toolChoices.push(options.toolChoice);
+        return model.doGenerate(options);
+      },
+    };
+    const { text } = await t.action((ctx) =>
+      answer(ctx, rulingsAgent(recording), { question: "What does serpent do?" }),
+    );
+    expect(text).toBe("Sinister Serpent returns to the hand.");
+    expect(toolChoices).toHaveLength(MAX_STEPS);
+    expect(toolChoices.at(-1)).toEqual({ type: "none" });
+    expect(toolChoices.at(-2)).not.toEqual({ type: "none" });
   });
 });

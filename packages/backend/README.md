@@ -7,7 +7,7 @@ Convex: schema, queries, mutations, and actions for the chatbot, and the agent t
 - `convex/schema.ts`: the `cards` and `passages` tables and their validators. See [docs/data.md](../../docs/data.md).
 - `convex/ingest/`: loads cards, rulings, ruling notices, and the gameplay `/learn` pages from beta.goatformat.com. `pnpm --filter @goat-format-chatbot/backend ingest` runs it against the running backend.
 - `convex/convex.config.ts`: registers the agent component and declares the deployment's env vars.
-- `convex/agent/`: the agent, on DeepSeek V4.1 Flash through OpenRouter with the model id pinned in `agent.ts`, its instructions, and its tools. `findCard` resolves a loosely typed card name to exact names: exact, then a one-letter typo for names of 8 or more characters, then partial names. It returns up to 10 candidates and never expands shorthand such as BLS.
+- `convex/agent/`: the agent, on DeepSeek V4.1 Flash through OpenRouter with the model id pinned in `agent.ts`, its instructions, and its tools. `findCard` resolves a loosely typed card name to exact names: exact, then a one-letter typo for names of 8 or more characters, then partial names. It returns up to 10 candidates and never expands shorthand such as BLS. `read` returns a card by exact name, with its rulings and every passage that names it. `search` runs a full-text search over passages, narrowed by kind or by owning card, and returns up to 8. The agent stops after 8 steps, and the last step has no tools, so it always answers.
 - `convex/lookup.ts`: the internal queries the tools call.
 - `convex/chat.ts`: `ask` answers a question in a new thread, or continues one when given its `threadId`.
 - `test/`: vitest, with convex-test for functions.
