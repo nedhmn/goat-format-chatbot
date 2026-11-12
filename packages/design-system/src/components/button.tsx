@@ -17,7 +17,6 @@ const buttonVariants = cva(
           "rounded-none border border-transparent bg-transparent text-text-primary hover:bg-bg-hover",
       },
       size: {
-        // Asymmetric bottom padding optically centres the cap height.
         sm: "pt-[5.6px] pb-[5.88px] pl-[10.5px] pr-[10.5px]",
         md: "pt-[9px] pb-[9.5px] pl-[18px] pr-[18px]",
         lg: "pt-[13px] pb-[13.5px] pl-[24px] pr-[24px] text-base",
