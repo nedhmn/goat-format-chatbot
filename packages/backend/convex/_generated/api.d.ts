@@ -20,6 +20,7 @@ import type * as ingest_paging from "../ingest/paging.js";
 import type * as ingest_store from "../ingest/store.js";
 import type * as ingest_sync from "../ingest/sync.js";
 import type * as lookup from "../lookup.js";
+import type * as smoke from "../smoke.js";
 
 import type {
   ApiFromModules,
@@ -40,6 +41,7 @@ declare const fullApi: ApiFromModules<{
   "ingest/store": typeof ingest_store;
   "ingest/sync": typeof ingest_sync;
   lookup: typeof lookup;
+  smoke: typeof smoke;
 }>;
 
 /**
