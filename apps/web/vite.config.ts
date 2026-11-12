@@ -56,7 +56,7 @@ function devPorts(): Plugin {
 }
 
 export default defineConfig({
-  base: "/yugioh-rulings-chatbot/",
+  base: "/goat-format-chatbot/",
   plugins: [react(), tailwindcss(), devPorts()],
   server: { host },
   preview: { host },

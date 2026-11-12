@@ -1,6 +1,6 @@
 # web
 
-React 19 and Vite app on `@yugioh-rulings-chatbot/design-system`. Served under `/yugioh-rulings-chatbot/`, the GitHub Pages path.
+React 19 and Vite app on `@goat-format-chatbot/design-system`. Served under `/goat-format-chatbot/`, the GitHub Pages path.
 
 ## Run
 

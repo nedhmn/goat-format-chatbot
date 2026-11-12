@@ -28,7 +28,7 @@ Start it in the background and read the log until the ready line. Stop it by pid
 
 ## Demo build
 
-For anything the dev server can hide (the Pages base path `/yugioh-rulings-chatbot/`, asset URLs, the built bundle), serve the production build:
+For anything the dev server can hide (the Pages base path `/goat-format-chatbot/`, asset URLs, the built bundle), serve the production build:
 
 ```sh
 pnpm build && pnpm --filter web preview      # WEB_PREVIEW_URL

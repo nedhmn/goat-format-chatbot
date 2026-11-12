@@ -1,4 +1,4 @@
-# Yu-Gi-Oh! Rulings Chatbot docs
+# Goat Format Chatbot docs
 
 Flat. One file per topic, no subdirectories.
 

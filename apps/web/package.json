@@ -10,18 +10,18 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@goat-format-chatbot/design-system": "workspace:*",
     "@remixicon/react": "4.9.0",
-    "@yugioh-rulings-chatbot/design-system": "workspace:*",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
   "devDependencies": {
+    "@goat-format-chatbot/typescript": "workspace:*",
     "@tailwindcss/vite": "4.3.3",
     "@types/node": "24.19.2",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.7",
     "@vitejs/plugin-react": "6.3.0",
-    "@yugioh-rulings-chatbot/typescript": "workspace:*",
     "typescript": "7.0.2",
     "vite": "8.3.7"
   }

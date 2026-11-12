@@ -1,5 +1,5 @@
 {
-  "extends": "@yugioh-rulings-chatbot/typescript/base.json",
+  "extends": "@goat-format-chatbot/typescript/base.json",
   "compilerOptions": {
     "jsx": "react-jsx",
     "lib": ["ES2023", "DOM", "DOM.Iterable"],
