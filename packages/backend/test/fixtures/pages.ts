@@ -5,8 +5,9 @@ export const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <url><loc>https://beta.goatformat.com/articles/ruling-notice-mind-crush</loc></url>
 <url><loc>https://beta.goatformat.com/articles/goat-format-world-championship-2026</loc></url>
 <url><loc>https://beta.goatformat.com/learn/rulings</loc></url>
-<url><loc>https://beta.goatformat.com/learn/how-to-play</loc></url>
-<url><loc>https://beta.goatformat.com/learn/how-to-play</loc></url>
+<url><loc>https://beta.goatformat.com/learn/goat-format-history</loc></url>
+<url><loc>https://beta.goatformat.com/learn/goat-format-history</loc></url>
+<url><loc>https://beta.goatformat.com/learn/tournament-bot</loc></url>
 <url><loc>https://example.com/learn/elsewhere</loc></url>
 </urlset>`;
 
@@ -41,7 +42,8 @@ export const learnPage = chrome(
 export const noticePage = chrome(
   "Ruling Notice: Mind Crush",
   `<p>The Judge Corps has issued a ruling update for Mind Crush.</p>
-<blockquote><p>&quot;Hand verification only occurs when the opponent has no copies.&quot;</p></blockquote>
+<blockquote><p><strong>Ruling:</strong> &#x201C;Hand verification only occurs when the opponent has <em>no</em> copies.&#x201D;</p><p>Source: <a href="/judges">Judge Corps</a></p></blockquote>
+<ol><li>Declare a card.</li><li>Check the hand.</li></ol>
 <p>This applies to paper events only.</p>`,
 );
 

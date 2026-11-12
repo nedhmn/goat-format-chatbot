@@ -7,10 +7,10 @@ const rulingsUrl = "https://beta.goatformat.com/learn/rulings";
 const noticeUrl = "https://beta.goatformat.com/articles/ruling-notice-mind-crush";
 
 describe("pageUrls", () => {
-  it("keeps ruling notices and learn pages on the site, once each", () => {
+  it("keeps ruling notices and the gameplay learn pages on the site, once each", () => {
     expect(pageUrls(sitemap)).toEqual({
       notices: [noticeUrl],
-      mechanics: ["https://beta.goatformat.com/learn/how-to-play", rulingsUrl],
+      mechanics: ["https://beta.goatformat.com/learn/goat-format-history", rulingsUrl],
     });
   });
 });
@@ -26,18 +26,18 @@ describe("parseSections", () => {
     ]);
   });
 
-  it("keeps the article text, lists as items, and drops embedded widgets", () => {
+  it("writes the article as Markdown and drops embedded widgets", () => {
     const [, priority, damageStep] = parseSections(learnPage, rulingsUrl);
     expect(priority?.text).toBe(
       [
         "After a chain or summon resolves, the turn player acts first.",
-        "- You don't need to call priority.\n- Priority has nothing to do with Trigger Effects.",
+        "- You don't need to call priority.\n- Priority has nothing to do with **Trigger Effects**.",
       ].join("\n\n"),
     );
     expect(damageStep?.text).toBe(
       [
         "Only Counter Traps and cards that change ATK or DEF can be activated.",
-        "Flip effects",
+        "### Flip effects",
         "A flipped monster's effect resolves after damage calculation.",
       ].join("\n\n"),
     );
@@ -57,7 +57,8 @@ describe("parseSections", () => {
         sourceUrl: noticeUrl,
         text: [
           "The Judge Corps has issued a ruling update for Mind Crush.",
-          '"Hand verification only occurs when the opponent has no copies."',
+          '> **Ruling:** "Hand verification only occurs when the opponent has *no* copies."\n> Source: Judge Corps',
+          "1. Declare a card.\n2. Check the hand.",
           "This applies to paper events only.",
         ].join("\n\n"),
       },
