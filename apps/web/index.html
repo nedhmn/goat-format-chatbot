@@ -13,9 +13,21 @@
     <script>
       {
         const dark = matchMedia("(prefers-color-scheme: dark)");
-        const apply = () => document.documentElement.classList.toggle("dark", dark.matches);
+        const saved = () => {
+          try {
+            return localStorage.getItem("theme");
+          } catch {
+            return null;
+          }
+        };
+        const apply = () => {
+          const theme = saved();
+          const isDark = theme === "dark" || (theme !== "light" && dark.matches);
+          document.documentElement.classList.toggle("dark", isDark);
+        };
         apply();
         dark.addEventListener("change", apply);
+        addEventListener("storage", apply);
       }
     </script>
   </head>
