@@ -1,13 +1,13 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { PAGE_SIZE, type SiteRuling } from "../convex/ingest/goatformat";
+import { PAGE_SIZE, type SiteRuling } from "../../../convex/model/ingest/goatformat";
 import {
   assertComplete,
   chunk,
   fetchAllPages,
   straddlingSlugs,
   uniqueById,
-} from "../convex/ingest/paging";
+} from "../../../convex/model/ingest/paging";
 
 function ruling(id: string, cardSlug: string): SiteRuling {
   return {

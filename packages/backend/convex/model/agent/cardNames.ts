@@ -1,4 +1,4 @@
-import { cardKey, FUZZY_MIN_LENGTH, withinOneEdit } from "../../ingest/mentions";
+import { cardKey, FUZZY_MIN_LENGTH, withinOneEdit } from "../ingest/mentions";
 
 export type NamedCard = { name: string; kind: "monster" | "spell" | "trap" };
 

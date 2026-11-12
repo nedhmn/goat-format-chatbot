@@ -1,7 +1,7 @@
 import type { Infer } from "convex/values";
 import { z } from "zod";
 
-import type { Card, rulingType } from "../schema";
+import type { Card, rulingType } from "../../schema";
 
 export const SITE_URL = "https://beta.goatformat.com";
 export const PAGE_SIZE = 100;
