@@ -3,7 +3,7 @@ import type * as React from "react";
 import { cn } from "../lib/utils.ts";
 
 const inputClasses =
-  "w-full rounded-md border border-border bg-bg-elevated p-[9px_11px] font-ui text-sm text-text-primary outline-none transition-[border-color,box-shadow] focus:border-border-bright focus:ring-[3px] focus:ring-accent-bg disabled:opacity-40";
+  "w-full rounded-md border border-border bg-bg-elevated p-[9px_11px] font-ui text-sm text-text-primary outline-none transition-[border-color,box-shadow] focus:border-border-bright focus:ring-[3px] focus:ring-brand-bg disabled:opacity-40";
 
 function Input({
   className,

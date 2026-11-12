@@ -28,4 +28,10 @@ tools/oxlint/anti-slop
   Copyright (c) 2026 Dillon Mulroy. MIT.
   https://github.com/dmmulroy/anti-slop
 
+packages/design-system/src/components/ui/**
+packages/design-system/src/hooks/use-highlighted-code.ts
+packages/design-system/src/lib/highlighter.tsx
+  Copyright (c) 2023 shadcn. MIT.
+  https://github.com/shadcn-ui/ui
+
 <!-- One entry per ported or vendored source. Path, holder, license, URL. -->

@@ -92,6 +92,20 @@
       "rules": { "typescript/consistent-type-definitions": "off" }
     },
     {
+      // shadcn/ui files added by the shadcn CLI are kept as generated so later `shadcn add`
+      // runs and upstream diffs apply cleanly. Restyle them through the theme instead.
+      "files": [
+        "packages/design-system/src/components/ui/**",
+        "packages/design-system/src/hooks/use-highlighted-code.ts",
+        "packages/design-system/src/lib/highlighter.tsx"
+      ],
+      "rules": {
+        "anti-slop/no-runtime-typeof": "off",
+        "anti-slop/no-known-value-widening": "off",
+        "no-shadow": "off"
+      }
+    },
+    {
       // Convex names its system fields _id and _creationTime.
       "files": ["packages/backend/**"],
       "rules": {
