@@ -2,13 +2,12 @@ import { ConvexQueryClient } from "@convex-dev/react-query";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConvexProvider, ConvexReactClient } from "convex/react";
 import { useState, type ReactNode } from "react";
-import { z } from "zod";
+
+import { readLiveEnv } from "@/lib/env";
 
 function createClients() {
-  const convexUrl = z
-    .url({ error: "VITE_CONVEX_URL must be the Convex backend URL" })
-    .parse(import.meta.env.VITE_CONVEX_URL);
-  const convexClient = new ConvexReactClient(convexUrl);
+  const env = readLiveEnv();
+  const convexClient = new ConvexReactClient(env.VITE_CONVEX_URL);
   const convexQueryClient = new ConvexQueryClient(convexClient);
   const queryClient = new QueryClient({
     defaultOptions: {

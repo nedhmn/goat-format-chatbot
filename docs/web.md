@@ -23,6 +23,7 @@ apps/web/src/
 - Create a folder when the first file needs it. A feature has only the subfolders it uses.
 - Reusable UI belongs in `@goat-format-chatbot/design-system`. `components/` holds what only this app needs.
 - Routes stay thin: they read params and render a feature's components.
+- `VITE_*` variables are declared and validated in `lib/env.ts` with t3 env and read only through it. Vite's built-ins (`import.meta.env.MODE`, `BASE_URL`) are read directly. The env is read when the live providers mount, so the demo build, which has no backend variables, never loads it.
 - Components get backend data from their feature's `api/` hooks and never call Convex. The hooks keep Convex, TanStack Query, and the demo's recorded threads out of components, so the demo build swaps one layer.
 
 ## Rules
