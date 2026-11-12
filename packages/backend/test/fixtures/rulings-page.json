@@ -1,0 +1,32 @@
+{
+  "result": {
+    "data": {
+      "json": {
+        "items": [
+          {
+            "id": "2e63d32d-dc4a-47fa-9f77-a7345db3b9c0",
+            "ruling": "When you activate \"Book of Moon\" during the Battle Step to flip an attacking monster into face-down Defense Position, the attack stops. No replay is triggered. The attacking monster cannot change its battle position in Main Phase 2, because it is still considered to have declared an attack. (So it c",
+            "rulingType": "Individual Card FAQs",
+            "cardName": "Book of Moon",
+            "cardSlug": "book-of-moon"
+          },
+          {
+            "id": "0988cba9-1f3d-4b7d-8198-e4f85eba9b17",
+            "ruling": "4-Starred Ladybug of Doom destroys monsters that are Level 4 at the time \"4-Starred Ladybug of Doom\" resolves.",
+            "rulingType": "Netrep Rulings",
+            "cardName": "4-Starred Ladybug of Doom",
+            "cardSlug": "4-starred-ladybug-of-doom"
+          },
+          {
+            "id": "d2bc168c-c94c-42a0-a717-1b4dd1f25a0d",
+            "ruling": "Q: If \"Pharaoh's Treasure\" has been successfully placed in the Deck face-up, can the effect of \"A Cat of Ill Omen\" be used to place it on top of the Deck?A: Yes you can. The \"Pharaoh's Treasure\" would be placed on top of your Deck. Its effect will activate when it is drawn. But if there is a \"Necrov",
+            "rulingType": "Netrep Q&As",
+            "cardName": "A Cat of Ill Omen",
+            "cardSlug": "a-cat-of-ill-omen"
+          }
+        ],
+        "totalCount": 4186
+      }
+    }
+  }
+}
