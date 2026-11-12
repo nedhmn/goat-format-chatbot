@@ -2,18 +2,23 @@ import { internal } from "../_generated/api";
 import { internalAction, type ActionCtx } from "../_generated/server";
 import type { Card } from "../schema";
 import { fetchCardsPage, fetchRulingsPage, fetchSitePage, type SiteRuling } from "./goatformat";
+import { mentionMatcher } from "./mentions";
 import { pageUrls, parseSections, type PageSection } from "./pages";
 import { assertComplete, chunk, fetchAllPages, pacer, straddlingSlugs, uniqueById } from "./paging";
-import type { Counts } from "./store";
+import type { Counts, LinkCounts } from "./store";
 
 const REQUEST_GAP_MS = 1000;
 const BATCH_SIZE = 100;
+const UNMATCHED_SHOWN = 20;
+
+type CardLinks = { sourceUrl: string; owner?: number; mentions: number[] };
 
 type Summary = {
   cards: Counts & { deleted: number };
   rulings: Counts & { deleted: number; withoutCard: number };
   notices: Counts & { deleted: number };
   mechanics: Counts & { deleted: number };
+  cardLinks: LinkCounts & { unmatchedQuotes: number; mostUnmatched: string[] };
 };
 
 export const run = internalAction({
@@ -44,12 +49,24 @@ export const run = internalAction({
       },
     );
     const urls = pageUrls(await paced(pace, () => fetchSitePage("/sitemap.xml")));
-    const notices = await syncSections(ctx, "notice", await fetchSections(urls.notices, pace));
-    const mechanics = await syncSections(
-      ctx,
-      "mechanic",
-      await fetchSections(urls.mechanics, pace),
-    );
+    const noticeSections = await fetchSections(urls.notices, pace);
+    const mechanicSections = await fetchSections(urls.mechanics, pace);
+    const notices = await syncSections(ctx, "notice", noticeSections);
+    const mechanics = await syncSections(ctx, "mechanic", mechanicSections);
+
+    const match = mentionMatcher(cards);
+    const unmatched = new Map<string, number>();
+    const links = [
+      ...owned.map((ruling) => ({ ...ruling, owner: ruling.passcode })),
+      ...noticeSections,
+      ...mechanicSections,
+    ].map(({ sourceUrl, text, owner }: { sourceUrl: string; text: string; owner?: number }) => {
+      const found = match(text);
+      for (const name of found.unmatched) unmatched.set(name, (unmatched.get(name) ?? 0) + 1);
+      const mentions = found.passcodes.filter((passcode) => passcode !== owner);
+      return owner === undefined ? { sourceUrl, mentions } : { sourceUrl, owner, mentions };
+    });
+    const linkCounts = await syncLinksInBatches(ctx, links);
 
     const deletedCards: number = await ctx.runMutation(internal.ingest.store.deleteStaleCards, {
       keep: cards.map((card) => card.passcode),
@@ -64,9 +81,30 @@ export const run = internalAction({
       },
       notices,
       mechanics,
+      cardLinks: {
+        ...linkCounts,
+        unmatchedQuotes: [...unmatched.values()].reduce((sum, count) => sum + count, 0),
+        mostUnmatched: [...unmatched]
+          .toSorted(([, a], [, b]) => b - a)
+          .slice(0, UNMATCHED_SHOWN)
+          .map(([name, count]) => `${name} (${count})`),
+      },
     };
   },
 });
+
+async function syncLinksInBatches(ctx: ActionCtx, links: CardLinks[]): Promise<LinkCounts> {
+  const total: LinkCounts = { inserted: 0, deleted: 0, unchanged: 0 };
+  for (const batch of chunk(links, BATCH_SIZE)) {
+    const counts: LinkCounts = await ctx.runMutation(internal.ingest.store.syncCardLinks, {
+      passages: batch,
+    });
+    total.inserted += counts.inserted;
+    total.deleted += counts.deleted;
+    total.unchanged += counts.unchanged;
+  }
+  return total;
+}
 
 async function fetchCards(pace: () => Promise<void>): Promise<Card[]> {
   const { pages, totalCount } = await fetchAllPages(fetchCardsPage, pace);
