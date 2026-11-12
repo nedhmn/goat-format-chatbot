@@ -104,12 +104,13 @@ function splitSources(parts: ChatPart[]): Answer {
 export function toChatMessage(message: UIMessage): ChatMessage[] {
   if (message.role !== "user" && message.role !== "assistant") return [];
   const parts = message.parts.flatMap(toPart);
+  const { _creationTime: sentAt } = message;
   return [
     {
       key: message.key,
       role: message.role,
       status: statuses[message.status],
-      sentAt: message._creationTime,
+      sentAt,
       text: message.text,
       ...(message.role === "assistant" ? splitSources(parts) : { parts, sources: [] }),
     },
