@@ -64,7 +64,7 @@ Load or refresh everything while the backend runs (`pnpm dev`):
 pnpm --filter @goat-format-chatbot/backend ingest
 ```
 
-It runs `ingest/sync:run`, an internal action in `packages/backend/convex/ingest/`:
+It runs `ingest:run`, an internal action in `packages/backend/convex/ingest.ts` whose logic lives in `packages/backend/convex/model/ingest/`:
 
 - Fetches every page of cards and rulings from the site's API, then every ruling notice (`/articles/ruling-notice-*`) and the two gameplay guides (`/learn/rulings`, `/learn/goat-format-history`) listed in the site's sitemap, one request a second. The other `/learn` pages cover accounts, deckbuilding, and tournaments, so they are left out. Each response is parsed where it is fetched.
 - Splits each article at its `h2` headings that carry an id. Each section links to that heading, and text before the first heading links to the page. Card widgets inside the article are skipped. The text is written as Markdown: lists, quotes, sub-headings, bold, and italics keep their markup, links keep only their text, and curly quotes are straightened.

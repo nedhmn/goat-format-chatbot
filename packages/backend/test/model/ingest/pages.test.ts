@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import { pageUrls, parseSections } from "../convex/ingest/pages";
-import { learnPage, noticePage, pageWithoutBody, sitemap } from "./fixtures/pages";
+import { pageUrls, parseSections } from "../../../convex/model/ingest/pages";
+import { learnPage, noticePage, pageWithoutBody, sitemap } from "../../fixtures/pages";
 
 const rulingsUrl = "https://beta.goatformat.com/learn/rulings";
 const noticeUrl = "https://beta.goatformat.com/articles/ruling-notice-mind-crush";

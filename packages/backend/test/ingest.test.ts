@@ -42,25 +42,29 @@ function moonRuling(id: string, text = `Ruling ${id}`) {
 
 async function seeded() {
   const t = convexTest(schema, modules);
-  await t.mutation(internal.ingest.store.upsertCards, { cards: [serpent, moon] });
+  await t.mutation(internal.ingest.upsertCards, { cards: [serpent, moon] });
   return t;
 }
 
 describe("upsertCards", () => {
   it("inserts new cards and leaves them alone on a second run", async () => {
     const t = convexTest(schema, modules);
-    expect(await t.mutation(internal.ingest.store.upsertCards, { cards: [serpent, moon] })).toEqual(
-      { inserted: 2, updated: 0, unchanged: 0 },
-    );
-    expect(await t.mutation(internal.ingest.store.upsertCards, { cards: [moon, serpent] })).toEqual(
-      { inserted: 0, updated: 0, unchanged: 2 },
-    );
+    expect(await t.mutation(internal.ingest.upsertCards, { cards: [serpent, moon] })).toEqual({
+      inserted: 2,
+      updated: 0,
+      unchanged: 0,
+    });
+    expect(await t.mutation(internal.ingest.upsertCards, { cards: [moon, serpent] })).toEqual({
+      inserted: 0,
+      updated: 0,
+      unchanged: 2,
+    });
   });
 
   it("replaces a card the site changed, keyed on its passcode", async () => {
     const t = await seeded();
     const errata = { ...serpent, text: "Once per turn, during your Standby Phase..." };
-    expect(await t.mutation(internal.ingest.store.upsertCards, { cards: [errata] })).toEqual({
+    expect(await t.mutation(internal.ingest.upsertCards, { cards: [errata] })).toEqual({
       inserted: 0,
       updated: 1,
       unchanged: 0,
@@ -75,12 +79,12 @@ describe("upsertRulings", () => {
   it("attaches rulings to their card and leaves them alone on a second run", async () => {
     const t = await seeded();
     const rulings = [moonRuling("a"), moonRuling("b")];
-    expect(await t.mutation(internal.ingest.store.upsertRulings, { rulings })).toEqual({
+    expect(await t.mutation(internal.ingest.upsertRulings, { rulings })).toEqual({
       inserted: 2,
       updated: 0,
       unchanged: 0,
     });
-    expect(await t.mutation(internal.ingest.store.upsertRulings, { rulings })).toEqual({
+    expect(await t.mutation(internal.ingest.upsertRulings, { rulings })).toEqual({
       inserted: 0,
       updated: 0,
       unchanged: 2,
@@ -100,9 +104,9 @@ describe("upsertRulings", () => {
 
   it("updates a ruling whose text changed", async () => {
     const t = await seeded();
-    await t.mutation(internal.ingest.store.upsertRulings, { rulings: [moonRuling("a")] });
+    await t.mutation(internal.ingest.upsertRulings, { rulings: [moonRuling("a")] });
     expect(
-      await t.mutation(internal.ingest.store.upsertRulings, {
+      await t.mutation(internal.ingest.upsertRulings, {
         rulings: [moonRuling("a", "Reworded")],
       }),
     ).toEqual({ inserted: 0, updated: 1, unchanged: 0 });
@@ -111,7 +115,7 @@ describe("upsertRulings", () => {
   it("refuses a ruling for a card that is not stored", async () => {
     const t = convexTest(schema, modules);
     await expect(
-      t.mutation(internal.ingest.store.upsertRulings, { rulings: [moonRuling("a")] }),
+      t.mutation(internal.ingest.upsertRulings, { rulings: [moonRuling("a")] }),
     ).rejects.toThrow(/no card with passcode/);
   });
 });
@@ -119,10 +123,10 @@ describe("upsertRulings", () => {
 describe("deleting what the site no longer lists", () => {
   it("deletes a dropped card along with its rulings", async () => {
     const t = await seeded();
-    await t.mutation(internal.ingest.store.upsertRulings, { rulings: [moonRuling("a")] });
-    expect(
-      await t.mutation(internal.ingest.store.deleteStaleCards, { keep: [serpent.passcode] }),
-    ).toBe(1);
+    await t.mutation(internal.ingest.upsertRulings, { rulings: [moonRuling("a")] });
+    expect(await t.mutation(internal.ingest.deleteStaleCards, { keep: [serpent.passcode] })).toBe(
+      1,
+    );
     const left = await t.run(async (ctx) => ({
       cards: await ctx.db.query("cards").collect(),
       passages: await ctx.db.query("passages").collect(),
@@ -134,7 +138,7 @@ describe("deleting what the site no longer lists", () => {
   it("deletes stale passages of one kind and keeps the rest", async () => {
     const t = await seeded();
     const kept = moonRuling("a");
-    await t.mutation(internal.ingest.store.upsertRulings, {
+    await t.mutation(internal.ingest.upsertRulings, {
       rulings: [kept, moonRuling("b")],
     });
     await t.run((ctx) =>
@@ -146,7 +150,7 @@ describe("deleting what the site no longer lists", () => {
       }),
     );
     expect(
-      await t.mutation(internal.ingest.store.deleteStalePassages, {
+      await t.mutation(internal.ingest.deleteStalePassages, {
         kind: "ruling",
         keep: [kept.sourceUrl],
       }),
@@ -169,10 +173,10 @@ describe("upsertSections", () => {
       },
     ];
     expect(
-      await t.mutation(internal.ingest.store.upsertSections, { kind: "mechanic", sections }),
+      await t.mutation(internal.ingest.upsertSections, { kind: "mechanic", sections }),
     ).toEqual({ inserted: 1, updated: 0, unchanged: 0 });
     expect(
-      await t.mutation(internal.ingest.store.upsertSections, { kind: "mechanic", sections }),
+      await t.mutation(internal.ingest.upsertSections, { kind: "mechanic", sections }),
     ).toEqual({ inserted: 0, updated: 0, unchanged: 1 });
     const [stored] = await t.run((ctx) => ctx.db.query("passages").collect());
     expect(stored).toMatchObject({ kind: "mechanic", ...sections[0] });
@@ -182,7 +186,7 @@ describe("upsertSections", () => {
 async function linked() {
   const t = await seeded();
   const ruling = moonRuling("a", 'Chain "Book of Moon" to "Sinister Serpent".');
-  await t.mutation(internal.ingest.store.upsertRulings, { rulings: [ruling] });
+  await t.mutation(internal.ingest.upsertRulings, { rulings: [ruling] });
   const links = [
     { sourceUrl: ruling.sourceUrl, owner: moon.passcode, mentions: [serpent.passcode] },
   ];
@@ -197,12 +201,12 @@ async function linked() {
 describe("card links", () => {
   it("links a ruling to its owner and the cards it mentions, once", async () => {
     const { t, links } = await linked();
-    expect(await t.mutation(internal.ingest.store.syncCardLinks, { passages: links })).toEqual({
+    expect(await t.mutation(internal.ingest.syncCardLinks, { passages: links })).toEqual({
       inserted: 2,
       deleted: 0,
       unchanged: 0,
     });
-    expect(await t.mutation(internal.ingest.store.syncCardLinks, { passages: links })).toEqual({
+    expect(await t.mutation(internal.ingest.syncCardLinks, { passages: links })).toEqual({
       inserted: 0,
       deleted: 0,
       unchanged: 2,
@@ -211,9 +215,9 @@ describe("card links", () => {
 
   it("drops a mention the text no longer makes", async () => {
     const { t, links, ruling } = await linked();
-    await t.mutation(internal.ingest.store.syncCardLinks, { passages: links });
+    await t.mutation(internal.ingest.syncCardLinks, { passages: links });
     expect(
-      await t.mutation(internal.ingest.store.syncCardLinks, {
+      await t.mutation(internal.ingest.syncCardLinks, {
         passages: [{ sourceUrl: ruling.sourceUrl, owner: moon.passcode, mentions: [] }],
       }),
     ).toEqual({ inserted: 0, deleted: 1, unchanged: 1 });
@@ -221,7 +225,7 @@ describe("card links", () => {
 
   it("finds a ruling from the card it mentions, apart from the ones the card owns", async () => {
     const { t, links, ids } = await linked();
-    await t.mutation(internal.ingest.store.syncCardLinks, { passages: links });
+    await t.mutation(internal.ingest.syncCardLinks, { passages: links });
     if (!ids.serpent || !ids.moon) throw new Error("cards not seeded");
     const forSerpent = await t.query(internal.cards.passagesForCard, { cardId: ids.serpent });
     expect(forSerpent.owned).toEqual([]);
@@ -235,17 +239,17 @@ describe("card links", () => {
 
   it("deletes links along with a stale passage or card", async () => {
     const { t, links } = await linked();
-    await t.mutation(internal.ingest.store.syncCardLinks, { passages: links });
-    await t.mutation(internal.ingest.store.deleteStaleCards, { keep: [moon.passcode] });
+    await t.mutation(internal.ingest.syncCardLinks, { passages: links });
+    await t.mutation(internal.ingest.deleteStaleCards, { keep: [moon.passcode] });
     expect(await t.run((ctx) => ctx.db.query("passageCards").collect())).toHaveLength(1);
-    await t.mutation(internal.ingest.store.deleteStalePassages, { kind: "ruling", keep: [] });
+    await t.mutation(internal.ingest.deleteStalePassages, { kind: "ruling", keep: [] });
     expect(await t.run((ctx) => ctx.db.query("passageCards").collect())).toEqual([]);
   });
 
   it("refuses a link to a passage that is not stored", async () => {
     const t = await seeded();
     await expect(
-      t.mutation(internal.ingest.store.syncCardLinks, {
+      t.mutation(internal.ingest.syncCardLinks, {
         passages: [{ sourceUrl: "https://beta.goatformat.com/missing", mentions: [] }],
       }),
     ).rejects.toThrow(/no passage at/);

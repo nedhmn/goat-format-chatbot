@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { cardKey, mentionMatcher, quotedNames, withinOneEdit } from "../convex/ingest/mentions";
+import {
+  cardKey,
+  mentionMatcher,
+  quotedNames,
+  withinOneEdit,
+} from "../../../convex/model/ingest/mentions";
 
 const pool = [
   { passcode: 1, name: "Ring of Destruction" },

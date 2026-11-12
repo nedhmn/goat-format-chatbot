@@ -5,11 +5,12 @@ Convex: schema, queries, mutations, and actions for the chatbot, and the agent t
 ## Layout
 
 - `convex/schema.ts`: the `cards` and `passages` tables and their validators. See [docs/data.md](../../docs/data.md).
-- `convex/ingest/`: loads cards, rulings, ruling notices, and the gameplay `/learn` pages from beta.goatformat.com. `pnpm --filter @goat-format-chatbot/backend ingest` runs it against the running backend.
 - `convex/convex.config.ts`: registers the agent component and declares the deployment's env vars.
 - `convex/model/`: the logic behind the functions, as plain functions over the Convex ctx. The function files below are thin wrappers that validate args and call into it.
 - `convex/model/agent/`: the agent, on DeepSeek V4.1 Flash through OpenRouter with the model id pinned in `agent.ts`, its instructions, its tools, and `answer.ts`, which streams a reply into a thread or returns a whole answer. `findCard` resolves a loosely typed card name to exact names: exact, then a one-letter typo for names of 8 or more characters, then partial names. It returns up to 10 candidates and never expands shorthand such as BLS. `read` returns a card by exact name, with its rulings and every passage that names it. `search` runs a full-text search over passages, narrowed by kind or by owning card, and returns up to 8. The agent stops after 8 steps, and the last step has no tools, so it always answers.
 - `convex/cards.ts`: the internal queries the tools call.
+- `convex/model/ingest/`: loads cards, rulings, ruling notices, and the gameplay `/learn` pages from beta.goatformat.com. `goatformat.ts` and `pages.ts` fetch and parse the site, `paging.ts` pages through the API, `mentions.ts` matches quoted card names, `store.ts` writes rows, and `sync.ts` runs the whole load.
+- `convex/ingest.ts`: the ingest functions. `run` (internal action) loads everything; `pnpm --filter @goat-format-chatbot/backend ingest` runs it against the running backend. The internal mutations `upsertCards`, `upsertRulings`, `upsertSections`, `deleteStaleCards`, `deleteStalePassages`, and `syncCardLinks` are the writes it batches.
 - `convex/agent.ts`: the internal actions that run the agent: `reply` and `ask`.
   - `ask` (internal action): answers a question and returns the whole text at once. `smoke` and the CLI use it.
 - `convex/smoke.ts`: five smoke questions through the live agent. `pnpm --filter @goat-format-chatbot/backend smoke` runs them against the running backend on your OpenRouter key (a few cents) and prints each answer.

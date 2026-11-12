@@ -1,8 +1,13 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { fetchCardsPage, fetchRulingsPage, PAGE_SIZE, SITE_URL } from "../convex/ingest/goatformat";
-import cardsPage from "./fixtures/cards-page.json";
-import rulingsPage from "./fixtures/rulings-page.json";
+import {
+  fetchCardsPage,
+  fetchRulingsPage,
+  PAGE_SIZE,
+  SITE_URL,
+} from "../../../convex/model/ingest/goatformat";
+import cardsPage from "../../fixtures/cards-page.json";
+import rulingsPage from "../../fixtures/rulings-page.json";
 
 type Body = typeof cardsPage | typeof rulingsPage | { result: { data: { json: object } } };
 

@@ -53,13 +53,13 @@ const damageStep = {
 
 async function seeded() {
   const t = convexTest(schema, modules);
-  await t.mutation(internal.ingest.store.upsertCards, { cards: [ring, lacooda] });
-  await t.mutation(internal.ingest.store.upsertRulings, { rulings: [ringRuling, lacoodaRuling] });
-  await t.mutation(internal.ingest.store.upsertSections, {
+  await t.mutation(internal.ingest.upsertCards, { cards: [ring, lacooda] });
+  await t.mutation(internal.ingest.upsertRulings, { rulings: [ringRuling, lacoodaRuling] });
+  await t.mutation(internal.ingest.upsertSections, {
     kind: "mechanic",
     sections: [damageStep],
   });
-  await t.mutation(internal.ingest.store.syncCardLinks, {
+  await t.mutation(internal.ingest.syncCardLinks, {
     passages: [
       { sourceUrl: ringRuling.sourceUrl, owner: ring.passcode, mentions: [] },
       { sourceUrl: lacoodaRuling.sourceUrl, owner: lacooda.passcode, mentions: [ring.passcode] },

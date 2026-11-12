@@ -28,7 +28,7 @@ const serpent: Card = {
 async function seeded() {
   const t = convexTest(schema, modules);
   agentComponent.register(t);
-  await t.mutation(internal.ingest.store.upsertCards, { cards: [serpent] });
+  await t.mutation(internal.ingest.upsertCards, { cards: [serpent] });
   return t;
 }
 
