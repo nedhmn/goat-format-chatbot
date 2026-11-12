@@ -1,16 +1,16 @@
-import "@yugioh-rulings-chatbot/design-system/styles.css";
-import { RiFileCopyLine, RiSendPlane2Line, RiStopCircleLine } from "@remixicon/react";
-import { Badge } from "@yugioh-rulings-chatbot/design-system/components/badge";
-import { Button } from "@yugioh-rulings-chatbot/design-system/components/button";
-import { Card } from "@yugioh-rulings-chatbot/design-system/components/card";
-import { Code, CodeBlock } from "@yugioh-rulings-chatbot/design-system/components/code";
-import { Input, Textarea } from "@yugioh-rulings-chatbot/design-system/components/input";
+import "@goat-format-chatbot/design-system/styles.css";
+import { Badge } from "@goat-format-chatbot/design-system/components/badge";
+import { Button } from "@goat-format-chatbot/design-system/components/button";
+import { Card } from "@goat-format-chatbot/design-system/components/card";
+import { Code, CodeBlock } from "@goat-format-chatbot/design-system/components/code";
+import { Input, Textarea } from "@goat-format-chatbot/design-system/components/input";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@yugioh-rulings-chatbot/design-system/components/tooltip";
+} from "@goat-format-chatbot/design-system/components/tooltip";
+import { RiFileCopyLine, RiSendPlane2Line, RiStopCircleLine } from "@remixicon/react";
 import { StrictMode, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 

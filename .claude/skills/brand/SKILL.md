@@ -1,6 +1,6 @@
 ---
 name: brand
-description: Brand reference for the rulings chatbot design system, covering voice, colour, type, spacing, interaction rules, and reference components. Load when designing or changing UI in apps/web or packages/design-system. Production code imports from packages/design-system, never from this folder.
+description: Brand reference for the Goat Format Chatbot design system, covering voice, colour, type, spacing, interaction rules, and reference components. Load when designing or changing UI in apps/web or packages/design-system. Production code imports from packages/design-system, never from this folder.
 user-invocable: true
 ---
 

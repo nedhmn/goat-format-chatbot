@@ -1,15 +1,15 @@
-# @yugioh-rulings-chatbot/design-system
+# @goat-format-chatbot/design-system
 
 Tokens, Tailwind 4 theme and React components for `apps/web`. Ported from the nedhermann design system, on Base UI instead of Radix. Shipped as source; the consuming app's Vite and Tailwind build it.
 
 ## Use
 
 ```css
-@import "@yugioh-rulings-chatbot/design-system/styles.css";
+@import "@goat-format-chatbot/design-system/styles.css";
 ```
 
 ```tsx
-import { Button } from "@yugioh-rulings-chatbot/design-system/components/button";
+import { Button } from "@goat-format-chatbot/design-system/components/button";
 ```
 
 - `styles.css` imports Tailwind, the typography plugin and the fonts, and scans `apps/**` for classes. It replaces Tailwind's default palette and type scale with the brand's, so classes like `bg-white` or `text-4xl` do not exist; use the tokens (`bg-bg`, `text-text-primary`, ...).

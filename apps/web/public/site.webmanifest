@@ -1,6 +1,6 @@
 {
-  "name": "Yu-Gi-Oh! Rulings Chatbot",
-  "short_name": "Yu-Gi-Oh! Rulings Chatbot",
+  "name": "Goat Format Chatbot",
+  "short_name": "Goat Format Chatbot",
   "description": "An AI chatbot that answers Yu-Gi-Oh! rulings questions",
   "start_url": ".",
   "display": "standalone",

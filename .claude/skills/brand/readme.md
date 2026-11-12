@@ -1,6 +1,6 @@
 # Brand
 
-Reference for the design system of this repo, a Yu-Gi-Oh! rulings chatbot. The product
+Reference for the design system of this repo, a Yu-Gi-Oh! Goat format chatbot. The product
 surface is `apps/web`: a chat where a player asks a rulings question and the assistant
 answers with the sources it used.
 

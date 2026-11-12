@@ -1,16 +1,16 @@
-<h1 align="center">Yu-Gi-Oh! Rulings Chatbot</h1>
+<h1 align="center">Goat Format Chatbot</h1>
 
-<p align="center"><strong>An AI chatbot that answers Goat format Yu-Gi-Oh! rulings questions</strong></p>
+<p align="center"><strong>An AI chatbot for playing Yu-Gi-Oh! Goat format</strong></p>
 
 <p align="center">
-  <a href="https://nedhmn.github.io/yugioh-rulings-chatbot"><strong>Demo</strong></a> ·
+  <a href="https://nedhmn.github.io/goat-format-chatbot"><strong>Demo</strong></a> ·
   <a href="./docs/getting-started.md"><strong>Getting started</strong></a> ·
   <a href="./CONTRIBUTING.md"><strong>Contributing</strong></a>
 </p>
 
 <p align="center">
   <img alt="MIT" src="https://img.shields.io/badge/license-MIT-blue.svg">
-  <img alt="CI" src="https://github.com/nedhmn/yugioh-rulings-chatbot/actions/workflows/ci.yml/badge.svg">
+  <img alt="CI" src="https://github.com/nedhmn/goat-format-chatbot/actions/workflows/ci.yml/badge.svg">
 </p>
 
 <!-- One screenshot or diagram of the example app here. -->
@@ -23,15 +23,15 @@ The app runs locally or self-hosted on Convex, with models through OpenRouter. T
 
 ## Packages
 
-| Package                                 | What it does                                           |
-| --------------------------------------- | ------------------------------------------------------ |
-| `@yugioh-rulings-chatbot/design-system` | Tokens, Tailwind theme, and components for the web app |
+| Package                              | What it does                                           |
+| ------------------------------------ | ------------------------------------------------------ |
+| `@goat-format-chatbot/design-system` | Tokens, Tailwind theme, and components for the web app |
 
 ## Apps
 
-| App        | What it is                                                           |
-| ---------- | -------------------------------------------------------------------- |
-| `apps/web` | The demo deployed at https://nedhmn.github.io/yugioh-rulings-chatbot |
+| App        | What it is                                                        |
+| ---------- | ----------------------------------------------------------------- |
+| `apps/web` | The demo deployed at https://nedhmn.github.io/goat-format-chatbot |
 
 ## Quick start
 

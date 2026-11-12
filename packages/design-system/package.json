@@ -1,5 +1,5 @@
 {
-  "name": "@yugioh-rulings-chatbot/design-system",
+  "name": "@goat-format-chatbot/design-system",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -18,9 +18,9 @@
     "tailwind-merge": "3.6.0"
   },
   "devDependencies": {
+    "@goat-format-chatbot/typescript": "workspace:*",
     "@tailwindcss/typography": "0.5.20",
     "@types/react": "19.2.18",
-    "@yugioh-rulings-chatbot/typescript": "workspace:*",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "tailwindcss": "4.3.3",
