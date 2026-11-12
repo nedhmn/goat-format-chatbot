@@ -3,6 +3,7 @@ import { RouterProvider } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
+import { AppProvider } from "@/app/provider";
 import { router } from "@/app/router";
 
 const root = document.querySelector("#root");
@@ -10,6 +11,8 @@ const root = document.querySelector("#root");
 if (root)
   createRoot(root).render(
     <StrictMode>
-      <RouterProvider router={router} />
+      <AppProvider>
+        <RouterProvider router={router} />
+      </AppProvider>
     </StrictMode>,
   );
