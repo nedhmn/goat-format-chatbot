@@ -4,6 +4,7 @@
     "**/dist/**",
     "**/.turbo/**",
     "**/drizzle/**",
+    "**/convex/_generated/**",
     "CHANGELOG.md",
     "pnpm-lock.yaml"
   ],

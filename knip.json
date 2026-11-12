@@ -6,6 +6,9 @@
     "packages/*": {
       "project": ["src/**/*.{ts,tsx}"]
     },
+    "packages/backend": {
+      "project": ["convex/**/*.ts"]
+    },
     "apps/web": {
       "entry": ["src/specimen.tsx"],
       "project": ["src/**/*.{ts,tsx}"]

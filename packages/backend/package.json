@@ -1,0 +1,16 @@
+{
+  "name": "@goat-format-chatbot/backend",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "convex": "1.49.0"
+  },
+  "devDependencies": {
+    "@goat-format-chatbot/typescript": "workspace:*",
+    "typescript": "7.0.2"
+  }
+}
