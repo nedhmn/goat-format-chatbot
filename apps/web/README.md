@@ -2,6 +2,8 @@
 
 React 19 and Vite app on `@goat-format-chatbot/design-system`. Served under `/goat-format-chatbot/`, the GitHub Pages path.
 
+The app is the rulings chat: `/` asks a new question and `/threads/<id>` shows a thread with the agent's lookups and its cited answer. The demo build has no backend, so its input is disabled with a note saying so.
+
 ## Run
 
 ```sh
