@@ -4,16 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node scripts/dev.ts",
+    "dev": "CONVEX_AGENT_MODE=anonymous convex dev",
     "typecheck": "tsc"
   },
   "dependencies": {
-    "convex": "1.49.0",
-    "zod": "4.6.7"
+    "convex": "1.49.0"
   },
   "devDependencies": {
     "@goat-format-chatbot/typescript": "workspace:*",
-    "@types/node": "24.19.2",
     "typescript": "7.0.2"
   }
 }

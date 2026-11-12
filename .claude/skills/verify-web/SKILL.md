@@ -21,10 +21,10 @@ Something answering on `localhost:5173` may be another project.
 ## Local
 
 ```sh
-pnpm dev                     # WEB_DEV_URL, CONVEX_URL
+pnpm dev                     # WEB_DEV_URL, Convex on http://127.0.0.1:3210
 ```
 
-Start it in the background and read the log until both entries are in `.dev/ports.env`. `CONVEX_URL` answers on `$CONVEX_URL/version`. Stop it with SIGINT to the native `turbo` binary (`pgrep -f darwin-arm64/bin/turbo`), not its node wrapper, so the Convex backend shuts down with it; never `pkill -f`. The first run downloads the Convex local backend binary.
+Start it in the background and read the log until `WEB_DEV_URL` is in `.dev/ports.env` and Convex prints "Convex functions ready". Stop it with SIGINT to the native `turbo` binary (`pgrep -f darwin-arm64/bin/turbo`), not its node wrapper, so the Convex backend shuts down with it; never `pkill -f`. The first run downloads the Convex local backend binary.
 
 ## Demo build
 

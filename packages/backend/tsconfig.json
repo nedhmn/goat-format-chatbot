@@ -1,8 +1,7 @@
 {
   "extends": "@goat-format-chatbot/typescript/base.json",
   "compilerOptions": {
-    "allowImportingTsExtensions": false,
-    "types": ["node"]
+    "allowImportingTsExtensions": false
   },
-  "include": ["convex", "scripts"]
+  "include": ["convex"]
 }
