@@ -4,7 +4,7 @@ import { convexTest } from "convex-test";
 import { describe, expect, it } from "vitest";
 
 import { components, internal } from "../convex/_generated/api";
-import { MAX_STEPS, rulingsAgent } from "../convex/agent/agent";
+import { ANSWER_NOW, MAX_STEPS, rulingsAgent } from "../convex/agent/agent";
 import { answer } from "../convex/chat";
 import schema, { type Card } from "../convex/schema";
 
@@ -78,7 +78,7 @@ describe("findCard", () => {
 });
 
 describe("the step limit", () => {
-  it("takes the tools away on the last step so the agent always answers", async () => {
+  it("takes the tools away on the last step and tells the agent to answer", async () => {
     const t = await seeded();
     const lookup = {
       type: "tool-call" as const,
@@ -94,11 +94,13 @@ describe("the step limit", () => {
         [{ type: "text", text: "Sinister Serpent returns to the hand." }],
       ],
     });
-    const toolChoices: unknown[] = [];
+    const offeredTools: number[] = [];
+    const lastPrompts: string[] = [];
     const recording: typeof model = {
       ...model,
       doGenerate: (options) => {
-        toolChoices.push(options.toolChoice);
+        offeredTools.push(options.tools?.length ?? 0);
+        lastPrompts.push(JSON.stringify(options.prompt.at(-1)));
         return model.doGenerate(options);
       },
     };
@@ -106,8 +108,10 @@ describe("the step limit", () => {
       answer(ctx, rulingsAgent(recording), { question: "What does serpent do?" }),
     );
     expect(text).toBe("Sinister Serpent returns to the hand.");
-    expect(toolChoices).toHaveLength(MAX_STEPS);
-    expect(toolChoices.at(-1)).toEqual({ type: "none" });
-    expect(toolChoices.at(-2)).not.toEqual({ type: "none" });
+    expect(offeredTools).toHaveLength(MAX_STEPS);
+    expect(offeredTools.at(-1)).toBe(0);
+    expect(offeredTools.at(-2)).toBe(3);
+    expect(lastPrompts.at(-1)).toContain(ANSWER_NOW);
+    expect(lastPrompts.at(-2)).not.toContain(ANSWER_NOW);
   });
 });

@@ -73,7 +73,7 @@ Tools return typed parts and the client renders a component per part type: card 
 ## Data sources
 
 - Card text, errata, card pool, banlist, rulings, ruling notices, and mechanics guides: read from [beta.goatformat.com](https://beta.goatformat.com)'s public API and pages. See [data.md](data.md).
-- Rulebook: source to be decided.
+- Rulebook: source to be decided. Until it lands, the agent has no full statement of the game rules (damage step, chains, timing). The guide sections summarize them, and the rest surfaces only as asides in rulings filed under other cards. Mechanics questions are the agent's biggest reliability gap. For example, Book of Moon in the damage step depends on a Skill Drain ruling that says only cards that specifically modify ATK or DEF can be activated there.
 
 Goat uses the April 2005 card text and errata, so modern card databases are not a source for card text.
 
@@ -100,4 +100,4 @@ The GitHub Pages build is static. It replays recorded threads stored as AI SDK U
 ## Open
 
 - Evals tooling
-- The rulebook source
+- The rulebook source, the biggest reliability gap (see Data sources)
