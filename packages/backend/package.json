@@ -5,13 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "CONVEX_AGENT_MODE=anonymous convex dev",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "test": "vitest run"
   },
   "dependencies": {
-    "convex": "1.49.0"
+    "convex": "1.49.0",
+    "zod": "4.6.7"
   },
   "devDependencies": {
     "@goat-format-chatbot/typescript": "workspace:*",
-    "typescript": "7.0.2"
+    "typescript": "7.0.2",
+    "vitest": "5.1.0"
   }
 }

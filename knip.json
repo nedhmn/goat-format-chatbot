@@ -13,7 +13,7 @@
       "project": ["src/**/*.{ts,tsx}"]
     },
     "packages/backend": {
-      "project": ["convex/**/*.ts"]
+      "project": ["convex/**/*.ts", "test/**/*.ts"]
     },
     "apps/web": {
       "entry": ["src/specimen.tsx"],
