@@ -31,7 +31,17 @@ export type Answer = { threadId: string; text: string };
 
 export type Sent = { threadId: string };
 
+export type ThreadSummary = { threadId: string; title: string; createdAt: number };
+
 export const STREAM_THROTTLE_MS = 100;
+
+export const OWNER = "owner";
+
+export const THREADS_LISTED = 50;
+
+export const TITLE_LENGTH = 80;
+
+export const UNTITLED = "Untitled question";
 
 export const NOT_YOUR_THREAD = "This thread belongs to someone else.";
 
@@ -44,7 +54,7 @@ export const send = mutation({
     if (!allowed.ok) throw new ConvexError(tooManyQuestions(allowed.retryAfter));
     const thread =
       threadId === undefined
-        ? await createThread(ctx, components.agent, { userId })
+        ? await createThread(ctx, components.agent, { userId, title: threadTitle(question) })
         : await ownThread(ctx, threadId);
     const { messageId } = await saveMessage(ctx, components.agent, {
       threadId: thread,
@@ -72,6 +82,22 @@ export const messages = query({
     const paginated = await listUIMessages(ctx, components.agent, { threadId, paginationOpts });
     const streams = await syncStreams(ctx, components.agent, { threadId, streamArgs });
     return { ...paginated, streams };
+  },
+});
+
+export const threads = query({
+  args: {},
+  handler: async (ctx): Promise<ThreadSummary[]> => {
+    const { page } = await ctx.runQuery(components.agent.threads.listThreadsByUserId, {
+      userId: await viewer(ctx),
+      order: "desc",
+      paginationOpts: { cursor: null, numItems: THREADS_LISTED },
+    });
+    return page.map((thread) => ({
+      threadId: thread._id,
+      title: thread.title || UNTITLED,
+      createdAt: thread._creationTime,
+    }));
   },
 });
 
@@ -110,8 +136,13 @@ export async function answer(
   return { threadId: thread, text: result.text };
 }
 
-async function viewer(_ctx: QueryCtx): Promise<string | undefined> {
-  return undefined;
+export function threadTitle(question: string): string {
+  const title = question.replace(/\s+/g, " ").trim();
+  return title.length > TITLE_LENGTH ? `${title.slice(0, TITLE_LENGTH - 1).trimEnd()}…` : title;
+}
+
+async function viewer(_ctx: QueryCtx): Promise<string> {
+  return OWNER;
 }
 
 async function ownThread(ctx: QueryCtx, threadId: string): Promise<string> {
