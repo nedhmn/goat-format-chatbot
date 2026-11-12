@@ -71,7 +71,7 @@ async function seeded() {
 describe("readCard", () => {
   it("returns the card, its rulings, and the rulings of other cards that name it", async () => {
     const t = await seeded();
-    expect(await t.query(internal.lookup.readCard, { name: "Ring of Destruction" })).toEqual({
+    expect(await t.query(internal.cards.readCard, { name: "Ring of Destruction" })).toEqual({
       found: true,
       card: {
         kind: "trap",
@@ -103,7 +103,7 @@ describe("readCard", () => {
 
   it("says when no card has that exact name", async () => {
     const t = await seeded();
-    expect(await t.query(internal.lookup.readCard, { name: "ring of destruction" })).toEqual({
+    expect(await t.query(internal.cards.readCard, { name: "ring of destruction" })).toEqual({
       found: false,
       name: "ring of destruction",
     });
@@ -114,7 +114,7 @@ describe("searchPassages", () => {
   it("finds passages by their words and narrows by kind or owning card", async () => {
     const t = await seeded();
     const urls = async (args: { query: string; kind?: "ruling" | "mechanic"; card?: string }) => {
-      const result = await t.query(internal.lookup.searchPassages, args);
+      const result = await t.query(internal.cards.searchPassages, args);
       return result.found ? result.passages.map((passage) => passage.sourceUrl) : result;
     };
     expect(await urls({ query: "damage step" })).toContain(damageStep.sourceUrl);

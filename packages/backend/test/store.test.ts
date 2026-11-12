@@ -223,12 +223,12 @@ describe("card links", () => {
     const { t, links, ids } = await linked();
     await t.mutation(internal.ingest.store.syncCardLinks, { passages: links });
     if (!ids.serpent || !ids.moon) throw new Error("cards not seeded");
-    const forSerpent = await t.query(internal.lookup.passagesForCard, { cardId: ids.serpent });
+    const forSerpent = await t.query(internal.cards.passagesForCard, { cardId: ids.serpent });
     expect(forSerpent.owned).toEqual([]);
     expect(forSerpent.mentioned.map((passage) => passage.text)).toEqual([
       'Chain "Book of Moon" to "Sinister Serpent".',
     ]);
-    const forMoon = await t.query(internal.lookup.passagesForCard, { cardId: ids.moon });
+    const forMoon = await t.query(internal.cards.passagesForCard, { cardId: ids.moon });
     expect(forMoon.owned).toHaveLength(1);
     expect(forMoon.mentioned).toEqual([]);
   });

@@ -8,10 +8,8 @@
  * @module
  */
 
-import type * as agent_agent from "../agent/agent.js";
-import type * as agent_cardNames from "../agent/cardNames.js";
-import type * as agent_instructions from "../agent/instructions.js";
-import type * as agent_tools from "../agent/tools.js";
+import type * as agent from "../agent.js";
+import type * as cards from "../cards.js";
 import type * as chat from "../chat.js";
 import type * as ingest_goatformat from "../ingest/goatformat.js";
 import type * as ingest_mentions from "../ingest/mentions.js";
@@ -19,8 +17,14 @@ import type * as ingest_pages from "../ingest/pages.js";
 import type * as ingest_paging from "../ingest/paging.js";
 import type * as ingest_store from "../ingest/store.js";
 import type * as ingest_sync from "../ingest/sync.js";
-import type * as limits from "../limits.js";
-import type * as lookup from "../lookup.js";
+import type * as model_agent_agent from "../model/agent/agent.js";
+import type * as model_agent_answer from "../model/agent/answer.js";
+import type * as model_agent_cardNames from "../model/agent/cardNames.js";
+import type * as model_agent_instructions from "../model/agent/instructions.js";
+import type * as model_agent_tools from "../model/agent/tools.js";
+import type * as model_cards from "../model/cards.js";
+import type * as model_chat from "../model/chat.js";
+import type * as model_limits from "../model/limits.js";
 import type * as smoke from "../smoke.js";
 
 import type {
@@ -30,10 +34,8 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
-  "agent/agent": typeof agent_agent;
-  "agent/cardNames": typeof agent_cardNames;
-  "agent/instructions": typeof agent_instructions;
-  "agent/tools": typeof agent_tools;
+  agent: typeof agent;
+  cards: typeof cards;
   chat: typeof chat;
   "ingest/goatformat": typeof ingest_goatformat;
   "ingest/mentions": typeof ingest_mentions;
@@ -41,8 +43,14 @@ declare const fullApi: ApiFromModules<{
   "ingest/paging": typeof ingest_paging;
   "ingest/store": typeof ingest_store;
   "ingest/sync": typeof ingest_sync;
-  limits: typeof limits;
-  lookup: typeof lookup;
+  "model/agent/agent": typeof model_agent_agent;
+  "model/agent/answer": typeof model_agent_answer;
+  "model/agent/cardNames": typeof model_agent_cardNames;
+  "model/agent/instructions": typeof model_agent_instructions;
+  "model/agent/tools": typeof model_agent_tools;
+  "model/cards": typeof model_cards;
+  "model/chat": typeof model_chat;
+  "model/limits": typeof model_limits;
   smoke: typeof smoke;
 }>;
 

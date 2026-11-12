@@ -3,12 +3,12 @@ import agentComponent from "@convex-dev/agent/test";
 import { convexTest } from "convex-test";
 import { describe, expect, it } from "vitest";
 
-import { components, internal } from "../convex/_generated/api";
-import { ANSWER_NOW, MAX_STEPS, rulingsAgent } from "../convex/agent/agent";
-import { answer } from "../convex/chat";
-import schema, { type Card } from "../convex/schema";
+import { components, internal } from "../../../convex/_generated/api";
+import { ANSWER_NOW, MAX_STEPS, rulingsAgent } from "../../../convex/model/agent/agent";
+import { answer } from "../../../convex/model/agent/answer";
+import schema, { type Card } from "../../../convex/schema";
 
-const modules = import.meta.glob("../convex/**/*.ts");
+const modules = import.meta.glob("../../../convex/**/*.ts");
 
 const serpent: Card = {
   kind: "monster",

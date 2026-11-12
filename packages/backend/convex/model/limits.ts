@@ -1,7 +1,7 @@
 import { DAY, MINUTE, RateLimiter } from "@convex-dev/rate-limiter";
 
-import { components } from "./_generated/api";
-import type { MutationCtx } from "./_generated/server";
+import { components } from "../_generated/api";
+import type { MutationCtx } from "../_generated/server";
 
 export const QUESTIONS_PER_MINUTE = 10;
 
