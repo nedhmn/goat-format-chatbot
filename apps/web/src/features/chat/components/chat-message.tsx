@@ -1,46 +1,112 @@
+import { Markdown } from "@goat-format-chatbot/design-system/components/markdown";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@goat-format-chatbot/design-system/components/tooltip";
+import { Bubble, BubbleContent } from "@goat-format-chatbot/design-system/components/ui/bubble";
+import { Button } from "@goat-format-chatbot/design-system/components/ui/button";
 import {
   Message,
   MessageContent,
-  MessageMarkdown,
-} from "@goat-format-chatbot/design-system/components/message";
-import { ToolCall } from "@goat-format-chatbot/design-system/components/tool-call";
+  MessageFooter,
+} from "@goat-format-chatbot/design-system/components/ui/message";
+import {
+  Trace,
+  TraceIcon,
+  TraceLine,
+  TraceTitle,
+} from "@goat-format-chatbot/design-system/components/ui/trace";
+import { RiCheckLine, RiFileCopyLine, RiSparkling2Line } from "@remixicon/react";
+import { useState } from "react";
 
 import type { ChatMessage as ChatMessageData } from "@/features/chat/api/chat-message";
-import { lookupLabel } from "@/features/chat/utils/lookup-label";
+import { LookupTrace } from "@/features/chat/components/lookup-trace";
+import { SourcesTrace } from "@/features/chat/components/sources-trace";
+import { groupParts } from "@/features/chat/utils/group-parts";
 
 export const NO_ANSWER = "The answer stopped before it finished. Ask again.";
 
 const THINKING = "Reading the question";
+const COPIED_FOR_MS = 2000;
+
+function CopyAnswer({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false);
+
+  async function copy() {
+    await navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), COPIED_FOR_MS);
+  }
+
+  return (
+    <Tooltip>
+      <TooltipTrigger
+        render={
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            aria-label={copied ? "Copied" : "Copy answer"}
+            onClick={copy}
+          />
+        }
+      >
+        {copied ? <RiCheckLine /> : <RiFileCopyLine />}
+      </TooltipTrigger>
+      <TooltipContent>{copied ? "Copied" : "Copy answer"}</TooltipContent>
+    </Tooltip>
+  );
+}
 
 export function ChatMessage({ message }: { message: ChatMessageData }) {
   if (message.role === "user") {
     return (
-      <Message from="user">
-        <MessageContent>{message.text}</MessageContent>
+      <Message align="end">
+        <MessageContent>
+          <Bubble align="end" variant="muted">
+            <BubbleContent className="whitespace-pre-wrap">{message.text}</BubbleContent>
+          </Bubble>
+        </MessageContent>
       </Message>
     );
   }
+
   const working = message.status === "pending" || message.status === "streaming";
-  const last = message.parts.at(-1);
+  const groups = groupParts(message.parts);
+  const last = groups.at(-1);
+
   return (
-    <Message from="assistant">
-      <MessageContent>
-        {message.parts.map((part) =>
-          part.kind === "lookup" ? (
-            <ToolCall
-              key={part.lookup.id}
-              label={lookupLabel(part.lookup)}
-              state={part.lookup.state}
-            />
+    <Message>
+      <MessageContent className="gap-4">
+        {groups.map((group) =>
+          group.kind === "lookups" ? (
+            <LookupTrace key={group.key} lookups={group.lookups} />
           ) : (
-            <MessageMarkdown key={part.key} streaming={working && part === last}>
-              {part.text}
-            </MessageMarkdown>
+            <Markdown key={group.key} streaming={working && group === last}>
+              {group.text}
+            </Markdown>
           ),
         )}
-        {working && !last ? <p className="text-sm text-text-muted">{THINKING}</p> : null}
+        {working && !last ? (
+          <Trace>
+            <TraceLine status="running">
+              <TraceIcon>
+                <RiSparkling2Line />
+              </TraceIcon>
+              <TraceTitle>{THINKING}</TraceTitle>
+            </TraceLine>
+          </Trace>
+        ) : null}
         {message.status === "failed" && !message.text ? (
-          <p className="text-sm text-error">{NO_ANSWER}</p>
+          <p role="alert" className="text-sm text-destructive">
+            {NO_ANSWER}
+          </p>
+        ) : null}
+        {message.sources.length > 0 ? <SourcesTrace sources={message.sources} /> : null}
+        {message.status === "done" && message.text ? (
+          <MessageFooter className="px-0">
+            <CopyAnswer text={message.text} />
+          </MessageFooter>
         ) : null}
       </MessageContent>
     </Message>

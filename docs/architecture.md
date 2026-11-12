@@ -21,7 +21,7 @@ The bot answers questions about playing Goat format, limited to the Goat card po
 | Routing                       | TanStack Router                                                                         |
 | Server state                  | TanStack Query through Convex's React Query adapter                                     |
 | UI                            | `packages/design-system`: Tailwind 4, Base UI, Remix icons                              |
-| Chat components               | shadcn/ui AI Elements patterns, ported into the design system                           |
+| Chat components               | shadcn/ui AI Elements, added with the shadcn CLI and restyled through the theme         |
 | Generative UI                 | Components rendered from typed tool parts                                               |
 | Backend, database, API        | Convex                                                                                  |
 | Validation                    | Convex validators; Zod for tool inputs                                                  |

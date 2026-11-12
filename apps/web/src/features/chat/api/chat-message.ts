@@ -13,12 +13,15 @@ export type ChatPart =
   | { kind: "text"; key: string; text: string }
   | { kind: "lookup"; lookup: Lookup };
 
+export type Source = { url: string; title: string; note: string };
+
 export type ChatMessage = {
   key: string;
   role: "user" | "assistant";
   status: "pending" | "streaming" | "done" | "failed";
   text: string;
   parts: ChatPart[];
+  sources: Source[];
 };
 
 const lookupInput = z.discriminatedUnion("tool", [
@@ -71,15 +74,42 @@ const statuses = {
   failed: "failed",
 } as const satisfies Record<UIMessage["status"], ChatMessage["status"]>;
 
+const sourcesHeading = /^[ \t]*(?:#{1,6}[ \t]*)?(?:\*\*|__)?Sources:?(?:\*\*|__)?:?[ \t]*$/im;
+const sourceItem = /^\s*[-*]\s+\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)\W*(.*)$/;
+
+function toSource(line: string): Source[] {
+  const match = sourceItem.exec(line);
+  if (!match?.[1] || !match[2]) return [];
+  return [{ title: match[1], url: match[2], note: match[3]?.trim() ?? "" }];
+}
+
+type Answer = Pick<ChatMessage, "parts" | "sources">;
+
+function splitSources(parts: ChatPart[]): Answer {
+  const last = parts.findLastIndex((part) => part.kind === "text");
+  const part = parts[last];
+  if (part?.kind !== "text") return { parts, sources: [] };
+  const heading = sourcesHeading.exec(part.text);
+  if (!heading) return { parts, sources: [] };
+  const answer = part.text.slice(0, heading.index).trimEnd();
+  const sources = part.text
+    .slice(heading.index + heading[0].length)
+    .split("\n")
+    .flatMap(toSource);
+  const kept = answer ? [{ ...part, text: answer }] : [];
+  return { parts: [...parts.slice(0, last), ...kept, ...parts.slice(last + 1)], sources };
+}
+
 export function toChatMessage(message: UIMessage): ChatMessage[] {
   if (message.role !== "user" && message.role !== "assistant") return [];
+  const parts = message.parts.flatMap(toPart);
   return [
     {
       key: message.key,
       role: message.role,
       status: statuses[message.status],
       text: message.text,
-      parts: message.parts.flatMap(toPart),
+      ...(message.role === "assistant" ? splitSources(parts) : { parts, sources: [] }),
     },
   ];
 }
