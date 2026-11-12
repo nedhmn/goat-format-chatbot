@@ -3,10 +3,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConvexProvider, ConvexReactClient } from "convex/react";
 import { useState, type ReactNode } from "react";
 
-import { readLiveEnv } from "@/lib/env";
+import { env } from "@/lib/env";
 
 function createClients() {
-  const env = readLiveEnv();
   const convexClient = new ConvexReactClient(env.VITE_CONVEX_URL);
   const convexQueryClient = new ConvexQueryClient(convexClient);
   const queryClient = new QueryClient({
