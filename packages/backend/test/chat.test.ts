@@ -91,7 +91,7 @@ describe("send", () => {
       await t.mutation(api.chat.send, { question: `Question ${i}` });
     }
     await expect(t.mutation(api.chat.send, { question: "One more" })).rejects.toThrow(
-      /^Too many questions\. Try again in \d+ seconds?\.$/,
+      /^Too many questions\. Try again in (\d+ seconds?|1 minute)\.$/,
     );
     vi.setSystemTime(new Date("2026-11-12T12:01:01Z"));
     await expect(t.mutation(api.chat.send, { question: "One more" })).resolves.toHaveProperty(
