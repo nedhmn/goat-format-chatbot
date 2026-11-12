@@ -4,6 +4,7 @@
 | ---------------------------------------- | ------------------------- |
 | A package or app                         | Its own `README.md`       |
 | Running it                               | `docs/getting-started.md` |
+| Files, folders, or imports in `apps/web` | `docs/web.md`             |
 | Workflows, versions, changelog, releases | `CONTRIBUTING.md`         |
 
 `.agents/skills/release` before merging a release PR.
