@@ -41,3 +41,20 @@ Every piece of text the agent searches, in one table so one search index ranks t
 `rulingType` is `faq`, `netrep-ruling`, or `netrep-qa`. `sourceUrl` links to the passage on the site and is the key for upserts.
 
 The `search_text` index searches `text` and filters by `kind` and `cardId`. Convex full-text search matches exact tokens with no typo tolerance, so card names are matched against the card pool in code before searching.
+
+## Ingest
+
+With the backend running (`pnpm dev`), load or refresh everything:
+
+```sh
+pnpm --filter @goat-format-chatbot/backend ingest
+```
+
+It runs `ingest/sync:run`, an internal action in `packages/backend/convex/ingest/`:
+
+- Fetches every page of cards and rulings from the site's API, one request a second, and parses each response at the fetch.
+- Upserts cards by `passcode` and rulings by `sourceUrl`, in batches of 100, rewriting only rows that changed.
+- Deletes cards and rulings the site no longer lists. Deleting a card deletes its rulings.
+- Prints how many rows it inserted, updated, left unchanged, and deleted. A second run with no site changes reports every row unchanged.
+
+The site sorts rulings by card name, which ties within a card, so paging can repeat or skip a ruling where a card's rulings cross a page boundary. The ingest refetches those cards by name and dedupes by ruling id.

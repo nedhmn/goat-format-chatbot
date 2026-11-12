@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "CONVEX_AGENT_MODE=anonymous convex dev",
+    "ingest": "CONVEX_AGENT_MODE=anonymous convex run ingest/sync:run",
     "typecheck": "tsc",
     "test": "vitest run"
   },
@@ -14,6 +15,7 @@
   },
   "devDependencies": {
     "@goat-format-chatbot/typescript": "workspace:*",
+    "convex-test": "0.0.66",
     "typescript": "7.0.2",
     "vitest": "5.1.0"
   }
