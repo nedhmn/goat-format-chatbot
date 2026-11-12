@@ -32,7 +32,7 @@
     "**/.turbo/**",
     "**/drizzle/**",
     "**/convex/_generated/**",
-    "**/route-tree.gen.ts",
+    "**/*.gen.ts",
     ".agents/**",
     ".claude/**",
     "docs/**",
@@ -81,7 +81,7 @@
     },
     {
       // TanStack Router derives URLs from route file names such as __root.tsx and
-      // threads.$threadId.tsx, so they cannot be kebab-case.
+      // threads/$threadId.tsx, so they cannot be kebab-case.
       "files": ["apps/web/src/app/routes/**"],
       "rules": { "unicorn/filename-case": "off" }
     },

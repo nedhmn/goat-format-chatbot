@@ -1,7 +1,12 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "ignoreExportsUsedInFile": true,
-  "ignore": ["tools/oxlint/anti-slop/**", ".agents/skills/brand/**"],
+  "ignore": [
+    "tools/oxlint/anti-slop/**",
+    ".agents/skills/brand/**",
+    "**/*.gen.ts",
+    "**/convex/_generated/**"
+  ],
   "ignoreDependencies": ["@tanstack/intent"],
   "workspaces": {
     "packages/*": {

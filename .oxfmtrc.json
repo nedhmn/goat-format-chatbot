@@ -5,7 +5,7 @@
     "**/.turbo/**",
     "**/drizzle/**",
     "**/convex/_generated/**",
-    "**/route-tree.gen.ts",
+    "**/*.gen.ts",
     ".agents/skills/**",
     "CHANGELOG.md",
     "pnpm-lock.yaml"
