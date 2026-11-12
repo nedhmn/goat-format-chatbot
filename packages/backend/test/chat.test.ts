@@ -1,11 +1,13 @@
 import { createThread, listMessages, mockModel, saveMessage } from "@convex-dev/agent";
 import agentComponent from "@convex-dev/agent/test";
+import rateLimiterComponent from "@convex-dev/rate-limiter/test";
 import { convexTest } from "convex-test";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { api, components } from "../convex/_generated/api";
 import { openRouterModel, rulingsAgent } from "../convex/agent/agent";
 import { answer, NOT_YOUR_THREAD, streamReply } from "../convex/chat";
+import { QUESTIONS_PER_MINUTE, tooManyQuestions } from "../convex/limits";
 import schema from "../convex/schema";
 
 const modules = import.meta.glob("../convex/**/*.ts");
@@ -48,6 +50,7 @@ const firstPage = { cursor: null, numItems: 10 };
 function backend() {
   const t = convexTest(schema, modules);
   agentComponent.register(t);
+  rateLimiterComponent.register(t);
   return t;
 }
 
@@ -71,6 +74,21 @@ describe("send", () => {
       ["user", "Book of Moon?"],
       ["user", "And Ring?"],
     ]);
+  });
+
+  it("stops questions past the limit and lets them through once the window passes", async () => {
+    vi.setSystemTime(new Date("2026-11-12T12:00:00Z"));
+    const t = backend();
+    for (let i = 0; i < QUESTIONS_PER_MINUTE; i++) {
+      await t.mutation(api.chat.send, { question: `Question ${i}` });
+    }
+    await expect(t.mutation(api.chat.send, { question: "One more" })).rejects.toThrow(
+      /^Too many questions\. Try again in \d+ seconds?\.$/,
+    );
+    vi.setSystemTime(new Date("2026-11-12T12:01:01Z"));
+    await expect(t.mutation(api.chat.send, { question: "One more" })).resolves.toHaveProperty(
+      "threadId",
+    );
   });
 
   it("says how to set the key before saving anything when it is missing", async () => {
@@ -112,5 +130,15 @@ describe("messages", () => {
     await expect(
       t.query(api.chat.messages, { threadId, paginationOpts: firstPage }),
     ).rejects.toThrow(NOT_YOUR_THREAD);
+  });
+});
+
+describe("tooManyQuestions", () => {
+  it("rounds the wait up to seconds, minutes, or hours", () => {
+    expect(tooManyQuestions(1)).toBe("Too many questions. Try again in 1 second.");
+    expect(tooManyQuestions(59_000)).toBe("Too many questions. Try again in 59 seconds.");
+    expect(tooManyQuestions(59_500)).toBe("Too many questions. Try again in 1 minute.");
+    expect(tooManyQuestions(61_000)).toBe("Too many questions. Try again in 2 minutes.");
+    expect(tooManyQuestions(5 * 3_600_000)).toBe("Too many questions. Try again in 5 hours.");
   });
 });
