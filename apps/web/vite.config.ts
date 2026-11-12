@@ -58,6 +58,7 @@ function devPorts(): Plugin {
 export default defineConfig({
   base: "/goat-format-chatbot/",
   plugins: [react(), tailwindcss(), devPorts()],
+  resolve: { tsconfigPaths: true },
   server: { host },
   preview: { host },
 });

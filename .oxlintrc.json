@@ -48,6 +48,148 @@
     {
       "files": ["apps/*/src/cli/**"],
       "rules": { "no-console": "off" }
+    },
+    // apps/web structure, documented in docs/web.md. Later overrides replace earlier
+    // no-restricted-imports settings, so each zone lists every pattern it needs.
+    {
+      "files": ["apps/web/src/**"],
+      "plugins": ["import"],
+      "rules": {
+        "import/no-relative-parent-imports": "error",
+        "import/no-unassigned-import": ["warn", { "allow": ["**/*.css"] }],
+        "oxc/no-barrel-file": ["error", { "threshold": 0 }],
+        "unicorn/filename-case": ["error", { "case": "kebabCase" }],
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "convex",
+                  "convex/**",
+                  "@convex-dev/**",
+                  "@goat-format-chatbot/backend",
+                  "@goat-format-chatbot/backend/**"
+                ],
+                "message": "Only src/lib and a feature's api/ folder import Convex or the backend. See docs/web.md."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      // TanStack Router derives URLs from route file names such as __root.tsx and
+      // threads.$threadId.tsx, so they cannot be kebab-case.
+      "files": ["apps/web/src/app/routes/**"],
+      "rules": { "unicorn/filename-case": "off" }
+    },
+    {
+      "files": [
+        "apps/web/src/components/**",
+        "apps/web/src/hooks/**",
+        "apps/web/src/utils/**",
+        "apps/web/src/types/**"
+      ],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "convex",
+                  "convex/**",
+                  "@convex-dev/**",
+                  "@goat-format-chatbot/backend",
+                  "@goat-format-chatbot/backend/**"
+                ],
+                "message": "Only src/lib and a feature's api/ folder import Convex or the backend. See docs/web.md."
+              },
+              {
+                "group": ["@/features/**"],
+                "message": "Shared folders and other features never import a feature. Move shared code to a shared folder. See docs/web.md."
+              },
+              {
+                "group": ["@/app/**"],
+                "message": "Only routes and main.tsx import from app/. See docs/web.md."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["apps/web/src/lib/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["@/features/**"],
+                "message": "Shared folders and other features never import a feature. Move shared code to a shared folder. See docs/web.md."
+              },
+              {
+                "group": ["@/app/**"],
+                "message": "Only routes and main.tsx import from app/. See docs/web.md."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      // Fails closed: a feature cannot import its own files until it has its own
+      // override below that allows them.
+      "files": ["apps/web/src/features/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "convex",
+                  "convex/**",
+                  "@convex-dev/**",
+                  "@goat-format-chatbot/backend",
+                  "@goat-format-chatbot/backend/**"
+                ],
+                "message": "Only src/lib and a feature's api/ folder import Convex or the backend. See docs/web.md."
+              },
+              {
+                "group": ["@/features/**"],
+                "message": "Shared folders and other features never import a feature. Move shared code to a shared folder. See docs/web.md."
+              },
+              {
+                "group": ["@/app/**"],
+                "message": "Only routes and main.tsx import from app/. See docs/web.md."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["apps/web/src/features/*/api/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["@/features/**"],
+                "message": "Shared folders and other features never import a feature. Move shared code to a shared folder. See docs/web.md."
+              },
+              {
+                "group": ["@/app/**"],
+                "message": "Only routes and main.tsx import from app/. See docs/web.md."
+              }
+            ]
+          }
+        ]
+      }
     }
   ]
 }
