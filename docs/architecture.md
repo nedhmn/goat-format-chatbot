@@ -64,7 +64,7 @@ Agentic search: the model decides what to look up, and looks again until it has 
 - Rulings, rulebook sections, mechanics, and notices are stored as separate rows, each linked to the cards it mentions.
 - Convex full-text search is BM25 with exact tokens and no typo tolerance, so card names are fuzzy-matched in our code against the card pool.
 
-The data model is not fixed yet.
+The tables are in [data.md](data.md).
 
 ## Generative UI
 
@@ -72,7 +72,7 @@ Tools return typed parts and the client renders a component per part type: card 
 
 ## Data sources
 
-- Card text, errata, card pool, banlist, and rulings: scraped from [beta.goatformat.com](https://beta.goatformat.com).
+- Card text, errata, card pool, banlist, rulings, ruling notices, and mechanics guides: read from [beta.goatformat.com](https://beta.goatformat.com)'s public API and pages. See [data.md](data.md).
 - Rulebook: source to be decided.
 
 Goat uses the April 2005 card text and errata, so modern card databases are not a source for card text.
@@ -99,6 +99,5 @@ The GitHub Pages build is static. It replays recorded threads stored as AI SDK U
 
 ## Open
 
-- The data model
 - Evals tooling
 - The rulebook source
