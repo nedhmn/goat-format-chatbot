@@ -1,7 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-function NewThread() {
-  return <h1 className="font-heading text-3xl text-text-primary">Goat Format Chatbot</h1>;
-}
+import { NewChat } from "@/features/chat/components/new-chat";
 
-export const Route = createFileRoute("/")({ component: NewThread });
+export const Route = createFileRoute("/")({ component: NewChat });

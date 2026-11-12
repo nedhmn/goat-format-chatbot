@@ -224,6 +224,57 @@
           }
         ]
       }
+    },
+    {
+      "files": ["apps/web/src/features/chat/**"],
+      "excludeFiles": ["apps/web/src/features/chat/api/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "convex",
+                  "convex/**",
+                  "@convex-dev/**",
+                  "@goat-format-chatbot/backend",
+                  "@goat-format-chatbot/backend/**"
+                ],
+                "message": "Only src/lib and a feature's api/ folder import Convex or the backend. See docs/web.md."
+              },
+              {
+                "group": ["@/features/**", "!@/features/chat/**"],
+                "message": "Shared folders and other features never import a feature. Move shared code to a shared folder. See docs/web.md."
+              },
+              {
+                "group": ["@/app/**"],
+                "message": "Only routes and main.tsx import from app/. See docs/web.md."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["apps/web/src/features/chat/api/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["@/features/**", "!@/features/chat/**"],
+                "message": "Shared folders and other features never import a feature. Move shared code to a shared folder. See docs/web.md."
+              },
+              {
+                "group": ["@/app/**"],
+                "message": "Only routes and main.tsx import from app/. See docs/web.md."
+              }
+            ]
+          }
+        ]
+      }
     }
   ]
 }

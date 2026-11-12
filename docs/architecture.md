@@ -1,6 +1,6 @@
 # Architecture
 
-The target design for the chatbot. Most of it is not built yet; the repo today has `apps/web` and `packages/design-system`.
+The target design for the chatbot. Built so far: the rulings data, the agent, and the chat in `apps/web`, `packages/design-system`, and `packages/backend`. Not built yet: card panels, citations, diagrams, recorded demo threads, and evals.
 
 ## Scope
 
@@ -21,7 +21,7 @@ The bot answers questions about playing Goat format, limited to the Goat card po
 | Routing                       | TanStack Router                                                                         |
 | Server state                  | TanStack Query through Convex's React Query adapter                                     |
 | UI                            | `packages/design-system`: Tailwind 4, Base UI, Remix icons                              |
-| Chat components               | shadcn/ui AI Elements patterns, ported into the design system                           |
+| Chat components               | shadcn/ui AI Elements, added with the shadcn CLI and restyled through the theme         |
 | Generative UI                 | Components rendered from typed tool parts                                               |
 | Backend, database, API        | Convex                                                                                  |
 | Validation                    | Convex validators; Zod for tool inputs                                                  |
@@ -79,7 +79,7 @@ Goat uses the April 2005 card text and errata, so modern card databases are not 
 
 ## Demo
 
-The GitHub Pages build is static. It replays recorded threads stored as AI SDK UIMessage parts, with no backend and no model calls. Components never call Convex directly; they get data through our own hooks module, which the demo build swaps for the recorded threads.
+The GitHub Pages build is static. It replays recorded threads stored as AI SDK UIMessage parts, with no backend and no model calls. Components never call Convex directly; they get data through our own hooks module, which the demo build swaps for the recorded threads. Until those exist, the demo shows the chat with its input disabled and a note that it has no backend.
 
 ## Running it
 
