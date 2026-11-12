@@ -204,6 +204,9 @@ importers:
       '@goat-format-chatbot/typescript':
         specifier: workspace:*
         version: link:../../tools/typescript
+      convex-test:
+        specifier: 0.0.66
+        version: 0.0.66(convex@1.49.0(react@19.2.8))
       typescript:
         specifier: 7.0.2
         version: 7.0.2
@@ -1574,6 +1577,11 @@ packages:
 
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
+
+  convex-test@0.0.66:
+    resolution: {integrity: sha512-d70YxtlUqL6w37EmcxAYSQPRZ6lWF7PQ4q/KrbUrn6bfbxPG4eafLl5386UNrjCb8U1kX7mRCanrB4Bv8uB5Cg==}
+    peerDependencies:
+      convex: ^1.43.0
 
   convex@1.49.0:
     resolution: {integrity: sha512-mkr9oXF8/arkCI1kvYyGytWd62oVXNABh4uwLeI4UQVN6Zuudm4DlmSzNUJKF63djk6f/uUXC+6ffuVSkPLvzA==}
@@ -3093,6 +3101,10 @@ snapshots:
   clsx@2.1.1: {}
 
   convert-source-map@2.0.0: {}
+
+  convex-test@0.0.66(convex@1.49.0(react@19.2.8)):
+    dependencies:
+      convex: 1.49.0(react@19.2.8)
 
   convex@1.49.0(react@19.2.8):
     dependencies:

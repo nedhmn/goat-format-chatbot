@@ -31,18 +31,18 @@ The bot answers questions about playing Goat format, limited to the Goat card po
 | Retrieval                     | Agentic search over Convex full-text indexes                                            |
 | Resumable streams             | Convex agent stream deltas, saved to the database                                       |
 | Rate limiting                 | Convex rate limiter component                                                           |
-| Ingestion                     | One-off scrapers in `packages/backend`, writing through Convex mutations                |
+| Ingestion                     | A Convex action that reads the site and upserts through internal mutations              |
 
 ## Layout
 
 Packages split by concern, not by dataset.
 
-| Path                     | Role                                                                    |
-| ------------------------ | ----------------------------------------------------------------------- |
-| `apps/web`               | The chat UI, and the static demo on GitHub Pages                        |
-| `packages/design-system` | Tokens, components, and chat components                                 |
-| `packages/backend`       | Convex: schema, queries, mutations, actions, agent, tools, and scrapers |
-| `packages/evals`         | Evals against the agent                                                 |
+| Path                     | Role                                                                  |
+| ------------------------ | --------------------------------------------------------------------- |
+| `apps/web`               | The chat UI, and the static demo on GitHub Pages                      |
+| `packages/design-system` | Tokens, components, and chat components                               |
+| `packages/backend`       | Convex: schema, queries, mutations, actions, agent, tools, and ingest |
+| `packages/evals`         | Evals against the agent                                               |
 
 The agent logic may move into its own package later, framed around agentic search rather than rulings.
 

@@ -92,6 +92,19 @@
       "rules": { "typescript/consistent-type-definitions": "off" }
     },
     {
+      // Convex names its system fields _id and _creationTime.
+      "files": ["packages/backend/**"],
+      "rules": {
+        "no-underscore-dangle": ["warn", { "allow": ["_id", "_creationTime"] }]
+      }
+    },
+    {
+      // convex-test loads functions through Vite's import.meta.glob, which the backend
+      // declares by merging into the global ImportMeta interface. A type alias cannot merge.
+      "files": ["packages/backend/test/import-meta.d.ts"],
+      "rules": { "typescript/consistent-type-definitions": "off" }
+    },
+    {
       "files": [
         "apps/web/src/components/**",
         "apps/web/src/hooks/**",
