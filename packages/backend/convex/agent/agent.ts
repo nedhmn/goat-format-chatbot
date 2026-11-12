@@ -11,7 +11,7 @@ export const MODEL = "deepseek/deepseek-v4.1-flash-1017";
 export const MAX_STEPS = 8;
 
 export function lastStepAnswers({ stepNumber }: { stepNumber: number }) {
-  return stepNumber >= MAX_STEPS - 1 ? { toolChoice: "none" as const } : {};
+  return stepNumber >= MAX_STEPS - 1 ? { activeTools: [] } : {};
 }
 
 export type RulingsAgent = ReturnType<typeof rulingsAgent>;

@@ -94,11 +94,11 @@ describe("the step limit", () => {
         [{ type: "text", text: "Sinister Serpent returns to the hand." }],
       ],
     });
-    const toolChoices: unknown[] = [];
+    const offeredTools: number[] = [];
     const recording: typeof model = {
       ...model,
       doGenerate: (options) => {
-        toolChoices.push(options.toolChoice);
+        offeredTools.push(options.tools?.length ?? 0);
         return model.doGenerate(options);
       },
     };
@@ -106,8 +106,8 @@ describe("the step limit", () => {
       answer(ctx, rulingsAgent(recording), { question: "What does serpent do?" }),
     );
     expect(text).toBe("Sinister Serpent returns to the hand.");
-    expect(toolChoices).toHaveLength(MAX_STEPS);
-    expect(toolChoices.at(-1)).toEqual({ type: "none" });
-    expect(toolChoices.at(-2)).not.toEqual({ type: "none" });
+    expect(offeredTools).toHaveLength(MAX_STEPS);
+    expect(offeredTools.at(-1)).toBe(0);
+    expect(offeredTools.at(-2)).toBe(3);
   });
 });
