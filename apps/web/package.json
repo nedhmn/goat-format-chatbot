@@ -12,7 +12,6 @@
   "dependencies": {
     "@remixicon/react": "4.9.0",
     "@yugioh-rulings-chatbot/design-system": "workspace:*",
-    "@yugioh-rulings-chatbot/rulings": "workspace:*",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
