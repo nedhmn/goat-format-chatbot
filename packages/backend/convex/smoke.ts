@@ -1,6 +1,6 @@
 import { env, internalAction } from "./_generated/server";
-import { openRouterModel, rulingsAgent } from "./agent/agent";
-import { answer } from "./chat";
+import { openRouterModel, rulingsAgent } from "./model/agent/agent";
+import { answer } from "./model/agent/answer";
 
 const questions = [
   "Can Book of Moon be activated during the damage step?",

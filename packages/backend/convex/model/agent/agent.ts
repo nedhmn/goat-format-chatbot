@@ -3,7 +3,7 @@ import { Agent, isStepCount } from "@convex-dev/agent";
 import { createOpenRouter } from "@openrouter/ai-sdk-provider";
 import type { ModelMessage } from "ai";
 
-import { components } from "../_generated/api";
+import { components } from "../../_generated/api";
 import { instructions } from "./instructions";
 import { tools } from "./tools";
 

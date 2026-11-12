@@ -52,7 +52,7 @@ Links each passage to the cards it involves, so a lookup by card finds the rulin
 | `cardId`    | A card it involves                                           |
 | `role`      | `owner` for the card a ruling is filed under, else `mention` |
 
-`by_card` looks up a card's links by role and `by_passage` a passage's links. `lookup.passagesForCard` returns a card's owned and mentioned passages.
+`by_card` looks up a card's links by role and `by_passage` a passage's links. `cards.passagesForCard` returns a card's owned and mentioned passages.
 
 Mentions come from quoted strings in the text, since the rulings quote card names. Each is matched against the card pool on a key that ignores case, spacing, punctuation, and a trailing `(s)` or possessive. A key of 8 or more characters with no exact match takes the one card within a single edit, which catches plurals and typos such as "Gradius's Option" and "Magicial Scientist". Names outside quotes are not matched, because short card names such as "Reload" and "Forest" are also ordinary words. Nicknames such as "Peten" and quoted terms such as "destroyed" stay unmatched, and the ingest lists the most frequent ones.
 

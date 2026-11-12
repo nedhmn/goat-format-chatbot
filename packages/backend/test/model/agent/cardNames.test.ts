@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { matchCards, MATCH_LIMIT, type NamedCard } from "../convex/agent/cardNames";
+import { matchCards, MATCH_LIMIT, type NamedCard } from "../../../convex/model/agent/cardNames";
 
 const pool: NamedCard[] = [
   { name: "Sinister Serpent", kind: "monster" },

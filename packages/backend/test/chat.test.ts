@@ -5,17 +5,10 @@ import { convexTest } from "convex-test";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { api, components } from "../convex/_generated/api";
-import { openRouterModel, rulingsAgent } from "../convex/agent/agent";
-import {
-  answer,
-  NOT_YOUR_THREAD,
-  OWNER,
-  streamReply,
-  threadTitle,
-  TITLE_LENGTH,
-  UNTITLED,
-} from "../convex/chat";
-import { QUESTIONS_PER_MINUTE, tooManyQuestions } from "../convex/limits";
+import { openRouterModel, rulingsAgent } from "../convex/model/agent/agent";
+import { answer, streamReply } from "../convex/model/agent/answer";
+import { NOT_YOUR_THREAD, OWNER, threadTitle, TITLE_LENGTH, UNTITLED } from "../convex/model/chat";
+import { QUESTIONS_PER_MINUTE, tooManyQuestions } from "../convex/model/limits";
 import schema from "../convex/schema";
 
 const modules = import.meta.glob("../convex/**/*.ts");
