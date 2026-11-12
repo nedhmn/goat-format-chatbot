@@ -9,10 +9,12 @@ Convex: schema, queries, mutations, and actions for the chatbot. The agent, its 
 
 ## Run
 
-Local only, no Convex account needed:
+Local only, no Convex account needed. `pnpm dev` at the root runs it alongside the web app, or alone:
 
 ```sh
-CONVEX_AGENT_MODE=anonymous pnpm exec convex dev
+pnpm --filter @goat-format-chatbot/backend dev
 ```
 
-The CLI keeps local state in `.convex/` and writes `CONVEX_URL` to `.env.local`, both gitignored.
+`scripts/dev.ts` picks the first free port pair from 3210, pins it in the CLI's saved local config (the CLI refuses to start while anything listens on its last saved pair), runs `convex dev` with `CONVEX_AGENT_MODE=anonymous`, and records `CONVEX_URL` in `.dev/ports.env` once the backend answers. The entry is removed when the backend exits.
+
+The CLI keeps local state in `.convex/` and writes `.env.local`, both gitignored. The local backend binary listens on all interfaces, not only `127.0.0.1`; the CLI exposes no flag for that.
