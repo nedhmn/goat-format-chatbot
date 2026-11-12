@@ -10,7 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ThreadsThreadIdRouteImport } from './routes/threads.$threadId'
+import { Route as ThreadsThreadIdRouteImport } from './routes/threads/$threadId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
