@@ -40,11 +40,10 @@ export function rulingsAgent(languageModel: LanguageModelV4) {
   });
 }
 
+export const MISSING_KEY =
+  "OPENROUTER_API_KEY is not set. Copy packages/backend/.env.example to .env, add the key, and restart pnpm dev.";
+
 export function openRouterModel(apiKey: string | undefined): LanguageModelV4 {
-  if (!apiKey) {
-    throw new Error(
-      "OPENROUTER_API_KEY is not set. Copy packages/backend/.env.example to .env, add the key, and restart pnpm dev.",
-    );
-  }
+  if (!apiKey) throw new Error(MISSING_KEY);
   return createOpenRouter({ apiKey }).chat(MODEL);
 }
