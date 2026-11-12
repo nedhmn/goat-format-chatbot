@@ -1,6 +1,6 @@
 <h1 align="center">Yu-Gi-Oh! Rulings Chatbot</h1>
 
-<p align="center"><strong>An AI chatbot that answers Yu-Gi-Oh! rulings questions</strong></p>
+<p align="center"><strong>An AI chatbot that answers Goat format Yu-Gi-Oh! rulings questions</strong></p>
 
 <p align="center">
   <a href="https://nedhmn.github.io/yugioh-rulings-chatbot"><strong>Demo</strong></a> ·
@@ -17,13 +17,15 @@
 
 ## What this is
 
-<!-- Two paragraphs. What the packages do, and what the example app turns them into. -->
+A chatbot for Goat format: the Goat card pool, its gameplay rules, card rulings, and the Goat-era card text with errata. It answers with agentic search, looking up rulings, cards, and rules through tools until it has enough to answer, and shows cards and citations as components in the chat.
+
+The app runs locally or self-hosted on Convex, with models through OpenRouter. The demo on GitHub Pages replays recorded conversations with no backend. Most of this is still being built; [docs/architecture.md](./docs/architecture.md) is the target design.
 
 ## Packages
 
-| Package                        | What it does |
-| ------------------------------ | ------------ |
-| `@yugioh-rulings-chatbot/core` |              |
+| Package                                 | What it does                                           |
+| --------------------------------------- | ------------------------------------------------------ |
+| `@yugioh-rulings-chatbot/design-system` | Tokens, Tailwind theme, and components for the web app |
 
 ## Apps
 
