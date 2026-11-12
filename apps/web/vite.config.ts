@@ -3,6 +3,7 @@ import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import tailwindcss from "@tailwindcss/vite";
+import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig, type Plugin, type PreviewServer, type ViteDevServer } from "vite";
 
@@ -57,7 +58,17 @@ function devPorts(): Plugin {
 
 export default defineConfig({
   base: "/goat-format-chatbot/",
-  plugins: [react(), tailwindcss(), devPorts()],
+  plugins: [
+    tanstackRouter({
+      target: "react",
+      autoCodeSplitting: true,
+      routesDirectory: "./src/app/routes",
+      generatedRouteTree: "./src/app/route-tree.gen.ts",
+    }),
+    react(),
+    tailwindcss(),
+    devPorts(),
+  ],
   resolve: { tsconfigPaths: true },
   server: { host },
   preview: { host },
