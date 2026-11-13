@@ -18,7 +18,7 @@ pnpm --filter @goat-format-chatbot/evals eval
 | `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY` | From the project's settings in Langfuse                                                         |
 | `LANGFUSE_BASE_URL`                          | `https://cloud.langfuse.com` (EU) or `https://us.cloud.langfuse.com` (US), the project's region |
 
-A run asks every case once, one question every 6.5 seconds to stay under the backend's 10 a minute. The backend also allows 200 a day, and each case makes one judge call on OpenRouter.
+A run asks every case once, three at a time, and each case makes one judge call on OpenRouter. The backend's default limits, 10 questions a minute and 200 a day, would fail cases, so raise `QUESTIONS_PER_MINUTE` and `QUESTIONS_PER_DAY` in `packages/backend/.env` first (see the backend README).
 
 ## Cases
 

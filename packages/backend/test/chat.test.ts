@@ -23,7 +23,7 @@ import {
   TITLE_LENGTH,
   UNTITLED,
 } from "../convex/model/chat";
-import { QUESTIONS_PER_MINUTE, tooManyQuestions } from "../convex/model/limits";
+import { questionLimits, tooManyQuestions } from "../convex/model/limits";
 import schema from "../convex/schema";
 
 const modules = import.meta.glob("../convex/**/*.ts");
@@ -95,7 +95,8 @@ describe("send", () => {
   it("stops questions past the limit and lets them through once the window passes", async () => {
     vi.setSystemTime(new Date("2026-11-12T12:00:00Z"));
     const t = backend();
-    for (let i = 0; i < QUESTIONS_PER_MINUTE; i++) {
+    expect(questionLimits()).toEqual({ perMinute: 10, perDay: 200 });
+    for (let i = 0; i < questionLimits().perMinute; i++) {
       await t.mutation(api.chat.send, { question: `Question ${i}` });
     }
     await expect(t.mutation(api.chat.send, { question: "One more" })).rejects.toThrow(
@@ -105,6 +106,24 @@ describe("send", () => {
     await expect(t.mutation(api.chat.send, { question: "One more" })).resolves.toHaveProperty(
       "threadId",
     );
+  });
+
+  it("takes the limits from the environment", async () => {
+    vi.setSystemTime(new Date("2026-11-12T12:00:00Z"));
+    vi.stubEnv("QUESTIONS_PER_MINUTE", "2");
+    vi.stubEnv("QUESTIONS_PER_DAY", "500");
+    expect(questionLimits()).toEqual({ perMinute: 2, perDay: 500 });
+    const t = backend();
+    await t.mutation(api.chat.send, { question: "One" });
+    await t.mutation(api.chat.send, { question: "Two" });
+    await expect(t.mutation(api.chat.send, { question: "Three" })).rejects.toThrow(
+      /^Too many questions\./,
+    );
+  });
+
+  it("refuses a limit that is not a positive whole number", () => {
+    vi.stubEnv("QUESTIONS_PER_MINUTE", "lots");
+    expect(() => questionLimits()).toThrow();
   });
 
   it("says how to set the key before saving anything when it is missing", async () => {
