@@ -24,7 +24,8 @@ import { RiAddLine, RiContractLeftLine, RiExpandRightLine, RiSearchLine } from "
 import { Link, useParams } from "@tanstack/react-router";
 import { useCallback, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 
-import { usePastThreads } from "@/features/chat/api/chat";
+import { usePastThreads, usePinnedThreads } from "@/features/chat/api/chat";
+import { ThreadRow } from "@/features/chat/components/thread-row";
 import { groupByActivity } from "@/features/chat/utils/thread-groups";
 
 const LOADING_ROWS = 4;
@@ -75,9 +76,13 @@ export function ThreadSidebar({ footer }: { footer?: ReactNode }) {
   const { threads, loading, loadMore } = usePastThreads(search);
   const loadSentinel = useLoadOnScroll(loadMore);
   const searching = search.trim() !== "";
-  const groups = searching
-    ? [{ label: "Results", threads }].filter((group) => group.threads.length > 0)
-    : groupByActivity(threads, new Date());
+  const pinned = usePinnedThreads();
+  const pinnedIds = new Set(pinned.map((thread) => thread.threadId));
+  const groups = (
+    searching
+      ? [{ label: "Results", threads }]
+      : [{ label: "Pinned", threads: pinned }, ...groupByActivity(threads, new Date())]
+  ).filter((group) => group.threads.length > 0);
   const searchInput = useRef<HTMLInputElement>(null);
   const openThreadId = useParams({ strict: false, select: (params) => params.threadId });
   const { isMobile, setOpen, setOpenMobile, toggleSidebar } = useSidebar();
@@ -169,7 +174,7 @@ export function ThreadSidebar({ footer }: { footer?: ReactNode }) {
             </SidebarGroupContent>
           </SidebarGroup>
         ) : null}
-        {!loading && threads.length === 0 ? (
+        {!loading && groups.length === 0 ? (
           <SidebarGroup>
             <SidebarGroupLabel>Past questions</SidebarGroupLabel>
             <p className="px-3 py-1.5 text-sm text-muted-foreground">
@@ -185,20 +190,13 @@ export function ThreadSidebar({ footer }: { footer?: ReactNode }) {
                 <SidebarGroupContent>
                   <SidebarMenu>
                     {group.threads.map((thread) => (
-                      <SidebarMenuItem key={thread.threadId}>
-                        <SidebarMenuButton
-                          isActive={thread.threadId === openThreadId}
-                          render={
-                            <Link
-                              to="/threads/$threadId"
-                              params={{ threadId: thread.threadId }}
-                              onClick={closeOnMobile}
-                            />
-                          }
-                        >
-                          <span>{thread.title}</span>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
+                      <ThreadRow
+                        key={thread.threadId}
+                        thread={thread}
+                        pinned={pinnedIds.has(thread.threadId)}
+                        active={thread.threadId === openThreadId}
+                        onOpen={closeOnMobile}
+                      />
                     ))}
                   </SidebarMenu>
                 </SidebarGroupContent>

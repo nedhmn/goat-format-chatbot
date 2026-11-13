@@ -329,7 +329,10 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
 }
 
 const MENU_BUTTON =
-  "flex h-9 w-full items-center gap-2.5 overflow-hidden rounded-xl px-3 text-left text-sm whitespace-nowrap ring-sidebar-ring outline-hidden transition-[background-color,color] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-active:bg-sidebar-accent data-active:font-medium data-active:text-sidebar-accent-foreground [&_svg]:size-4 [&_svg]:shrink-0 [&>span:last-child]:truncate [&>span:last-child]:transition-opacity group-data-[collapsible=icon]:[&>span:last-child]:opacity-0";
+  "peer/menu-button flex h-9 w-full items-center gap-2.5 overflow-hidden rounded-xl px-3 text-left text-sm whitespace-nowrap ring-sidebar-ring outline-hidden transition-[background-color,color] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-active:bg-sidebar-accent data-active:font-medium data-active:text-sidebar-accent-foreground [&_svg]:size-4 [&_svg]:shrink-0 [&>span:last-child]:truncate [&>span:last-child]:transition-opacity group-data-[collapsible=icon]:[&>span:last-child]:opacity-0";
+
+const ROOM_FOR_ACTION =
+  "group-has-data-[reveal=always]/menu-item:pr-9 max-md:group-has-data-[reveal=hover]/menu-item:pr-9 group-hover/menu-item:group-has-data-[reveal=hover]/menu-item:pr-9 group-focus-within/menu-item:group-has-data-[reveal=hover]/menu-item:pr-9 group-has-[[data-reveal=hover][data-popup-open]]/menu-item:pr-9";
 
 function SidebarMenuButton({
   render,
@@ -345,7 +348,7 @@ function SidebarMenuButton({
   const { isMobile, state } = useSidebar();
   const button = useRender({
     defaultTagName: "button",
-    props: mergeProps<"button">({ className: cn(MENU_BUTTON, className) }, props),
+    props: mergeProps<"button">({ className: cn(MENU_BUTTON, ROOM_FOR_ACTION, className) }, props),
     render: tooltip ? <TooltipTrigger render={render} /> : render,
     state: { slot: "sidebar-menu-button", sidebar: "menu-button", active: isActive },
   });
@@ -360,6 +363,37 @@ function SidebarMenuButton({
       </TooltipContent>
     </Tooltip>
   );
+}
+
+function SidebarMenuAction({
+  render,
+  showOnHover = false,
+  className,
+  ...props
+}: useRender.ComponentProps<"button"> &
+  React.ComponentProps<"button"> & {
+    showOnHover?: boolean;
+  }) {
+  return useRender({
+    defaultTagName: "button",
+    props: mergeProps<"button">(
+      {
+        className: cn(
+          "absolute top-1.5 right-1.5 flex size-6 items-center justify-center rounded-lg text-sidebar-foreground/70 ring-sidebar-ring outline-hidden transition-[opacity,background-color,color] peer-hover/menu-button:text-sidebar-accent-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 group-data-[collapsible=icon]:hidden [&_svg]:size-4 [&_svg]:shrink-0",
+          showOnHover &&
+            "group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 data-popup-open:opacity-100 md:opacity-0",
+          className,
+        ),
+      },
+      props,
+    ),
+    render,
+    state: {
+      slot: "sidebar-menu-action",
+      sidebar: "menu-action",
+      reveal: showOnHover ? "hover" : "always",
+    },
+  });
 }
 
 function SidebarMenuSkeleton({ className, ...props }: React.ComponentProps<"div">) {
@@ -391,6 +425,7 @@ export {
   SidebarInput,
   SidebarInset,
   SidebarMenu,
+  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSkeleton,
