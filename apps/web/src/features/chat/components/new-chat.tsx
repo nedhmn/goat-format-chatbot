@@ -1,7 +1,8 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 
-import { useAsk, useSuggestions } from "@/features/chat/api/chat";
+import { suggestionsSend, useAsk } from "@/features/chat/api/chat";
+import { SUGGESTIONS } from "@/features/chat/api/suggestions";
 import { QuestionForm } from "@/features/chat/components/question-form";
 
 const SUGGESTION_CARD =
@@ -9,9 +10,22 @@ const SUGGESTION_CARD =
 
 export function NewChat() {
   const ask = useAsk();
-  const suggestions = useSuggestions();
   const navigate = useNavigate();
   const [question, setQuestion] = useState("");
+
+  function openThread(threadId: string) {
+    void navigate({ to: "/threads/$threadId", params: { threadId } });
+  }
+
+  async function pick(example: string) {
+    if (!suggestionsSend) {
+      setQuestion(example);
+      return;
+    }
+    const sent = await ask(example);
+    if (sent.ok) openThread(sent.threadId);
+  }
+
   return (
     <div className="mx-auto my-auto flex w-full max-w-3xl flex-col gap-6 pt-10 pb-[max(2.5rem,12vh)]">
       <div className="flex flex-col gap-2">
@@ -24,24 +38,14 @@ export function NewChat() {
         ask={ask}
         question={question}
         onQuestionChange={setQuestion}
-        onSent={(threadId) => navigate({ to: "/threads/$threadId", params: { threadId } })}
+        onSent={openThread}
       />
       <ul className="grid gap-3 sm:grid-cols-3">
-        {suggestions.map(({ question: example, threadId }) => (
+        {SUGGESTIONS.map((example) => (
           <li key={example} className="flex">
-            {threadId ? (
-              <Link to="/threads/$threadId" params={{ threadId }} className={SUGGESTION_CARD}>
-                {example}
-              </Link>
-            ) : (
-              <button
-                type="button"
-                className={SUGGESTION_CARD}
-                onClick={() => setQuestion(example)}
-              >
-                {example}
-              </button>
-            )}
+            <button type="button" className={SUGGESTION_CARD} onClick={() => void pick(example)}>
+              {example}
+            </button>
           </li>
         ))}
       </ul>

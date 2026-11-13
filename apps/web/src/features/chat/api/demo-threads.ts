@@ -42,13 +42,19 @@ export type DemoThread = z.infer<typeof demoThread>;
 let parsed: DemoThread[] | undefined;
 
 export function demoThreads(): DemoThread[] {
-  parsed ??= z
-    .array(demoThread)
-    .parse(recorded)
-    .toSorted((a, b) => b.activeAt - a.activeAt);
+  parsed ??= z.array(demoThread).parse(recorded);
   return parsed;
 }
 
 export function findDemoThread(id: string): DemoThread | undefined {
   return demoThreads().find((thread) => thread.id === id);
+}
+
+function normalize(question: string): string {
+  return question.trim().toLowerCase();
+}
+
+export function findPreset(question: string): DemoThread | undefined {
+  const wanted = normalize(question);
+  return demoThreads().find((thread) => normalize(thread.messages[0]?.text ?? "") === wanted);
 }
