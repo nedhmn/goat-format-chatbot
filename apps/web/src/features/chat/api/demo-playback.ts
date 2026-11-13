@@ -2,6 +2,21 @@ import type { ChatMessage, ChatPart } from "./chat-message";
 import type { DemoTurn, StoredThread } from "./demo-store";
 import { findDemoThread } from "./demo-threads";
 
+export const FALLBACK = "fallback";
+
+const FALLBACK_TEXT =
+  "This demo answers only the questions above the input, with answers recorded from the local app. Each one shows the cards and rulings the agent looked up and the sources it cites. Any other question needs the app and its backend running locally. Setup is in the [repository](https://github.com/nedhmn/goat-format-chatbot#readme).";
+
+const fallbackAnswer: ChatMessage = {
+  key: FALLBACK,
+  role: "assistant",
+  status: "done",
+  sentAt: 0,
+  text: FALLBACK_TEXT,
+  parts: [{ kind: "text", key: FALLBACK, text: FALLBACK_TEXT }],
+  sources: [],
+};
+
 const THINKING_MS = 700;
 const LOOKUPS_MS = 3500;
 const LOOKUP_MAX_MS = 600;
@@ -47,6 +62,7 @@ function playPart({ part, startsAt, endsAt }: Step, elapsed: number, prefix: str
 }
 
 function turnAnswer(turn: DemoTurn): ChatMessage | undefined {
+  if (turn.answer === FALLBACK) return fallbackAnswer;
   return findDemoThread(turn.answer)?.messages.find((message) => message.role === "assistant");
 }
 
