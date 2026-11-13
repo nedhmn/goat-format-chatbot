@@ -111,6 +111,15 @@ export async function viewerPins(ctx: QueryCtx): Promise<ThreadSummary[]> {
   return pinned.map(toSummary);
 }
 
+export async function viewerThread(ctx: QueryCtx, threadId: string): Promise<ThreadSummary | null> {
+  const row = await ctx.db
+    .query("threads")
+    .withIndex("by_thread", (q) => q.eq("threadId", threadId))
+    .unique();
+  if (row === null || row.userId !== (await viewer(ctx))) return null;
+  return toSummary(row);
+}
+
 export async function pinThread(
   ctx: MutationCtx,
   { threadId, pinned }: { threadId: string; pinned: boolean },
