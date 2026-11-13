@@ -1,11 +1,9 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 
 import { useAsk, useSuggestions } from "@/features/chat/api/chat";
 import { QuestionForm } from "@/features/chat/components/question-form";
-
-const SUGGESTION_CARD =
-  "flex-1 rounded-2xl border border-border p-4 text-left text-sm text-text-secondary transition-colors outline-none hover:bg-bg-hover hover:text-text-primary focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30";
+import { SUGGESTION_CARD } from "@/features/chat/utils/suggestion-card";
 
 export function NewChat() {
   const ask = useAsk();
@@ -27,21 +25,11 @@ export function NewChat() {
         onSent={(threadId) => navigate({ to: "/threads/$threadId", params: { threadId } })}
       />
       <ul className="grid gap-3 sm:grid-cols-3">
-        {suggestions.map(({ question: example, threadId }) => (
+        {suggestions.map(({ question: example }) => (
           <li key={example} className="flex">
-            {threadId ? (
-              <Link to="/threads/$threadId" params={{ threadId }} className={SUGGESTION_CARD}>
-                {example}
-              </Link>
-            ) : (
-              <button
-                type="button"
-                className={SUGGESTION_CARD}
-                onClick={() => setQuestion(example)}
-              >
-                {example}
-              </button>
-            )}
+            <button type="button" className={SUGGESTION_CARD} onClick={() => setQuestion(example)}>
+              {example}
+            </button>
           </li>
         ))}
       </ul>
