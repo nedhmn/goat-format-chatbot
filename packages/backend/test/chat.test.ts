@@ -4,10 +4,17 @@ import rateLimiterComponent from "@convex-dev/rate-limiter/test";
 import { convexTest } from "convex-test";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { api, components } from "../convex/_generated/api";
+import { api, components, internal } from "../convex/_generated/api";
 import { openRouterModel, rulingsAgent } from "../convex/model/agent/agent";
 import { answer, streamReply } from "../convex/model/agent/answer";
-import { NOT_YOUR_THREAD, OWNER, threadTitle, TITLE_LENGTH, UNTITLED } from "../convex/model/chat";
+import {
+  BACKFILL_BATCH,
+  NOT_YOUR_THREAD,
+  OWNER,
+  threadTitle,
+  TITLE_LENGTH,
+  UNTITLED,
+} from "../convex/model/chat";
 import { QUESTIONS_PER_MINUTE, tooManyQuestions } from "../convex/model/limits";
 import schema from "../convex/schema";
 
@@ -144,19 +151,88 @@ describe("threads", () => {
     vi.unstubAllEnvs();
   });
 
-  it("lists the owner's threads newest first, titled from their first question", async () => {
+  it("lists the owner's threads by last activity, titled from their first question", async () => {
     const t = backend();
     const first = await t.mutation(api.chat.send, { question: "Book of Moon?" });
-    await t.mutation(api.chat.send, { question: "And Ring?", threadId: first.threadId });
+    vi.advanceTimersByTime(1_000);
     const second = await t.mutation(api.chat.send, { question: "  Sangan\n banished? " });
-    await t.mutation((ctx) => createThread(ctx, components.agent, { userId: "someone-else" }));
-    await t.mutation((ctx) => createThread(ctx, components.agent, { userId: OWNER }));
-    const threads = await t.query(api.chat.threads, {});
-    expect(threads.map((thread) => [thread.threadId, thread.title])).toEqual([
-      [expect.any(String), UNTITLED],
-      [second.threadId, "Sangan banished?"],
+    vi.advanceTimersByTime(1_000);
+    await t.mutation(api.chat.send, { question: "And Ring?", threadId: first.threadId });
+    await t.run((ctx) =>
+      ctx.db.insert("threads", {
+        threadId: "elsewhere",
+        userId: "someone-else",
+        title: "Book of Moon?",
+        activeAt: Date.now() + 1_000,
+      }),
+    );
+    const { page } = await t.query(api.chat.threads, { paginationOpts: firstPage });
+    expect(page.map((thread) => [thread.threadId, thread.title])).toEqual([
       [first.threadId, "Book of Moon?"],
+      [second.threadId, "Sangan banished?"],
     ]);
+  });
+
+  it("pages through threads", async () => {
+    const t = backend();
+    for (const question of ["One?", "Two?", "Three?"]) {
+      await t.mutation(api.chat.send, { question });
+      vi.advanceTimersByTime(1_000);
+    }
+    const one = await t.query(api.chat.threads, { paginationOpts: { cursor: null, numItems: 2 } });
+    const two = await t.query(api.chat.threads, {
+      paginationOpts: { cursor: one.continueCursor, numItems: 2 },
+    });
+    expect([...one.page, ...two.page].map((thread) => thread.title)).toEqual([
+      "Three?",
+      "Two?",
+      "One?",
+    ]);
+    expect(two.isDone).toBe(true);
+  });
+
+  it("searches the owner's thread titles", async () => {
+    const t = backend();
+    const moon = await t.mutation(api.chat.send, { question: "Book of Moon in the damage step?" });
+    await t.mutation(api.chat.send, { question: "Sangan banished?" });
+    await t.run((ctx) =>
+      ctx.db.insert("threads", {
+        threadId: "elsewhere",
+        userId: "someone-else",
+        title: "Moon again?",
+        activeAt: Date.now(),
+      }),
+    );
+    const found = await t.query(api.chat.searchThreads, { query: "moon" });
+    expect(found.map((thread) => thread.threadId)).toEqual([moon.threadId]);
+    expect(await t.query(api.chat.searchThreads, { query: "  " })).toEqual([]);
+  });
+
+  it("backfills threads by their last message", async () => {
+    const t = backend();
+    const older = await t.mutation((ctx) =>
+      createThread(ctx, components.agent, { userId: OWNER, title: "Book of Moon?" }),
+    );
+    vi.advanceTimersByTime(1_000);
+    const untitled = await t.mutation((ctx) =>
+      createThread(ctx, components.agent, { userId: OWNER }),
+    );
+    for (let made = 0; made < BACKFILL_BATCH; made += 1) {
+      await t.mutation((ctx) => createThread(ctx, components.agent, { userId: OWNER }));
+    }
+    vi.advanceTimersByTime(1_000);
+    await t.mutation((ctx) =>
+      saveMessage(ctx, components.agent, { threadId: older, userId: OWNER, prompt: "And Ring?" }),
+    );
+    await t.mutation(internal.chat.backfillThreads, { cursor: null });
+    await t.finishAllScheduledFunctions(vi.runAllTimers);
+    const { page, isDone } = await t.query(api.chat.threads, {
+      paginationOpts: { cursor: null, numItems: BACKFILL_BATCH + 2 },
+    });
+    expect(page).toHaveLength(BACKFILL_BATCH + 2);
+    expect(isDone).toBe(true);
+    expect(page[0]).toMatchObject({ threadId: older, title: "Book of Moon?" });
+    expect(page.find((thread) => thread.threadId === untitled)?.title).toBe(UNTITLED);
   });
 });
 

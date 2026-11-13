@@ -22,15 +22,29 @@ import {
 } from "@goat-format-chatbot/design-system/components/ui/tooltip";
 import { RiAddLine, RiContractLeftLine, RiExpandRightLine, RiSearchLine } from "@remixicon/react";
 import { Link, useParams } from "@tanstack/react-router";
-import { useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+import { useCallback, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 
-import { usePastThreads, type PastThread } from "@/features/chat/api/chat";
+import { usePastThreads } from "@/features/chat/api/chat";
 
 const LOADING_ROWS = 4;
 
-function matching(threads: PastThread[], search: string): PastThread[] {
-  const needle = search.trim().toLowerCase();
-  return needle ? threads.filter((thread) => thread.title.toLowerCase().includes(needle)) : threads;
+const LOAD_AHEAD = "200px";
+
+function useLoadOnScroll(loadMore: (() => void) | undefined) {
+  return useCallback(
+    (sentinel: HTMLElement | null) => {
+      if (!sentinel || !loadMore) return;
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) loadMore();
+        },
+        { rootMargin: LOAD_AHEAD },
+      );
+      observer.observe(sentinel);
+      return () => observer.disconnect();
+    },
+    [loadMore],
+  );
 }
 
 function CollapseButton() {
@@ -56,12 +70,12 @@ function CollapseButton() {
 }
 
 export function ThreadSidebar({ footer }: { footer?: ReactNode }) {
-  const { threads, loading } = usePastThreads();
   const [search, setSearch] = useState("");
+  const { threads, loading, loadMore } = usePastThreads(search);
+  const loadSentinel = useLoadOnScroll(loadMore);
   const searchInput = useRef<HTMLInputElement>(null);
   const openThreadId = useParams({ strict: false, select: (params) => params.threadId });
   const { isMobile, setOpen, setOpenMobile, toggleSidebar } = useSidebar();
-  const shown = matching(threads, search);
 
   const closeOnMobile = () => {
     if (isMobile) setOpenMobile(false);
@@ -146,7 +160,7 @@ export function ThreadSidebar({ footer }: { footer?: ReactNode }) {
                       <SidebarMenuSkeleton />
                     </SidebarMenuItem>
                   ))
-                : shown.map((thread) => (
+                : threads.map((thread) => (
                     <SidebarMenuItem key={thread.threadId}>
                       <SidebarMenuButton
                         isActive={thread.threadId === openThreadId}
@@ -163,11 +177,12 @@ export function ThreadSidebar({ footer }: { footer?: ReactNode }) {
                     </SidebarMenuItem>
                   ))}
             </SidebarMenu>
-            {!loading && shown.length === 0 ? (
+            {!loading && threads.length === 0 ? (
               <p className="px-3 py-1.5 text-sm text-muted-foreground">
-                {threads.length === 0 ? "No questions yet." : "No questions match."}
+                {search.trim() ? "No questions match." : "No questions yet."}
               </p>
             ) : null}
+            {loadMore ? <div ref={loadSentinel} aria-hidden className="h-px" /> : null}
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>

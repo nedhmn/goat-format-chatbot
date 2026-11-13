@@ -98,6 +98,14 @@ export const passageCard = v.object({
   role: cardRole,
 });
 
+export const thread = v.object({
+  threadId: v.string(),
+  userId: v.string(),
+  title: v.string(),
+  activeAt: v.number(),
+  pinnedAt: v.optional(v.number()),
+});
+
 export type Card = Infer<typeof card>;
 export type Passage = Infer<typeof passage>;
 
@@ -110,4 +118,8 @@ export default defineSchema({
   passageCards: defineTable(passageCard)
     .index("by_card", ["cardId", "role"])
     .index("by_passage", ["passageId"]),
+  threads: defineTable(thread)
+    .index("by_thread", ["threadId"])
+    .index("by_user_pinned_active", ["userId", "pinnedAt", "activeAt"])
+    .searchIndex("search_title", { searchField: "title", filterFields: ["userId"] }),
 });
