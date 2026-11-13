@@ -11,8 +11,20 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@goat-format-chatbot/design-system/components/tooltip";
+import { Avatar, AvatarFallback } from "@goat-format-chatbot/design-system/components/ui/avatar";
 import { Bubble, BubbleContent } from "@goat-format-chatbot/design-system/components/ui/bubble";
 import { Button as UiButton } from "@goat-format-chatbot/design-system/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@goat-format-chatbot/design-system/components/ui/dropdown-menu";
 import {
   HoverCard,
   HoverCardContent,
@@ -55,6 +67,7 @@ import {
   RiSearchLine,
   RiSendPlane2Line,
   RiStopCircleLine,
+  RiUserLine,
 } from "@remixicon/react";
 import { StrictMode, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
@@ -165,6 +178,45 @@ function Specimen() {
               />
               <TooltipContent side="bottom">Stop generating</TooltipContent>
             </Tooltip>
+          </div>
+        </Section>
+
+        <Section name="Avatar">
+          <div className="flex items-center gap-3">
+            <Avatar size="sm">
+              <AvatarFallback>Y</AvatarFallback>
+            </Avatar>
+            <Avatar>
+              <AvatarFallback>
+                <RiUserLine />
+              </AvatarFallback>
+            </Avatar>
+            <Avatar size="lg">
+              <AvatarFallback>GF</AvatarFallback>
+            </Avatar>
+          </div>
+        </Section>
+
+        <Section name="Dropdown menu">
+          <div>
+            <DropdownMenu>
+              <DropdownMenuTrigger render={<Button variant="outline">You</Button>} />
+              <DropdownMenuContent align="start" className="w-48">
+                <DropdownMenuGroup>
+                  <DropdownMenuLabel>Theme</DropdownMenuLabel>
+                  <DropdownMenuRadioGroup defaultValue="system">
+                    <DropdownMenuRadioItem value="system">System</DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="light">Light</DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="dark">Dark</DropdownMenuRadioItem>
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <RiFileCopyLine />
+                  Copy link
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </Section>
 
