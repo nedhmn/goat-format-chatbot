@@ -21,6 +21,12 @@ export type PastThreads = {
   loadMore: (() => void) | undefined;
 };
 
+export type ThreadActions = {
+  pin: (threadId: string, pinned: boolean) => Promise<void>;
+  rename: (threadId: string, title: string) => Promise<void>;
+  remove: (threadId: string) => Promise<void>;
+};
+
 export const SEND_FAILED = "The question could not be sent. Check that the backend is running.";
 
 export const DEMO_NOTICE =
@@ -85,6 +91,31 @@ function useLivePastThreads(search: string): PastThreads {
   };
 }
 
+function useLivePinnedThreads(): PastThread[] {
+  const pinned = useQuery(api.chat.pinnedThreads, {});
+  return useMemo(() => (pinned ?? []).map(toPastThread), [pinned]);
+}
+
+function useLiveThreadActions(): ThreadActions {
+  const pinThread = useMutation(api.chat.pin);
+  const renameThread = useMutation(api.chat.rename);
+  const removeThread = useMutation(api.chat.remove);
+  return useMemo(
+    () => ({
+      pin: async (threadId, pinned) => {
+        await pinThread({ threadId, pinned });
+      },
+      rename: async (threadId, title) => {
+        await renameThread({ threadId, title });
+      },
+      remove: async (threadId) => {
+        await removeThread({ threadId });
+      },
+    }),
+    [pinThread, renameThread, removeThread],
+  );
+}
+
 function useDemoAsk(): Ask {
   return useCallback(async () => ({ ok: false, error: DEMO_NOTICE }), []);
 }
@@ -97,6 +128,20 @@ function useDemoPastThreads(): PastThreads {
   return { threads: [], loading: false, loadMore: undefined };
 }
 
+const noPins: PastThread[] = [];
+
+function useDemoPinnedThreads(): PastThread[] {
+  return noPins;
+}
+
+async function nothing() {}
+
+const demoActions: ThreadActions = { pin: nothing, rename: nothing, remove: nothing };
+
+function useDemoThreadActions(): ThreadActions {
+  return demoActions;
+}
+
 const demo = import.meta.env.MODE === "demo";
 
 export const chatAvailable = !demo;
@@ -107,3 +152,9 @@ export const useThreadMessages: (threadId: string) => ThreadMessages = demo
 export const usePastThreads: (search: string) => PastThreads = demo
   ? useDemoPastThreads
   : useLivePastThreads;
+export const usePinnedThreads: () => PastThread[] = demo
+  ? useDemoPinnedThreads
+  : useLivePinnedThreads;
+export const useThreadActions: () => ThreadActions = demo
+  ? useDemoThreadActions
+  : useLiveThreadActions;
