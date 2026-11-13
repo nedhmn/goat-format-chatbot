@@ -34,7 +34,6 @@ Before editing files for a substantial task:
 - Commit subjects are lowercase conventional commits and they are the release notes.
   Write the subject for the person reading the changelog.
 - No `Co-Authored-By` trailer, ever. The person who pushes is the author.
-- Ported or vendored code keeps its attribution in the README or `VENDORED.md` next to it. `LICENSE` stays the plain MIT text.
 - Third-party skills and vendored rules are never edited in place. Edit upstream or fork it.
 - No comments or docstrings in code files. Names and types carry the what; the why goes in the
   commit, the PR, or the docs. Exceptions: lint override reasons in lint configs, license and
