@@ -144,17 +144,14 @@ function toDemoPastThread({ id, title, activeAt }: DemoThread): PastThread {
   return { threadId: id, title, activeAt };
 }
 
-const demoPastThreads = demoThreads.map(toDemoPastThread);
-
 function useDemoPastThreads(search: string): PastThreads {
   const words = search.trim().toLowerCase();
-  const threads = useMemo(
-    () =>
-      words
-        ? demoPastThreads.filter((thread) => thread.title.toLowerCase().includes(words))
-        : demoPastThreads,
-    [words],
-  );
+  const threads = useMemo(() => {
+    const recorded = demoThreads().map(toDemoPastThread);
+    return words
+      ? recorded.filter((thread) => thread.title.toLowerCase().includes(words))
+      : recorded;
+  }, [words]);
   return { threads, loading: false, loadMore: undefined };
 }
 
@@ -173,16 +170,14 @@ function useDemoThreadActions(): ThreadActions | undefined {
 }
 
 function recordedThreadId(question: string) {
-  return demoThreads.find((thread) => thread.messages[0]?.text === question)?.id;
+  return demoThreads().find((thread) => thread.messages[0]?.text === question)?.id;
 }
 
-const demoSuggestions: Suggestion[] = SUGGESTIONS.map((question) => ({
-  question,
-  threadId: recordedThreadId(question),
-}));
-
 function useDemoSuggestions(): Suggestion[] {
-  return demoSuggestions;
+  return useMemo(
+    () => SUGGESTIONS.map((question) => ({ question, threadId: recordedThreadId(question) })),
+    [],
+  );
 }
 
 const demo = import.meta.env.MODE === "demo";

@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:demo": "vite --mode demo",
     "build": "vite build --mode demo && cp dist/index.html dist/404.html",
     "preview": "vite preview",
     "record": "node --env-file=.env.development scripts/record-demo-threads.ts",

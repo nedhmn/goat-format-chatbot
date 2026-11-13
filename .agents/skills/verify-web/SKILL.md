@@ -34,6 +34,8 @@ For anything the dev server can hide (the Pages base path `/goat-format-chatbot/
 pnpm build && pnpm --filter web preview      # WEB_PREVIEW_URL
 ```
 
+Anything that differs in the demo is checked on `pnpm --filter web dev:demo` (`WEB_DEMO_URL`) while you work, and on the preview before the PR.
+
 ## Drive
 
 Harness browser tools when available: open the page, snapshot, click by role or text, screenshot. Otherwise Playwright. Check both themes and reduced motion for anything visual.

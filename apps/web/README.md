@@ -9,9 +9,10 @@ The app is the rulings chat: `/` asks a new question and `/threads/<id>` shows a
 ```sh
 pnpm dev                                  # WEB_DEV_URL in .dev/ports.env
 pnpm build && pnpm --filter web preview   # WEB_PREVIEW_URL in .dev/ports.env
+pnpm --filter web dev:demo                # WEB_DEMO_URL in .dev/ports.env
 ```
 
-`pnpm dev` runs the live app against the local Convex backend at `VITE_CONVEX_URL` (set in `.env.development`). `pnpm build` is the demo build that GitHub Pages serves (`vite build --mode demo`). It copies `index.html` to `404.html`, so Pages serves the app for deep links such as `/threads/<id>`.
+`pnpm dev` runs the live app against the local Convex backend at `VITE_CONVEX_URL` (set in `.env.development`). `pnpm build` is the demo build that GitHub Pages serves (`vite build --mode demo`). It copies `index.html` to `404.html`, so Pages serves the app for deep links such as `/threads/<id>`. `dev:demo` serves the demo with hot reload, so demo changes show while you work.
 
 Each server takes the next free port when its default is busy and records its real URL in `.dev/ports.env`. Read the URL from there, never assume a port.
 
