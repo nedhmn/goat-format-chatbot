@@ -30,4 +30,4 @@ Chat, for the rulings chat, follows the [shadcn AI Elements](https://ui.shadcn.c
 - The theme maps shadcn's variables (`--background`, `--primary`, `--muted`, `--accent`, `--ring`, `--sidebar*`, ...) onto the brand tokens in `styles.css`. shadcn's `accent` is a hover fill, so the brand orange is `brand` (`bg-brand`, `text-brand`).
 - `markdown`: `Markdown` renders a reply with Streamdown and routes fenced code to `code-block`. Pass `streaming` while the text is still arriving, so an unclosed `**` or fence does not flash as raw text.
 
-The shadcn/ui files are MIT; see the root `LICENSE`.
+The shadcn/ui files are MIT; see the root `THIRD_PARTY_NOTICES.md`.
