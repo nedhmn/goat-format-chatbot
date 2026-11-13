@@ -4,8 +4,7 @@ import { findDemoThread } from "./demo-threads";
 
 export const FALLBACK = "fallback";
 
-const FALLBACK_TEXT =
-  "This demo answers only the questions above the input, with answers recorded from the local app. Each one shows the cards and rulings the agent looked up and the sources it cites. Any other question needs the app and its backend running locally. Setup is in the [repository](https://github.com/nedhmn/goat-format-chatbot#readme).";
+const FALLBACK_TEXT = "I only have answers for these in the demo.";
 
 const fallbackAnswer: ChatMessage = {
   key: FALLBACK,
@@ -15,6 +14,7 @@ const fallbackAnswer: ChatMessage = {
   text: FALLBACK_TEXT,
   parts: [{ kind: "text", key: FALLBACK, text: FALLBACK_TEXT }],
   sources: [],
+  offersPresets: true,
 };
 
 const THINKING_MS = 700;
@@ -91,6 +91,7 @@ function playTurn(turn: DemoTurn, index: number, now: number): ChatMessage[] {
     text: done ? answer.text : "",
     parts,
     sources: done ? answer.sources : [],
+    offersPresets: done && answer.offersPresets,
   };
   return [question, reply];
 }

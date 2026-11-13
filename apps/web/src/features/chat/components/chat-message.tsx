@@ -22,6 +22,7 @@ import { useState } from "react";
 
 import type { ChatMessage as ChatMessageData } from "@/features/chat/api/chat-message";
 import { LookupTrace } from "@/features/chat/components/lookup-trace";
+import { PresetChips } from "@/features/chat/components/preset-chips";
 import { SourcesTrace } from "@/features/chat/components/sources-trace";
 import { answerTime, fullTime } from "@/features/chat/utils/answer-time";
 import { groupParts } from "@/features/chat/utils/group-parts";
@@ -71,7 +72,13 @@ function CopyAnswer({ text }: { text: string }) {
   );
 }
 
-export function ChatMessage({ message }: { message: ChatMessageData }) {
+export function ChatMessage({
+  message,
+  onPick,
+}: {
+  message: ChatMessageData;
+  onPick: (question: string) => void;
+}) {
   if (message.role === "user") {
     return (
       <Message align="end">
@@ -115,6 +122,7 @@ export function ChatMessage({ message }: { message: ChatMessageData }) {
             {NO_ANSWER}
           </p>
         ) : null}
+        {message.offersPresets ? <PresetChips onPick={onPick} wrap /> : null}
         {message.sources.length > 0 ? <SourcesTrace sources={message.sources} /> : null}
         {message.status === "done" && message.text ? (
           <MessageFooter className="gap-1 px-0">

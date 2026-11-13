@@ -23,6 +23,7 @@ export type ChatMessage = {
   text: string;
   parts: ChatPart[];
   sources: Source[];
+  offersPresets?: boolean;
 };
 
 const lookupInput = z.discriminatedUnion("tool", [

@@ -29,7 +29,7 @@ export function ChatThread({ threadId }: { threadId: string }) {
                   messageId={message.key}
                   scrollAnchor={message.role === "user"}
                 >
-                  <ChatMessage message={message} />
+                  <ChatMessage message={message} onPick={(example) => void ask(example)} />
                 </MessageScrollerItem>
               ))}
             </MessageScrollerContent>
