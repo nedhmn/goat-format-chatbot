@@ -14,7 +14,6 @@ export const answer = z.object({
 export type Answer = z.infer<typeof answer>;
 
 const POLL_MS = 2000;
-const SEND_EVERY_MS = 6500;
 const TIMEOUT_MS = 3 * 60 * 1000;
 const URL_PATTERN = /https?:\/\/[^\s)\]>"']+/g;
 const SEND_FAILED = "The question could not be sent";
@@ -60,14 +59,6 @@ function settled(messages: Message[]): boolean {
 
 export function asker(convexUrl: string) {
   const client = new ConvexHttpClient(convexUrl);
-  let nextSendAt = 0;
-
-  async function waitToSend() {
-    const sendAt = Math.max(Date.now(), nextSendAt);
-    nextSendAt = sendAt + SEND_EVERY_MS;
-    await sleep(sendAt - Date.now());
-  }
-
   async function readMessages(threadId: string): Promise<Message[]> {
     const result = await client.query(api.chat.messages, {
       threadId,
@@ -91,7 +82,6 @@ export function asker(convexUrl: string) {
 
   return async function ask(question: string): Promise<Answer> {
     let threadId: string;
-    await waitToSend();
     try {
       ({ threadId } = await client.mutation(api.chat.send, { question }));
     } catch (error) {

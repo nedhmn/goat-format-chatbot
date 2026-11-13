@@ -15,7 +15,7 @@ Convex: schema, queries, mutations, and actions for the chatbot, and the agent t
   - `ask` (internal action): answers a question and returns the whole text at once. `smoke` and the CLI use it.
 - `convex/smoke.ts`: five smoke questions through the live agent. `pnpm --filter @goat-format-chatbot/backend smoke` runs them against the running backend on your OpenRouter key (a few cents) and prints each answer.
 - `convex/chat.ts`: the public chat API.
-  - `send` (mutation): saves a question in a new thread titled from the question (cut to 80 characters), or continues the thread given by `threadId`, and schedules `reply`, which streams the answer into the thread as stream deltas. It fails at once with the setup message when the OpenRouter key is missing, and with "Too many questions. Try again in ..." past the limits in `convex/model/limits.ts` (10 a minute, 200 a day, for the one viewer until there is auth). Both errors are `ConvexError`s whose `data` is the message to show.
+  - `send` (mutation): saves a question in a new thread titled from the question (cut to 80 characters), or continues the thread given by `threadId`, and schedules `reply`, which streams the answer into the thread as stream deltas. It fails at once with the setup message when the OpenRouter key is missing, and with "Too many questions. Try again in ..." past the limits in `convex/model/limits.ts` (for the one viewer until there is auth). Both errors are `ConvexError`s whose `data` is the message to show.
   - `messages` (query): a page of the thread's messages as AI SDK UI messages, plus any reply still streaming. Built for `useUIMessages` from `@convex-dev/agent/react`.
   - `threads` (query): a page of the viewer's unpinned threads, most recently active first, as `{ threadId, title, activeAt }`. Built for `usePaginatedQuery`.
   - `thread` (query): one of the viewer's threads with its title, or null when it is missing or someone else's.
@@ -41,6 +41,14 @@ pnpm --filter @goat-format-chatbot/backend dev
 The backend answers on `http://127.0.0.1:3210` and listens on all interfaces. The CLI keeps local state in `.convex/` and writes `CONVEX_URL` to `.env.local`, both gitignored.
 
 The agent needs an OpenRouter key. Convex functions read env vars from the deployment, not from files, so `dev` first runs `env:sync`, which copies `.env` onto the local deployment with `convex env set --from-file`. Without a `.env` it skips the step, and everything but the agent works. After editing `.env` while the backend runs, run `pnpm --filter @goat-format-chatbot/backend env:sync`.
+
+| Variable               | Value                                               |
+| ---------------------- | --------------------------------------------------- |
+| `OPENROUTER_API_KEY`   | The agent's model key                               |
+| `QUESTIONS_PER_MINUTE` | Questions a viewer can ask a minute. Defaults to 10 |
+| `QUESTIONS_PER_DAY`    | Questions a viewer can ask a day. Defaults to 200   |
+
+Raise the two limits on a local backend for eval runs, which ask many questions at once.
 
 Ask a question from the CLI:
 
