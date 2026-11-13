@@ -19,6 +19,11 @@ Convex: schema, queries, mutations, and actions for the chatbot, and the agent t
   - `messages` (query): a page of the thread's messages as AI SDK UI messages, plus any reply still streaming. Built for `useUIMessages` from `@convex-dev/agent/react`.
   - `threads` (query): a page of the viewer's unpinned threads, most recently active first, as `{ threadId, title, activeAt }`. Built for `usePaginatedQuery`.
   - `searchThreads` (query): up to 20 of the viewer's threads whose title matches `query`, best match first. An empty query returns none.
+  - `pinnedThreads` (query): up to 50 of the viewer's pinned threads, latest pin first.
+  - `pin` (mutation): pins a thread when `pinned` is true, which moves it out of `threads` into `pinnedThreads`, and unpins it otherwise.
+  - `rename` (mutation): retitles a thread, here and on the agent thread, tidied and cut like a first question. A blank title fails with a `ConvexError`.
+  - `remove` (mutation): deletes the thread for good: its row at once, then the agent thread with its messages and streams in scheduled batches.
+  - `pin`, `rename`, and `remove` fail with "This thread no longer exists." for an unknown thread and with "This thread belongs to someone else." for another viewer's.
   - `backfillThreads` (internal mutation): adds a `threads` row for each of the viewer's agent threads that has none, active at its last message, in batches of 50. Run it once on an existing deployment: `pnpm exec convex run chat:backfillThreads '{"cursor":null}'`.
   - There is no auth. One `viewer` helper in `convex/model/chat.ts` returns the fixed user `owner`, so every thread `send` starts belongs to it, and `send`, `messages`, and `threads` check against it. Threads made before this have no user and no longer open. Adding auth means filling in that helper; the rate limit is already keyed by its user. `ask` starts threads with no user.
 - `test/`: vitest, with convex-test for functions.

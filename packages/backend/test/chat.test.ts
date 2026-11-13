@@ -1,4 +1,10 @@
-import { createThread, listMessages, mockModel, saveMessage } from "@convex-dev/agent";
+import {
+  createThread,
+  getThreadMetadata,
+  listMessages,
+  mockModel,
+  saveMessage,
+} from "@convex-dev/agent";
 import agentComponent from "@convex-dev/agent/test";
 import rateLimiterComponent from "@convex-dev/rate-limiter/test";
 import { convexTest } from "convex-test";
@@ -9,6 +15,8 @@ import { openRouterModel, rulingsAgent } from "../convex/model/agent/agent";
 import { answer, streamReply } from "../convex/model/agent/answer";
 import {
   BACKFILL_BATCH,
+  EMPTY_TITLE,
+  NO_THREAD,
   NOT_YOUR_THREAD,
   OWNER,
   threadTitle,
@@ -233,6 +241,103 @@ describe("threads", () => {
     expect(isDone).toBe(true);
     expect(page[0]).toMatchObject({ threadId: older, title: "Book of Moon?" });
     expect(page.find((thread) => thread.threadId === untitled)?.title).toBe(UNTITLED);
+  });
+});
+
+describe("thread actions", () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.stubEnv("OPENROUTER_API_KEY", "test-key");
+  });
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.unstubAllEnvs();
+  });
+
+  async function titles(t: ReturnType<typeof backend>) {
+    const { page } = await t.query(api.chat.threads, { paginationOpts: firstPage });
+    const pinned = await t.query(api.chat.pinnedThreads, {});
+    return {
+      listed: page.map((thread) => thread.title),
+      pinned: pinned.map((thread) => thread.title),
+    };
+  }
+
+  it("pins threads out of the list, latest pin first, and unpins them back", async () => {
+    const t = backend();
+    const moon = await t.mutation(api.chat.send, { question: "Book of Moon?" });
+    vi.advanceTimersByTime(1_000);
+    await t.mutation(api.chat.send, { question: "Sangan?" });
+    vi.advanceTimersByTime(1_000);
+    const ring = await t.mutation(api.chat.send, { question: "Ring?" });
+    await t.mutation(api.chat.pin, { threadId: moon.threadId, pinned: true });
+    vi.advanceTimersByTime(1_000);
+    await t.mutation(api.chat.pin, { threadId: ring.threadId, pinned: true });
+    expect(await titles(t)).toEqual({ listed: ["Sangan?"], pinned: ["Ring?", "Book of Moon?"] });
+    await t.mutation(api.chat.pin, { threadId: moon.threadId, pinned: false });
+    expect(await titles(t)).toEqual({ listed: ["Sangan?", "Book of Moon?"], pinned: ["Ring?"] });
+  });
+
+  it("renames a thread here and in the agent", async () => {
+    const t = backend();
+    const { threadId } = await t.mutation(api.chat.send, { question: "Book of Moon?" });
+    await t.mutation(api.chat.rename, { threadId, title: "  Moon in the\n damage step " });
+    expect((await titles(t)).listed).toEqual(["Moon in the damage step"]);
+    const agentThread = await t.query((ctx) =>
+      getThreadMetadata(ctx, components.agent, { threadId }),
+    );
+    expect(agentThread.title).toBe("Moon in the damage step");
+    const found = await t.query(api.chat.searchThreads, { query: "damage" });
+    expect(found.map((thread) => thread.threadId)).toEqual([threadId]);
+    await expect(t.mutation(api.chat.rename, { threadId, title: " \n " })).rejects.toThrow(
+      EMPTY_TITLE,
+    );
+  });
+
+  it("removes a thread with its messages", async () => {
+    const t = backend();
+    const threadId = await t.mutation(async (ctx) => {
+      const made = await createThread(ctx, components.agent, { userId: OWNER, title: "Moon?" });
+      await saveMessage(ctx, components.agent, { threadId: made, userId: OWNER, prompt: "Moon?" });
+      await ctx.db.insert("threads", {
+        threadId: made,
+        userId: OWNER,
+        title: "Moon?",
+        activeAt: 1,
+      });
+      return made;
+    });
+    await t.mutation(api.chat.remove, { threadId });
+    await t.finishAllScheduledFunctions(vi.runAllTimers);
+    expect((await titles(t)).listed).toEqual([]);
+    const { page } = await t.query((ctx) =>
+      listMessages(ctx, components.agent, { threadId, paginationOpts: firstPage }),
+    );
+    expect(page).toEqual([]);
+    await expect(
+      t.query((ctx) => getThreadMetadata(ctx, components.agent, { threadId })),
+    ).rejects.toThrow();
+  });
+
+  it("refuses another owner's thread and a missing one", async () => {
+    const t = backend();
+    await t.run((ctx) =>
+      ctx.db.insert("threads", {
+        threadId: "elsewhere",
+        userId: "someone-else",
+        title: "Moon?",
+        activeAt: 1,
+      }),
+    );
+    const threadId = "elsewhere";
+    await expect(t.mutation(api.chat.pin, { threadId, pinned: true })).rejects.toThrow(
+      NOT_YOUR_THREAD,
+    );
+    await expect(t.mutation(api.chat.rename, { threadId, title: "Mine" })).rejects.toThrow(
+      NOT_YOUR_THREAD,
+    );
+    await expect(t.mutation(api.chat.remove, { threadId })).rejects.toThrow(NOT_YOUR_THREAD);
+    await expect(t.mutation(api.chat.remove, { threadId: "gone" })).rejects.toThrow(NO_THREAD);
   });
 });
 

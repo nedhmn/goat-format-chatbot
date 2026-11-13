@@ -32,6 +32,12 @@ export const UNTITLED = "Untitled question";
 
 export const NOT_YOUR_THREAD = "This thread belongs to someone else.";
 
+export const NO_THREAD = "This thread no longer exists.";
+
+export const EMPTY_TITLE = "A title needs at least one character.";
+
+export const PINS_LISTED = 50;
+
 export async function sendQuestion(
   ctx: MutationCtx,
   { question, threadId }: { question: string; threadId?: string },
@@ -95,6 +101,44 @@ export async function searchViewerThreads(ctx: QueryCtx, query: string): Promise
   return found.map(toSummary);
 }
 
+export async function viewerPins(ctx: QueryCtx): Promise<ThreadSummary[]> {
+  const userId = await viewer(ctx);
+  const pinned = await ctx.db
+    .query("threads")
+    .withIndex("by_user_pinned_active", (q) => q.eq("userId", userId).gt("pinnedAt", 0))
+    .order("desc")
+    .take(PINS_LISTED);
+  return pinned.map(toSummary);
+}
+
+export async function pinThread(
+  ctx: MutationCtx,
+  { threadId, pinned }: { threadId: string; pinned: boolean },
+): Promise<void> {
+  const row = await ownRow(ctx, threadId);
+  await ctx.db.patch(row._id, { pinnedAt: pinned ? Date.now() : undefined });
+}
+
+export async function renameThread(
+  ctx: MutationCtx,
+  { threadId, title }: { threadId: string; title: string },
+): Promise<void> {
+  const row = await ownRow(ctx, threadId);
+  const renamed = threadTitle(title);
+  if (!renamed) throw new ConvexError(EMPTY_TITLE);
+  await ctx.db.patch(row._id, { title: renamed });
+  await ctx.runMutation(components.agent.threads.updateThread, {
+    threadId,
+    patch: { title: renamed },
+  });
+}
+
+export async function removeThread(ctx: MutationCtx, threadId: string): Promise<void> {
+  const row = await ownRow(ctx, threadId);
+  await ctx.db.delete(row._id);
+  await ctx.runMutation(components.agent.threads.deleteAllForThreadIdAsync, { threadId });
+}
+
 export async function backfillThreads(ctx: MutationCtx, cursor: string | null): Promise<void> {
   const userId = await viewer(ctx);
   const listed = await ctx.runQuery(components.agent.threads.listThreadsByUserId, {
@@ -151,6 +195,16 @@ async function ownThread(ctx: QueryCtx, threadId: string): Promise<StartedThread
     throw new ConvexError(NOT_YOUR_THREAD);
   }
   return { threadId, title: thread.title || UNTITLED };
+}
+
+async function ownRow(ctx: QueryCtx, threadId: string): Promise<Doc<"threads">> {
+  const row = await ctx.db
+    .query("threads")
+    .withIndex("by_thread", (q) => q.eq("threadId", threadId))
+    .unique();
+  if (row === null) throw new ConvexError(NO_THREAD);
+  if (row.userId !== (await viewer(ctx))) throw new ConvexError(NOT_YOUR_THREAD);
+  return row;
 }
 
 async function touchThread(ctx: MutationCtx, activity: ThreadActivity): Promise<void> {
