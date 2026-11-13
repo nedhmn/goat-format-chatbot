@@ -18,6 +18,7 @@ Convex: schema, queries, mutations, and actions for the chatbot, and the agent t
   - `send` (mutation): saves a question in a new thread titled from the question (cut to 80 characters), or continues the thread given by `threadId`, and schedules `reply`, which streams the answer into the thread as stream deltas. It fails at once with the setup message when the OpenRouter key is missing, and with "Too many questions. Try again in ..." past the limits in `convex/model/limits.ts` (10 a minute, 200 a day, for the one viewer until there is auth). Both errors are `ConvexError`s whose `data` is the message to show.
   - `messages` (query): a page of the thread's messages as AI SDK UI messages, plus any reply still streaming. Built for `useUIMessages` from `@convex-dev/agent/react`.
   - `threads` (query): a page of the viewer's unpinned threads, most recently active first, as `{ threadId, title, activeAt }`. Built for `usePaginatedQuery`.
+  - `thread` (query): one of the viewer's threads with its title, or null when it is missing or someone else's.
   - `searchThreads` (query): up to 20 of the viewer's threads whose title matches `query`, best match first. An empty query returns none.
   - `pinnedThreads` (query): up to 50 of the viewer's pinned threads, latest pin first.
   - `pin` (mutation): pins a thread when `pinned` is true, which moves it out of `threads` into `pinnedThreads`, and unpins it otherwise.

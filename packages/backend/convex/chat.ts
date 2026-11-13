@@ -12,6 +12,7 @@ import {
   sendQuestion,
   threadMessages,
   viewerPins,
+  viewerThread,
   viewerThreads,
 } from "./model/chat";
 
@@ -28,6 +29,11 @@ export const messages = query({
 export const threads = query({
   args: { paginationOpts: paginationOptsValidator },
   handler: (ctx, { paginationOpts }) => viewerThreads(ctx, paginationOpts),
+});
+
+export const thread = query({
+  args: { threadId: v.string() },
+  handler: (ctx, { threadId }) => viewerThread(ctx, threadId),
 });
 
 export const searchThreads = query({

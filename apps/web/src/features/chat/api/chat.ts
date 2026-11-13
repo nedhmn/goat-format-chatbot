@@ -96,6 +96,10 @@ function useLivePinnedThreads(): PastThread[] {
   return useMemo(() => (pinned ?? []).map(toPastThread), [pinned]);
 }
 
+function useLiveThreadTitle(threadId: string): string | undefined {
+  return useQuery(api.chat.thread, { threadId })?.title;
+}
+
 function useLiveThreadActions(): ThreadActions {
   const pinThread = useMutation(api.chat.pin);
   const renameThread = useMutation(api.chat.rename);
@@ -138,6 +142,10 @@ async function nothing() {}
 
 const demoActions: ThreadActions = { pin: nothing, rename: nothing, remove: nothing };
 
+function useDemoThreadTitle(): string | undefined {
+  return undefined;
+}
+
 function useDemoThreadActions(): ThreadActions {
   return demoActions;
 }
@@ -158,3 +166,6 @@ export const usePinnedThreads: () => PastThread[] = demo
 export const useThreadActions: () => ThreadActions = demo
   ? useDemoThreadActions
   : useLiveThreadActions;
+export const useThreadTitle: (threadId: string) => string | undefined = demo
+  ? useDemoThreadTitle
+  : useLiveThreadTitle;

@@ -278,6 +278,25 @@ describe("thread actions", () => {
     expect(await titles(t)).toEqual({ listed: ["Sangan?", "Book of Moon?"], pinned: ["Ring?"] });
   });
 
+  it("looks up one of the owner's threads and nobody else's", async () => {
+    const t = backend();
+    const { threadId } = await t.mutation(api.chat.send, { question: "Book of Moon?" });
+    await t.run((ctx) =>
+      ctx.db.insert("threads", {
+        threadId: "elsewhere",
+        userId: "someone-else",
+        title: "Moon?",
+        activeAt: 1,
+      }),
+    );
+    expect(await t.query(api.chat.thread, { threadId })).toMatchObject({
+      threadId,
+      title: "Book of Moon?",
+    });
+    expect(await t.query(api.chat.thread, { threadId: "elsewhere" })).toBeNull();
+    expect(await t.query(api.chat.thread, { threadId: "gone" })).toBeNull();
+  });
+
   it("renames a thread here and in the agent", async () => {
     const t = backend();
     const { threadId } = await t.mutation(api.chat.send, { question: "Book of Moon?" });
