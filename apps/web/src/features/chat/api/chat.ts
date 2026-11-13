@@ -13,7 +13,7 @@ export type Ask = (question: string) => Promise<Sent>;
 
 export type ThreadMessages = { messages: ChatMessage[]; loading: boolean };
 
-export type PastThread = { threadId: string; title: string };
+export type PastThread = { threadId: string; title: string; activeAt: number };
 
 export type PastThreads = {
   threads: PastThread[];
@@ -58,8 +58,8 @@ function useLiveThreadMessages(threadId: string): ThreadMessages {
   return { messages, loading: status === "LoadingFirstPage" };
 }
 
-function toPastThread({ threadId, title }: PastThread): PastThread {
-  return { threadId, title };
+function toPastThread({ threadId, title, activeAt }: PastThread): PastThread {
+  return { threadId, title, activeAt };
 }
 
 function useLivePastThreads(search: string): PastThreads {
