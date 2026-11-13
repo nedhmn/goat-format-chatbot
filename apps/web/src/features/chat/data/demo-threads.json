@@ -24,7 +24,7 @@
         "role": "assistant",
         "status": "done",
         "sentAt": 1794534936738.992,
-        "text": "The rulings data does not settle this: no passage states whether **Book of Moon** may or may not be activated during the Damage Step.\n\nWhat the passages do say, and their limits:\n\n- **Book of Moon**'s own rulings only cover the **Battle Step**: activating it there on a defending monster lets the attack resolve normally with no replay, and on an attacking monster it stops the attack and the Damage Step is never reached. None of its rulings address activating it *inside* the Damage Step.\n- The Damage Step mechanics passage only says you can't use Quick-Play Spells, Normal Traps or Continuous Traps **to negate** something in the Damage Step — that is a restriction on negation, not a statement about whether **Book of Moon** can be activated there.\n- Cards that *are* barred from the Damage Step are called out individually (for example **Mystical Space Typhoon** and **Ring of Destruction** have explicit \"cannot be activated during the Damage Step\" rulings), and other Quick-Play Spells such as **Rush Recklessly** appear in rulings being used during the Damage Step — but the data contains no equivalent statement either way for **Book of Moon**.\n\nBecause the rules passages don't grant permission and don't prohibit it, I can't give a yes or no from these sources.\n\nSources:\n- [Rulings: The Damage Step](https://beta.goatformat.com/learn/rulings#the-damage-step) — bars Quick-Play Spells, Normal Traps and Continuous Traps from *negating* in the Damage Step; says nothing about Book of Moon.\n- [Book of Moon — Battle Step, defending monster](https://beta.goatformat.com/cards/book-of-moon#ruling-9745383a-3e82-4642-ac3f-3c000275b169) — activation during the Battle Step; attack resolves, no replay.\n- [Book of Moon — attacking monster](https://beta.goatformat.com/cards/book-of-moon#ruling-f426224e-464f-4b45-8489-7a20b1cd87f3) — attack stops and the Damage Step is not reached.\n- [Mystical Space Typhoon](https://beta.goatformat.com/cards/mystical-space-typhoon#ruling-83bebd8a-60ac-47d8-a47f-80e5f2fbb991) — example of an explicit \"may not be activated during the Damage Step\" ruling.\n- [Spirit Reaper](https://beta.goatformat.com/cards/spirit-reaper#ruling-84e178a3-fffc-438d-96cb-60c408535076) — example of Rush Recklessly being activated during the Damage Step.",
+        "text": "These rulings don't settle it. **Book of Moon**'s own rulings only cover the Battle Step: used on a defending monster the attack still resolves, and used on an attacking monster the attack stops before the Damage Step. The Damage Step rulings only bar Quick-Play Spells from *negating* there.",
         "parts": [
           {
             "kind": "lookup",
@@ -33,15 +33,6 @@
               "state": "done",
               "tool": "findCard",
               "name": "Book of Moon"
-            }
-          },
-          {
-            "kind": "lookup",
-            "lookup": {
-              "id": "call_93da0b989a7846939e41cad8",
-              "state": "done",
-              "tool": "search",
-              "query": "damage step activation Spell Speed 2"
             }
           },
           {
@@ -65,124 +56,33 @@
           {
             "kind": "lookup",
             "lookup": {
-              "id": "call_604a715175244e988551d5a6",
-              "state": "done",
-              "tool": "search",
-              "query": "Damage Step what cards can be activated Quick-Play Spell"
-            }
-          },
-          {
-            "kind": "lookup",
-            "lookup": {
-              "id": "call_272d14e0e9884c778000b3ff",
-              "state": "done",
-              "tool": "search",
-              "query": "can only be activated during the Damage Step"
-            }
-          },
-          {
-            "kind": "lookup",
-            "lookup": {
-              "id": "call_1ab8ed421ccc4054970b50f3",
-              "state": "done",
-              "tool": "search",
-              "query": "Book of Moon Damage Step flip face-down damage calculation"
-            }
-          },
-          {
-            "kind": "lookup",
-            "lookup": {
-              "id": "call_6f16e0f19f144539aa927f9a",
-              "state": "done",
-              "tool": "search",
-              "query": "Spell Speed 2 Quick-Play Spell activation Damage Step allowed"
-            }
-          },
-          {
-            "kind": "lookup",
-            "lookup": {
-              "id": "call_0dfe8e778f064221ae7722b7",
-              "state": "done",
-              "tool": "search",
-              "query": "Rush Recklessly can be activated during the Damage Step"
-            }
-          },
-          {
-            "kind": "lookup",
-            "lookup": {
-              "id": "call_5e3530c80bd54d9e824a42b0",
-              "state": "done",
-              "tool": "search",
-              "query": "Quick-Play Spell Card activate Damage Step damage calculation"
-            }
-          },
-          {
-            "kind": "lookup",
-            "lookup": {
-              "id": "call_14e83bea76b941a090c839ef",
-              "state": "done",
-              "tool": "search",
-              "query": "flip the monster face-down during the Damage Step before damage calculation"
-            }
-          },
-          {
-            "kind": "lookup",
-            "lookup": {
               "id": "call_976fcf65bf0d453ab489c47f",
               "state": "done",
               "tool": "search",
-              "query": "\"Book of Moon\" during the Damage Step"
-            }
-          },
-          {
-            "kind": "lookup",
-            "lookup": {
-              "id": "call_0bb239783c4647979e227841",
-              "state": "done",
-              "tool": "search",
-              "query": "Damage Step"
-            }
-          },
-          {
-            "kind": "lookup",
-            "lookup": {
-              "id": "call_5b63a764a4a440bf958fc9bf",
-              "state": "done",
-              "tool": "read",
-              "card": "Rush Recklessly"
+              "query": "Book of Moon during the Damage Step"
             }
           },
           {
             "kind": "text",
             "key": "text-35",
-            "text": "The rulings data does not settle this: no passage states whether **Book of Moon** may or may not be activated during the Damage Step.\n\nWhat the passages do say, and their limits:\n\n- **Book of Moon**'s own rulings only cover the **Battle Step**: activating it there on a defending monster lets the attack resolve normally with no replay, and on an attacking monster it stops the attack and the Damage Step is never reached. None of its rulings address activating it *inside* the Damage Step.\n- The Damage Step mechanics passage only says you can't use Quick-Play Spells, Normal Traps or Continuous Traps **to negate** something in the Damage Step — that is a restriction on negation, not a statement about whether **Book of Moon** can be activated there.\n- Cards that *are* barred from the Damage Step are called out individually (for example **Mystical Space Typhoon** and **Ring of Destruction** have explicit \"cannot be activated during the Damage Step\" rulings), and other Quick-Play Spells such as **Rush Recklessly** appear in rulings being used during the Damage Step — but the data contains no equivalent statement either way for **Book of Moon**.\n\nBecause the rules passages don't grant permission and don't prohibit it, I can't give a yes or no from these sources."
+            "text": "These rulings don't settle it. **Book of Moon**'s own rulings only cover the Battle Step: used on a defending monster the attack still resolves, and used on an attacking monster the attack stops before the Damage Step. The Damage Step rulings only bar Quick-Play Spells from *negating* there."
           }
         ],
         "sources": [
           {
-            "title": "Rulings: The Damage Step",
-            "url": "https://beta.goatformat.com/learn/rulings#the-damage-step",
-            "note": "bars Quick-Play Spells, Normal Traps and Continuous Traps from *negating* in the Damage Step; says nothing about Book of Moon."
-          },
-          {
-            "title": "Book of Moon — Battle Step, defending monster",
+            "title": "Book of Moon: Battle Step, defending monster",
             "url": "https://beta.goatformat.com/cards/book-of-moon#ruling-9745383a-3e82-4642-ac3f-3c000275b169",
             "note": "activation during the Battle Step; attack resolves, no replay."
           },
           {
-            "title": "Book of Moon — attacking monster",
+            "title": "Book of Moon: attacking monster",
             "url": "https://beta.goatformat.com/cards/book-of-moon#ruling-f426224e-464f-4b45-8489-7a20b1cd87f3",
             "note": "attack stops and the Damage Step is not reached."
           },
           {
-            "title": "Mystical Space Typhoon",
-            "url": "https://beta.goatformat.com/cards/mystical-space-typhoon#ruling-83bebd8a-60ac-47d8-a47f-80e5f2fbb991",
-            "note": "example of an explicit \"may not be activated during the Damage Step\" ruling."
-          },
-          {
-            "title": "Spirit Reaper",
-            "url": "https://beta.goatformat.com/cards/spirit-reaper#ruling-84e178a3-fffc-438d-96cb-60c408535076",
-            "note": "example of Rush Recklessly being activated during the Damage Step."
+            "title": "Rulings: The Damage Step",
+            "url": "https://beta.goatformat.com/learn/rulings#the-damage-step",
+            "note": "bars Quick-Play Spells, Normal Traps and Continuous Traps from *negating* in the Damage Step; says nothing about Book of Moon."
           }
         ]
       }
@@ -213,13 +113,8 @@
         "role": "assistant",
         "status": "done",
         "sentAt": 1794534955176.206,
-        "text": "I'll look up Sangan first.\n\n \n\n No. Sangan's effect only triggers when it is sent from the field to the Graveyard, so if it is banished (removed from play) instead, it never reaches the Graveyard and the effect does not activate.\n\nSangan's text requires it to be \"sent from the field to the Graveyard.\" The rulings back this up in two ways:\n\n- **Banisher of the Light** (which removes from play cards that would go to the Graveyard): \"Effects that trigger when cards are sent to the Graveyard, such as 'Sangan'... will not activate.\" So with a replacement effect sending it out of play, no trigger.\n- **Nobleman of Crossout**: the monster \"is removed from play and never go[es] to the Graveyard, so the effects of cards like 'Sangan' will not activate.\"\n- The parallel ruling on **Witch of the Black Forest** states the effect \"only activates when she is sent from the field to the Graveyard... and not if she is removed from play.\"\n\nThe same logic applies to effects that destroy by battle without sending to the Graveyard (see the Lesser Fiend ruling naming Sangan).\n\nSources:\n- [Sangan card text and rulings](https://beta.goatformat.com/cards/sangan) — text requires being sent from the field to the Graveyard.\n- [Banisher of the Light](https://beta.goatformat.com/cards/banisher-of-the-light#ruling-b83cea8b-a2e5-4708-bfe0-fa8670a88433) — Sangan-type effects do not activate when cards are removed from play instead of sent to the Graveyard.\n- [Nobleman of Crossout](https://beta.goatformat.com/cards/nobleman-of-crossout#ruling-b82f1a2a-1721-4342-a98c-bfe1f7eff4eb) — monster removed from play never goes to the Graveyard, so Sangan's effect will not activate.\n- [Witch of the Black Forest](https://beta.goatformat.com/cards/witch-of-the-black-forest#ruling-0ef0b841-428d-4ea8-8e1d-2a527ba5ba04) — only activates from field to Graveyard, not if removed from play.\n- [Lesser Fiend](https://beta.goatformat.com/cards/lesser-fiend#ruling-fef65e87-2efb-4403-819c-b74fc74ec5a8) — monsters destroyed without being sent to the Graveyard do not trigger Sangan.",
+        "text": "No. **Sangan** only triggers when it is sent from the field to the Graveyard, and a banished Sangan never gets there. The **Nobleman of Crossout** and **Banisher of the Light** rulings both say its effect will not activate.",
         "parts": [
-          {
-            "kind": "text",
-            "key": "text-0",
-            "text": "I'll look up Sangan first.\n\n"
-          },
           {
             "kind": "lookup",
             "lookup": {
@@ -228,11 +123,6 @@
               "tool": "findCard",
               "name": "Sangan"
             }
-          },
-          {
-            "kind": "text",
-            "key": "text-3",
-            "text": "\n\n"
           },
           {
             "kind": "lookup",
@@ -253,18 +143,9 @@
             }
           },
           {
-            "kind": "lookup",
-            "lookup": {
-              "id": "call_c51a2fd28f824245af00970aab54a513",
-              "state": "done",
-              "tool": "search",
-              "query": "banished from the field trigger sent to Graveyard"
-            }
-          },
-          {
             "kind": "text",
             "key": "text-12",
-            "text": "No. Sangan's effect only triggers when it is sent from the field to the Graveyard, so if it is banished (removed from play) instead, it never reaches the Graveyard and the effect does not activate.\n\nSangan's text requires it to be \"sent from the field to the Graveyard.\" The rulings back this up in two ways:\n\n- **Banisher of the Light** (which removes from play cards that would go to the Graveyard): \"Effects that trigger when cards are sent to the Graveyard, such as 'Sangan'... will not activate.\" So with a replacement effect sending it out of play, no trigger.\n- **Nobleman of Crossout**: the monster \"is removed from play and never go[es] to the Graveyard, so the effects of cards like 'Sangan' will not activate.\"\n- The parallel ruling on **Witch of the Black Forest** states the effect \"only activates when she is sent from the field to the Graveyard... and not if she is removed from play.\"\n\nThe same logic applies to effects that destroy by battle without sending to the Graveyard (see the Lesser Fiend ruling naming Sangan)."
+            "text": "No. **Sangan** only triggers when it is sent from the field to the Graveyard, and a banished Sangan never gets there. The **Nobleman of Crossout** and **Banisher of the Light** rulings both say its effect will not activate."
           }
         ],
         "sources": [
@@ -274,24 +155,14 @@
             "note": "text requires being sent from the field to the Graveyard."
           },
           {
-            "title": "Banisher of the Light",
-            "url": "https://beta.goatformat.com/cards/banisher-of-the-light#ruling-b83cea8b-a2e5-4708-bfe0-fa8670a88433",
-            "note": "Sangan-type effects do not activate when cards are removed from play instead of sent to the Graveyard."
-          },
-          {
             "title": "Nobleman of Crossout",
             "url": "https://beta.goatformat.com/cards/nobleman-of-crossout#ruling-b82f1a2a-1721-4342-a98c-bfe1f7eff4eb",
             "note": "monster removed from play never goes to the Graveyard, so Sangan's effect will not activate."
           },
           {
-            "title": "Witch of the Black Forest",
-            "url": "https://beta.goatformat.com/cards/witch-of-the-black-forest#ruling-0ef0b841-428d-4ea8-8e1d-2a527ba5ba04",
-            "note": "only activates from field to Graveyard, not if removed from play."
-          },
-          {
-            "title": "Lesser Fiend",
-            "url": "https://beta.goatformat.com/cards/lesser-fiend#ruling-fef65e87-2efb-4403-819c-b74fc74ec5a8",
-            "note": "monsters destroyed without being sent to the Graveyard do not trigger Sangan."
+            "title": "Banisher of the Light",
+            "url": "https://beta.goatformat.com/cards/banisher-of-the-light#ruling-b83cea8b-a2e5-4708-bfe0-fa8670a88433",
+            "note": "Sangan-type effects do not activate when cards are removed from play instead of sent to the Graveyard."
           }
         ]
       }
@@ -322,7 +193,7 @@
         "role": "assistant",
         "status": "done",
         "sentAt": 1794534963352.294,
-        "text": "No—not by its own return effect: **Sinister Serpent**’s Standby Phase effect does not target it in the Graveyard. The **Big Burn** ruling expressly says **Big Burn** cannot be activated when **Sinister Serpent** activates because **Sinister Serpent** doesn’t target. The rulings do not establish any broader Sinister Serpent-specific immunity to other effects that target a Graveyard card; if you have a particular card in mind, name it.\n\nSources:\n- [Sinister Serpent](https://beta.goatformat.com/cards/sinister-serpent) — card text and rulings for its optional Standby Phase return effect.\n- [Big Burn ruling](https://beta.goatformat.com/cards/big-burn#ruling-ebc50a75-f79b-49c2-883a-1e025b9bd7f8) — says Big Burn cannot respond to Sinister Serpent because Sinister Serpent doesn’t target.\n- [Disappear / Spear Cretin ruling](https://beta.goatformat.com/cards/disappear#ruling-51a63076-8551-45c9-a52f-8c9221515647) — describes effects that select a card in the Graveyard as a target.",
+        "text": "Yes. Nothing in the rulings protects it in the Graveyard, and effects like **Disappear** target Graveyard cards. Its own Standby Phase effect does not target it, though, so **Big Burn** cannot be activated in response.",
         "parts": [
           {
             "kind": "lookup",
@@ -345,60 +216,6 @@
           {
             "kind": "lookup",
             "lookup": {
-              "id": "call_resp_01a1d29e-8274-7114-8d2d-65241e4992e1_0",
-              "state": "done",
-              "tool": "search",
-              "query": "target card in the Graveyard during Standby Phase"
-            }
-          },
-          {
-            "kind": "lookup",
-            "lookup": {
-              "id": "call_resp_01a1d29e-8274-7114-8d2d-65241e4992e1_1",
-              "state": "done",
-              "tool": "search",
-              "query": "Sinister Serpent target Graveyard Standby Phase"
-            }
-          },
-          {
-            "kind": "lookup",
-            "lookup": {
-              "id": "call_resp_01a1d29e-8274-7114-8d2d-65241e4992e1_2",
-              "state": "done",
-              "tool": "search",
-              "query": "Sinister Serpent does not target"
-            }
-          },
-          {
-            "kind": "lookup",
-            "lookup": {
-              "id": "call_resp_01a1d29e-910d-7115-8767-f67e4aa806e6_0",
-              "state": "done",
-              "tool": "search",
-              "query": "cards in the Graveyard can be targeted by card effects"
-            }
-          },
-          {
-            "kind": "lookup",
-            "lookup": {
-              "id": "call_resp_01a1d29e-910d-7115-8767-f67e4aa806e6_1",
-              "state": "done",
-              "tool": "search",
-              "query": "target a card in the Graveyard"
-            }
-          },
-          {
-            "kind": "lookup",
-            "lookup": {
-              "id": "call_resp_01a1d29e-910d-7115-8767-f67e4aa806e6_2",
-              "state": "done",
-              "tool": "search",
-              "query": "Graveyard target Standby Phase effect"
-            }
-          },
-          {
-            "kind": "lookup",
-            "lookup": {
               "id": "call_resp_01a1d29e-99e5-79c5-bafa-cf0a5012138d_0",
               "state": "done",
               "tool": "read",
@@ -415,45 +232,9 @@
             }
           },
           {
-            "kind": "lookup",
-            "lookup": {
-              "id": "call_resp_01a1d29e-99e5-79c5-bafa-cf0a5012138d_2",
-              "state": "done",
-              "tool": "read",
-              "card": "Necrovalley"
-            }
-          },
-          {
-            "kind": "lookup",
-            "lookup": {
-              "id": "call_resp_01a1d29e-a66f-77d5-8216-1b13988f9d35_0",
-              "state": "done",
-              "tool": "search",
-              "query": "activate Trap Card during Standby Phase"
-            }
-          },
-          {
-            "kind": "lookup",
-            "lookup": {
-              "id": "call_resp_01a1d29e-a66f-77d5-8216-1b13988f9d35_1",
-              "state": "done",
-              "tool": "search",
-              "query": "Disappear Sinister Serpent"
-            }
-          },
-          {
-            "kind": "lookup",
-            "lookup": {
-              "id": "call_resp_01a1d29e-a66f-77d5-8216-1b13988f9d35_2",
-              "state": "done",
-              "tool": "search",
-              "query": "chain Disappear to Sinister Serpent"
-            }
-          },
-          {
             "kind": "text",
             "key": "text-35",
-            "text": "No—not by its own return effect: **Sinister Serpent**’s Standby Phase effect does not target it in the Graveyard. The **Big Burn** ruling expressly says **Big Burn** cannot be activated when **Sinister Serpent** activates because **Sinister Serpent** doesn’t target. The rulings do not establish any broader Sinister Serpent-specific immunity to other effects that target a Graveyard card; if you have a particular card in mind, name it."
+            "text": "Yes. Nothing in the rulings protects it in the Graveyard, and effects like **Disappear** target Graveyard cards. Its own Standby Phase effect does not target it, though, so **Big Burn** cannot be activated in response."
           }
         ],
         "sources": [
@@ -463,14 +244,14 @@
             "note": "card text and rulings for its optional Standby Phase return effect."
           },
           {
-            "title": "Big Burn ruling",
-            "url": "https://beta.goatformat.com/cards/big-burn#ruling-ebc50a75-f79b-49c2-883a-1e025b9bd7f8",
-            "note": "says Big Burn cannot respond to Sinister Serpent because Sinister Serpent doesn’t target."
-          },
-          {
             "title": "Disappear / Spear Cretin ruling",
             "url": "https://beta.goatformat.com/cards/disappear#ruling-51a63076-8551-45c9-a52f-8c9221515647",
             "note": "describes effects that select a card in the Graveyard as a target."
+          },
+          {
+            "title": "Big Burn ruling",
+            "url": "https://beta.goatformat.com/cards/big-burn#ruling-ebc50a75-f79b-49c2-883a-1e025b9bd7f8",
+            "note": "says Big Burn cannot respond to Sinister Serpent because Sinister Serpent doesn’t target."
           }
         ]
       }
