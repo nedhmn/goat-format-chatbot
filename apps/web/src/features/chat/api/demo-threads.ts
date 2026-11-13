@@ -39,11 +39,16 @@ const demoThread = z.object({
 
 export type DemoThread = z.infer<typeof demoThread>;
 
-export const demoThreads: DemoThread[] = z
-  .array(demoThread)
-  .parse(recorded)
-  .toSorted((a, b) => b.activeAt - a.activeAt);
+let parsed: DemoThread[] | undefined;
+
+export function demoThreads(): DemoThread[] {
+  parsed ??= z
+    .array(demoThread)
+    .parse(recorded)
+    .toSorted((a, b) => b.activeAt - a.activeAt);
+  return parsed;
+}
 
 export function findDemoThread(id: string): DemoThread | undefined {
-  return demoThreads.find((thread) => thread.id === id);
+  return demoThreads().find((thread) => thread.id === id);
 }
