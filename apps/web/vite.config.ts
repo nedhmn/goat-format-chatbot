@@ -51,7 +51,8 @@ function recordUrl(key: string, server: ViteDevServer | PreviewServer) {
 function devPorts(): Plugin {
   return {
     name: "dev-ports",
-    configureServer: (server) => recordUrl("WEB_DEV_URL", server),
+    configureServer: (server) =>
+      recordUrl(server.config.mode === "demo" ? "WEB_DEMO_URL" : "WEB_DEV_URL", server),
     configurePreviewServer: (server) => recordUrl("WEB_PREVIEW_URL", server),
   };
 }
