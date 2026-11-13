@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.2.0](https://github.com/nedhmn/goat-format-chatbot/compare/v0.1.0...v0.2.0) (2026-11-13)
+
+
+### Features
+
+* **web:** answer typed questions in the demo ([#153](https://github.com/nedhmn/goat-format-chatbot/issues/153)) ([a0c22de](https://github.com/nedhmn/goat-format-chatbot/commit/a0c22de64fb4f302a39f315370e27ecf2e39e97f))
+* **web:** offer the preset questions in the demo fallback ([#159](https://github.com/nedhmn/goat-format-chatbot/issues/159)) ([6263397](https://github.com/nedhmn/goat-format-chatbot/commit/626339706ccd411064a68ad192f04d2db59cac15))
+* **web:** open recorded threads from the demo examples ([#138](https://github.com/nedhmn/goat-format-chatbot/issues/138)) ([331532f](https://github.com/nedhmn/goat-format-chatbot/commit/331532f09dcf338c1e5f0f738e7600a413a157cf))
+* **web:** play preset answers back live in the demo ([#150](https://github.com/nedhmn/goat-format-chatbot/issues/150)) ([05d0aac](https://github.com/nedhmn/goat-format-chatbot/commit/05d0aac0ae2003b0291298c897985f968ebf10d8))
+* **web:** point the demo input at the preset questions ([#156](https://github.com/nedhmn/goat-format-chatbot/issues/156)) ([7642408](https://github.com/nedhmn/goat-format-chatbot/commit/7642408baf6c62e1584b9205698774dd3b317a3d))
+* **web:** record the demo threads with one command ([#135](https://github.com/nedhmn/goat-format-chatbot/issues/135)) ([3292686](https://github.com/nedhmn/goat-format-chatbot/commit/3292686b260ae853b0d0097348b78ae1790fada7))
+* **web:** replay recorded threads in the demo ([#136](https://github.com/nedhmn/goat-format-chatbot/issues/136)) ([fb5672a](https://github.com/nedhmn/goat-format-chatbot/commit/fb5672a10a299d9b58c5cdeb19c84e78076786e0))
+* **web:** shorten the demo answers ([#157](https://github.com/nedhmn/goat-format-chatbot/issues/157)) ([0897c4a](https://github.com/nedhmn/goat-format-chatbot/commit/0897c4a287a5aeefc44e3956d902bbf81b345f15))
+* **web:** show preset questions above the demo input ([#152](https://github.com/nedhmn/goat-format-chatbot/issues/152)) ([b545efb](https://github.com/nedhmn/goat-format-chatbot/commit/b545efb8c13fc8a18fe9455ddb6a603b168f9ed0))
+
+
+### Performance
+
+* **web:** keep the demo recording out of the live app ([#143](https://github.com/nedhmn/goat-format-chatbot/issues/143)) ([e022e04](https://github.com/nedhmn/goat-format-chatbot/commit/e022e044164a0944b6874e58373d3c1d6c4091cc))
+
 ## 0.1.0 (2026-11-13)
 
 
