@@ -7,7 +7,7 @@ import { z } from "zod";
 
 import { toChatMessage, type ChatMessage } from "./chat-message";
 import { clockUntil, readClock } from "./demo-clock";
-import { playbackEndsAt, playThread } from "./demo-playback";
+import { FALLBACK, playbackEndsAt, playThread } from "./demo-playback";
 import {
   addTurn,
   lastActive,
@@ -39,8 +39,7 @@ export type ThreadActions = {
 
 export const SEND_FAILED = "The question could not be sent. Check that the backend is running.";
 
-export const DEMO_NOTICE =
-  "This demo has no backend, so it cannot answer questions. Run the app locally to ask one.";
+const DEMO_NOTICE = "This demo replays recorded answers to the questions above.";
 
 const INITIAL_MESSAGES = 50;
 
@@ -133,10 +132,10 @@ function useLiveThreadActions(): ThreadActions {
 function useDemoAsk(threadId?: string): Ask {
   return useCallback(
     async (question: string): Promise<Sent> => {
-      const preset = findPreset(question);
-      if (!preset) return { ok: false, error: DEMO_NOTICE };
-      const turn = { question: question.trim(), answer: preset.id, startedAt: Date.now() };
-      return { ok: true, threadId: addTurn(threadId, turn, preset.title) };
+      const asked = question.trim();
+      const preset = findPreset(asked);
+      const turn = { question: asked, answer: preset?.id ?? FALLBACK, startedAt: Date.now() };
+      return { ok: true, threadId: addTurn(threadId, turn, preset?.title ?? asked) };
     },
     [threadId],
   );
@@ -191,7 +190,7 @@ function useDemoThreadActions(): ThreadActions | undefined {
 
 const demo = import.meta.env.MODE === "demo";
 
-export const chatAvailable = !demo;
+export const inputNotice = demo ? DEMO_NOTICE : undefined;
 export const suggestionsSend = demo;
 export const useAsk: (threadId?: string) => Ask = demo ? useDemoAsk : useLiveAsk;
 export const useThreadMessages: (threadId: string) => ThreadMessages = demo

@@ -7,7 +7,7 @@ import {
 import { RiArrowUpLine } from "@remixicon/react";
 import { useState, type FormEvent, type KeyboardEvent } from "react";
 
-import { chatAvailable, DEMO_NOTICE, type Ask } from "@/features/chat/api/chat";
+import { inputNotice, type Ask } from "@/features/chat/api/chat";
 
 export function QuestionForm({
   ask,
@@ -24,7 +24,7 @@ export function QuestionForm({
 }) {
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | undefined>();
-  const canSend = chatAvailable && !sending && question.trim() !== "";
+  const canSend = !sending && question.trim() !== "";
 
   async function send() {
     const asked = question.trim();
@@ -52,7 +52,7 @@ export function QuestionForm({
     void send();
   }
 
-  const notice = error ?? (chatAvailable ? undefined : DEMO_NOTICE);
+  const notice = error ?? inputNotice;
 
   return (
     <form onSubmit={submit} className="flex flex-col gap-2">
@@ -63,7 +63,6 @@ export function QuestionForm({
           value={question}
           onChange={(event) => onQuestionChange(event.target.value)}
           onKeyDown={sendOnEnter}
-          disabled={!chatAvailable}
           className="p-3"
         />
         <InputGroupAddon align="block-end">

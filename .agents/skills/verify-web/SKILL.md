@@ -34,7 +34,7 @@ For anything the dev server can hide (the Pages base path `/goat-format-chatbot/
 pnpm build && pnpm --filter web preview      # WEB_PREVIEW_URL
 ```
 
-Anything that differs in the demo is checked on `pnpm --filter web dev:demo` (`WEB_DEMO_URL`) while you work, and on the preview before the PR.
+Anything that differs in the demo is checked on `pnpm --filter web dev:demo` (`WEB_DEMO_URL`) while you work, and on the preview before the PR. Demo threads persist in localStorage under `demo-threads`, so use a fresh browser context to start from an empty sidebar.
 
 ## Drive
 
