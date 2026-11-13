@@ -6,9 +6,8 @@ import { ConvexHttpClient } from "convex/browser";
 import { z } from "zod";
 
 import { toChatMessage, type ChatMessage } from "../src/features/chat/api/chat-message.ts";
+import type { DemoThread } from "../src/features/chat/api/demo-threads.ts";
 import { SUGGESTIONS } from "../src/features/chat/api/suggestions.ts";
-
-type DemoThread = { id: string; title: string; activeAt: number; messages: ChatMessage[] };
 
 const OUTPUT = new URL("../src/features/chat/data/demo-threads.json", import.meta.url);
 const POLL_MS = 2000;
