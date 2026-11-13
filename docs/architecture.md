@@ -79,7 +79,7 @@ Goat uses the April 2005 card text and errata, so modern card databases are not 
 
 ## Demo
 
-The GitHub Pages build is static. It replays recorded answers to a few preset questions, with no backend and no model calls, playing each one back as if it were streaming. Components never call Convex directly; they get data through our own hooks module, which the demo build swaps for the recorded threads and a localStorage thread store.
+The GitHub Pages build is static. It replays sample answers, trimmed by hand from real recordings, to a few preset questions, with no backend and no model calls, playing each one back as if it were streaming. Components never call Convex directly; they get data through our own hooks module, which the demo build swaps for the recorded threads and a localStorage thread store.
 
 ## Running it
 
