@@ -1,12 +1,24 @@
 import { Button } from "@goat-format-chatbot/design-system/components/button";
+import { cn } from "@goat-format-chatbot/design-system/lib/utils";
 
 import { SUGGESTIONS } from "@/features/chat/api/suggestions";
 
-export function PresetChips({ onPick }: { onPick: (question: string) => void }) {
+export function PresetChips({
+  onPick,
+  wrap = false,
+}: {
+  onPick: (question: string) => void;
+  wrap?: boolean;
+}) {
   return (
     <ul
       aria-label="Demo questions"
-      className="-my-1 flex gap-2 overflow-x-auto py-1 [scrollbar-width:none] sm:flex-wrap sm:overflow-visible"
+      className={cn(
+        "-my-1 flex gap-2 py-1",
+        wrap
+          ? "flex-wrap"
+          : "overflow-x-auto [scrollbar-width:none] sm:flex-wrap sm:overflow-visible",
+      )}
     >
       {SUGGESTIONS.map((question) => (
         <li key={question} className="flex shrink-0">
