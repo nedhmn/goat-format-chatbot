@@ -2,8 +2,14 @@ import { vStreamArgs } from "@convex-dev/agent";
 import { paginationOptsValidator } from "convex/server";
 import { v } from "convex/values";
 
-import { mutation, query } from "./_generated/server";
-import { sendQuestion, threadMessages, viewerThreads } from "./model/chat";
+import { internalMutation, mutation, query } from "./_generated/server";
+import {
+  backfillThreads as backfill,
+  searchViewerThreads,
+  sendQuestion,
+  threadMessages,
+  viewerThreads,
+} from "./model/chat";
 
 export const send = mutation({
   args: { question: v.string(), threadId: v.optional(v.string()) },
@@ -16,6 +22,16 @@ export const messages = query({
 });
 
 export const threads = query({
-  args: {},
-  handler: (ctx) => viewerThreads(ctx),
+  args: { paginationOpts: paginationOptsValidator },
+  handler: (ctx, { paginationOpts }) => viewerThreads(ctx, paginationOpts),
+});
+
+export const searchThreads = query({
+  args: { query: v.string() },
+  handler: (ctx, { query: words }) => searchViewerThreads(ctx, words),
+});
+
+export const backfillThreads = internalMutation({
+  args: { cursor: v.union(v.string(), v.null()) },
+  handler: (ctx, { cursor }) => backfill(ctx, cursor),
 });

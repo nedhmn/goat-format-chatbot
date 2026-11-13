@@ -1,8 +1,8 @@
 import { useUIMessages } from "@convex-dev/agent/react";
 import { api } from "@goat-format-chatbot/backend/convex/_generated/api";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation, usePaginatedQuery, useQuery } from "convex/react";
 import { ConvexError } from "convex/values";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { z } from "zod";
 
 import { toChatMessage, type ChatMessage } from "./chat-message";
@@ -15,7 +15,11 @@ export type ThreadMessages = { messages: ChatMessage[]; loading: boolean };
 
 export type PastThread = { threadId: string; title: string };
 
-export type PastThreads = { threads: PastThread[]; loading: boolean };
+export type PastThreads = {
+  threads: PastThread[];
+  loading: boolean;
+  loadMore: (() => void) | undefined;
+};
 
 export const SEND_FAILED = "The question could not be sent. Check that the backend is running.";
 
@@ -23,6 +27,8 @@ export const DEMO_NOTICE =
   "This demo has no backend, so it cannot answer questions. Run the app locally to ask one.";
 
 const INITIAL_MESSAGES = 50;
+
+const THREADS_PER_PAGE = 30;
 
 const errorMessage = z.string();
 
@@ -52,13 +58,31 @@ function useLiveThreadMessages(threadId: string): ThreadMessages {
   return { messages, loading: status === "LoadingFirstPage" };
 }
 
-function useLivePastThreads(): PastThreads {
-  const listed = useQuery(api.chat.threads, {});
+function toPastThread({ threadId, title }: PastThread): PastThread {
+  return { threadId, title };
+}
+
+function useLivePastThreads(search: string): PastThreads {
+  const words = search.trim();
+  const listed = usePaginatedQuery(api.chat.threads, words ? "skip" : {}, {
+    initialNumItems: THREADS_PER_PAGE,
+  });
+  const found = useQuery(api.chat.searchThreads, words ? { query: words } : "skip");
+  const [lastFound, setLastFound] = useState(found);
+  if (found !== undefined && found !== lastFound) setLastFound(found);
+  const { loadMore: loadPage, status, results } = listed;
+  const loadMore = useCallback(() => loadPage(THREADS_PER_PAGE), [loadPage]);
+  const searched = found ?? lastFound;
   const threads = useMemo(
-    () => (listed ?? []).map(({ threadId, title }) => ({ threadId, title })),
-    [listed],
+    () => (words ? (searched ?? []) : results).map(toPastThread),
+    [words, searched, results],
   );
-  return { threads, loading: listed === undefined };
+  if (words) return { threads, loading: searched === undefined, loadMore: undefined };
+  return {
+    threads,
+    loading: status === "LoadingFirstPage",
+    loadMore: status === "CanLoadMore" ? loadMore : undefined,
+  };
 }
 
 function useDemoAsk(): Ask {
@@ -70,7 +94,7 @@ function useDemoThreadMessages(): ThreadMessages {
 }
 
 function useDemoPastThreads(): PastThreads {
-  return { threads: [], loading: false };
+  return { threads: [], loading: false, loadMore: undefined };
 }
 
 const demo = import.meta.env.MODE === "demo";
@@ -80,4 +104,6 @@ export const useAsk: (threadId?: string) => Ask = demo ? useDemoAsk : useLiveAsk
 export const useThreadMessages: (threadId: string) => ThreadMessages = demo
   ? useDemoThreadMessages
   : useLiveThreadMessages;
-export const usePastThreads: () => PastThreads = demo ? useDemoPastThreads : useLivePastThreads;
+export const usePastThreads: (search: string) => PastThreads = demo
+  ? useDemoPastThreads
+  : useLivePastThreads;

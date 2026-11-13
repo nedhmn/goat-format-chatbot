@@ -2,7 +2,7 @@
 
 React 19 and Vite app on `@goat-format-chatbot/design-system`. Served under `/goat-format-chatbot/`, the GitHub Pages path.
 
-The app is the rulings chat: `/` asks a new question and `/threads/<id>` shows a thread with the agent's lookups and its cited answer. There is no header. A sidebar holds the name, a collapse button, an inline search over past questions, New chat, and the past threads newest first. Collapsed (or ⌘B) it is an icon rail, and the state survives a reload. Below 768px a slim bar opens it as a sheet. The demo build has no backend, so its input is disabled with a note saying so.
+The app is the rulings chat: `/` asks a new question and `/threads/<id>` shows a thread with the agent's lookups and its cited answer. There is no header. A sidebar holds the name, a collapse button, a search over past question titles, New chat, and the past threads by last activity, loading more as you scroll. Collapsed (or ⌘B) it is an icon rail, and the state survives a reload. Below 768px a slim bar opens it as a sheet. The demo build has no backend, so its input is disabled with a note saying so.
 
 ## Run
 
