@@ -7,7 +7,7 @@ import {
 import { RiArrowUpLine } from "@remixicon/react";
 import { useState, type FormEvent, type KeyboardEvent } from "react";
 
-import { inputNotice, type Ask } from "@/features/chat/api/chat";
+import { inputPlaceholder, type Ask } from "@/features/chat/api/chat";
 
 export function QuestionForm({
   ask,
@@ -52,14 +52,12 @@ export function QuestionForm({
     void send();
   }
 
-  const notice = error ?? inputNotice;
-
   return (
     <form onSubmit={submit} className="flex flex-col gap-2">
       <InputGroup>
         <InputGroupTextarea
           aria-label="Question"
-          placeholder={placeholder}
+          placeholder={inputPlaceholder ?? placeholder}
           value={question}
           onChange={(event) => onQuestionChange(event.target.value)}
           onKeyDown={sendOnEnter}
@@ -78,12 +76,9 @@ export function QuestionForm({
           </InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
-      {notice ? (
-        <p
-          role={error ? "alert" : undefined}
-          className={error ? "text-sm text-destructive" : "text-sm text-muted-foreground"}
-        >
-          {notice}
+      {error ? (
+        <p role="alert" className="text-sm text-destructive">
+          {error}
         </p>
       ) : null}
     </form>
