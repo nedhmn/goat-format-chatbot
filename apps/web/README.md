@@ -15,6 +15,14 @@ pnpm build && pnpm --filter web preview   # WEB_PREVIEW_URL in .dev/ports.env
 
 Each server takes the next free port when its default is busy and records its real URL in `.dev/ports.env`. Read the URL from there, never assume a port.
 
+## Demo threads
+
+```sh
+pnpm --filter web record
+```
+
+Asks each example question on the new-chat page against the local backend, waits for the answer, and writes the threads to `src/features/chat/data/demo-threads.json`. It then deletes those threads from the local backend. Run it with `pnpm dev` up and an OpenRouter key set, and commit the JSON. Each run makes real model calls.
+
 ## Pages
 
 - `index.html`: the app. A head script sets `.dark` on `html` before paint, from the theme saved under `theme` in `localStorage` (`light` or `dark`) or, when none is saved, from `prefers-color-scheme`. It keeps following the OS and other tabs after load. The theme is picked in the user menu at the bottom of the sidebar.

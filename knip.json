@@ -16,8 +16,8 @@
       "project": ["convex/**/*.ts", "test/**/*.ts"]
     },
     "apps/web": {
-      "entry": ["src/specimen.tsx"],
-      "project": ["src/**/*.{ts,tsx}"]
+      "entry": ["src/specimen.tsx", "scripts/*.ts"],
+      "project": ["src/**/*.{ts,tsx}", "scripts/**/*.ts"]
     }
   }
 }

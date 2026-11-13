@@ -50,6 +50,11 @@
       "files": ["apps/*/src/cli/**"],
       "rules": { "no-console": "off" }
     },
+    // Scripts run in a terminal and report their progress there.
+    {
+      "files": ["apps/*/scripts/**"],
+      "rules": { "no-console": "off" }
+    },
     // apps/web structure, documented in docs/web.md. Later overrides replace earlier
     // no-restricted-imports settings, so each zone lists every pattern it needs.
     {

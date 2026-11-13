@@ -2,13 +2,8 @@ import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 
 import { useAsk } from "@/features/chat/api/chat";
+import { SUGGESTIONS } from "@/features/chat/api/suggestions";
 import { QuestionForm } from "@/features/chat/components/question-form";
-
-const SUGGESTIONS = [
-  "Can Book of Moon be activated during the Damage Step?",
-  "Does Sangan trigger if it is banished from the field?",
-  "Can Sinister Serpent be targeted in the graveyard during the Standby Phase?",
-];
 
 export function NewChat() {
   const ask = useAsk();
