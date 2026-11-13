@@ -50,9 +50,9 @@
       "files": ["apps/*/src/cli/**"],
       "rules": { "no-console": "off" }
     },
-    // Scripts run in a terminal and report their progress there.
+    // Scripts and the eval runner run in a terminal and report their progress there.
     {
-      "files": ["apps/*/scripts/**"],
+      "files": ["apps/*/scripts/**", "packages/evals/src/run.ts"],
       "rules": { "no-console": "off" }
     },
     // apps/web structure, documented in docs/web.md. Later overrides replace earlier
