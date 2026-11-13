@@ -25,6 +25,7 @@ import { Link, useParams } from "@tanstack/react-router";
 import { useCallback, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 
 import { usePastThreads } from "@/features/chat/api/chat";
+import { groupByActivity } from "@/features/chat/utils/thread-groups";
 
 const LOADING_ROWS = 4;
 
@@ -73,6 +74,10 @@ export function ThreadSidebar({ footer }: { footer?: ReactNode }) {
   const [search, setSearch] = useState("");
   const { threads, loading, loadMore } = usePastThreads(search);
   const loadSentinel = useLoadOnScroll(loadMore);
+  const searching = search.trim() !== "";
+  const groups = searching
+    ? [{ label: "Results", threads }].filter((group) => group.threads.length > 0)
+    : groupByActivity(threads, new Date());
   const searchInput = useRef<HTMLInputElement>(null);
   const openThreadId = useParams({ strict: false, select: (params) => params.threadId });
   const { isMobile, setOpen, setOpenMobile, toggleSidebar } = useSidebar();
@@ -150,41 +155,56 @@ export function ThreadSidebar({ footer }: { footer?: ReactNode }) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Past questions</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {loading
-                ? Array.from({ length: LOADING_ROWS }, (_, row) => (
-                    <SidebarMenuItem key={row}>
-                      <SidebarMenuSkeleton />
-                    </SidebarMenuItem>
-                  ))
-                : threads.map((thread) => (
-                    <SidebarMenuItem key={thread.threadId}>
-                      <SidebarMenuButton
-                        isActive={thread.threadId === openThreadId}
-                        render={
-                          <Link
-                            to="/threads/$threadId"
-                            params={{ threadId: thread.threadId }}
-                            onClick={closeOnMobile}
-                          />
-                        }
-                      >
-                        <span>{thread.title}</span>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  ))}
-            </SidebarMenu>
-            {!loading && threads.length === 0 ? (
-              <p className="px-3 py-1.5 text-sm text-muted-foreground">
-                {search.trim() ? "No questions match." : "No questions yet."}
-              </p>
-            ) : null}
-            {loadMore ? <div ref={loadSentinel} aria-hidden className="h-px" /> : null}
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {loading ? (
+          <SidebarGroup>
+            <SidebarGroupLabel>Past questions</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {Array.from({ length: LOADING_ROWS }, (_, row) => (
+                  <SidebarMenuItem key={row}>
+                    <SidebarMenuSkeleton />
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        ) : null}
+        {!loading && threads.length === 0 ? (
+          <SidebarGroup>
+            <SidebarGroupLabel>Past questions</SidebarGroupLabel>
+            <p className="px-3 py-1.5 text-sm text-muted-foreground">
+              {searching ? "No questions match." : "No questions yet."}
+            </p>
+          </SidebarGroup>
+        ) : null}
+        {loading
+          ? null
+          : groups.map((group) => (
+              <SidebarGroup key={group.label}>
+                <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
+                <SidebarGroupContent>
+                  <SidebarMenu>
+                    {group.threads.map((thread) => (
+                      <SidebarMenuItem key={thread.threadId}>
+                        <SidebarMenuButton
+                          isActive={thread.threadId === openThreadId}
+                          render={
+                            <Link
+                              to="/threads/$threadId"
+                              params={{ threadId: thread.threadId }}
+                              onClick={closeOnMobile}
+                            />
+                          }
+                        >
+                          <span>{thread.title}</span>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    ))}
+                  </SidebarMenu>
+                </SidebarGroupContent>
+              </SidebarGroup>
+            ))}
+        {loadMore ? <div ref={loadSentinel} aria-hidden className="h-px shrink-0" /> : null}
       </SidebarContent>
       {footer ? <SidebarFooter>{footer}</SidebarFooter> : null}
     </Sidebar>
