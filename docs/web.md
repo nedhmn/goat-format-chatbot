@@ -12,6 +12,7 @@ apps/web/src/
   features/<name>/  one folder per feature, such as chat or threads
     api/            hooks that read and write backend data
     components/
+    data/           recorded data the feature's api/ hooks serve, such as the demo threads
     hooks/          UI-only hooks
     utils/
   lib/              configured libraries: the Convex client, the query client
