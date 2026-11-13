@@ -43,6 +43,12 @@
       "skillPath": "skills/convex-test/SKILL.md",
       "computedHash": "5b627fefb022a06c8c5765c11556eff85fa00428d1b5b286fab77a512bc03136"
     },
+    "langfuse": {
+      "source": "langfuse/skills",
+      "sourceType": "github",
+      "skillPath": "skills/langfuse/SKILL.md",
+      "computedHash": "a35653229c8f110a1c950bce100edaf84870b8037dd59c940031e8434b9e15f0"
+    },
     "no-use-effect": {
       "source": "Factory-AI/factory-plugins",
       "sourceType": "github",
