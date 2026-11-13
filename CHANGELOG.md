@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/nedhmn/goat-format-chatbot/compare/v0.2.0...v0.3.0) (2026-11-13)
+
+
+### Features
+
+* **backend:** set the question limits from the environment ([#166](https://github.com/nedhmn/goat-format-chatbot/issues/166)) ([3b60d24](https://github.com/nedhmn/goat-format-chatbot/commit/3b60d24450474dae1c684c5c8e9865c8282dd1b5))
+* **evals:** score rulings answers in langfuse experiments ([#164](https://github.com/nedhmn/goat-format-chatbot/issues/164)) ([ccc9fd7](https://github.com/nedhmn/goat-format-chatbot/commit/ccc9fd78ca78baf3aa74cfa76b5c54b08ca227d1))
+
 ## [0.2.0](https://github.com/nedhmn/goat-format-chatbot/compare/v0.1.0...v0.2.0) (2026-11-13)
 
 
