@@ -31,20 +31,49 @@ import {
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useRef, useState, type FocusEvent, type KeyboardEvent } from "react";
 
-import { useThreadActions, type PastThread } from "@/features/chat/api/chat";
+import { useThreadActions, type PastThread, type ThreadActions } from "@/features/chat/api/chat";
 
-export function ThreadRow({
-  thread,
-  pinned,
-  active,
-  onOpen,
-}: {
+type ThreadRowProps = {
   thread: PastThread;
   pinned: boolean;
   active: boolean;
   onOpen: () => void;
-}) {
-  const { pin, rename, remove } = useThreadActions();
+};
+
+export function ThreadRow(props: ThreadRowProps) {
+  const actions = useThreadActions();
+  if (actions) return <EditableThreadRow {...props} actions={actions} />;
+  return (
+    <SidebarMenuItem>
+      <ThreadLink thread={props.thread} active={props.active} onOpen={props.onOpen} />
+    </SidebarMenuItem>
+  );
+}
+
+function ThreadLink({
+  thread,
+  active,
+  onOpen,
+}: Pick<ThreadRowProps, "thread" | "active" | "onOpen">) {
+  return (
+    <SidebarMenuButton
+      isActive={active}
+      render={
+        <Link to="/threads/$threadId" params={{ threadId: thread.threadId }} onClick={onOpen} />
+      }
+    >
+      <span>{thread.title}</span>
+    </SidebarMenuButton>
+  );
+}
+
+function EditableThreadRow({
+  thread,
+  pinned,
+  active,
+  onOpen,
+  actions: { pin, rename, remove },
+}: ThreadRowProps & { actions: ThreadActions }) {
   const navigate = useNavigate();
   const [renaming, setRenaming] = useState(false);
   const [confirming, setConfirming] = useState(false);
@@ -86,14 +115,7 @@ export function ThreadRow({
           onBlur={saveRename}
         />
       ) : (
-        <SidebarMenuButton
-          isActive={active}
-          render={
-            <Link to="/threads/$threadId" params={{ threadId: thread.threadId }} onClick={onOpen} />
-          }
-        >
-          <span>{thread.title}</span>
-        </SidebarMenuButton>
+        <ThreadLink thread={thread} active={active} onOpen={onOpen} />
       )}
       <DropdownMenu>
         <DropdownMenuTrigger

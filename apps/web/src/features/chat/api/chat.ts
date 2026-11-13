@@ -6,6 +6,7 @@ import { useCallback, useMemo, useState } from "react";
 import { z } from "zod";
 
 import { toChatMessage, type ChatMessage } from "./chat-message";
+import { demoThreads, findDemoThread, type DemoThread } from "./demo-threads";
 
 export type Sent = { ok: true; threadId: string } | { ok: false; error: string };
 
@@ -124,12 +125,28 @@ function useDemoAsk(): Ask {
   return useCallback(async () => ({ ok: false, error: DEMO_NOTICE }), []);
 }
 
-function useDemoThreadMessages(): ThreadMessages {
-  return { messages: [], loading: false };
+const noMessages: ChatMessage[] = [];
+
+function useDemoThreadMessages(threadId: string): ThreadMessages {
+  return { messages: findDemoThread(threadId)?.messages ?? noMessages, loading: false };
 }
 
-function useDemoPastThreads(): PastThreads {
-  return { threads: [], loading: false, loadMore: undefined };
+function toDemoPastThread({ id, title, activeAt }: DemoThread): PastThread {
+  return { threadId: id, title, activeAt };
+}
+
+const demoPastThreads = demoThreads.map(toDemoPastThread);
+
+function useDemoPastThreads(search: string): PastThreads {
+  const words = search.trim().toLowerCase();
+  const threads = useMemo(
+    () =>
+      words
+        ? demoPastThreads.filter((thread) => thread.title.toLowerCase().includes(words))
+        : demoPastThreads,
+    [words],
+  );
+  return { threads, loading: false, loadMore: undefined };
 }
 
 const noPins: PastThread[] = [];
@@ -138,16 +155,12 @@ function useDemoPinnedThreads(): PastThread[] {
   return noPins;
 }
 
-async function nothing() {}
-
-const demoActions: ThreadActions = { pin: nothing, rename: nothing, remove: nothing };
-
-function useDemoThreadTitle(): string | undefined {
-  return undefined;
+function useDemoThreadTitle(threadId: string): string | undefined {
+  return findDemoThread(threadId)?.title;
 }
 
-function useDemoThreadActions(): ThreadActions {
-  return demoActions;
+function useDemoThreadActions(): ThreadActions | undefined {
+  return undefined;
 }
 
 const demo = import.meta.env.MODE === "demo";
@@ -163,7 +176,7 @@ export const usePastThreads: (search: string) => PastThreads = demo
 export const usePinnedThreads: () => PastThread[] = demo
   ? useDemoPinnedThreads
   : useLivePinnedThreads;
-export const useThreadActions: () => ThreadActions = demo
+export const useThreadActions: () => ThreadActions | undefined = demo
   ? useDemoThreadActions
   : useLiveThreadActions;
 export const useThreadTitle: (threadId: string) => string | undefined = demo
