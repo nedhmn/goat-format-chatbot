@@ -1,0 +1,140 @@
+[
+  {
+    "question": "If Dark Magician of Chaos gets Special Summoned partway through a chain and isn't the last thing to resolve, do I still get a Spell Card back from my Graveyard?",
+    "expected": "No. If Dark Magician of Chaos is Special Summoned in the middle of a chain, its optional trigger effect misses the timing, so you do not return a Spell Card from your Graveyard to your hand.",
+    "source": "https://beta.goatformat.com/cards/dark-magician-of-chaos#ruling-48b36240-1344-444b-9155-3d4b76cef93a",
+    "origin": "seed"
+  },
+  {
+    "question": "If I discard Night Assailant to pay for Tribe-Infecting Virus, does Night Assailant's effect go off?",
+    "expected": "Yes. Night Assailant only has to be sent to the Graveyard, so discarding it as a cost for Tribe-Infecting Virus or Magic Jammer activates its effect, after the current chain resolves.",
+    "source": "https://beta.goatformat.com/cards/night-assailant#ruling-e76248d6-36e1-414d-914f-0fdac0e7a08c",
+    "origin": "seed"
+  },
+  {
+    "question": "My Sinister Serpent got destroyed during my own Standby Phase. Can I bring it back to my hand right away or do I wait a turn?",
+    "expected": "You can return it right away. If Sinister Serpent is destroyed on the field during your Standby Phase, you may return it to your hand during that same Standby Phase.",
+    "source": "https://beta.goatformat.com/cards/sinister-serpent#ruling-3a245c0d-9dc0-4f9f-94ad-3124de6dedef",
+    "origin": "seed"
+  },
+  {
+    "question": "My opponent used Nobleman of Crossout on my face-down Sangan. Do I get to search with Sangan?",
+    "expected": "No. Nobleman of Crossout removes the monster from play so it never goes to the Graveyard, and Sangan's effect does not activate.",
+    "source": "https://beta.goatformat.com/cards/nobleman-of-crossout#ruling-b82f1a2a-1721-4342-a98c-bfe1f7eff4eb",
+    "origin": "seed"
+  },
+  {
+    "question": "When Mystic Tomato dies in battle and pulls out another monster, can I respond with Torrential Tribute?",
+    "expected": "No. Torrential Tribute cannot be activated during the Damage Step, so it cannot be used against monsters Special Summoned by Mystic Tomato and similar cards that summon when destroyed by battle.",
+    "source": "https://beta.goatformat.com/cards/torrential-tribute#ruling-10da53bf-8455-4974-b8a4-ef37247941ed",
+    "origin": "seed"
+  },
+  {
+    "question": "My opponent activated a Spell Card. Can I chain Breaker the Magical Warrior's effect to it to destroy something?",
+    "expected": "No. Breaker the Magical Warrior's effect is Spell Speed 1, so you cannot chain it to the activation of a Spell Card.",
+    "source": "https://beta.goatformat.com/cards/breaker-the-magical-warrior#ruling-4be562d8-66e2-4cd3-9f91-904d24fd047d",
+    "origin": "seed"
+  },
+  {
+    "question": "I removed the counter from Breaker to destroy a card and my opponent chained Ring of Destruction on Breaker. How much damage does Ring do, and does Breaker still destroy my target?",
+    "expected": "Ring of Destruction deals 1600 damage to each player because removing the Spell Counter is a cost and already happened. Breaker's destruction effect still applies even though Breaker has been destroyed.",
+    "source": "https://beta.goatformat.com/cards/breaker-the-magical-warrior#ruling-812a2aff-a31a-4da7-a604-cd56bc707ecb",
+    "origin": "seed"
+  },
+  {
+    "question": "I activated Premature Burial and my opponent chained Imperial Order. Do I get my 800 Life Points back since nothing was summoned?",
+    "expected": "No. The effect of Premature Burial is negated and the Special Summon never happens, but you still pay the 800 Life Points.",
+    "source": "https://beta.goatformat.com/cards/premature-burial#ruling-5a88f888-8d7d-4f4c-bd10-f702d0305e88",
+    "origin": "seed"
+  },
+  {
+    "question": "With Tribe-Infecting Virus, does my opponent find out which Type I'm hitting before they decide whether to chain?",
+    "expected": "Yes. You declare the Type when you activate the effect and discard for the cost, not on resolution, so your opponent can chain after knowing which Type will be destroyed.",
+    "source": "https://beta.goatformat.com/cards/tribe-infecting-virus#ruling-5ee11627-bfbc-4bdc-98b5-3880d827f48c",
+    "origin": "seed"
+  },
+  {
+    "question": "If I take my opponent's Spirit Reaper with Creature Swap, does Spirit Reaper destroy itself?",
+    "expected": "No. Creature Swap does not target, so it does not cause Spirit Reaper to be destroyed by its own effect.",
+    "source": "https://beta.goatformat.com/cards/spirit-reaper#ruling-fdf4d378-c7d4-4ce4-b63b-63683e54ac3e",
+    "origin": "seed"
+  },
+  {
+    "question": "I'm attacking and my opponent flips Mirror Force. If I chain Book of Moon to flip my attacker face-down, does it survive?",
+    "expected": "Yes. If you chain Book of Moon to your opponent's Mirror Force to flip one of your monsters face-down, that monster is not destroyed by Mirror Force.",
+    "source": "https://beta.goatformat.com/cards/book-of-moon#ruling-6104a84a-b0c8-4a0a-a84b-f22b6f93c22b",
+    "origin": "seed"
+  },
+  {
+    "question": "My opponent's Fiber Jar flipped up and its effect activated. Can I stop it by chaining Book of Moon to turn it back face-down?",
+    "expected": "No. Book of Moon flips the monster face-down again, but the Flip Effect of a monster like Fiber Jar still resolves as normal.",
+    "source": "https://beta.goatformat.com/cards/book-of-moon#ruling-ca743235-8615-4c40-ad9a-b7d3b04f1def",
+    "origin": "seed"
+  },
+  {
+    "question": "Airknight Parshath attacks a face-down flip monster and deals piercing damage. Which happens first, my draw or the flip effect?",
+    "expected": "You draw first. When Airknight Parshath attacks a face-down Flip Effect monster and inflicts Battle Damage, you draw 1 card before the Flip Effect is applied.",
+    "source": "https://beta.goatformat.com/cards/airknight-parshath#ruling-cd0dceb5-c644-4154-8250-7d7595db8ba3",
+    "origin": "seed"
+  },
+  {
+    "question": "My opponent has a face-up Jinzo. Can I still flip my Sakuretsu Armor when Jinzo attacks?",
+    "expected": "No. Traps cannot be activated while Jinzo is face-up on the field.",
+    "source": "https://beta.goatformat.com/cards/jinzo#ruling-e26b26ef-a8f3-4a95-9be2-7c73d14afa70",
+    "origin": "seed"
+  },
+  {
+    "question": "I brought back a monster with Premature Burial and my opponent hit it with Book of Moon. Does my monster die too?",
+    "expected": "No. If the equipped monster is flipped face-down, Premature Burial is destroyed but the monster is not destroyed.",
+    "source": "https://beta.goatformat.com/cards/premature-burial#ruling-bbb18385-8067-4e4a-b3b1-4cfe65a29970",
+    "origin": "seed"
+  },
+  {
+    "question": "Skill Drain is face-up. If my Sangan gets destroyed, can I still search?",
+    "expected": "Yes. Skill Drain only negates the effects of face-up Effect Monsters on the field, not effects that activate in the Graveyard such as Sangan's.",
+    "source": "https://beta.goatformat.com/cards/skill-drain#ruling-e5bf7488-f70e-470f-8d93-5728a4110b48",
+    "origin": "seed"
+  },
+  {
+    "question": "I used Scapegoat this turn. Am I still allowed to Set a monster?",
+    "expected": "Yes. You can Set a monster in the same turn you activate Scapegoat.",
+    "source": "https://beta.goatformat.com/cards/scapegoat#ruling-a102eab2-8485-40ef-b0d9-6048602dad2e",
+    "origin": "seed"
+  },
+  {
+    "question": "Can I attack with Chaos Sorcerer and then use its banish effect in Main Phase 2?",
+    "expected": "No. If Chaos Sorcerer attacks, you cannot use its effect during Main Phase 2; you can only activate it in Main Phase 2 if it did not attack.",
+    "source": "https://beta.goatformat.com/cards/chaos-sorcerer#ruling-18b40492-d390-443d-9358-9f89b9a0c7b0",
+    "origin": "seed"
+  },
+  {
+    "question": "If my opponent responds to my Call of the Haunted by destroying it with Mystical Space Typhoon, do I still get my monster?",
+    "expected": "No. If Call of the Haunted is destroyed in a chain to its own activation, the monster it would Special Summon is not Special Summoned.",
+    "source": "https://beta.goatformat.com/cards/call-of-the-haunted#ruling-132ae236-a782-4ce2-bebe-d4fc0c7e5388",
+    "origin": "seed"
+  },
+  {
+    "question": "What happens if Morphing Jar flips up and one of us has only 3 cards left in the Deck?",
+    "expected": "That player loses the Duel. If either player has fewer than 5 cards in their Deck when Morphing Jar's Flip Effect activates, that player loses because the card says draw.",
+    "source": "https://beta.goatformat.com/cards/morphing-jar#ruling-82a731ee-7f7d-4415-81e7-e52d803bcda4",
+    "origin": "seed"
+  },
+  {
+    "question": "My opponent controls two monsters tied for the highest DEF. When I activate Smashing Ground, who chooses which one gets destroyed?",
+    "expected": "The rulings in the data do not settle this. No ruling covers how Smashing Ground resolves when monsters are tied for the highest DEF.",
+    "source": null,
+    "origin": "seed"
+  },
+  {
+    "question": "If Magician of Faith flips up while there are no Spell Cards in my Graveyard, does its effect still activate?",
+    "expected": "The rulings in the data do not settle this. No ruling covers Magician of Faith's Flip Effect when the Graveyard has no Spell Cards.",
+    "source": null,
+    "origin": "seed"
+  },
+  {
+    "question": "Does Sakuretsu Armor target the attacking monster?",
+    "expected": "The rulings in the data do not settle this. No ruling states whether Sakuretsu Armor targets.",
+    "source": null,
+    "origin": "seed"
+  }
+]

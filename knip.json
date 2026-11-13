@@ -12,6 +12,10 @@
     "packages/*": {
       "project": ["src/**/*.{ts,tsx}"]
     },
+    "packages/evals": {
+      "entry": ["src/run.ts"],
+      "project": ["src/**/*.ts"]
+    },
     "packages/backend": {
       "project": ["convex/**/*.ts", "test/**/*.ts"]
     },

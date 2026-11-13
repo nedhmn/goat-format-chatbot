@@ -1,0 +1,658 @@
+{
+  "ranAt": "2026-11-13T16:49:27.342Z",
+  "runName": "Rulings - 2026-11-13T16:46:23.951Z",
+  "experimentUrl": "https://us.cloud.langfuse.com/project/cmwf773u3002rad0knan33pni/experiments/results?baseline=3359640a6727c949",
+  "commit": "cb680ac",
+  "judge": "anthropic/claude-sonnet-5.5",
+  "passRates": [
+    {
+      "name": "cites the ruling rate",
+      "value": 1,
+      "comment": "20 of 20"
+    },
+    {
+      "name": "agrees with the ruling rate",
+      "value": 1,
+      "comment": "23 of 23"
+    }
+  ],
+  "items": [
+    {
+      "question": "If Dark Magician of Chaos gets Special Summoned partway through a chain and isn't the last thing to resolve, do I still get a Spell Card back from my Graveyard?",
+      "expected": {
+        "answer": "No. If Dark Magician of Chaos is Special Summoned in the middle of a chain, its optional trigger effect misses the timing, so you do not return a Spell Card from your Graveyard to your hand.",
+        "source": "https://beta.goatformat.com/cards/dark-magician-of-chaos#ruling-48b36240-1344-444b-9155-3d4b76cef93a"
+      },
+      "answer": "No — you do not get a Spell Card back in that case.\n\n\"Dark Magician of Chaos\"'s Spell retrieval is an optional Trigger Effect with a \"when ... successfully\" condition, so it has to be the last thing to resolve for the timing to be correct. The ruling on the card says exactly this: if it is Special Summoned in the middle of a chain (not the last effect in the chain to resolve), the timing is not correct and you do **not** return a Spell Card from your Graveyard to your hand.\n\nNote that this is about *mid-chain* Summons, not about cards like \"Monster Gate\" or \"Reasoning\": when \"Dark Magician of Chaos\" is Special Summoned by \"Monster Gate\", its effect still activates, but only after \"Monster Gate\" has fully resolved — so you can even retrieve a Spell Card that \"Monster Gate\" itself sent to the Graveyard. The difference is that \"Monster Gate\" finishes resolving entirely, leaving \"Dark Magician of Chaos\"'s Summon as the last thing that happened.\n\nSources:\n- [Dark Magician of Chaos ruling — Missing the Timing](https://beta.goatformat.com/cards/dark-magician-of-chaos#ruling-48b36240-1344-444b-9155-3d4b76cef93a): if Special Summoned mid-chain, the Optional Trigger Effect misses its timing and you do not retrieve a Spell Card.\n- [Monster Gate ruling naming Dark Magician of Chaos](https://beta.goatformat.com/cards/monster-gate#ruling-dec56e07-a726-41aa-89d2-66bfd6c4884f): the effect activates after \"Monster Gate\" has fully resolved, so Spell Cards sent to the Graveyard by \"Monster Gate\" can be retrieved.\n- [Dark Magician of Chaos ruling — Reasoning](https://beta.goatformat.com/cards/dark-magician-of-chaos#ruling-c79cfc84-f38c-492b-8a22-04f60aa4f005): its effect activates when Special Summoned by \"Reasoning\" (the Summon is the last thing to resolve).",
+      "cited": [
+        "https://beta.goatformat.com/cards/dark-magician-of-chaos#ruling-48b36240-1344-444b-9155-3d4b76cef93a",
+        "https://beta.goatformat.com/cards/monster-gate#ruling-dec56e07-a726-41aa-89d2-66bfd6c4884f",
+        "https://beta.goatformat.com/cards/dark-magician-of-chaos#ruling-c79cfc84-f38c-492b-8a22-04f60aa4f005"
+      ],
+      "lookups": 2,
+      "length": 1769,
+      "scores": [
+        {
+          "name": "cites the ruling",
+          "value": 1,
+          "comment": "https://beta.goatformat.com/cards/dark-magician-of-chaos#ruling-48b36240-1344-444b-9155-3d4b76cef93a"
+        },
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer gives the same verdict as the reference: if Dark Magician of Chaos is Special Summoned mid-chain, its optional trigger effect misses the timing and no Spell Card is returned, and the added Monster Gate/Reasoning detail does not contradict this."
+        }
+      ],
+      "traceId": "21ad2f3213303d77b34fa10307d6554f"
+    },
+    {
+      "question": "If I discard Night Assailant to pay for Tribe-Infecting Virus, does Night Assailant's effect go off?",
+      "expected": {
+        "answer": "Yes. Night Assailant only has to be sent to the Graveyard, so discarding it as a cost for Tribe-Infecting Virus or Magic Jammer activates its effect, after the current chain resolves.",
+        "source": "https://beta.goatformat.com/cards/night-assailant#ruling-e76248d6-36e1-414d-914f-0fdac0e7a08c"
+      },
+      "answer": "I'll look up both cards first. **Yes — Night Assailant's second effect activates, but only after the whole chain containing Tribe-Infecting Virus's effect resolves.**\n\nThe ruling on Night Assailant is explicit: its effect \"activates when sent to the Graveyard as a cost for 'Magic Jammer' or 'Tribe-Infecting Virus'; 'Night Assailant''s effect activates after the current chain resolves.\" It doesn't matter that the discard was a cost rather than an effect. The End of Anubis ruling shows the same timing — when Night Assailant is discarded for Tribe-Infecting Virus and Fiend is named, Night Assailant's effect is activated after Tribe-Infecting Virus resolves.\n\nTwo things to keep in mind:\n- Night Assailant cannot select itself (so no loop), so you need a *different* Flip Effect Monster in your Graveyard to return. If the only Flip Effect Monster in the Graveyard is the Night Assailant you just discarded, there is nothing to get back.\n- This is unlike a \"when… you can\" card such as Peten the Dark Clown, whose effect does *not* activate when discarded as a cost for Tribe-Infecting Virus; Night Assailant's is a plain \"when sent\" trigger with no missed-timing restriction stated.\n\nAlso note the effect is negated entirely while The End of Anubis is face-up on the field — but in the Tribe-Infecting Virus scenario where Fiend is named, Anubis is destroyed first, which is why Night Assailant's effect still goes off afterwards.\n\nSources:\n- [Night Assailant ruling](https://beta.goatformat.com/cards/night-assailant#ruling-e76248d6-36e1-414d-914f-0fdac0e7a08c) — effect activates when sent as a cost for Tribe-Infecting Virus, after the current chain resolves.\n- [Night Assailant ruling](https://beta.goatformat.com/cards/night-assailant#ruling-dc6bffa4-e053-407d-a298-6cdd1c90c679) — it cannot select itself, so no infinite loop.\n- [The End of Anubis ruling](https://beta.goatformat.com/cards/the-end-of-anubis#ruling-e043553d-5e50-4299-aa87-9c866fbe9dc5) — Night Assailant discarded for Tribe-Infecting Virus activates after it resolves.\n- [The End of Anubis ruling](https://beta.goatformat.com/cards/the-end-of-anubis#ruling-8082d010-bc79-42cd-b9db-cc9d00c47df7) — Anubis negates Night Assailant's second effect while on the field.\n- [Peten the Dark Clown ruling](https://beta.goatformat.com/cards/peten-the-dark-clown#ruling-30e34349-6eba-4c01-b54b-8d5af869fbee) — contrast: that card's \"when… you can\" effect does not activate when discarded for Tribe-Infecting Virus.",
+      "cited": [
+        "https://beta.goatformat.com/cards/night-assailant#ruling-e76248d6-36e1-414d-914f-0fdac0e7a08c",
+        "https://beta.goatformat.com/cards/night-assailant#ruling-dc6bffa4-e053-407d-a298-6cdd1c90c679",
+        "https://beta.goatformat.com/cards/the-end-of-anubis#ruling-e043553d-5e50-4299-aa87-9c866fbe9dc5",
+        "https://beta.goatformat.com/cards/the-end-of-anubis#ruling-8082d010-bc79-42cd-b9db-cc9d00c47df7",
+        "https://beta.goatformat.com/cards/peten-the-dark-clown#ruling-30e34349-6eba-4c01-b54b-8d5af869fbee"
+      ],
+      "lookups": 4,
+      "length": 2480,
+      "scores": [
+        {
+          "name": "cites the ruling",
+          "value": 1,
+          "comment": "https://beta.goatformat.com/cards/night-assailant#ruling-e76248d6-36e1-414d-914f-0fdac0e7a08c"
+        },
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer gives the same verdict as the reference: Night Assailant's effect activates when discarded as a cost for Tribe-Infecting Virus, after the current chain resolves, and its extra details do not contradict this."
+        }
+      ],
+      "traceId": "d8d201796b8f673e1cbf575f0ec348f3"
+    },
+    {
+      "question": "My Sinister Serpent got destroyed during my own Standby Phase. Can I bring it back to my hand right away or do I wait a turn?",
+      "expected": {
+        "answer": "You can return it right away. If Sinister Serpent is destroyed on the field during your Standby Phase, you may return it to your hand during that same Standby Phase.",
+        "source": "https://beta.goatformat.com/cards/sinister-serpent#ruling-3a245c0d-9dc0-4f9f-94ad-3124de6dedef"
+      },
+      "answer": "Yes — you can return **Sinister Serpent** to your hand during that same Standby Phase.\n\nIts effect is optional, but because it was destroyed during your Standby Phase, you may activate it and retrieve it immediately rather than waiting a turn—unless its effect was negated (for example, by battle with **Dark Ruler Ha Des** or **Dark Balter the Terrible**).\n\n**Sources**\n- [Sinister Serpent ruling](https://beta.goatformat.com/cards/sinister-serpent#ruling-3a245c0d-9dc0-4f9f-94ad-3124de6dedef) — says a Sinister Serpent destroyed during your Standby Phase may be returned during that same Standby Phase.\n- [Sinister Serpent ruling](https://beta.goatformat.com/cards/sinister-serpent#ruling-72d12652-b6a6-4125-a3fe-ca714d576cc4) — says its effect is optional.\n- [Sinister Serpent ruling](https://beta.goatformat.com/cards/sinister-serpent#ruling-8f6c0bb1-9884-430c-98df-05f4f403d753) — says destruction by Dark Ruler Ha Des or Dark Balter the Terrible prevents the effect.",
+      "cited": [
+        "https://beta.goatformat.com/cards/sinister-serpent#ruling-3a245c0d-9dc0-4f9f-94ad-3124de6dedef",
+        "https://beta.goatformat.com/cards/sinister-serpent#ruling-72d12652-b6a6-4125-a3fe-ca714d576cc4",
+        "https://beta.goatformat.com/cards/sinister-serpent#ruling-8f6c0bb1-9884-430c-98df-05f4f403d753"
+      ],
+      "lookups": 2,
+      "length": 972,
+      "scores": [
+        {
+          "name": "cites the ruling",
+          "value": 1,
+          "comment": "https://beta.goatformat.com/cards/sinister-serpent#ruling-3a245c0d-9dc0-4f9f-94ad-3124de6dedef"
+        },
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer gives the same verdict as the reference, that Sinister Serpent can return to hand during that same Standby Phase, and its extra caveat about negation does not contradict the reference."
+        }
+      ],
+      "traceId": "7319e2912ec6fca07408745335f7f0de"
+    },
+    {
+      "question": "My opponent used Nobleman of Crossout on my face-down Sangan. Do I get to search with Sangan?",
+      "expected": {
+        "answer": "No. Nobleman of Crossout removes the monster from play so it never goes to the Graveyard, and Sangan's effect does not activate.",
+        "source": "https://beta.goatformat.com/cards/nobleman-of-crossout#ruling-b82f1a2a-1721-4342-a98c-bfe1f7eff4eb"
+      },
+      "answer": "No — you do not get to search with \"Sangan.\"\n\n\"Nobleman of Crossout\" destroys the face-down monster and removes it from play, so \"Sangan\" never goes to the Graveyard, and its effect (which triggers only when it is sent from the field to the Graveyard) does not activate. The ruling under Nobleman of Crossout says this explicitly: the targeted monster is removed from play and never goes to the Graveyard, \"so the effects of cards like 'Sangan' will not activate.\" The related ruling also confirms that a face-down Flip Effect Monster hit by Nobleman of Crossout is not flipped face-up and its Flip Effect is not activated (Sangan is not a Flip Effect Monster anyway, and no copies would be removed from the Decks here).\n\nSources:\n- [Nobleman of Crossout ruling](https://beta.goatformat.com/cards/nobleman-of-crossout#ruling-b82f1a2a-1721-4342-a98c-bfe1f7eff4eb) — the monster is removed from play and never goes to the Graveyard, so \"Sangan\"'s effect will not activate.\n- [Nobleman of Crossout ruling](https://beta.goatformat.com/cards/nobleman-of-crossout#ruling-79122b60-1a8a-4862-ad07-8a3f0e60b732) — the targeted monster is not flipped face-up and its Flip Effect is not activated.",
+      "cited": [
+        "https://beta.goatformat.com/cards/nobleman-of-crossout#ruling-b82f1a2a-1721-4342-a98c-bfe1f7eff4eb",
+        "https://beta.goatformat.com/cards/nobleman-of-crossout#ruling-79122b60-1a8a-4862-ad07-8a3f0e60b732"
+      ],
+      "lookups": 4,
+      "length": 1186,
+      "scores": [
+        {
+          "name": "cites the ruling",
+          "value": 1,
+          "comment": "https://beta.goatformat.com/cards/nobleman-of-crossout#ruling-b82f1a2a-1721-4342-a98c-bfe1f7eff4eb"
+        },
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer reaches the same verdict as the reference (no search) with the same reasoning: Nobleman of Crossout removes Sangan from play so it never goes to the Graveyard and its effect does not activate."
+        }
+      ],
+      "traceId": "a3fdca65f6c7487a16050c86d67fb46d"
+    },
+    {
+      "question": "When Mystic Tomato dies in battle and pulls out another monster, can I respond with Torrential Tribute?",
+      "expected": {
+        "answer": "No. Torrential Tribute cannot be activated during the Damage Step, so it cannot be used against monsters Special Summoned by Mystic Tomato and similar cards that summon when destroyed by battle.",
+        "source": "https://beta.goatformat.com/cards/torrential-tribute#ruling-10da53bf-8455-4974-b8a4-ef37247941ed"
+      },
+      "answer": "I'll look up both cards first. **No.** You cannot activate Torrential Tribute against the monster Special Summoned by Mystic Tomato.\n\nMystic Tomato's effect activates when it is sent to the Graveyard as a result of battle, so the Special Summon happens during the Damage Step. Torrential Tribute's own ruling states plainly that it **cannot be activated during the Damage Step**, and that this specifically bars it from being used against monsters Special Summoned by \"Mystic Tomato,\" \"Giant Rat,\" \"Nimble Momonga,\" \"Masked Dragon\" and similar cards — as well as against \"Cyber Jar\" or \"Morphing Jar #2\" flipped face-up by an attack. Mystic Tomato's page says the same thing: \"Since the Special Summoning occurs during the Damage Step, 'Torrential Tribute', etc. cannot be used.\" The Damage Step guide section adds that only the effects of monsters and Counter Traps can be used to negate things there — Normal Traps cannot.\n\nNote that this is about timing, not about Torrential Tribute being unable to respond to a Special Summon in general — it can be activated after a monster is Summoned through another card's effect such as \"Monster Reborn\" or \"Call of the Haunted.\" It is simply locked out during the Damage Step.\n\nSources:\n- [Mystic Tomato ruling](https://beta.goatformat.com/cards/mystic-tomato#ruling-1f1cb147-79d9-4134-a9a3-b1304b88273b) — because the Special Summon happens in the Damage Step, \"Torrential Tribute\" cannot be used.\n- [Torrential Tribute ruling](https://beta.goatformat.com/cards/torrential-tribute#ruling-10da53bf-8455-4974-b8a4-ef37247941ed) — Torrential Tribute cannot be activated during the Damage Step, expressly including against \"Mystic Tomato.\"\n- [Torrential Tribute ruling](https://beta.goatformat.com/cards/torrential-tribute#ruling-126ff640-f16b-4b96-9a41-a4a31d0875c3) — it can be activated after Summons through card effects like \"Monster Reborn.\"\n- [Rulings: The Damage Step](https://beta.goatformat.com/learn/rulings#the-damage-step) — only monster effects and Counter Traps can negate in the Damage Step; Normal Traps cannot be used.",
+      "cited": [
+        "https://beta.goatformat.com/cards/mystic-tomato#ruling-1f1cb147-79d9-4134-a9a3-b1304b88273b",
+        "https://beta.goatformat.com/cards/torrential-tribute#ruling-10da53bf-8455-4974-b8a4-ef37247941ed",
+        "https://beta.goatformat.com/cards/torrential-tribute#ruling-126ff640-f16b-4b96-9a41-a4a31d0875c3",
+        "https://beta.goatformat.com/learn/rulings#the-damage-step"
+      ],
+      "lookups": 5,
+      "length": 2077,
+      "scores": [
+        {
+          "name": "cites the ruling",
+          "value": 1,
+          "comment": "https://beta.goatformat.com/cards/torrential-tribute#ruling-10da53bf-8455-4974-b8a4-ef37247941ed"
+        },
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer says No, Torrential Tribute cannot be activated because the Special Summon occurs during the Damage Step, which matches the reference verdict and reasoning, and its extra detail does not contradict the reference."
+        }
+      ],
+      "traceId": "08603a1ace3975522ee2ddd16750670f"
+    },
+    {
+      "question": "My opponent activated a Spell Card. Can I chain Breaker the Magical Warrior's effect to it to destroy something?",
+      "expected": {
+        "answer": "No. Breaker the Magical Warrior's effect is Spell Speed 1, so you cannot chain it to the activation of a Spell Card.",
+        "source": "https://beta.goatformat.com/cards/breaker-the-magical-warrior#ruling-4be562d8-66e2-4cd3-9f91-904d24fd047d"
+      },
+      "answer": "I'll look up Breaker the Magical Warrior first.\n\n \n\n **No.** Breaker the Magical Warrior's counter-removal effect is Spell Speed 1, so it cannot be chained to the activation of a Spell Card (or to any other effect).\n\nBreaker's destruction effect is a cost-paying Spell Speed 1 effect: you remove the Spell Counter as a cost, and the ruling states plainly that because it is Spell Speed 1 you cannot chain it to the activation of a Spell Card. A separate Netrep ruling says the same — the removal is a Cost Effect, Speed 1, and \"may not be chained to any other effect.\" Note also that you cannot activate it at all if there are no Spell or Trap Cards on the field to destroy.\n\nTwo related points that come up alongside this:\n- The Spell Counter placement when Breaker is Normal Summoned is itself a chain, and it is Spell Speed 1 as well — the counter is placed by the effect, not instantly, so \"Trap Hole\" / \"Ring of Destruction\" chained to that placement resolve first (and the counter is not yet on him).\n- Removing the counter is a cost, so once you have activated the effect and paid it, the destruction still applies even if Breaker is destroyed in a chain (e.g. by \"Ring of Destruction\", which will deal 1600 damage to each player).\n\n**Sources**\n- [Breaker the Magical Warrior ruling](https://beta.goatformat.com/cards/breaker-the-magical-warrior#ruling-4be562d8-66e2-4cd3-9f91-904d24fd047d) — his effect is Spell Speed 1, so it cannot be chained to a Spell Card's activation.\n- [Breaker the Magical Warrior ruling](https://beta.goatformat.com/cards/breaker-the-magical-warrior#ruling-622f2bfa-bd6b-4582-aaeb-80d194ca6c6a) — counter removal is a Speed 1 Cost Effect, not chainable to any other effect.\n- [Breaker the Magical Warrior ruling](https://beta.goatformat.com/cards/breaker-the-magical-warrior#ruling-ff757e91-0b29-446a-b3f8-909e1ee56894) — effect cannot be activated with no Spell/Trap Cards on the field.\n- [Breaker the Magical Warrior ruling](https://beta.goatformat.com/cards/breaker-the-magical-warrior#ruling-4af3148e-14ed-48e5-b052-4cca5e1bacf9) — placing the counter is a chain after the Summon; chained Trap Hole/Ring resolves first.\n- [Breaker the Magical Warrior ruling](https://beta.goatformat.com/cards/breaker-the-magical-warrior#ruling-812a2aff-a31a-4da7-a604-cd56bc707ecb) — removing the counter is a cost; the destruction still applies if he is destroyed in response.",
+      "cited": [
+        "https://beta.goatformat.com/cards/breaker-the-magical-warrior#ruling-4be562d8-66e2-4cd3-9f91-904d24fd047d",
+        "https://beta.goatformat.com/cards/breaker-the-magical-warrior#ruling-622f2bfa-bd6b-4582-aaeb-80d194ca6c6a",
+        "https://beta.goatformat.com/cards/breaker-the-magical-warrior#ruling-ff757e91-0b29-446a-b3f8-909e1ee56894",
+        "https://beta.goatformat.com/cards/breaker-the-magical-warrior#ruling-4af3148e-14ed-48e5-b052-4cca5e1bacf9",
+        "https://beta.goatformat.com/cards/breaker-the-magical-warrior#ruling-812a2aff-a31a-4da7-a604-cd56bc707ecb"
+      ],
+      "lookups": 2,
+      "length": 2399,
+      "scores": [
+        {
+          "name": "cites the ruling",
+          "value": 1,
+          "comment": "https://beta.goatformat.com/cards/breaker-the-magical-warrior#ruling-4be562d8-66e2-4cd3-9f91-904d24fd047d"
+        },
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer gives the same verdict as the reference, No, because Breaker's effect is Spell Speed 1 and cannot be chained to a Spell Card's activation, and its extra details do not contradict that."
+        }
+      ],
+      "traceId": "d5b85bb40790e07f5440e70c50df9606"
+    },
+    {
+      "question": "I removed the counter from Breaker to destroy a card and my opponent chained Ring of Destruction on Breaker. How much damage does Ring do, and does Breaker still destroy my target?",
+      "expected": {
+        "answer": "Ring of Destruction deals 1600 damage to each player because removing the Spell Counter is a cost and already happened. Breaker's destruction effect still applies even though Breaker has been destroyed.",
+        "source": "https://beta.goatformat.com/cards/breaker-the-magical-warrior#ruling-812a2aff-a31a-4da7-a604-cd56bc707ecb"
+      },
+      "answer": "**Ring of Destruction deals 1600 damage to each player, and yes—Breaker the Magical Warrior’s effect still destroys your target.**\n\nRemoving the Spell Counter was a cost, so Breaker is already back to 1600 ATK when Ring of Destruction resolves. Ring destroys Breaker and inflicts 1600 damage to both players; then Breaker’s effect still resolves and destroys the targeted Spell or Trap, even though Breaker is no longer on the field.\n\n**Sources**\n- [Breaker the Magical Warrior ruling](https://beta.goatformat.com/cards/breaker-the-magical-warrior#ruling-812a2aff-a31a-4da7-a604-cd56bc707ecb): removing the counter is a cost, so Ring deals 1600 to each player, and Breaker’s destruction effect still applies.\n- [Ring of Destruction ruling](https://beta.goatformat.com/cards/ring-of-destruction#ruling-fea5858f-a3a6-4014-b742-3e8946d8ea13): damage is based on the monster’s current ATK, not its original ATK.",
+      "cited": [
+        "https://beta.goatformat.com/cards/breaker-the-magical-warrior#ruling-812a2aff-a31a-4da7-a604-cd56bc707ecb",
+        "https://beta.goatformat.com/cards/ring-of-destruction#ruling-fea5858f-a3a6-4014-b742-3e8946d8ea13"
+      ],
+      "lookups": 4,
+      "length": 907,
+      "scores": [
+        {
+          "name": "cites the ruling",
+          "value": 1,
+          "comment": "https://beta.goatformat.com/cards/breaker-the-magical-warrior#ruling-812a2aff-a31a-4da7-a604-cd56bc707ecb"
+        },
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer matches the reference: Ring deals 1600 to each player because the counter removal was a cost, and Breaker's effect still destroys the target."
+        }
+      ],
+      "traceId": "b7593199def5d01337a89dfdbc90c0ab"
+    },
+    {
+      "question": "I activated Premature Burial and my opponent chained Imperial Order. Do I get my 800 Life Points back since nothing was summoned?",
+      "expected": {
+        "answer": "No. The effect of Premature Burial is negated and the Special Summon never happens, but you still pay the 800 Life Points.",
+        "source": "https://beta.goatformat.com/cards/premature-burial#ruling-5a88f888-8d7d-4f4c-bd10-f702d0305e88"
+      },
+      "answer": "No. You still pay the 800 Life Points even though nothing is Summoned.\n\nIf your opponent chains **Imperial Order** to **Premature Burial**, **Imperial Order** negates **Premature Burial**'s effect, so the Special Summon never occurs. The 800 Life Points are still paid, and **Premature Burial** is sent to the Graveyard because it no longer has a legal target.\n\n**Sources**\n- [Premature Burial ruling](https://beta.goatformat.com/cards/premature-burial#ruling-5a88f888-8d7d-4f4c-bd10-f702d0305e88): chaining **Imperial Order** negates the effect and prevents the Summon, but you still pay 800 Life Points.\n- [Imperial Order ruling](https://beta.goatformat.com/cards/imperial-order#ruling-c19e49d7-0c8f-4106-9fb5-09a91afd8f6e): **Premature Burial** does not Summon and is sent to the Graveyard when **Imperial Order** is chained and not negated.",
+      "cited": [
+        "https://beta.goatformat.com/cards/premature-burial#ruling-5a88f888-8d7d-4f4c-bd10-f702d0305e88",
+        "https://beta.goatformat.com/cards/imperial-order#ruling-c19e49d7-0c8f-4106-9fb5-09a91afd8f6e"
+      ],
+      "lookups": 4,
+      "length": 844,
+      "scores": [
+        {
+          "name": "cites the ruling",
+          "value": 1,
+          "comment": "https://beta.goatformat.com/cards/premature-burial#ruling-5a88f888-8d7d-4f4c-bd10-f702d0305e88"
+        },
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer gives the same verdict as the reference (No, the 800 Life Points are still paid because the effect is negated and no Special Summon occurs), and its extra detail about Premature Burial going to the Graveyard does not contradict the reference."
+        }
+      ],
+      "traceId": "8bf7c1bb0a9d77a7287e0152b504972f"
+    },
+    {
+      "question": "With Tribe-Infecting Virus, does my opponent find out which Type I'm hitting before they decide whether to chain?",
+      "expected": {
+        "answer": "Yes. You declare the Type when you activate the effect and discard for the cost, not on resolution, so your opponent can chain after knowing which Type will be destroyed.",
+        "source": "https://beta.goatformat.com/cards/tribe-infecting-virus#ruling-5ee11627-bfbc-4bdc-98b5-3880d827f48c"
+      },
+      "answer": "Yes. You declare the Type when you activate Tribe-Infecting Virus’s effect and pay the discard cost, so your opponent knows the declared Type before choosing whether to chain.\n\n**Sources**\n- [Tribe-Infecting Virus ruling](https://beta.goatformat.com/cards/tribe-infecting-virus#ruling-5ee11627-bfbc-4bdc-98b5-3880d827f48c): says the Type is declared at activation, not resolution, so the opponent can chain after it is announced.",
+      "cited": [
+        "https://beta.goatformat.com/cards/tribe-infecting-virus#ruling-5ee11627-bfbc-4bdc-98b5-3880d827f48c"
+      ],
+      "lookups": 2,
+      "length": 429,
+      "scores": [
+        {
+          "name": "cites the ruling",
+          "value": 1,
+          "comment": "https://beta.goatformat.com/cards/tribe-infecting-virus#ruling-5ee11627-bfbc-4bdc-98b5-3880d827f48c"
+        },
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer gives the same verdict as the reference: the Type is declared on activation when the discard cost is paid, so the opponent knows it before deciding whether to chain."
+        }
+      ],
+      "traceId": "a2048bb7d66a5ae34ae5647d2752f777"
+    },
+    {
+      "question": "If I take my opponent's Spirit Reaper with Creature Swap, does Spirit Reaper destroy itself?",
+      "expected": {
+        "answer": "No. Creature Swap does not target, so it does not cause Spirit Reaper to be destroyed by its own effect.",
+        "source": "https://beta.goatformat.com/cards/spirit-reaper#ruling-fdf4d378-c7d4-4ce4-b63b-63683e54ac3e"
+      },
+      "answer": "No. **Creature Swap** does not target, and **Spirit Reaper** only destroys itself when it is targeted by an effect. Its ruling expressly lists **Creature Swap** as a card that will not destroy it. **Creature Swap** instead chooses the monsters when its effect resolves.\n\nSources:\n- [Spirit Reaper ruling](https://beta.goatformat.com/cards/spirit-reaper#ruling-fdf4d378-c7d4-4ce4-b63b-63683e54ac3e): Lists **Creature Swap** among cards that do not destroy **Spirit Reaper** because they do not target.\n- [Creature Swap ruling](https://beta.goatformat.com/cards/creature-swap#ruling-21cbbace-c43e-45a1-9900-81e04bbcd052): States that **Creature Swap** does not target and that the monsters are chosen when its effect resolves.",
+      "cited": [
+        "https://beta.goatformat.com/cards/spirit-reaper#ruling-fdf4d378-c7d4-4ce4-b63b-63683e54ac3e",
+        "https://beta.goatformat.com/cards/creature-swap#ruling-21cbbace-c43e-45a1-9900-81e04bbcd052"
+      ],
+      "lookups": 4,
+      "length": 724,
+      "scores": [
+        {
+          "name": "cites the ruling",
+          "value": 1,
+          "comment": "https://beta.goatformat.com/cards/spirit-reaper#ruling-fdf4d378-c7d4-4ce4-b63b-63683e54ac3e"
+        },
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer gives the same verdict as the reference (No, Spirit Reaper is not destroyed) with the same reasoning that Creature Swap does not target, and its extra detail does not contradict the reference."
+        }
+      ],
+      "traceId": "0e7902c84811a06bd65fab2090729e1c"
+    },
+    {
+      "question": "I'm attacking and my opponent flips Mirror Force. If I chain Book of Moon to flip my attacker face-down, does it survive?",
+      "expected": {
+        "answer": "Yes. If you chain Book of Moon to your opponent's Mirror Force to flip one of your monsters face-down, that monster is not destroyed by Mirror Force.",
+        "source": "https://beta.goatformat.com/cards/book-of-moon#ruling-6104a84a-b0c8-4a0a-a84b-f22b6f93c22b"
+      },
+      "answer": "Yes. If you chain **Book of Moon** to **Mirror Force** and flip your attacking monster face-down, that monster is not destroyed by **Mirror Force**.\n\n**Book of Moon** resolves first and flips the attacker into face-down Defense Position. Then **Mirror Force** resolves, but it only destroys Attack Position monsters, so the flipped monster is spared. Note that flipping the attacking monster face-down also stops its attack and does not trigger a replay.\n\n**Sources**\n- [Book of Moon ruling](https://beta.goatformat.com/cards/book-of-moon#ruling-6104a84a-b0c8-4a0a-a84b-f22b6f93c22b): expressly says a monster flipped face-down by a chained **Book of Moon** is not destroyed by **Mirror Force**.\n- [Mirror Force ruling](https://beta.goatformat.com/cards/mirror-force#ruling-8efbc2b6-8328-44ed-9ab5-16ef50f6d5a9): monsters turned face-down in a chain with **Mirror Force** are not destroyed.\n- [Book of Moon ruling](https://beta.goatformat.com/cards/book-of-moon#ruling-2e63d32d-dc4a-47fa-9f77-a7345db3b9c0): flipping an attacking monster face-down stops the attack without a replay.",
+      "cited": [
+        "https://beta.goatformat.com/cards/book-of-moon#ruling-6104a84a-b0c8-4a0a-a84b-f22b6f93c22b",
+        "https://beta.goatformat.com/cards/mirror-force#ruling-8efbc2b6-8328-44ed-9ab5-16ef50f6d5a9",
+        "https://beta.goatformat.com/cards/book-of-moon#ruling-2e63d32d-dc4a-47fa-9f77-a7345db3b9c0"
+      ],
+      "lookups": 4,
+      "length": 1082,
+      "scores": [
+        {
+          "name": "cites the ruling",
+          "value": 1,
+          "comment": "https://beta.goatformat.com/cards/book-of-moon#ruling-6104a84a-b0c8-4a0a-a84b-f22b6f93c22b"
+        },
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer gives the same verdict as the reference, that the attacker flipped face-down by a chained Book of Moon is not destroyed by Mirror Force, and its extra details about the attack stopping do not contradict the reference."
+        }
+      ],
+      "traceId": "efc80c14a3bb0c4db42f05f0ab258d79"
+    },
+    {
+      "question": "My opponent's Fiber Jar flipped up and its effect activated. Can I stop it by chaining Book of Moon to turn it back face-down?",
+      "expected": {
+        "answer": "No. Book of Moon flips the monster face-down again, but the Flip Effect of a monster like Fiber Jar still resolves as normal.",
+        "source": "https://beta.goatformat.com/cards/book-of-moon#ruling-ca743235-8615-4c40-ad9a-b7d3b04f1def"
+      },
+      "answer": "I'll look up both cards first. **No.** Chaining \"Book of Moon\" to flip \"Fiber Jar\" back face-down does not stop its Flip Effect — the effect still resolves as normal.\n\nThe rulings are explicit on this point. One ruling under \"Book of Moon\" gives \"Fiber Jar\" as its example: if you chain \"Book of Moon\" to the activation of a Flip Effect Monster's effect, \"Book of Moon\" flips the monster face-down again, but the Flip Effect still resolves as normal. A related ruling states the general principle: when \"Book of Moon\" is chained to a Flip effect, the Flip effect resolves as normally unless the Flip effect requires the monster to remain face-up — and \"Fiber Jar\" does not. \"Fiber Jar\"'s effect shuffles all cards on the field, in hands, and in Graveyards into the Decks, including \"Fiber Jar\" itself, and it even applies when \"Fiber Jar\" has been attacked and destroyed by battle, so it clearly doesn't care whether \"Fiber Jar\" is still face-up when it resolves.\n\nOne practical note: \"Fiber Jar\" is Forbidden in this format, so this situation shouldn't come up in a legal Goat Format game.\n\nSources\n- [Book of Moon ruling (faq)](https://beta.goatformat.com/cards/book-of-moon#ruling-ca743235-8615-4c40-ad9a-b7d3b04f1def): chaining \"Book of Moon\" to a Flip Effect such as \"Fiber Jar\" flips it face-down, but the Flip Effect still resolves as normal.\n- [Book of Moon ruling (netrep-ruling)](https://beta.goatformat.com/cards/book-of-moon#ruling-959c26f2-0759-4cc3-9079-5aea669a2f17): a chained \"Book of Moon\" doesn't stop a Flip effect unless the effect requires the monster to stay face-up.\n- [Fiber Jar ruling (faq)](https://beta.goatformat.com/cards/fiber-jar#ruling-1c16be76-1bd2-45f8-93aa-55f1aae253a1): when \"Fiber Jar\"'s effect is activated, \"Fiber Jar\" itself is shuffled into the Deck even if it was destroyed by battle — its effect does not depend on it remaining on the field.",
+      "cited": [
+        "https://beta.goatformat.com/cards/book-of-moon#ruling-ca743235-8615-4c40-ad9a-b7d3b04f1def",
+        "https://beta.goatformat.com/cards/book-of-moon#ruling-959c26f2-0759-4cc3-9079-5aea669a2f17",
+        "https://beta.goatformat.com/cards/fiber-jar#ruling-1c16be76-1bd2-45f8-93aa-55f1aae253a1"
+      ],
+      "lookups": 4,
+      "length": 1886,
+      "scores": [
+        {
+          "name": "cites the ruling",
+          "value": 1,
+          "comment": "https://beta.goatformat.com/cards/book-of-moon#ruling-ca743235-8615-4c40-ad9a-b7d3b04f1def"
+        },
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer gives the same verdict as the reference: chaining Book of Moon flips Fiber Jar face-down but its Flip Effect still resolves as normal, and the added details do not contradict this."
+        }
+      ],
+      "traceId": "9aa143c1378726cf855afe50ba13a211"
+    },
+    {
+      "question": "Airknight Parshath attacks a face-down flip monster and deals piercing damage. Which happens first, my draw or the flip effect?",
+      "expected": {
+        "answer": "You draw first. When Airknight Parshath attacks a face-down Flip Effect monster and inflicts Battle Damage, you draw 1 card before the Flip Effect is applied.",
+        "source": "https://beta.goatformat.com/cards/airknight-parshath#ruling-cd0dceb5-c644-4154-8250-7d7595db8ba3"
+      },
+      "answer": "You draw first.\n\nThe rulings say it directly: when Airknight Parshath attacks a face-down monster with a Flip Effect and inflicts Battle Damage, you draw 1 card before the Flip Effect is applied. The same timing is confirmed from the other side on Raging Flame Sprite, whose effect \"is resolved after damage calculation and before Flip Effects are resolved (so the timing is the same as Don Zaloog and Airknight Parshath).\" Note the draw is mandatory, and it only happens if Battle Damage was actually inflicted — if damage is reduced to 0 (e.g. Waboku, Kuriboh) there is no draw.\n\nSources\n- [Airknight Parshath ruling](https://beta.goatformat.com/cards/airknight-parshath#ruling-cd0dceb5-c644-4154-8250-7d7595db8ba3) — draw 1 card happens before the Flip Effect is applied.\n- [Airknight Parshath ruling](https://beta.goatformat.com/cards/airknight-parshath#ruling-e9906798-0a56-4e23-9751-05bc7c43d29b) — drawing is not optional; required whenever Battle Damage is inflicted.\n- [Airknight Parshath ruling](https://beta.goatformat.com/cards/airknight-parshath#ruling-36b7b489-3970-4ec6-b014-be53002310ff) — no draw if Battle Damage is reduced to 0.\n- [Raging Flame Sprite ruling](https://beta.goatformat.com/cards/raging-flame-sprite#ruling-e632588e-9960-4c0d-8007-4c05e9fa0e28) — such effects resolve after damage calculation and before Flip Effects (same timing as Airknight Parshath).",
+      "cited": [
+        "https://beta.goatformat.com/cards/airknight-parshath#ruling-cd0dceb5-c644-4154-8250-7d7595db8ba3",
+        "https://beta.goatformat.com/cards/airknight-parshath#ruling-e9906798-0a56-4e23-9751-05bc7c43d29b",
+        "https://beta.goatformat.com/cards/airknight-parshath#ruling-36b7b489-3970-4ec6-b014-be53002310ff",
+        "https://beta.goatformat.com/cards/raging-flame-sprite#ruling-e632588e-9960-4c0d-8007-4c05e9fa0e28"
+      ],
+      "lookups": 2,
+      "length": 1386,
+      "scores": [
+        {
+          "name": "cites the ruling",
+          "value": 1,
+          "comment": "https://beta.goatformat.com/cards/airknight-parshath#ruling-cd0dceb5-c644-4154-8250-7d7595db8ba3"
+        },
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer gives the same verdict as the reference (you draw first, before the Flip Effect is applied), and its extra details about the mandatory draw and no draw at 0 damage do not contradict it."
+        }
+      ],
+      "traceId": "47f5f1358bcc6c548403ba90babbe56a"
+    },
+    {
+      "question": "My opponent has a face-up Jinzo. Can I still flip my Sakuretsu Armor when Jinzo attacks?",
+      "expected": {
+        "answer": "No. Traps cannot be activated while Jinzo is face-up on the field.",
+        "source": "https://beta.goatformat.com/cards/jinzo#ruling-e26b26ef-a8f3-4a95-9be2-7c73d14afa70"
+      },
+      "answer": "I'll look up both cards first. No — you cannot activate Sakuretsu Armor while Jinzo is face-up on the field.\n\nJinzo's effect says \"As long as this card remains face-up on the field, Trap Cards cannot be activated,\" and the ruling under Jinzo states plainly that \"Traps may not be activated while 'Jinzo' is face up on the field.\" This applies to both players, so it does not matter that the Jinzo is your opponent's — it protects their own attacking monster from your Sakuretsu Armor. Sakuretsu Armor is a Normal Trap that must be activated when your opponent declares an attack, so there is no window in which you could legally activate it during that attack.\n\nThe one related point in Jinzo's rulings worth noting: Traps that were activated and fully resolved *before* Jinzo was face-up on the field are not negated. That does not help here, because Sakuretsu Armor would have to be activated during the attack, while Jinzo is already face-up.\n\nSources:\n- [Jinzo — card text and ruling: \"Traps may not be activated while 'Jinzo' is face up on the field\"](https://beta.goatformat.com/cards/jinzo#ruling-e26b26ef-a8f3-4a95-9be2-7c73d14afa70)\n- [Jinzo — ruling: Traps activated and fully resolved before Jinzo is face-up are not negated](https://beta.goatformat.com/cards/jinzo#ruling-f974d592-f04c-450c-92f9-dd3b0ab761b6)\n- [Sakuretsu Armor — card data: a Normal Trap activated only when your opponent declares an attack](https://beta.goatformat.com/cards/sakuretsu-armor)",
+      "cited": [
+        "https://beta.goatformat.com/cards/jinzo#ruling-e26b26ef-a8f3-4a95-9be2-7c73d14afa70",
+        "https://beta.goatformat.com/cards/jinzo#ruling-f974d592-f04c-450c-92f9-dd3b0ab761b6",
+        "https://beta.goatformat.com/cards/sakuretsu-armor"
+      ],
+      "lookups": 6,
+      "length": 1472,
+      "scores": [
+        {
+          "name": "cites the ruling",
+          "value": 1,
+          "comment": "https://beta.goatformat.com/cards/jinzo#ruling-e26b26ef-a8f3-4a95-9be2-7c73d14afa70"
+        },
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer gives the same verdict as the reference, that Sakuretsu Armor cannot be activated while Jinzo is face-up, and its extra details about both players being affected and earlier-resolved Traps do not contradict the reference."
+        }
+      ],
+      "traceId": "739626fca78f115cde198614b2ea9f96"
+    },
+    {
+      "question": "I brought back a monster with Premature Burial and my opponent hit it with Book of Moon. Does my monster die too?",
+      "expected": {
+        "answer": "No. If the equipped monster is flipped face-down, Premature Burial is destroyed but the monster is not destroyed.",
+        "source": "https://beta.goatformat.com/cards/premature-burial#ruling-bbb18385-8067-4e4a-b3b1-4cfe65a29970"
+      },
+      "answer": "No. The equipped monster remains on the field, face-down, while **Premature Burial** goes to the Graveyard.\n\nOnce **Book of Moon** flips the monster face-down, it is no longer a legal target for **Premature Burial**, so the Equip Spell leaves the field. Its effect does not destroy the monster. The rulings specifically state that the monster is not destroyed.\n\n**Sources**\n- [Book of Moon ruling](https://beta.goatformat.com/cards/book-of-moon#ruling-b47b4f26-5310-4bf3-a6f6-7eb0c054c192): a monster equipped with **Premature Burial** stays on the field when flipped face-down, while **Premature Burial** is sent to the Graveyard.\n- [Premature Burial ruling](https://beta.goatformat.com/cards/premature-burial#ruling-bbb18385-8067-4e4a-b3b1-4cfe65a29970): if the equipped monster is flipped face-down, **Premature Burial** is destroyed but the monster is not.",
+      "cited": [
+        "https://beta.goatformat.com/cards/book-of-moon#ruling-b47b4f26-5310-4bf3-a6f6-7eb0c054c192",
+        "https://beta.goatformat.com/cards/premature-burial#ruling-bbb18385-8067-4e4a-b3b1-4cfe65a29970"
+      ],
+      "lookups": 4,
+      "length": 860,
+      "scores": [
+        {
+          "name": "cites the ruling",
+          "value": 1,
+          "comment": "https://beta.goatformat.com/cards/premature-burial#ruling-bbb18385-8067-4e4a-b3b1-4cfe65a29970"
+        },
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer says the monster survives face-down while Premature Burial is destroyed and sent to the Graveyard, which matches the reference verdict."
+        }
+      ],
+      "traceId": "90ca5ec297a17433dff235b103205496"
+    },
+    {
+      "question": "Skill Drain is face-up. If my Sangan gets destroyed, can I still search?",
+      "expected": {
+        "answer": "Yes. Skill Drain only negates the effects of face-up Effect Monsters on the field, not effects that activate in the Graveyard such as Sangan's.",
+        "source": "https://beta.goatformat.com/cards/skill-drain#ruling-e5bf7488-f70e-470f-8d93-5728a4110b48"
+      },
+      "answer": "I'll look up both cards first. **Yes — you still get the search.** \"Skill Drain\" only negates the effects of face-up Effect Monsters *on the field*; it does not negate effects that activate in the Graveyard, and \"Sangan\" is named specifically as one of the exceptions. Once \"Sangan\" is destroyed and sent to the Graveyard, its search effect activates there, not on the field, so \"Skill Drain\" does not touch it.\n\nThis applies whether \"Sangan\" is destroyed by battle or by a card effect, as long as it actually reaches the Graveyard — effects like \"Banisher of the Light\" or \"Nobleman of Crossout\" that keep it from going to the Graveyard would prevent the effect from ever activating.\n\n(For contrast, note that \"Skill Drain\" *does* negate Flip Effects, because those resolve on the field — that's a different situation from \"Sangan\".)\n\n**Sources**\n- [Skill Drain ruling (GoatFormat.com)](https://beta.goatformat.com/cards/skill-drain#ruling-e5bf7488-f70e-470f-8d93-5728a4110b48) — \"Skill Drain\" negates only face-up Effect Monsters on the field, not effects that activate in the Graveyard such as \"Sangan\".\n- [Skill Drain ruling (GoatFormat.com)](https://beta.goatformat.com/cards/skill-drain#ruling-ea8f8fdb-a890-42e9-be26-b8ebfad429b5) — \"Skill Drain\" negates Flip Effects, distinguishing them from Graveyard-activating effects.\n- [Sangan — Banisher of the Light ruling](https://beta.goatformat.com/cards/banisher-of-the-light#ruling-b83cea8b-a2e5-4708-bfe0-fa8670a88433) — effects that trigger when cards are sent to the Graveyard, such as \"Sangan\", will not activate if the card never reaches the Graveyard.",
+      "cited": [
+        "https://beta.goatformat.com/cards/skill-drain#ruling-e5bf7488-f70e-470f-8d93-5728a4110b48",
+        "https://beta.goatformat.com/cards/skill-drain#ruling-ea8f8fdb-a890-42e9-be26-b8ebfad429b5",
+        "https://beta.goatformat.com/cards/banisher-of-the-light#ruling-b83cea8b-a2e5-4708-bfe0-fa8670a88433"
+      ],
+      "lookups": 4,
+      "length": 1611,
+      "scores": [
+        {
+          "name": "cites the ruling",
+          "value": 1,
+          "comment": "https://beta.goatformat.com/cards/skill-drain#ruling-e5bf7488-f70e-470f-8d93-5728a4110b48"
+        },
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer says yes, Sangan's search still works under Skill Drain because the effect activates in the Graveyard, which matches the reference verdict, and its extra details do not contradict it."
+        }
+      ],
+      "traceId": "556a9fb0f894d729c114eed925d9ca38"
+    },
+    {
+      "question": "I used Scapegoat this turn. Am I still allowed to Set a monster?",
+      "expected": {
+        "answer": "Yes. You can Set a monster in the same turn you activate Scapegoat.",
+        "source": "https://beta.goatformat.com/cards/scapegoat#ruling-a102eab2-8485-40ef-b0d9-6048602dad2e"
+      },
+      "answer": "I'll look up Scapegoat first. Yes. You can Set a monster in the same turn you activate \"Scapegoat.\"\n\n\"Scapegoat\" only stops Summons — Normal Summons (including Flip Summons) and Special Summons. Setting a monster face-down is not a Summon, so it is unaffected. Its own rulings confirm that you can Set a monster in the same turn you activate \"Scapegoat,\" and that monsters may be Set before or after its resolution. (The restriction also disappears entirely if the activation itself is negated, e.g. by \"Magic Jammer,\" though \"Imperial Order\" chained to it still blocks your Summons for the turn.)\n\nSources:\n- [Scapegoat ruling — \"You can Set a monster in the same turn you activate 'Scapegoat.'\"](https://beta.goatformat.com/cards/scapegoat#ruling-a102eab2-8485-40ef-b0d9-6048602dad2e)\n- [Scapegoat netrep ruling — \"Monsters may be Set before or after the resolution of 'Scapegoat.'\"](https://beta.goatformat.com/cards/scapegoat#ruling-acbed0c5-0555-4031-8e0f-18184ee35797)\n- [Scapegoat ruling — can activate only with 4 or more vacant Monster Card Zones (card text: \"cannot summon any monster ... including Flip Summon and Special Summon\")](https://beta.goatformat.com/cards/scapegoat#ruling-171ddc36-6107-444b-8003-6d591c6096d3)\n- [Scapegoat ruling — Magic Jammer vs. Imperial Order chained to it](https://beta.goatformat.com/cards/scapegoat#ruling-b4d24477-3d9d-405f-b183-afcc7c552ddd)",
+      "cited": [
+        "https://beta.goatformat.com/cards/scapegoat#ruling-a102eab2-8485-40ef-b0d9-6048602dad2e",
+        "https://beta.goatformat.com/cards/scapegoat#ruling-acbed0c5-0555-4031-8e0f-18184ee35797",
+        "https://beta.goatformat.com/cards/scapegoat#ruling-171ddc36-6107-444b-8003-6d591c6096d3",
+        "https://beta.goatformat.com/cards/scapegoat#ruling-b4d24477-3d9d-405f-b183-afcc7c552ddd"
+      ],
+      "lookups": 2,
+      "length": 1389,
+      "scores": [
+        {
+          "name": "cites the ruling",
+          "value": 1,
+          "comment": "https://beta.goatformat.com/cards/scapegoat#ruling-a102eab2-8485-40ef-b0d9-6048602dad2e"
+        },
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer gives the same verdict as the reference, that you can Set a monster in the same turn you activate Scapegoat, and its extra detail does not contradict the reference."
+        }
+      ],
+      "traceId": "4541fd6385a1e18f2bc085d66f6a6d82"
+    },
+    {
+      "question": "Can I attack with Chaos Sorcerer and then use its banish effect in Main Phase 2?",
+      "expected": {
+        "answer": "No. If Chaos Sorcerer attacks, you cannot use its effect during Main Phase 2; you can only activate it in Main Phase 2 if it did not attack.",
+        "source": "https://beta.goatformat.com/cards/chaos-sorcerer#ruling-18b40492-d390-443d-9358-9f89b9a0c7b0"
+      },
+      "answer": "No. If Chaos Sorcerer attacks, you cannot activate its banish effect during Main Phase 2; you can only use that effect in Main Phase 2 if Chaos Sorcerer did not attack that turn.\n\nThis also applies if the attack is negated by “Magic Cylinder,” or if a replay occurs and you choose not to attack again with Chaos Sorcerer.\n\nSources:\n- [Chaos Sorcerer ruling](https://beta.goatformat.com/cards/chaos-sorcerer#ruling-18b40492-d390-443d-9358-9f89b9a0c7b0): if it attacks, its effect cannot be used in Main Phase 2.\n- [Chaos Sorcerer ruling](https://beta.goatformat.com/cards/chaos-sorcerer#ruling-ee3b3ace-a4db-4ab2-b7d9-d820b6b2a749): the same applies when the attack is negated by “Magic Cylinder.”\n- [Chaos Sorcerer ruling](https://beta.goatformat.com/cards/chaos-sorcerer#ruling-b401d12c-a1a1-4dc7-80a5-6eac4cb50b46): the same applies after a replay if you decline to attack again.",
+      "cited": [
+        "https://beta.goatformat.com/cards/chaos-sorcerer#ruling-18b40492-d390-443d-9358-9f89b9a0c7b0",
+        "https://beta.goatformat.com/cards/chaos-sorcerer#ruling-ee3b3ace-a4db-4ab2-b7d9-d820b6b2a749",
+        "https://beta.goatformat.com/cards/chaos-sorcerer#ruling-b401d12c-a1a1-4dc7-80a5-6eac4cb50b46"
+      ],
+      "lookups": 2,
+      "length": 881,
+      "scores": [
+        {
+          "name": "cites the ruling",
+          "value": 1,
+          "comment": "https://beta.goatformat.com/cards/chaos-sorcerer#ruling-18b40492-d390-443d-9358-9f89b9a0c7b0"
+        },
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer gives the same verdict as the reference (No, it cannot use its effect in Main Phase 2 after attacking, only if it did not attack), and the extra details about Magic Cylinder and replay do not contradict it."
+        }
+      ],
+      "traceId": "513d0124f8ef4b4c13cf69746428951e"
+    },
+    {
+      "question": "If my opponent responds to my Call of the Haunted by destroying it with Mystical Space Typhoon, do I still get my monster?",
+      "expected": {
+        "answer": "No. If Call of the Haunted is destroyed in a chain to its own activation, the monster it would Special Summon is not Special Summoned.",
+        "source": "https://beta.goatformat.com/cards/call-of-the-haunted#ruling-132ae236-a782-4ce2-bebe-d4fc0c7e5388"
+      },
+      "answer": "I'll look up both cards first. No — if Mystical Space Typhoon is chained to your Call of the Haunted, Call of the Haunted is destroyed before it ever Special Summons anything, and its effect disappears.\n\n**Why:** Call of the Haunted is a Continuous Trap Card, so it must still be on the field when its effect resolves. Mystical Space Typhoon (chain link 2) resolves first and destroys it, so when Call of the Haunted would resolve there is nothing there to Summon the monster.\n\n**Watch the order, though:** if it's the other way around — Mystical Space Typhoon already activated and targeting Call of the Haunted, and you chain Call of the Haunted to it — then Call of the Haunted resolves first and you *do* get your monster. But Mystical Space Typhoon then resolves and destroys Call of the Haunted, which in turn destroys that monster. So you only keep the monster if Call of the Haunted survives, e.g. its destruction is prevented or its effect is negated, or the monster is protected (a monster equipped with Heart of Clear Water, for instance, is not destroyed when Call of the Haunted is destroyed).\n\nSources:\n- [Call of the Haunted ruling](https://beta.goatformat.com/cards/call-of-the-haunted#ruling-271f8428-efd9-4a0e-a5d2-4765e7fc1961) — Mystical Space Typhoon chained to Call of the Haunted destroys it before the Summon, and \"Call of the Haunted's effect will then disappear\"; also covers the reversed order.\n- [Mystical Space Typhoon ruling](https://beta.goatformat.com/cards/mystical-space-typhoon#ruling-5ca453c3-5c4e-47c8-8416-d65d43ab9110) — same text, filed under Mystical Space Typhoon.\n- [Call of the Haunted ruling](https://beta.goatformat.com/cards/call-of-the-haunted#ruling-132ae236-a782-4ce2-bebe-d4fc0c7e5388) — if Call of the Haunted is destroyed in a chain to its own activation, the monster is not Special Summoned.\n- [Heart of Clear Water ruling](https://beta.goatformat.com/cards/heart-of-clear-water#ruling-3e29dd64-b9b2-406d-b1d0-7de3b7a012b1) — an equipped monster is not destroyed when Call of the Haunted is destroyed.",
+      "cited": [
+        "https://beta.goatformat.com/cards/call-of-the-haunted#ruling-271f8428-efd9-4a0e-a5d2-4765e7fc1961",
+        "https://beta.goatformat.com/cards/mystical-space-typhoon#ruling-5ca453c3-5c4e-47c8-8416-d65d43ab9110",
+        "https://beta.goatformat.com/cards/call-of-the-haunted#ruling-132ae236-a782-4ce2-bebe-d4fc0c7e5388",
+        "https://beta.goatformat.com/cards/heart-of-clear-water#ruling-3e29dd64-b9b2-406d-b1d0-7de3b7a012b1"
+      ],
+      "lookups": 4,
+      "length": 2055,
+      "scores": [
+        {
+          "name": "cites the ruling",
+          "value": 1,
+          "comment": "https://beta.goatformat.com/cards/call-of-the-haunted#ruling-132ae236-a782-4ce2-bebe-d4fc0c7e5388"
+        },
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer says No, matching the reference that Call of the Haunted destroyed in response to its own activation does not Special Summon the monster, and its extra detail about reversed chain order does not contradict that verdict."
+        }
+      ],
+      "traceId": "4198250087a0d5aa77bbcb63f578180a"
+    },
+    {
+      "question": "What happens if Morphing Jar flips up and one of us has only 3 cards left in the Deck?",
+      "expected": {
+        "answer": "That player loses the Duel. If either player has fewer than 5 cards in their Deck when Morphing Jar's Flip Effect activates, that player loses because the card says draw.",
+        "source": "https://beta.goatformat.com/cards/morphing-jar#ruling-82a731ee-7f7d-4415-81e7-e52d803bcda4"
+      },
+      "answer": "I'll look up Morphing Jar first. **That player loses the Duel.** Morphing Jar's effect tells both players to draw 5 cards, and the rulings say a player who can't draw the full 5 because their Deck is short loses.\n\nDetails from the ruling:\n- \"If there are fewer than 5 cards in the Deck of either player when this card's Flip Effect is activated, that player will lose the Duel, since the text of this card says 'draw.'\" Three cards is fewer than 5, so that player loses.\n- The effect still resolves as a whole: both players discard their hands first, \"after that\" both draw 5. The short-Deck player simply can't complete the draw.\n- This is different from pick-up effects: with Cyber Jar, a player with fewer than 5 cards does not lose, because Cyber Jar's text picks up cards rather than drawing them. Morphing Jar says \"draw,\" which is why the loss applies.\n- It also differs from milling, like Needle Worm, where the remaining cards just go to the Graveyard and the player only loses later when a draw is actually required.\n\nOne timing note, since \"after that, draw\" and other resolution effects can interact: loss from an incomplete draw happens during resolution, so effects that trigger afterward (for example Magical Thorn's damage, which is dealt after the effect resolves) won't get to apply — there is a ruling where a player with only one card left in the Deck loses to their own Morphing Jar before Magical Thorn damages the opponent.\n\nSources:\n- [Morphing Jar ruling](https://beta.goatformat.com/cards/morphing-jar#ruling-82a731ee-7f7d-4415-81e7-e52d803bcda4) — fewer than 5 cards in either Deck means that player loses, because the card says \"draw.\"\n- [Morphing Jar card text / read](https://beta.goatformat.com/cards/morphing-jar) — both players discard all cards in hand, then both draw 5.\n- [Cyber Jar ruling](https://beta.goatformat.com/cards/cyber-jar#ruling-71cd16e0-df2e-466e-99ea-388365d21cef) — picking up cards instead of drawing does not cause a loss.\n- [Needle Worm ruling](https://beta.goatformat.com/cards/needle-worm#ruling-bf70c472-2781-4f53-8822-0399aa15b542) — contrast with milling, where the player does not lose immediately.\n- [Magical Thorn ruling](https://beta.goatformat.com/cards/magical-thorn#ruling-ee0080be-0cd3-4577-acb5-628d5f42d482) — the loss from the short Deck happens before post-resolution damage.",
+      "cited": [
+        "https://beta.goatformat.com/cards/morphing-jar#ruling-82a731ee-7f7d-4415-81e7-e52d803bcda4",
+        "https://beta.goatformat.com/cards/morphing-jar",
+        "https://beta.goatformat.com/cards/cyber-jar#ruling-71cd16e0-df2e-466e-99ea-388365d21cef",
+        "https://beta.goatformat.com/cards/needle-worm#ruling-bf70c472-2781-4f53-8822-0399aa15b542",
+        "https://beta.goatformat.com/cards/magical-thorn#ruling-ee0080be-0cd3-4577-acb5-628d5f42d482"
+      ],
+      "lookups": 4,
+      "length": 2347,
+      "scores": [
+        {
+          "name": "cites the ruling",
+          "value": 1,
+          "comment": "https://beta.goatformat.com/cards/morphing-jar#ruling-82a731ee-7f7d-4415-81e7-e52d803bcda4"
+        },
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer gives the same verdict as the reference, that the player with fewer than 5 cards in their Deck loses because Morphing Jar says 'draw', and its extra details do not contradict the reference."
+        }
+      ],
+      "traceId": "e896d2391e9132da9c4012d4c2a63a80"
+    },
+    {
+      "question": "My opponent controls two monsters tied for the highest DEF. When I activate Smashing Ground, who chooses which one gets destroyed?",
+      "expected": {
+        "answer": "The rulings in the data do not settle this. No ruling covers how Smashing Ground resolves when monsters are tied for the highest DEF.",
+        "source": null
+      },
+      "answer": "I'll look up the card first. **The rulings data does not cover this.** There is no ruling in the database for what happens when two of your opponent's monsters are tied for the highest DEF and **Smashing Ground** resolves, so the answer is not settled by these passages.\n\nWhat the passages do establish:\n\n- **Smashing Ground**'s text is only \"Destroy 1 monster with the highest DEF on your opponent's side of the field\" — it says nothing about who picks in a tie.\n- Several rulings confirm **Smashing Ground** does not target (e.g. **Riryoku Field** cannot be used against it, and a monster equipped with **Heart of Clear Water** can still be destroyed by it), but not targeting tells us nothing about tie-breaking.\n- There is a closely analogous ruling, but only for a different card: for **Fissure**, \"If there are two or more monsters with equal ATK on your opponent's side of the field, you (the player who activated 'Fissure') select which monster will be destroyed.\" That ruling is written for **Fissure** and its ATK comparison, and nothing in the passages extends it to **Smashing Ground**'s DEF comparison. I won't reason from it to an answer.\n\nSo treat this as a judge question rather than something the rulings data answers.\n\nSources:\n- [Smashing Ground — card text](https://beta.goatformat.com/cards/smashing-ground): the card's effect, which does not address ties.\n- [Riryoku Field ruling](https://beta.goatformat.com/cards/riryoku-field#ruling-c97af3cd-af42-4596-96e4-e0f1cbe832dc): \"Smashing Ground\" does not target (no tie-break information).\n- [Heart of Clear Water ruling](https://beta.goatformat.com/cards/heart-of-clear-water#ruling-e7449781-699d-4af5-bb54-844df0604c7b): \"Smashing Ground\" is a non-targeting effect.\n- [Fissure ruling](https://beta.goatformat.com/cards/fissure#ruling-1d224335-059b-483f-9d19-9ab898bcc1cc): the activator selects among equal-ATK monsters for \"Fissure\" — a different card, so it does not settle \"Smashing Ground\".",
+      "cited": [
+        "https://beta.goatformat.com/cards/smashing-ground",
+        "https://beta.goatformat.com/cards/riryoku-field#ruling-c97af3cd-af42-4596-96e4-e0f1cbe832dc",
+        "https://beta.goatformat.com/cards/heart-of-clear-water#ruling-e7449781-699d-4af5-bb54-844df0604c7b",
+        "https://beta.goatformat.com/cards/fissure#ruling-1d224335-059b-483f-9d19-9ab898bcc1cc"
+      ],
+      "lookups": 12,
+      "length": 1965,
+      "scores": [
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer says the rulings data does not settle who chooses in a DEF tie for Smashing Ground, matching the reference, and it declines to extend the Fissure ruling to give a confident verdict."
+        }
+      ],
+      "traceId": "c125b01401952cda9477fca933685f4d"
+    },
+    {
+      "question": "If Magician of Faith flips up while there are no Spell Cards in my Graveyard, does its effect still activate?",
+      "expected": {
+        "answer": "The rulings in the data do not settle this. No ruling covers Magician of Faith's Flip Effect when the Graveyard has no Spell Cards.",
+        "source": null
+      },
+      "answer": "I'll look up thecard first. **The rulings data does not settle this.** Nothing in the passages returned addresses what happens to Magician of Faith's FLIP effect when your Graveyard contains no Spell Card, so I can't give you a yes or no.\n\nWhat the passages do establish, and where they fall short:\n\n- Magician of Faith is a FLIP monster whose text reads \"FLIP: Select 1 Spell Card from your Graveyard. Add the selected card to your hand.\" No ruling returned for the card itself (its `rulings` list is empty).\n- The Disappear / Spear Cretin rulings say Magician of Faith \"select[s] their target at activation, not resolution\" — so a Spell Card in the Graveyard is picked when the effect is activated. That tells you when the selection happens, but not whether the effect can still be activated (or must be activated) when there is nothing eligible to select.\n- The general notes only cover a related-but-different case: \"Search effects can fail to find. You can activate them with nothing left to search,\" and Skilled Dark Magician's ruling that \"If there is no 'Dark Magician' in your hand/Deck/Graveyard you can still activate this effect but your opponent can verify the contents to make certain, and then the effect disappears.\" Those are about Deck-searching and an Ignition effect, not a Flip Effect retrieving from the Graveyard.\n- For contrast on how the data treats an effect that simply has nothing to do, Cyber Raider's ruling says that with no Equip Spell Card on the field \"Cyber Raider's effect does not activate and cannot be chained to\" — but that is a different card with different wording, so it does not decide Magician of Faith.\n\nBecause none of these passages speak to Magician of Faith's FLIP effect with an empty (Spell-less) Graveyard, I won't reason my way to an answer from general game knowledge. Treat this as an uncovered case.\n\nSources:\n- [Magician of Faith — card data](https://beta.goatformat.com/cards/magician-of-faith) — card text (FLIP: retrieve 1 Spell Card from Graveyard); no rulings attached.\n- [Disappear](https://beta.goatformat.com/cards/disappear#ruling-51a63076-8551-45c9-a52f-8c9221515647) — Magician of Faith selects its target at activation, not resolution.\n- [Spear Cretin](https://beta.goatformat.com/cards/spear-cretin#ruling-a0a26e34-b28a-4cf4-8152-1472d677d650) — same point, restated.\n- [Rulings: The big differences](https://beta.goatformat.com/learn/rulings#the-big-differences) — search effects can fail to find (Deck only).\n- [Skilled Dark Magician](https://beta.goatformat.com/cards/skilled-dark-magician#ruling-74810b76-49ac-4045-ab0d-1f0173cc7e51) — effect may be activated with nothing to retrieve; not a Flip Effect.\n- [Cyber Raider](https://beta.goatformat.com/cards/cyber-raider#ruling-3740cbf6-6a80-40c1-b8af-60f8b3f70b24) — an effect that does not activate when there is nothing to act on (different card).",
+      "cited": [
+        "https://beta.goatformat.com/cards/magician-of-faith",
+        "https://beta.goatformat.com/cards/disappear#ruling-51a63076-8551-45c9-a52f-8c9221515647",
+        "https://beta.goatformat.com/cards/spear-cretin#ruling-a0a26e34-b28a-4cf4-8152-1472d677d650",
+        "https://beta.goatformat.com/learn/rulings#the-big-differences",
+        "https://beta.goatformat.com/cards/skilled-dark-magician#ruling-74810b76-49ac-4045-ab0d-1f0173cc7e51",
+        "https://beta.goatformat.com/cards/cyber-raider#ruling-3740cbf6-6a80-40c1-b8af-60f8b3f70b24"
+      ],
+      "lookups": 12,
+      "length": 2873,
+      "scores": [
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer concludes that the rulings data does not settle whether Magician of Faith's Flip Effect activates with no Spell Cards in the Graveyard, matching the reference, and gives no confident verdict."
+        }
+      ],
+      "traceId": "16fe8975de7bbbb8a9eda8c205f0eee4"
+    },
+    {
+      "question": "Does Sakuretsu Armor target the attacking monster?",
+      "expected": {
+        "answer": "The rulings in the data do not settle this. No ruling states whether Sakuretsu Armor targets.",
+        "source": null
+      },
+      "answer": "I'll look up the card and its rulings. The rulings data does not cover this: no passage states whether Sakuretsu Armor targets.\n\n**Sakuretsu Armor**'s own page in the database has no rulings at all, and its card text — \"You can only activate this card when your opponent declares an attack. Destroy the attacking monster.\" — does not use the word \"target.\" The only passage that names Sakuretsu Armor is a \"Butterfly Dagger - Elma\" ruling, and it says nothing about targeting; it only notes that a monster destroyed \"by a card effect like 'Sakuretsu Armor' or 'Fissure'\" no longer has the Equip Card attached.\n\nWhat the passages do establish is that targeting matters for battle-phase Traps in general — \"Magic Cylinder\" is expressly \"considered a targeting effect,\" and \"Metalsilver Armor\"/\"Lord of D.\" rulings show attacking-monster effects can be blocked when they target. That is background, not a statement about Sakuretsu Armor, and I won't infer its ruling from other cards.\n\nSources\n- [Sakuretsu Armor card page](https://beta.goatformat.com/cards/sakuretsu-armor) — card text only, no rulings listed.\n- [Butterfly Dagger - Elma ruling](https://beta.goatformat.com/cards/butterfly-dagger-elma#ruling-4bb1e0c2-18f1-486f-9253-cbcb48af4c12) — the only ruling naming Sakuretsu Armor; it is about the Equip Card, not targeting.\n- [Magic Cylinder ruling](https://beta.goatformat.com/cards/magic-cylinder#ruling-13c4acd6-8172-4c91-8e1a-0b9f9c60424b) — \"Magic Cylinder\" is a targeting effect (comparison only).\n- [Metalsilver Armor ruling](https://beta.goatformat.com/cards/metalsilver-armor#ruling-73515610-77b3-4dee-b620-e0625d4d1b8b) — targeting restrictions apply to attacking monsters (comparison only).",
+      "cited": [
+        "https://beta.goatformat.com/cards/sakuretsu-armor",
+        "https://beta.goatformat.com/cards/butterfly-dagger-elma#ruling-4bb1e0c2-18f1-486f-9253-cbcb48af4c12",
+        "https://beta.goatformat.com/cards/magic-cylinder#ruling-13c4acd6-8172-4c91-8e1a-0b9f9c60424b",
+        "https://beta.goatformat.com/cards/metalsilver-armor#ruling-73515610-77b3-4dee-b620-e0625d4d1b8b"
+      ],
+      "lookups": 12,
+      "length": 1707,
+      "scores": [
+        {
+          "name": "agrees with the ruling",
+          "value": 1,
+          "comment": "The answer says the rulings data does not settle whether Sakuretsu Armor targets and declines to infer a verdict from other cards, which matches the reference's 'not settled' position."
+        }
+      ],
+      "traceId": "04bd02a4fd13676a1b927bc891d282ee"
+    }
+  ]
+}

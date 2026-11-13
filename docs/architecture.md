@@ -1,6 +1,6 @@
 # Architecture
 
-The target design for the chatbot. Built so far: the rulings data, the agent, and the chat in `apps/web`, `packages/design-system`, and `packages/backend`. Not built yet: card panels, citations, diagrams, and evals.
+The target design for the chatbot. Built so far: the rulings data, the agent, the chat, and evals in `apps/web`, `packages/design-system`, `packages/backend`, and `packages/evals`. Not built yet: card panels, citations, and diagrams.
 
 ## Scope
 
@@ -32,6 +32,7 @@ The bot answers questions about playing Goat format, limited to the Goat card po
 | Resumable streams             | Convex agent stream deltas, saved to the database                                       |
 | Rate limiting                 | Convex rate limiter component                                                           |
 | Ingestion                     | A Convex action that reads the site and upserts through internal mutations              |
+| Evals                         | Langfuse Cloud experiments run from `packages/evals`, with an LLM judge on OpenRouter   |
 
 ## Layout
 
@@ -99,5 +100,4 @@ The GitHub Pages build is static. It replays sample answers, trimmed by hand fro
 
 ## Open
 
-- Evals tooling
 - The rulebook source, the biggest reliability gap (see Data sources)
