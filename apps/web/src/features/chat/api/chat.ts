@@ -2,12 +2,20 @@ import { useUIMessages } from "@convex-dev/agent/react";
 import { api } from "@goat-format-chatbot/backend/convex/_generated/api";
 import { useMutation, usePaginatedQuery, useQuery } from "convex/react";
 import { ConvexError } from "convex/values";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, useSyncExternalStore } from "react";
 import { z } from "zod";
 
 import { toChatMessage, type ChatMessage } from "./chat-message";
-import { demoThreads, findDemoThread, type DemoThread } from "./demo-threads";
-import { SUGGESTIONS } from "./suggestions";
+import { clockUntil, readClock } from "./demo-clock";
+import { playbackEndsAt, playThread } from "./demo-playback";
+import {
+  addTurn,
+  lastActive,
+  storedThreads,
+  subscribeStoredThreads,
+  type StoredThread,
+} from "./demo-store";
+import { findPreset } from "./demo-threads";
 
 export type Sent = { ok: true; threadId: string } | { ok: false; error: string };
 
@@ -28,8 +36,6 @@ export type ThreadActions = {
   rename: (threadId: string, title: string) => Promise<void>;
   remove: (threadId: string) => Promise<void>;
 };
-
-export type Suggestion = { question: string; threadId?: string };
 
 export const SEND_FAILED = "The question could not be sent. Check that the backend is running.";
 
@@ -124,34 +130,48 @@ function useLiveThreadActions(): ThreadActions {
   );
 }
 
-const liveSuggestions: Suggestion[] = SUGGESTIONS.map((question) => ({ question }));
-
-function useLiveSuggestions(): Suggestion[] {
-  return liveSuggestions;
+function useDemoAsk(threadId?: string): Ask {
+  return useCallback(
+    async (question: string): Promise<Sent> => {
+      const preset = findPreset(question);
+      if (!preset) return { ok: false, error: DEMO_NOTICE };
+      const turn = { question: question.trim(), answer: preset.id, startedAt: Date.now() };
+      return { ok: true, threadId: addTurn(threadId, turn, preset.title) };
+    },
+    [threadId],
+  );
 }
 
-function useDemoAsk(): Ask {
-  return useCallback(async () => ({ ok: false, error: DEMO_NOTICE }), []);
+function useStoredThreads(): StoredThread[] {
+  return useSyncExternalStore(subscribeStoredThreads, storedThreads);
+}
+
+function useStoredThread(threadId: string): StoredThread | undefined {
+  return useStoredThreads().find((thread) => thread.id === threadId);
 }
 
 const noMessages: ChatMessage[] = [];
 
 function useDemoThreadMessages(threadId: string): ThreadMessages {
-  return { messages: findDemoThread(threadId)?.messages ?? noMessages, loading: false };
+  const thread = useStoredThread(threadId);
+  const endsAt = thread ? playbackEndsAt(thread) : 0;
+  const subscribe = useMemo(() => clockUntil(endsAt), [endsAt]);
+  const now = useSyncExternalStore(subscribe, readClock);
+  const messages = useMemo(() => (thread ? playThread(thread, now) : noMessages), [thread, now]);
+  return { messages, loading: false };
 }
 
-function toDemoPastThread({ id, title, activeAt }: DemoThread): PastThread {
-  return { threadId: id, title, activeAt };
+function toDemoPastThread(thread: StoredThread): PastThread {
+  return { threadId: thread.id, title: thread.title, activeAt: lastActive(thread) };
 }
 
 function useDemoPastThreads(search: string): PastThreads {
+  const stored = useStoredThreads();
   const words = search.trim().toLowerCase();
   const threads = useMemo(() => {
-    const recorded = demoThreads().map(toDemoPastThread);
-    return words
-      ? recorded.filter((thread) => thread.title.toLowerCase().includes(words))
-      : recorded;
-  }, [words]);
+    const visited = stored.map(toDemoPastThread);
+    return words ? visited.filter((thread) => thread.title.toLowerCase().includes(words)) : visited;
+  }, [stored, words]);
   return { threads, loading: false, loadMore: undefined };
 }
 
@@ -162,27 +182,17 @@ function useDemoPinnedThreads(): PastThread[] {
 }
 
 function useDemoThreadTitle(threadId: string): string | undefined {
-  return findDemoThread(threadId)?.title;
+  return useStoredThread(threadId)?.title;
 }
 
 function useDemoThreadActions(): ThreadActions | undefined {
   return undefined;
 }
 
-function recordedThreadId(question: string) {
-  return demoThreads().find((thread) => thread.messages[0]?.text === question)?.id;
-}
-
-function useDemoSuggestions(): Suggestion[] {
-  return useMemo(
-    () => SUGGESTIONS.map((question) => ({ question, threadId: recordedThreadId(question) })),
-    [],
-  );
-}
-
 const demo = import.meta.env.MODE === "demo";
 
 export const chatAvailable = !demo;
+export const suggestionsSend = demo;
 export const useAsk: (threadId?: string) => Ask = demo ? useDemoAsk : useLiveAsk;
 export const useThreadMessages: (threadId: string) => ThreadMessages = demo
   ? useDemoThreadMessages
@@ -199,4 +209,3 @@ export const useThreadActions: () => ThreadActions | undefined = demo
 export const useThreadTitle: (threadId: string) => string | undefined = demo
   ? useDemoThreadTitle
   : useLiveThreadTitle;
-export const useSuggestions: () => Suggestion[] = demo ? useDemoSuggestions : useLiveSuggestions;
