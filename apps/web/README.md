@@ -17,5 +17,5 @@ Each server takes the next free port when its default is busy and records its re
 
 ## Pages
 
-- `index.html`: the app. A head script sets `.dark` on `html` from `prefers-color-scheme` before paint.
+- `index.html`: the app. A head script sets `.dark` on `html` before paint, from the theme saved under `theme` in `localStorage` (`light` or `dark`) or, when none is saved, from `prefers-color-scheme`. It keeps following the OS and other tabs after load. The theme is picked in the user menu at the bottom of the sidebar.
 - `specimen.html`: every design-system component in both themes. Dev only; the build ships `index.html` alone. Open `<WEB_DEV_URL>specimen.html`.

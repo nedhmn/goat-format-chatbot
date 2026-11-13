@@ -6,6 +6,7 @@ import {
 import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
 
 import { ThreadSidebar } from "@/features/chat/components/thread-sidebar";
+import { UserMenu } from "@/features/settings/components/user-menu";
 
 const SIDEBAR_CLOSED_COOKIE = "sidebar_state=false";
 
@@ -16,7 +17,7 @@ function sidebarOpenAtLoad(): boolean {
 function RootLayout() {
   return (
     <SidebarProvider defaultOpen={sidebarOpenAtLoad()} className="h-dvh">
-      <ThreadSidebar />
+      <ThreadSidebar footer={<UserMenu />} />
       <SidebarInset className="min-h-0 overflow-hidden">
         <header className="flex h-12 shrink-0 items-center gap-2 border-b border-border px-2 md:hidden">
           <SidebarTrigger aria-label="Open sidebar" />

@@ -1,6 +1,7 @@
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -21,7 +22,7 @@ import {
 } from "@goat-format-chatbot/design-system/components/ui/tooltip";
 import { RiAddLine, RiContractLeftLine, RiExpandRightLine, RiSearchLine } from "@remixicon/react";
 import { Link, useParams } from "@tanstack/react-router";
-import { useRef, useState, type KeyboardEvent } from "react";
+import { useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 
 import { usePastThreads, type PastThread } from "@/features/chat/api/chat";
 
@@ -54,7 +55,7 @@ function CollapseButton() {
   );
 }
 
-export function ThreadSidebar() {
+export function ThreadSidebar({ footer }: { footer?: ReactNode }) {
   const { threads, loading } = usePastThreads();
   const [search, setSearch] = useState("");
   const searchInput = useRef<HTMLInputElement>(null);
@@ -170,6 +171,7 @@ export function ThreadSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      {footer ? <SidebarFooter>{footer}</SidebarFooter> : null}
     </Sidebar>
   );
 }
