@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { suggestionsSend, useAsk } from "@/features/chat/api/chat";
 import { SUGGESTIONS } from "@/features/chat/api/suggestions";
+import { PresetChips } from "@/features/chat/components/preset-chips";
 import { QuestionForm } from "@/features/chat/components/question-form";
 
 const SUGGESTION_CARD =
@@ -17,11 +18,7 @@ export function NewChat() {
     void navigate({ to: "/threads/$threadId", params: { threadId } });
   }
 
-  async function pick(example: string) {
-    if (!suggestionsSend) {
-      setQuestion(example);
-      return;
-    }
+  async function send(example: string) {
     const sent = await ask(example);
     if (sent.ok) openThread(sent.threadId);
   }
@@ -34,21 +31,28 @@ export function NewChat() {
           Ask how a card or mechanic plays in Goat Format. Answers cite the rulings they come from.
         </p>
       </div>
+      {suggestionsSend ? <PresetChips onPick={(example) => void send(example)} /> : null}
       <QuestionForm
         ask={ask}
         question={question}
         onQuestionChange={setQuestion}
         onSent={openThread}
       />
-      <ul className="grid gap-3 sm:grid-cols-3">
-        {SUGGESTIONS.map((example) => (
-          <li key={example} className="flex">
-            <button type="button" className={SUGGESTION_CARD} onClick={() => void pick(example)}>
-              {example}
-            </button>
-          </li>
-        ))}
-      </ul>
+      {suggestionsSend ? null : (
+        <ul className="grid gap-3 sm:grid-cols-3">
+          {SUGGESTIONS.map((example) => (
+            <li key={example} className="flex">
+              <button
+                type="button"
+                className={SUGGESTION_CARD}
+                onClick={() => setQuestion(example)}
+              >
+                {example}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
