@@ -11,6 +11,16 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@goat-format-chatbot/design-system/components/tooltip";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@goat-format-chatbot/design-system/components/ui/alert-dialog";
 import { Avatar, AvatarFallback } from "@goat-format-chatbot/design-system/components/ui/avatar";
 import { Bubble, BubbleContent } from "@goat-format-chatbot/design-system/components/ui/bubble";
 import { Button as UiButton } from "@goat-format-chatbot/design-system/components/ui/button";
@@ -217,6 +227,26 @@ function Specimen() {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+          </div>
+        </Section>
+
+        <Section name="Alert dialog">
+          <div>
+            <AlertDialog>
+              <AlertDialogTrigger render={<Button variant="outline">Delete thread</Button>} />
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Delete this thread?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    "Does Sangan trigger if it is banished?" and its answers will be gone for good.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogCancel variant="destructive">Delete</AlertDialogCancel>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </Section>
 
