@@ -7,6 +7,7 @@ import { z } from "zod";
 
 import { toChatMessage, type ChatMessage } from "./chat-message";
 import { demoThreads, findDemoThread, type DemoThread } from "./demo-threads";
+import { SUGGESTIONS } from "./suggestions";
 
 export type Sent = { ok: true; threadId: string } | { ok: false; error: string };
 
@@ -27,6 +28,8 @@ export type ThreadActions = {
   rename: (threadId: string, title: string) => Promise<void>;
   remove: (threadId: string) => Promise<void>;
 };
+
+export type Suggestion = { question: string; threadId?: string };
 
 export const SEND_FAILED = "The question could not be sent. Check that the backend is running.";
 
@@ -121,6 +124,12 @@ function useLiveThreadActions(): ThreadActions {
   );
 }
 
+const liveSuggestions: Suggestion[] = SUGGESTIONS.map((question) => ({ question }));
+
+function useLiveSuggestions(): Suggestion[] {
+  return liveSuggestions;
+}
+
 function useDemoAsk(): Ask {
   return useCallback(async () => ({ ok: false, error: DEMO_NOTICE }), []);
 }
@@ -163,6 +172,19 @@ function useDemoThreadActions(): ThreadActions | undefined {
   return undefined;
 }
 
+function recordedThreadId(question: string) {
+  return demoThreads.find((thread) => thread.messages[0]?.text === question)?.id;
+}
+
+const demoSuggestions: Suggestion[] = SUGGESTIONS.map((question) => ({
+  question,
+  threadId: recordedThreadId(question),
+}));
+
+function useDemoSuggestions(): Suggestion[] {
+  return demoSuggestions;
+}
+
 const demo = import.meta.env.MODE === "demo";
 
 export const chatAvailable = !demo;
@@ -182,3 +204,4 @@ export const useThreadActions: () => ThreadActions | undefined = demo
 export const useThreadTitle: (threadId: string) => string | undefined = demo
   ? useDemoThreadTitle
   : useLiveThreadTitle;
+export const useSuggestions: () => Suggestion[] = demo ? useDemoSuggestions : useLiveSuggestions;
