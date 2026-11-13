@@ -36,6 +36,9 @@ export const SEND_FAILED = "The question could not be sent. Check that the backe
 export const DEMO_NOTICE =
   "This demo has no backend, so it cannot answer questions. Run the app locally to ask one.";
 
+const RECORDED_NOTE =
+  "Recorded answer. The lookups show what the agent checked, and the sources show what it cites.";
+
 const INITIAL_MESSAGES = 50;
 
 const THREADS_PER_PAGE = 30;
@@ -130,6 +133,10 @@ function useLiveSuggestions(): Suggestion[] {
   return liveSuggestions;
 }
 
+function useLiveThreadNote(): string | undefined {
+  return undefined;
+}
+
 function useDemoAsk(): Ask {
   return useCallback(async () => ({ ok: false, error: DEMO_NOTICE }), []);
 }
@@ -163,6 +170,10 @@ function useDemoPinnedThreads(): PastThread[] {
 
 function useDemoThreadTitle(threadId: string): string | undefined {
   return findDemoThread(threadId)?.title;
+}
+
+function useDemoThreadNote(threadId: string): string | undefined {
+  return findDemoThread(threadId) ? RECORDED_NOTE : undefined;
 }
 
 function useDemoThreadActions(): ThreadActions | undefined {
@@ -200,3 +211,6 @@ export const useThreadTitle: (threadId: string) => string | undefined = demo
   ? useDemoThreadTitle
   : useLiveThreadTitle;
 export const useSuggestions: () => Suggestion[] = demo ? useDemoSuggestions : useLiveSuggestions;
+export const useThreadNote: (threadId: string) => string | undefined = demo
+  ? useDemoThreadNote
+  : useLiveThreadNote;
