@@ -39,7 +39,7 @@ export type ThreadActions = {
 
 export const SEND_FAILED = "The question could not be sent. Check that the backend is running.";
 
-const DEMO_NOTICE = "This demo replays recorded answers to the questions above.";
+const DEMO_PLACEHOLDER = "Pick a question above";
 
 const INITIAL_MESSAGES = 50;
 
@@ -190,7 +190,7 @@ function useDemoThreadActions(): ThreadActions | undefined {
 
 const demo = import.meta.env.MODE === "demo";
 
-export const inputNotice = demo ? DEMO_NOTICE : undefined;
+export const inputPlaceholder = demo ? DEMO_PLACEHOLDER : undefined;
 export const suggestionsSend = demo;
 export const useAsk: (threadId?: string) => Ask = demo ? useDemoAsk : useLiveAsk;
 export const useThreadMessages: (threadId: string) => ThreadMessages = demo
