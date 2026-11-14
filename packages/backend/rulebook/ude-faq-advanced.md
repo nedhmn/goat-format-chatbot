@@ -1,0 +1,527 @@
+# Upper Deck Entertainment Yu-Gi-Oh! TCG FAQ: Advanced Gameplay
+
+Source: Advanced Gameplay F.A.Q., Upper Deck Entertainment, Wayback Machine snapshot of 26 October 2005, <https://web.archive.org/web/20051026133922/http://upperdeckentertainment.com/yugioh/en/faq_advanced.aspx>
+
+## ADVANCED GAMEPLAY
+
+Sometimes, the Yu-Gi-Oh! TRADING CARD GAME can get very complicated, especially when two expert Duelists are dueling against each other.
+
+This Advanced F.A.Q. will answer some very important questions. These situations don't happen very often, but when they do the answers can be tricky. Study this carefully! If you have a question that isn't covered, please click here to review the Entertainment email guidelines.
+
+## Battle Position Changes
+
+Added June 2005
+
+A Monster Card’s battle position in the Yu-Gi-Oh! TRADING CARD GAME can be changed in one of two ways:
+
+1. A "manual" change. This is when you use your once-per-turn battle position change on a monster, during your Main Phase 1 or 2, to change it from attack position to defense position or vice versa. This includes a Flip Summon. There are some restrictions on when you can do this (see below).
+
+2. A change because of a card effect. Examples: “Enemy Controller”, “Zero Gravity”, “Guardian Sphinx”, “Book of Moon” and “Tsukuyomi”.
+
+A “manual” change can only be performed during your Main Phase 1 or 2. There are 3 exceptions that will prevent you from “manually” changing a monster’s battle position:
+
+Exception #1: You cannot “manually” change the battle position of a monster if it declared an attack that turn (even if the attack was negated or a replay occurred).
+
+Exception #2: You cannot “manually” change the battle position of a monster if it was Summoned or Set that turn by the turn player.
+
+Exception #3: You cannot “manually” change the battle position of a monster if its battle position was already changed “manually” that turn (including if it was Flip Summoned).
+
+Please note that:
+
+You CAN always change the battle position of a monster with a card effect, even if any of the above exceptions prevent you from changing its battle position “manually”.
+
+You CAN change the battle position of a monster “manually” if its battle position was changed by a card effect previously that turn (as long as none of the 3 exceptions exist). Example: You activate “Book of Moon” and flip a monster into face-down Defense Position. Then you can Flip Summon it that same turn, as long as none of the 3 exceptions exist.
+
+You CAN change the battle position of a monster “manually” if it was Summoned or Set, but not by the turn player. Example: “Cyber Jar” Summons a monster on the opponent’s side of the field, and the turn player uses “Change of Heart” to take control of it, then Flip Summons it that same turn. This is a legal play (as long as none of the 3 exceptions exist).
+
+You CAN change the battle position of a monster “manually” if it was returned to the field because of “Dimensionhole”, because it does not Summon the monster (as long as none of the 3 exceptions exists).
+
+## Missing the Timing - Optional Trigger Effects
+
+Added June 2005
+
+Sometimes a Trigger Effect says that “when” a condition happens, you “can” activate its effect. In this case, you are only allowed to activate the effect when the condition being met was the last thing to happen in the game (activating cards & effects that haven’t resolved yet doesn’t count).
+
+If the triggering condition happened for an optional Trigger Effect, but something else has happened after that, then you have “missed the timing” and you cannot activate it. For example, this can happen if the optional Trigger Effect monster was Tributed for a Tribute Summon or to activate a card effect, or if the triggering condition happened in a chain and wasn’t Chain Link 1, or if another card effect or game effect has happened since then. The triggering condition has to be the very last thing that happened in order for a “when… you can” optional Trigger Effect to activate.
+
+Note that Trigger Effects can be found on Spell & Trap Cards as well as Monster Cards.
+
+For some good specific examples of “missing the timing”, see the rulings for “Pinch Hopper”, “Butterfly Dagger – Elma”, “Heart of the Underdog”, “Peten the Dark Clown”, or “Dark Magician of Chaos”.
+
+## Unaffected by Spell Cards
+
+Added June 2005
+
+Some monsters are “unaffected by Spell Cards”. The more complete meaning of this is: “unaffected by the effects of Spell Cards while this monster is face-up on the field”.
+
+These monsters can still be used to pay costs for Spell Cards (like “Level Up!” or “Mystik Wok”). They can be revived with “Monster Reborn” or “Premature Burial”.
+
+If a monster is unaffected by Spell Cards, that only applies to the monster. It does not apply to a player. For example, if “Snatch Steal” is equipped to a monster that is unaffected by Spell Cards, control of the monster will not switch but the opponent will still gain 1000 Life Points during each of their Standby Phases. Nor does it apply to something like “Metallizing Parasite – Lunatite”, which would still be destroyed instead of the equipped monster, even if the monster itself was unaffected by Spell Cards.
+
+If a monster is unaffected by Spell Cards, that extends to any attacks the monster makes. A monster unaffected by Spell Cards can attack while “Swords of Revealing Light” is active, and its controller will not have to pay for “Toll” or “Gravekeeper’s Servant” in order to attack with it. It can also ignore the effects of “The Dark Door” or “Vengeful Bog Spirit”.
+
+Spell Card effects can still be applied to monsters that are unaffected by Spell Cards, but their effects will simply disappear. It’s like there’s a force field surrounding the monster, protecting it from the Spell Card’s effect. However, the Spell Card still “sees” the monster and may attempt to apply its effect on the monster.
+
+Example 1: A player has “Horus the Black Flame Dragon LV6” and “Blue-Eyes White Dragon” on the field and the opponent activates “Fissure”. The effect of “Fissure” looks for the lowest ATK monster, and attempts to destroy “Horus the Black Flame Dragon LV6”, but that monster is unaffected by Spell Cards and isn’t destroyed, and the effect of “Fissure” just disappears. Fissure does not try to “skip” “Horus the Black Flame Dragon LV6” and try to destroy “Blue-Eyes” instead.
+
+Example 2: The opponent controls “Silent Swordsman LV5” and “Gemini Elf”. The turn player controls a “Sheep Token” and activates “Creature Swap”. When “Creature Swap” resolves, the turn player selects his “Sheep Token” to give to the opponent. The opponent can select “Silent Swordsman LV5” for the effect of “Creature Swap”. However, since that monster is unaffected by Spell Cards, the force field around him nullifies the effect of “Creature Swap”, and no monsters change sides. (Note that this is very different from monsters that cannot change sides, like “Mataza the Zapper” or “Blindly Loyal Goblin”. These monsters cannot be selected for “Creature Swap” and another monster must be selected instead.)
+
+## Returning Activated Cards
+
+Added June 2005
+
+When cards are activated, and a chain is formed, the cards activated in the chain are not sent to the Graveyard until the chain is completely resolved OR they are destroyed by a card effect in the middle of the chain (see “Chains, Activation, and Resolution”).
+
+However, once a Normal Spell Card, Quick-Play Spell Card, Normal Trap Card, or Counter-Trap Card has been activated (even though it has not resolved yet), the fact that the card will be destroyed and sent to the Graveyard after the chain resolves has already been decided.
+
+Because it has already been decided that the card will be destroyed, the card cannot be returned to the hand or Deck. This is similar to how Monster Cards that have been destroyed by damage calculation cannot be returned to the hand, even though they are not actually sent to the Graveyard until after effects are resolved.
+
+Example 1: “Giant Trunade” is activated. Because “Giant Trunade” has been activated, it is already decided that it will be destroyed, so it does not return itself to the hand.
+
+Example 2: “Giant Trunade” is activated, and “Jar of Greed” is chained to it. Because “Jar of Greed” has been activated, it is already decided that it will be destroyed, so it cannot be returned to the hand. (Any other cards will be returned to the hand, but “Jar of Greed” will not.)
+
+Example 3: “Phoenix Wing Wind Blast” is activated targeting a face-down card. The card is “Jar of Greed” and the controller chains it to “Phoenix Wing Wind Blast”. Because “Jar of Greed” has been activated, it is already decided that it will be destroyed, so it cannot be returned to the Deck. (The effect of “Phoenix Wing Wind Blast” disappears.)
+
+Exception: Because “Swords of Revealing Light” is destroyed by its effect, rather than by the game mechanics, it can be returned to the hand or Deck before it is destroyed by its effect.
+
+## Equip Cards
+
+An “Equip Card” is any card that is equipped to a face-up monster on the field. Spell Cards with the Equip Icon are the most common type of Equip Card, and are officially called Equip Spell Cards. They are treated as both Spell Cards (They would be destroyed by the effect of “Heavy Storm”) and Equip Cards (for purposes such as “Gearfried the Swordmaster”.) Other cards may become Equip Cards though card effects, like with “Sword Hunter” or Union Monsters. Whenever a Monster Card becomes an Equip Card, it is treated as an Equip Spell Card, and is no longer a Monster Card. So a “Dark Magician” equipped to your “Sword Hunter” as an Equip Card could be destroyed by “Heavy Storm” but not “Tribute to the Doomed”.
+
+Some Trap Cards, like “Blast with Chain”, can also become Equip Cards. These cards are considered Equip Cards but are NOT Equip Spell Cards. This means that it is a Trap Card (and could be destroyed by “Remove Trap”) and an Equip Card (for purposes such as “Gearfried the Swordmaster”.) It is not a Spell Card, and could not be destroyed by “De-Spell”.
+
+## Simultaneous Effects
+
+Sometimes, you will have simultaneous effects attempting to activate at the same time, such as when Mystic Tomato attacks Mystic Tomato, or 2 Sangans are sent to the Graveyard at the same time because of Dark Hole.
+
+Whenever you have simultaneous effects, resolve them in a chain, even if they are Spell Speed 1 effects. This is a special case when Spell Speed 1 effects can be chained to each other, because they are all trying to activate at the same time and the players are not choosing to activate them.
+
+If only one player has simultaneous effects being activated, then that player can choose the order in which they resolve.
+
+Example #1:
+
+Player A activates Swords of Revealing Light. Player B controls a face-down Cyber Jar and a face-down Morphing Jar #2. Both effects activate simultaneously, and Player B chooses the order in which they go on a chain. Player B can choose to have Cyber Jar be Step 1 (and resolve last) and Morphing Jar #2 to be Step 2 (and resolve first), or vice versa.
+
+If both players have simultaneous effects being activated, then the "turn player" (the player taking his/her turn) automatically has his/her effect become Step 1 of the chain. The turn player has no choice but to be Step 1 of the chain, although if he/she has multiple effects being activated, he/she does choose which of those effects is Step 1.
+
+Example #1: Mystic Tomato vs. Mystic Tomato
+
+Player A, the turn player, attacks Player B's Mystic Tomato with his own Mystic Tomato. Both monsters are destroyed and then sent to the Graveyard. Their simultaneous effects form a chain.
+
+Step 1: Player A's Mystic Tomato effect, because he is the turn player.
+
+Step 2: Player B's Mystic Tomato effect.
+
+(resolve in reverse order)
+
+Step 2 resolves first, and Player B Special Summons an appropriate monster.
+
+Step 1 resolves second, and Player A Special Summons an appropriate monster.
+
+Example #2: Mystic Tomato vs. Shining Angel & Jowgen the Spiritualist
+
+Player A, the turn player, attacks Player B's Shining Angel with his Mystic Tomato. Both monsters are destroyed and then sent to the Graveyard. Their simultaneous effects form a chain.
+
+Step 1: Player A's Mystic Tomato effect, because he is the turn player.
+
+Step 2: Player B's Shining Angel effect.
+
+(resolve in reverse order)
+
+Step 2 resolves first, and Player B Special Summons Jowgen the Spiritualist from his Deck. Jowgen the Spiritualist's effect prevents any more Special Summons from occurring as long as he remains face-up on the field. Step 1 would resolve next, but because of Jowgen the Spiritualist, the effect disappears and Player A does not Special Summon a monster.
+
+Example #3: Witch of the Black Forest vs. Witch of the Black Forest
+
+Player A, the turn player, attacks Player B's Witch of the Black Forest (in Attack Position) with his own Witch of the Black Forest. Both players have 4 pieces of Exodia in their hand and the 5th piece in their Deck. Both Witches are sent to the Graveyard. Their simultaneous effects form a chain.
+
+Step 1: Player A's Witch of the Black Forest effect, because he is the turn player.
+
+Step 2: Player B's Witch of the Black Forest effect.
+
+(resolve in reverse order)
+
+Step 2 resolves first, and Player B retrieves the 5th piece of Exodia from his Deck.
+
+The Duel ends. Player B is the winner. Player A, the turn player, never gets to retrieve his 5th Exodia piece.
+
+Example #4: Black Pendant vs. Sangan/Exodia
+
+Player A, the turn player, has Sangan on the field and 4 Exodia pieces in his hand, but only has 400 Life Points. Player B has a monster equipped with Black Pendant. Player A activates Dark Hole. All monsters are sent to the Graveyard. There are two simultaneous effects: Sangan's effect and Black Pendant's effect. They form a chain.
+
+Step 1: Player A's Sangan effect, because he is the turn player.
+
+Step 2: Player B's Black Pendant effect.
+
+(resolve in reverse order)
+
+Step 2 resolves first and does 500 damage to Player A. Player A has no Life Points remaining. The Duel ends and Player B is the winner.
+
+(Had Player B activated Dark Hole during his turn, then the chain would have been reversed, Black Pendant's effect would be Step 1, and Player A would win with Exodia.)
+
+## Negating Continuous Card Costs
+
+Costs for cards come in three varieties.
+
+The first kind is activation costs. These are paid when you activate (play) a card. Activation costs cannot be negated by cards that negate the effect of a card.
+
+The second kind is "maintenance" costs. "Maintenance" costs are costs that are paid in order to keep a card on the field. Examples of cards with "maintenance" costs include most of the Archfiend monsters from the Dark Crisis expansion, "Imperial Order", "Messenger of Peace", "Mirror Wall", "Regulation of Tribe", "Armor Exe", and more.
+
+"Maintenance" costs cannot be negated by card effects that negate the effects of another card. They can only be negated by a card that specifically does so (such as "Pandemonium").
+
+Example #1: "Imperial Order" will negate the effects of "Messenger of Peace", but will not negate the "maintenance" cost of 100 Life Points during your Standby Phase. If you do not pay the 100 Life Points, then "Messenger of Peace" is destroyed (you always have the choice whether to pay or not to pay).
+
+Example #2: "Jinzo" will negate the effects of "Imperial Order", but will not negate the "maintenance" cost of 700 Life Points during your Standby Phase. If you do not pay the 700 Life Points, then "Imperial Order" is destroyed (you always have the choice whether to pay or not to pay).
+
+Example #3: "Skill Drain" will negate the effects of "Armor Exe" (so with "Skill Drain" active, "Armor Exe" can attack the same turn it is Summoned), but will not negate the "maintenance" cost of removing 1 Spell Counter during each Standby Phase. If you do not remove 1 Spell Counter, then "Armor Exe" is destroyed (you always have the choice whether to pay or not to pay).
+
+Example #4: "Skill Drain" will negate the effects of "Terrorking Archfiend" (so "Terrorking Archfiend" will not negate the effects of monsters it destroys in battle, and will not get to roll its die when targeted by an opponent's card effect), but will not negate the "maintenance" cost of paying 800 Life Points during your Standby Phase. If you cannot pay the 800 Life Points, then "Terrorking Archfiend" is destroyed (you must pay if possible, because "Terrorking Archfiend" says "this is not optional").
+
+The third kind of cost is non-"maintenance" costs for cards that remain on the field. Examples include paying Life Points to attack with "Dark Elf", "Jirai Gumo", or Toon Monsters. These are not "maintenance" costs because they are not costs that are paid to keep the card on the field. These costs are negated when the card's effect is negated. So if "Skill Drain" is active, for example, you do not have to pay to attack with "Dark Elf", "Jirai Gumo", or a Toon Monster.
+
+## Activation & Targeting Eligibility
+
+Many cards and effects can only be activated under certain conditions, or can only be used against certain targets. But because other cards and effects can be chained to them, and resolve before the original card resolves, those conditions aren't always still correct at the end of the chain.
+
+In general, if a card has specific conditions in order to be activated, those conditions only have to be correct at the time the card is activated. If they are no longer correct when the card resolves, the card's effect still resolves.
+
+However, if a card has specific conditions regarding its target, and those conditions are no longer correct at the time the card is activated and when the card resolves, then the card's effect disappears.
+
+Examples of cards with specific conditions for activation, and how those conditions no longer have to be correct at resolution:
+
+Example #1: Player A has "Lord of D." face-up on the field and activates "The Flute of Summoning Dragon." Player B chains "Ring of Destruction" and destroys "Lord of D." "The Flute of Summoning Dragon" still resolves because its condition only had to be correct at activation.
+
+Example #2: Player A has 2 cards in his hand and Player B has 6 cards in his hand. Player A activates "Gamble." Player B responds by chaining 2 "Mystical Space Typhoons" from his hand, so he now has 4 cards in his hand when "Gamble" resolves. "Gamble" still resolves because its condition only had to be correct at activation.
+
+Example #3: Player A has no cards in his Graveyard and activates "Dimension Distortion." Player B chains with "Ring of Destruction" to destroy one of Player A's monsters on the field and send it to the Graveyard. When "Dimension Distortion" resolves, Player A now has 1 card in his Graveyard, but "Dimension Distortion" still resolves because its condition only had to be correct at activation. Examples of cards with specific conditions for selection of targets, and how those conditions must still be correct at resolution:
+
+Example #1: Player A activates "Ring of Destruction," targeting Player B's "Dark Magician." Player B chains "Book of Moon" to flip "Dark Magician" face-down. When "Ring of Destruction" resolves, its effect disappears because it must target a face-up monster on the field.
+
+Example #2: Player A Summons "Yata-Garasu." Player B activates "Eatgaboon" to destroy it. Player A chains "Rush Recklessly" to increase "Yata-Garasu"'s ATK by 700 points. When "Eatgaboon" resolves, its effect disappears because it must target a monster with ATK 500 or less.
+
+Example #3: "Mystic Plasma Zone" is active. Player A Summons "Lord of D." Player B activates "Trap Hole." Player A chains "Reverse Trap" to decrease "Lord of D."'s ATK by 500 points combined with "Mystic Plasma Zone." When "Trap Hole" resolves, its effect disappears because it must target a monster with ATK 1000 or greater.
+
+Example #4: Player A activates "Nobleman of Crossout", targeting Player B's face-down monster. Player B chains "Ceasefire", flipping all monsters face-up. When "Nobleman of Crossout" resolves, its effect disappears because it must target a face-down monster.
+
+Example #5: Player A activates "Nobleman of Extermination", targeting Player B's face-down card. Player B chains the card, which is "Waboku." When "Nobleman of Extermination" resolves, its effect disappears because it must target a face-down Spell or Trap Card. Example #6: Player A activates "Nobleman of Extermination", targeting Player B's face-down card. Player B chains the card, which is "Gravity Bind." When "Nobleman of Extermination" resolves, its effect disappears because it must target a face-down Spell or Trap Card.
+
+## Chains, Activation, and Resolution
+
+A chain is what happens when several card effects are trying to happen at the same time. By building a chain, you can more easily determine how the effects resolve. The basic information on chains and Spell Speeds is found on pages 19-21 of the rulebook.
+
+"Activation" is when you declare an intent to use a card: flipping a Trap Card face up, announcing that you are using a monster's effect, flipping a face-down Spell Card, and playing a Spell Card from your hand are all examples of activation.
+
+"Resolution" is when you carry out the effects of a card.
+
+When you chain multiple Spell/Trap Cards together, their activation (intent to use the card) is declared, one after the other. But no cards have resolution until nobody wishes to chain (activate) more Spell/Trap Cards.
+
+A simple 2-card chain works like this:
+
+Step 1 is activated (Spell Card played, Trap Card flipped face-up, etc.).
+
+Step 2 is chained to Step 1 (activated).
+
+(neither player wishes to chain additional cards)
+
+(resolve in reverse order)
+
+Step 2 Resolves.
+
+Step 1 Resolves.
+
+In a 3-card chain:
+
+Step 1 is activated.
+
+Step 2 is activated.
+
+Step 3 is activated.
+
+(neither player wishes to chain additional cards)
+
+(resolve in reverse order)
+
+Step 3 resolves.
+
+Step 2 resolves.
+
+Step 1 resolves.
+
+Note on terminology: Some Continuous Trap Cards have effects that can be re-used, such as "Ultimate Offering", "Skull Lair", etc. To "activate" these Trap Cards is to flip the Trap Card from face-down to face-up, just like with any other Trap Card. Once the card is activated, you may "use" the card, or "use its effect", or "activate the effect." These are all synonymous terms but are different from activation of the card (which still means flipping the Trap Card face-up). The "use" of a Continuous Trap Card's effect (which has a Spell Speed of 2) can be chained and can be chained to. You CANNOT activate (flip face-up) a Continuous Trap Card and also use its effect in the same chain. In order to use the effect of a Continuous Trap Card, it must have been activated (flipped face-up) before the current chain was initiated.
+
+IMPORTANT: When resolving a chain, as the cards resolve they are NOT sent to the Graveyard until the entire chain has resolved, or a card specifically destroys them. This is important for cards such as "Princess of Tsurugi" and "Secret Barrel" where the effect depends on the number of Spell & Trap Cards on the field.
+
+Example #1:
+
+Step 1: Player A Flip Summons "Princess of Tsurugi."
+
+Step 2: Player B chains "Barrel Behind the Door" to the effect.
+
+Because "Barrel Behind the Door" remains on the field until the chain resolves, Player A takes 500 points of damage (1 Trap Card on the opponent's side of the field) from "Princess of Tsurugi"'s Flip Effect.
+
+Example #2:
+
+Step 1: Player A Flip Summons "Princess of Tsurugi."
+
+Step 2: Player B chains "Barrel Behind the Door" to the effect.
+
+Step 3: Player A chains "Seven Tools of the Bandit" to "Barrel Behind the Door."
+
+"Seven Tools of the Bandit" resolves first, and destroys "Barrel Behind the Door", which is sent to the Graveyard immediately. "Princess of Tsurugi" does zero damage to Player B because Player B has no Spell or Trap Cards remaining on the field since "Barrel Behind the Door" was destroyed and sent to the Graveyard.
+
+Example #3:
+
+Step 1: Player A activates "Secret Barrel."
+
+Step 2: Player B chains "Ring of Destruction", his only card on the field or in his hand.
+
+Even though "Ring of Destruction" resolves first, "Secret Barrel" still does 200 damage to Player B because "Ring of Destruction" is on the field when "Secret Barrel" resolves.
+
+## Counter Traps and Chains
+
+The basic rule is that Counter Traps can only be used against the card they are immediately following in a chain.
+
+So for Counter Traps:
+
+Chain Link 2 used against Chain Link 1 only
+
+Chain Link 3 used against Chain Link 2 only
+
+Chain Link 4 used against Chain Link 3 only
+
+Chain Link 5 used against Chain Link 4 only
+
+Chain Link 4 CANNOT be used against Chain Link 1's effect.
+
+So:
+
+Player A activates "Raigeki."
+
+Player B chains "Magic Jammer."
+
+Player A chains "Seven Tools of the Bandit."
+
+Player B cannot chain a second "Magic Jammer", "Magic Drain", etc. The only Counter-Traps he may activate are ones that would negate the previous step ("Seven Tools of the Bandit").
+
+This also prevents "loading on" of "Magic Drains." So you cannot chain 2 "Magic Drains" to the same Spell Card, hoping your opponent won't be able to discard 2 Spell Cards to save his original Spell Card.
+
+## Summons & Chains
+
+You CANNOT chain to a Summon, because a Summon does not have a Spell Speed (it is not listed on page 21 of the rulebook on the Spell Speed chart). When you use cards like "Horn of Heaven", "Trap Hole", "Torrential Tribute", you are NOT chaining to the Summon. If you are starting a chain (because your opponent responds to your Trap Card), the Trap Card you are using is Step 1 of the chain; the Summon is NOT a step in the chain.
+
+You CAN chain to a Flip Effect, Trigger Effect, or Ignition Effect. So you can chain to the Flip Effect of "Man-Eater Bug" (with "Royal Command", "Two-Pronged Attack", etc.) when "Man-Eater Bug" is Flip Summoned. You CANNOT chain to the Flip Summon itself, but you can chain to the Flip Effect. Likewise you can chain to effects like "Cannon Soldier", "Sanga of the Thunder", etc. (Also note that if "Man-Eater Bug" is flipped by an attack, you cannot chain "Royal Command", etc. to it because you're in the Damage Step).
+
+You CANNOT chain to a Continuous Effect Monster's effect when it is Summoned.
+
+Which means that...
+
+You CANNOT chain a Trap Card to the SUMMON, NOR to the EFFECT, of "Jinzo." So you cannot chain "Waboku", "Call of the Haunted", etc. to the Summoning (or effect) of "Jinzo." You CAN use "Solemn Judgment"/"Horn of Heaven" to negate the Summon of "Jinzo" from happening in the first place. But that's it.
+
+## Chaining to Your Own Cards
+
+You can chain to your own cards (example: chain "Backup Soldier" to "Backup Soldier") even if your opponent doesn't have any "intermediate" steps.
+
+Example #1:
+
+Player A attacks.
+
+Player B activates "Enchanted Javelin."
+
+Player A does not respond.
+
+Player B chains another "Enchanted Javelin."
+
+Example #2:
+
+Player A attacks.
+
+Player B activates "Gravity Bind."
+
+Player A does not respond.
+
+Player B chains "Enchanted Javelin."
+
+Example #3:
+
+Player A attacks.
+
+Player B activates "Mirror Force."
+
+Player A does not respond.
+
+Player B chains "Magic Cylinder."
+
+Example #4:
+
+Player A Summons a monster.
+
+Player B activates "Trap Hole."
+
+Player A does not respond.
+
+Player B chains "Chain Destruction" to "Trap Hole."
+
+Example #5:
+
+Player A activates "Ring of Destruction."
+
+Player B does not respond.
+
+Player A chains "Barrel Behind the Door" to "Ring of Destruction."
+
+These are all legal moves.
+
+Remember that a Counter-Trap can only be chained to negate the step immediately preceding its activation.
+
+Example #6:
+
+Player A activates "Ring of Destruction."
+
+Player B chains "Waboku."
+
+Player A cannot chain "Barrel Behind the Door" to "Ring of Destruction" because "Ring of Destruction" was not the immediately preceding step of the chain.
+
+## Winning in a Chain
+
+You can win a Duel between steps of a chain, ending the Duel and preventing the complete chain from resolving.
+
+For example, if both players have less than 1000 Life Points, and both players chain "Ceasefire" with 2 Effect Monsters on the field, the player whose "Ceasefire" resolves first (the one that was activated second) wins the Duel, and the other "Ceasefire" never resolves.
+
+Likewise, if your opponent activates "Ookazi" and you have less than 800 Life Points, and you chain "Backup Soldier" to retrieve enough Exodia pieces so you have all 5 in your hand, you win before "Ookazi" resolves.
+
+You cannot win the Duel during resolution of a step. For example, if you activate "Graceful Charity", and have all 5 pieces of Exodia in your hand, you cannot win until the current step is resolved by discarding 2 cards from your hand.
+
+## "Negate" vs. "Destroy" and Continuous Cards
+
+Chaining "Mystical Space Typhoon" (or "Dust Tornado") to a card like "Raigeki" (or another Normal Spell or Normal Trap Card, a Quick-Play Spell Card, or a Ritual Spell Card) has no effect, as it does not negate the card's effect. So if "Raigeki" is activated, and the opponent chains "Mystical Space Typhoon" to destroy "Raigeki", "Raigeki"'s effect still resolves as normal.
+
+But, if you chain against a Continuous or Equip Spell Card, or a Continuous Trap Card, with "Mystical Space Typhoon" (or "Dust Tornado"), the Continuous/Equip Card is no longer active because it is destroyed, and the effect does not resolve and disappears.
+
+Example #1:
+
+Step 1: Player A activates "Raigeki."
+
+Step 2: Player B chains "Imperial Order" to negate the effect of "Raigeki."
+
+Step 3: Player A chains "Mystical Space Typhoon" (or "Dust Tornado") to destroy "Imperial Order."
+
+(resolve in reverse order)
+
+Step 3 resolves first. "Mystical Space Typhoon" destroys "Imperial Order."
+
+Step 2 would resolve next. "Imperial Order" has been destroyed though and its effect disappears.
+
+Step 1 resolves. "Raigeki"'s effect activates as normal.
+
+For the exact same reason, if you chain "Mystical Space Typhoon" to "The Eye of Truth", or "Premature Burial", or "Call of the Haunted", the effects from those cards never happen.
+
+## Rules for Quick-Play Spell Cards
+
+You can chain Quick-Play Spell Cards from your hand as long as it is during your turn.
+
+Example #1:
+
+Player A activates "Dark Hole."
+
+Player B chains "Imperial Order."
+
+Player A chains "Mystical Space Typhoon" from his/her hand.
+
+Also, you can chain or play a Quick-Play Spell Card from your hand during any Phase of your turn, even during your Battle Phase. Activating/chaining/playing Quick-Play Spell Cards from your hand, during your turn, is not limited to Main Phase 1 or 2 and can occur in the Draw, Standby, Battle, and End Phases. Of course, you cannot activate a Quick-Play Spell Card from your hand during your opponent's turn.
+
+You can also Set a Quick-Play Spell Card during your Main Phase 1 or 2. Once you Set a Quick-Play Spell Card, you cannot activate it that turn (similar to a Trap Card) but can activate it on any subsequent turn. (This rule does not apply to normal Spell Cards; you may Set "Raigeki" during your turn and still activate it that same turn).
+
+## Costs
+
+There are two key concepts in the Yu-Gi-Oh! TRADING CARD GAME concerning "costs":
+
+1. Costs are paid before the activation of a card, not after.
+
+2. You never get a "refund" on a cost.
+
+Costs are paid before activation. So to activate “Seven Tools of the Bandit”, or the effect of “Cannon Soldier”, or play “Premature Burial”, you pay the Life Points or Tribute the monster before you activate the card or use the effect. (In other words, you pay the cost then announce your intention to use the card.) This includes flipping the card, for a Trap, or playing it from your hand, for a Spell Card.
+
+If a card is negated (or, for a Continuous card, if it is destroyed in a chain), it makes no difference regarding the cost, because the cost has been paid. You do not receive a "refund" simply because your card was negated, or its effect was negated, or it was destroyed (in the case of a Continuous card).
+
+Here are some specific examples:
+
+Example #1: Negation of “Seven Tools of the Bandit”
+
+Step 1: Player A activates “Mirror Force”.
+
+Step 2: Player B pays 1000 Life Points, and activates “Seven Tools of the Bandit”.
+
+Step 3: Player A pays half his Life Points and activates “Solemn Judgment”, negating “Seven Tools of the Bandit”.
+
+Step 3 resolves: “Solemn Judgment” negates and destroys “Seven Tools of the Bandit”.
+
+Step 2 doesn't resolve because the Trap Card was negated.There is no refund of Life Points. The Life Points were paid already. You don't get them back.
+
+Step 1 resolves: “Mirror Force” resolves its effect.
+
+Example #2: Negation in a Chain of “Premature Burial”
+
+Step 1: Player A pays 800 Life Points and activates “Premature Burial”. Player A chooses the “Jinzo” in his Graveyard as the target of “Premature Burial”.
+
+Step 2: Player B discards 1 card from his hand and chains “Magic Jammer” to negate “Premature Burial”.
+
+Step 2 resolves: “Magic Jammer” negates “Premature Burial”.
+
+Step 1 does not resolve because “Premature Burial” was negated. No monster is Special Summoned. There is no refund of Life Points because they have already been paid.
+
+Example #3: Destruction in a Chain of “Premature Burial”
+
+Step 1: Player A pays 800 Life Points and activates “Premature Burial”. Player A chooses the “Jinzo” in his Graveyard as the target of “Premature Burial”.
+
+Step 2: Player B activates “Mystical Space Typhoon” to destroy “Premature Burial”.
+
+Step 2 resolves: “Mystical Space Typhoon” destroys “Premature Burial”.
+
+Step 1 does not resolve because “Premature Burial” was destroyed, and, as a Continuous Spell Card, relies on the card continuing to be in play in order to achieve its effect. No monster is revived. There is no refund of Life Points because they have already been paid.
+
+Example #4: Chaining of “Mask of Restrict” to “Cannon Soldier”'s effect
+
+Step 1: Player A Tributes a monster and activates his “Cannon Soldier”'s effect during his Main Phase 2.
+
+Step 2: Player B activates “Mask of Restrict” as a chain to “Cannon Soldier”'s effect.
+
+Step 2 resolves:“Mask of Restrict” is in play and prevents Tributing of monsters.
+
+Step 1 resolves: The monster was already Tributed before “Mask of Restrict” was successfully resolved. Therefore “Cannon Soldier”'s effect resolves and Player B loses 500 life points.However, now that Mask of Restrict is active, further Tributes cannot take place.
+
+## Costs: Fusion Material & Ritual Spell Tributes
+
+Fusion Material Monsters used in a Fusion Summon are NOT a cost.
+
+Monsters Tributed to a Ritual Spell Card for a Ritual Summon are NOT a cost.
+
+Both of these are considered to be cards sent to the Graveyard by the resolution of the Spell Card's effect. So the discard/Tribute is carried out at resolution, not at activation.
+
+This means that if the Ritual Spell Card, or "Polymerization", are negated, or have their effects negated, you do NOT discard the Fusion Material/Tributes.
+
+This is also why you can chain "Mask of Restrict" to the activation of a Ritual Spell Card, and prevent the Tribute/Ritual Summon from taking place, because "Mask of Restrict" resolves first, and then prevents the Tribute at resolution of the Ritual Spell Card.
+
+## Toon Monsters
+
+Playing a Toon Monster is a Special Summon. Toon Monsters cannot be Normal Summoned or Set. To Special Summon a Toon Monster, you need your OWN Toon World on your side of the field. You still have to Tribute for high-level Toon Monsters (1 Tribute for "Toon Summoned Skull", 2 Tributes for "Blue-Eyes Toon Dragon", etc.). Because this is a Special Summon, you can Summon multiple Toon Monsters on the same turn.
+
+If "Toon World", on either player's side of the field, is destroyed, all face-up Toon Monsters on the field are destroyed. If "Toon World" is returned to the hand, or sent to the Graveyard (but not "destroyed"), then Toon Monsters on the field are not destroyed.
+
+If a Toon Monster is flipped face-down, and then "Toon World" is destroyed, the Toon Monster is not destroyed but cannot be Flip Summoned until a new "Toon World" is played. The Toon Monster can be flipped face-up with "Book of Taiyou", an attack, or "Swords of Revealing Light" even if "Toon World" is not on the field.
+
+## Union Monsters
+
+Union Monsters are a special type of monster that have the ability to attach themselves to specific other monsters and become Equip Spell Cards, granting the effects printed on the Union Monster card.
+
+In order to attach a Union Monster to another monster, you must first have the Union Monster as a monster on the field. So you must play the monster normally, then you can attach it. You cannot play a Union Monster as an Equip Spell Card directly from your hand.
+
+You can Summon a Union Monster and attach it to another monster right away. You cannot attach a Union Monster and detach the same Union Monster during the same turn, unless a card effect specifically allows it (such as "Combination Attack").
+
+Union Monsters only grant their special effects to a monster when equipped to that monster using the Union Monster's effect. So if "Relinquished" equips itself with a Union Monster, it gains none of the Union Monster's bonuses. Also, if "Union Rider" equips itself with a Union Monster, "Union Rider" gains none of the bonuses. The Trap Card "Formation Union" is considered to equip the Union Monster 'by its own effect' so the bonuses do activate.
+
+A Union Monster that is attached to a monster is treated as an Equip Spell Card and can be destroyed with "Heavy Storm", etc. You can use "Magic Reflector" to place a counter on an equipped Union Monster and, if the equipped monster would be destroyed in battle, you can remove the counter instead so neither the equipped monster nor the Union Monster are destroyed.
+
+A monster can only be equipped with 1 Union Monster at a time, but can still be equipped with other Equip Spell Cards such as "Axe of Despair", etc.
+
+If an equipped monster is taken by the opponent (such as with "Snatch Steal"), the Union Monster remains where it is, although it is still equipped to the monster, and the player who controls the Union Monster can detach it and it is Special Summoned to that player's side of the field. (So if I have "X-Head Cannon" equipped with "Z-Metal Tank", and my opponent uses "Snatch Steal" on "X-Head Cannon", on my next Main Phase I can detach "Z-Metal Tank" and it is Special Summoned onto my side of the field because I still control it.)
+
+If a Union Monster turns into an Equip Spell Card, or reverts back into a monster, effects are reset. For example, if I use "Call of the Haunted" to Special Summon a Union Monster, then attach it to another monster, it is no longer affected by "Call of the Haunted" (which remains on the field meaninglessly and, if destroyed, does not destroy the Union Monster). If I use "Limiter Removal" on a Union Monster, and equip it, it is not destroyed at the end of the turn, and if I turn it back into a monster its ATK is no longer doubled.
